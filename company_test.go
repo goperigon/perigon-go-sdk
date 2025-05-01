@@ -1,0 +1,54 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+package perigonsdk_test
+
+import (
+	"context"
+	"errors"
+	"os"
+	"testing"
+	"time"
+
+	"github.com/stainless-sdks/perigon-sdk-go"
+	"github.com/stainless-sdks/perigon-sdk-go/internal/testutil"
+	"github.com/stainless-sdks/perigon-sdk-go/option"
+)
+
+func TestCompanyListWithOptionalParams(t *testing.T) {
+	t.Skip("skipped: tests are disabled for the time being")
+	baseURL := "http://localhost:4010"
+	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
+		baseURL = envURL
+	}
+	if !testutil.CheckTestServer(t, baseURL) {
+		return
+	}
+	client := perigonsdk.NewClient(
+		option.WithBaseURL(baseURL),
+		option.WithAPIKey("My API Key"),
+	)
+	_, err := client.Companies.List(context.TODO(), perigonsdk.CompanyListParams{
+		ID:               []string{"string"},
+		Country:          []string{"string"},
+		Domain:           []string{"string"},
+		Exchange:         []string{"string"},
+		Industry:         perigonsdk.String("industry"),
+		IpoFrom:          perigonsdk.Time(time.Now()),
+		IpoTo:            perigonsdk.Time(time.Now()),
+		Name:             perigonsdk.String("name"),
+		NumEmployeesFrom: perigonsdk.Int(0),
+		NumEmployeesTo:   perigonsdk.Int(0),
+		Page:             perigonsdk.Int(0),
+		Q:                perigonsdk.String("q"),
+		Sector:           perigonsdk.String("sector"),
+		Size:             perigonsdk.Int(1),
+		Symbol:           []string{"string"},
+	})
+	if err != nil {
+		var apierr *perigonsdk.Error
+		if errors.As(err, &apierr) {
+			t.Log(string(apierr.DumpRequest(true)))
+		}
+		t.Fatalf("err should be nil: %s", err.Error())
+	}
+}
