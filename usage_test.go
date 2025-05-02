@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package perigonsdk_test
+package perigon_test
 
 import (
 	"context"
@@ -20,11 +20,11 @@ func TestUsage(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := perigonsdk.NewClient(
+	client := perigon.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 	)
-	alls, err := client.All.List(context.TODO(), perigonsdk.AllListParams{})
+	alls, err := client.All.List(context.TODO(), perigon.AllListParams{})
 	if err != nil {
 		t.Fatalf("err should be nil: %s", err.Error())
 	}
