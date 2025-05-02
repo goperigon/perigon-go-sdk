@@ -11,15 +11,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/stainless-sdks/perigon-sdk-go/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
 	"github.com/tidwall/sjson"
 )
 
-// RequestOption is an option for the requests made by the perigon-sdk API Client
+// RequestOption is an option for the requests made by the perigon API Client
 // which can be supplied to clients, services, and methods. You can read more about this functional
 // options pattern in our [README].
 //
-// [README]: https://pkg.go.dev/github.com/stainless-sdks/perigon-sdk-go#readme-requestoptions
+// [README]: https://pkg.go.dev/github.com/goperigon/perigon-go-sdk#readme-requestoptions
 type RequestOption = requestconfig.RequestOption
 
 // WithBaseURL returns a RequestOption that sets the BaseURL for the client.

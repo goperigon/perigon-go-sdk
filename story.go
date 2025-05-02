@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package perigonsdk
+package perigon
 
 import (
 	"context"
@@ -8,16 +8,16 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/stainless-sdks/perigon-sdk-go/internal/apijson"
-	"github.com/stainless-sdks/perigon-sdk-go/internal/apiquery"
-	"github.com/stainless-sdks/perigon-sdk-go/internal/requestconfig"
-	"github.com/stainless-sdks/perigon-sdk-go/option"
-	"github.com/stainless-sdks/perigon-sdk-go/packages/param"
-	"github.com/stainless-sdks/perigon-sdk-go/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/internal/apijson"
+	"github.com/goperigon/perigon-go-sdk/internal/apiquery"
+	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/option"
+	"github.com/goperigon/perigon-go-sdk/packages/param"
+	"github.com/goperigon/perigon-go-sdk/packages/resp"
 )
 
 // StoryService contains methods and other services that help with interacting with
-// the perigon-sdk API.
+// the perigon API.
 //
 // Note, unlike clients, this service does not read variables from the environment
 // automatically. You should not instantiate this service directly, and instead use

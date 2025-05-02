@@ -1,8 +1,8 @@
 package paramutil
 
 import (
-	"github.com/stainless-sdks/perigon-sdk-go/packages/param"
-	"github.com/stainless-sdks/perigon-sdk-go/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/packages/param"
+	"github.com/goperigon/perigon-go-sdk/packages/resp"
 )
 
 func AddrIfPresent[T comparable](v param.Opt[T]) *T {

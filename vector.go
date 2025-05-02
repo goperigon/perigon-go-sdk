@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package perigonsdk
+package perigon
 
 import (
-	"github.com/stainless-sdks/perigon-sdk-go/option"
+	"github.com/goperigon/perigon-go-sdk/option"
 )
 
 // VectorService contains methods and other services that help with interacting
-// with the perigon-sdk API.
+// with the perigon API.
 //
 // Note, unlike clients, this service does not read variables from the environment
 // automatically. You should not instantiate this service directly, and instead use

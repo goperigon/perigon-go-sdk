@@ -18,15 +18,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/stainless-sdks/perigon-sdk-go/internal"
-	"github.com/stainless-sdks/perigon-sdk-go/internal/apierror"
-	"github.com/stainless-sdks/perigon-sdk-go/internal/apiform"
-	"github.com/stainless-sdks/perigon-sdk-go/internal/apiquery"
+	"github.com/goperigon/perigon-go-sdk/internal"
+	"github.com/goperigon/perigon-go-sdk/internal/apierror"
+	"github.com/goperigon/perigon-go-sdk/internal/apiform"
+	"github.com/goperigon/perigon-go-sdk/internal/apiquery"
 )
 
 func getDefaultHeaders() map[string]string {
 	return map[string]string{
-		"User-Agent": fmt.Sprintf("PerigonSDK/Go %s", internal.PackageVersion),
+		"User-Agent": fmt.Sprintf("Perigon/Go %s", internal.PackageVersion),
 	}
 }
 

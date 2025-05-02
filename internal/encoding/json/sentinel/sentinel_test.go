@@ -1,7 +1,7 @@
 package sentinel_test
 
 import (
-	"github.com/stainless-sdks/perigon-sdk-go/internal/encoding/json/sentinel"
+	"github.com/goperigon/perigon-go-sdk/internal/encoding/json/sentinel"
 	"reflect"
 	"slices"
 	"testing"

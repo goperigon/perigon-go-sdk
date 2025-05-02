@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package perigonsdk_test
+package perigon_test
 
 import (
 	"context"
@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/perigon-sdk-go"
-	"github.com/stainless-sdks/perigon-sdk-go/internal/testutil"
-	"github.com/stainless-sdks/perigon-sdk-go/option"
+	"github.com/goperigon/perigon-go-sdk"
+	"github.com/goperigon/perigon-go-sdk/internal/testutil"
+	"github.com/goperigon/perigon-go-sdk/option"
 )
 
 func TestSummarizeNewWithOptionalParams(t *testing.T) {
@@ -23,13 +23,13 @@ func TestSummarizeNewWithOptionalParams(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := perigonsdk.NewClient(
+	client := perigon.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 	)
-	_, err := client.Summarize.New(context.TODO(), perigonsdk.SummarizeNewParams{
-		AddDateFrom:             perigonsdk.Time(time.Now()),
-		AddDateTo:               perigonsdk.Time(time.Now()),
+	_, err := client.Summarize.New(context.TODO(), perigon.SummarizeNewParams{
+		AddDateFrom:             perigon.Time(time.Now()),
+		AddDateTo:               perigon.Time(time.Now()),
 		Area:                    []string{"string"},
 		ArticleID:               []string{"string"},
 		Author:                  []string{"string"},
@@ -39,12 +39,12 @@ func TestSummarizeNewWithOptionalParams(t *testing.T) {
 		ClusterID:               []string{"string"},
 		CompanyDomain:           []string{"string"},
 		CompanyID:               []string{"string"},
-		CompanyName:             perigonsdk.String("companyName"),
+		CompanyName:             perigon.String("companyName"),
 		CompanySymbol:           []string{"string"},
-		Content:                 perigonsdk.String("content"),
+		Content:                 perigon.String("content"),
 		Country:                 []string{"string"},
 		County:                  []string{"string"},
-		Desc:                    perigonsdk.String("desc"),
+		Desc:                    perigon.String("desc"),
 		ExcludeAuthor:           []string{"string"},
 		ExcludeCategory:         []string{"string"},
 		ExcludeCity:             []string{"string"},
@@ -62,64 +62,64 @@ func TestSummarizeNewWithOptionalParams(t *testing.T) {
 		ExcludeSourceGroup:      []string{"string"},
 		ExcludeState:            []string{"string"},
 		ExcludeTopic:            []string{"string"},
-		From:                    perigonsdk.Time(time.Now()),
+		From:                    perigon.Time(time.Now()),
 		JournalistID:            []string{"string"},
 		Label:                   []string{"string"},
 		Language:                []string{"string"},
-		Lat:                     perigonsdk.Float(-90),
-		LinkTo:                  perigonsdk.String("linkTo"),
+		Lat:                     perigon.Float(-90),
+		LinkTo:                  perigon.String("linkTo"),
 		Location:                []string{"string"},
 		LocationsCountry:        []string{"string"},
-		Lon:                     perigonsdk.Float(-180),
-		MaxDistance:             perigonsdk.Float(1),
+		Lon:                     perigon.Float(-180),
+		MaxDistance:             perigon.Float(1),
 		Medium:                  []string{"string"},
-		NegativeSentimentFrom:   perigonsdk.Float(0),
-		NegativeSentimentTo:     perigonsdk.Float(0),
-		NeutralSentimentFrom:    perigonsdk.Float(0),
-		NeutralSentimentTo:      perigonsdk.Float(0),
-		Page:                    perigonsdk.Int(0),
-		Paywall:                 perigonsdk.Bool(true),
+		NegativeSentimentFrom:   perigon.Float(0),
+		NegativeSentimentTo:     perigon.Float(0),
+		NeutralSentimentFrom:    perigon.Float(0),
+		NeutralSentimentTo:      perigon.Float(0),
+		Page:                    perigon.Int(0),
+		Paywall:                 perigon.Bool(true),
 		PersonName:              []string{"string"},
 		PersonWikidataID:        []string{"string"},
-		PositiveSentimentFrom:   perigonsdk.Float(0),
-		PositiveSentimentTo:     perigonsdk.Float(0),
-		PrefixTaxonomy:          perigonsdk.String("prefixTaxonomy"),
-		Q:                       perigonsdk.String("q"),
-		RefreshDateFrom:         perigonsdk.Time(time.Now()),
-		RefreshDateTo:           perigonsdk.Time(time.Now()),
-		ReprintGroupID:          perigonsdk.String("reprintGroupId"),
-		SearchTranslation:       perigonsdk.Bool(true),
-		ShowNumResults:          perigonsdk.Bool(true),
-		ShowReprints:            perigonsdk.Bool(true),
-		Size:                    perigonsdk.Int(0),
-		SortBy:                  perigonsdk.AllEndpointSortByRelevance,
+		PositiveSentimentFrom:   perigon.Float(0),
+		PositiveSentimentTo:     perigon.Float(0),
+		PrefixTaxonomy:          perigon.String("prefixTaxonomy"),
+		Q:                       perigon.String("q"),
+		RefreshDateFrom:         perigon.Time(time.Now()),
+		RefreshDateTo:           perigon.Time(time.Now()),
+		ReprintGroupID:          perigon.String("reprintGroupId"),
+		SearchTranslation:       perigon.Bool(true),
+		ShowNumResults:          perigon.Bool(true),
+		ShowReprints:            perigon.Bool(true),
+		Size:                    perigon.Int(0),
+		SortBy:                  perigon.AllEndpointSortByRelevance,
 		Source:                  []string{"string"},
 		SourceCity:              []string{"string"},
 		SourceCountry:           []string{"string"},
 		SourceCounty:            []string{"string"},
 		SourceGroup:             []string{"string"},
-		SourceLat:               perigonsdk.Float(-90),
-		SourceLon:               perigonsdk.Float(-180),
-		SourceMaxDistance:       perigonsdk.Float(1),
+		SourceLat:               perigon.Float(-90),
+		SourceLon:               perigon.Float(-180),
+		SourceMaxDistance:       perigon.Float(1),
 		SourceState:             []string{"string"},
 		State:                   []string{"string"},
 		Taxonomy:                []string{"string"},
-		Title:                   perigonsdk.String("title"),
-		To:                      perigonsdk.Time(time.Now()),
+		Title:                   perigon.String("title"),
+		To:                      perigon.Time(time.Now()),
 		Topic:                   []string{"string"},
-		URL:                     perigonsdk.String("url"),
-		MaxArticleCount:         perigonsdk.Int(1),
-		MaxTokens:               perigonsdk.Int(0),
-		Method:                  perigonsdk.SummarizeNewParamsMethodArticles,
-		Model:                   perigonsdk.SummarizeNewParamsModelGpt4o,
-		Prompt:                  perigonsdk.String("prompt"),
-		ReturnedArticleCount:    perigonsdk.Int(1),
-		SummarizeFields:         perigonsdk.SummarizeNewParamsSummarizeFieldsTitle,
-		Temperature:             perigonsdk.Float(0),
-		TopP:                    perigonsdk.Float(0),
+		URL:                     perigon.String("url"),
+		MaxArticleCount:         perigon.Int(1),
+		MaxTokens:               perigon.Int(0),
+		Method:                  perigon.SummarizeNewParamsMethodArticles,
+		Model:                   perigon.SummarizeNewParamsModelGpt4o,
+		Prompt:                  perigon.String("prompt"),
+		ReturnedArticleCount:    perigon.Int(1),
+		SummarizeFields:         perigon.SummarizeNewParamsSummarizeFieldsTitle,
+		Temperature:             perigon.Float(0),
+		TopP:                    perigon.Float(0),
 	})
 	if err != nil {
-		var apierr *perigonsdk.Error
+		var apierr *perigon.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

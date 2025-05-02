@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package perigonsdk
+package perigon
 
 import (
-	"github.com/stainless-sdks/perigon-sdk-go/internal/apierror"
-	"github.com/stainless-sdks/perigon-sdk-go/packages/param"
+	"github.com/goperigon/perigon-go-sdk/internal/apierror"
+	"github.com/goperigon/perigon-go-sdk/packages/param"
 )
 
 // aliased to make [param.APIUnion] private when embedding
