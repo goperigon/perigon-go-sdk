@@ -3,8 +3,8 @@ package resp_test
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/stainless-sdks/perigon-sdk-go/internal/apijson"
-	"github.com/stainless-sdks/perigon-sdk-go/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/internal/apijson"
+	"github.com/goperigon/perigon-go-sdk/packages/resp"
 	"reflect"
 	"testing"
 )

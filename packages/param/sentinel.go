@@ -1,7 +1,7 @@
 package param
 
 import (
-	"github.com/stainless-sdks/perigon-sdk-go/internal/encoding/json/sentinel"
+	"github.com/goperigon/perigon-go-sdk/internal/encoding/json/sentinel"
 )
 
 // NullPtr returns a pointer to the zero value of the type T.

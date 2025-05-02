@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/stainless-sdks/perigon-sdk-go/packages/param"
+	"github.com/goperigon/perigon-go-sdk/packages/param"
 )
 
 var encoders sync.Map // map[encoderEntry]encoderFunc

@@ -1,4 +1,4 @@
-module github.com/stainless-sdks/perigon-sdk-go
+module github.com/goperigon/perigon-go-sdk
 
 go 1.21
 
