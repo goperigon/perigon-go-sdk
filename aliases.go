@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package perigonsdk
+package perigon
 
 import (
 	"github.com/goperigon/perigon-go-sdk/internal/apierror"

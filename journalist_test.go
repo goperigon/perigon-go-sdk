@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package perigonsdk_test
+package perigon_test
 
 import (
 	"context"
@@ -23,13 +23,13 @@ func TestJournalistGet(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := perigonsdk.NewClient(
+	client := perigon.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Journalists.Get(context.TODO(), "id")
 	if err != nil {
-		var apierr *perigonsdk.Error
+		var apierr *perigon.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
@@ -46,30 +46,30 @@ func TestJournalistListWithOptionalParams(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := perigonsdk.NewClient(
+	client := perigon.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 	)
-	_, err := client.Journalists.List(context.TODO(), perigonsdk.JournalistListParams{
+	_, err := client.Journalists.List(context.TODO(), perigon.JournalistListParams{
 		ID:              []string{"string"},
 		Category:        []string{"string"},
 		Country:         []string{"string"},
 		Label:           []string{"string"},
-		MaxMonthlyPosts: perigonsdk.Int(0),
-		MinMonthlyPosts: perigonsdk.Int(0),
-		Name:            perigonsdk.String("name"),
-		Page:            perigonsdk.Int(0),
-		Q:               perigonsdk.String("q"),
-		ShowNumResults:  perigonsdk.Bool(true),
-		Size:            perigonsdk.Int(0),
+		MaxMonthlyPosts: perigon.Int(0),
+		MinMonthlyPosts: perigon.Int(0),
+		Name:            perigon.String("name"),
+		Page:            perigon.Int(0),
+		Q:               perigon.String("q"),
+		ShowNumResults:  perigon.Bool(true),
+		Size:            perigon.Int(0),
 		Source:          []string{"string"},
 		Topic:           []string{"string"},
-		Twitter:         perigonsdk.String("twitter"),
-		UpdatedAtFrom:   perigonsdk.Time(time.Now()),
-		UpdatedAtTo:     perigonsdk.Time(time.Now()),
+		Twitter:         perigon.String("twitter"),
+		UpdatedAtFrom:   perigon.Time(time.Now()),
+		UpdatedAtTo:     perigon.Time(time.Now()),
 	})
 	if err != nil {
-		var apierr *perigonsdk.Error
+		var apierr *perigon.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

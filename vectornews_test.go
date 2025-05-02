@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package perigonsdk_test
+package perigon_test
 
 import (
 	"context"
@@ -23,16 +23,16 @@ func TestVectorNewsSearchWithOptionalParams(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := perigonsdk.NewClient(
+	client := perigon.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 	)
-	_, err := client.Vector.News.Search(context.TODO(), perigonsdk.VectorNewsSearchParams{
+	_, err := client.Vector.News.Search(context.TODO(), perigon.VectorNewsSearchParams{
 		Prompt:      "prompt",
-		AddDateFrom: perigonsdk.Time(time.Now()),
-		AddDateTo:   perigonsdk.Time(time.Now()),
-		Filter: perigonsdk.ArticleSearchFilterParam{
-			And:           []perigonsdk.ArticleSearchFilterParam{},
+		AddDateFrom: perigon.Time(time.Now()),
+		AddDateTo:   perigon.Time(time.Now()),
+		Filter: perigon.ArticleSearchFilterParam{
+			And:           []perigon.ArticleSearchFilterParam{},
 			ArticleID:     []string{"string"},
 			Category:      []string{"string"},
 			City:          []string{"string"},
@@ -41,10 +41,10 @@ func TestVectorNewsSearchWithOptionalParams(t *testing.T) {
 			CompanyID:     []string{"string"},
 			CompanyName:   []string{"string"},
 			CompanySymbol: []string{"string"},
-			Coordinates: perigonsdk.ArticleSearchFilterCoordinatesParam{
-				Lat:    perigonsdk.Float(0),
-				Lon:    perigonsdk.Float(0),
-				Radius: perigonsdk.Float(0),
+			Coordinates: perigon.ArticleSearchFilterCoordinatesParam{
+				Lat:    perigon.Float(0),
+				Lon:    perigon.Float(0),
+				Radius: perigon.Float(0),
 			},
 			Country:                 []string{"string"},
 			County:                  []string{"string"},
@@ -65,16 +65,16 @@ func TestVectorNewsSearchWithOptionalParams(t *testing.T) {
 			Label:                   []string{"string"},
 			Language:                []string{"string"},
 			LocationsCountry:        []string{"string"},
-			Not:                     []perigonsdk.ArticleSearchFilterParam{},
-			Or:                      []perigonsdk.ArticleSearchFilterParam{},
+			Not:                     []perigon.ArticleSearchFilterParam{},
+			Or:                      []perigon.ArticleSearchFilterParam{},
 			PersonName:              []string{"string"},
 			PersonWikidataID:        []string{"string"},
 			Source:                  []string{"string"},
 			SourceCity:              []string{"string"},
-			SourceCoordinates: perigonsdk.ArticleSearchFilterSourceCoordinatesParam{
-				Lat:    perigonsdk.Float(0),
-				Lon:    perigonsdk.Float(0),
-				Radius: perigonsdk.Float(0),
+			SourceCoordinates: perigon.ArticleSearchFilterSourceCoordinatesParam{
+				Lat:    perigon.Float(0),
+				Lon:    perigon.Float(0),
+				Radius: perigon.Float(0),
 			},
 			SourceCountry: []string{"string"},
 			SourceCounty:  []string{"string"},
@@ -84,15 +84,15 @@ func TestVectorNewsSearchWithOptionalParams(t *testing.T) {
 			Taxonomy:      []string{"string"},
 			Topic:         []string{"string"},
 		},
-		Page:           perigonsdk.Int(0),
-		PubDateFrom:    perigonsdk.Time(time.Now()),
-		PubDateTo:      perigonsdk.Time(time.Now()),
-		ScoreThreshold: perigonsdk.Float(0),
-		ShowReprints:   perigonsdk.Bool(true),
-		Size:           perigonsdk.Int(1),
+		Page:           perigon.Int(0),
+		PubDateFrom:    perigon.Time(time.Now()),
+		PubDateTo:      perigon.Time(time.Now()),
+		ScoreThreshold: perigon.Float(0),
+		ShowReprints:   perigon.Bool(true),
+		Size:           perigon.Int(1),
 	})
 	if err != nil {
-		var apierr *perigonsdk.Error
+		var apierr *perigon.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

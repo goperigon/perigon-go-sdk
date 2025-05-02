@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package perigonsdk_test
+package perigon_test
 
 import (
 	"context"
@@ -22,20 +22,20 @@ func TestPersonListWithOptionalParams(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := perigonsdk.NewClient(
+	client := perigon.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 	)
-	_, err := client.People.List(context.TODO(), perigonsdk.PersonListParams{
-		Name:            perigonsdk.String("name"),
+	_, err := client.People.List(context.TODO(), perigon.PersonListParams{
+		Name:            perigon.String("name"),
 		OccupationID:    []string{"string"},
-		OccupationLabel: perigonsdk.String("occupationLabel"),
-		Page:            perigonsdk.Int(0),
-		Size:            perigonsdk.Int(1),
+		OccupationLabel: perigon.String("occupationLabel"),
+		Page:            perigon.Int(0),
+		Size:            perigon.Int(1),
 		WikidataID:      []string{"string"},
 	})
 	if err != nil {
-		var apierr *perigonsdk.Error
+		var apierr *perigon.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}

@@ -1,8 +1,8 @@
-# Perigon SDK Go API Library
+# Perigon Go API Library
 
 <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk"><img src="https://pkg.go.dev/badge/github.com/goperigon/perigon-go-sdk.svg" alt="Go Reference"></a>
 
-The Perigon SDK Go library provides convenient access to the [Perigon SDK REST API](https://docs.perigon.io/discuss)
+The Perigon Go library provides convenient access to the [Perigon REST API](https://docs.perigon.io/discuss)
 from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
@@ -13,7 +13,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ```go
 import (
-	"github.com/goperigon/perigon-go-sdk" // imported as perigonsdk
+	"github.com/goperigon/perigon-go-sdk" // imported as perigon
 )
 ```
 
@@ -49,10 +49,10 @@ import (
 )
 
 func main() {
-	client := perigonsdk.NewClient(
+	client := perigon.NewClient(
 		option.WithAPIKey("My API Key"), // defaults to os.LookupEnv("PERIGON_SDK_API_KEY")
 	)
-	alls, err := client.All.List(context.TODO(), perigonsdk.AllListParams{})
+	alls, err := client.All.List(context.TODO(), perigon.AllListParams{})
 	if err != nil {
 		panic(err.Error())
 	}
@@ -63,29 +63,29 @@ func main() {
 
 ### Request fields
 
-The perigonsdk library uses the [`omitzero`](https://tip.golang.org/doc/go1.24#encodingjsonpkgencodingjson)
+The perigon library uses the [`omitzero`](https://tip.golang.org/doc/go1.24#encodingjsonpkgencodingjson)
 semantics from the Go 1.24+ `encoding/json` release for request fields.
 
 Required primitive fields (`int64`, `string`, etc.) feature the tag <code>\`json:"...,required"\`</code>. These
 fields are always serialized, even their zero values.
 
-Optional primitive types are wrapped in a `param.Opt[T]`. These fields can be set with the provided constructors, `perigonsdk.String(string)`, `perigonsdk.Int(int64)`, etc.
+Optional primitive types are wrapped in a `param.Opt[T]`. These fields can be set with the provided constructors, `perigon.String(string)`, `perigon.Int(int64)`, etc.
 
 Any `param.Opt[T]`, map, slice, struct or string enum uses the
 tag <code>\`json:"...,omitzero"\`</code>. Its zero value is considered omitted.
 
 ```go
-params := perigonsdk.ExampleParams{
-	ID:   "id_xxx",                 // required property
-	Name: perigonsdk.String("..."), // optional property
+params := perigon.ExampleParams{
+	ID:   "id_xxx",              // required property
+	Name: perigon.String("..."), // optional property
 
-	Point: perigonsdk.Point{
-		X: 0,                 // required field will serialize as 0
-		Y: perigonsdk.Int(1), // optional field will serialize as 1
+	Point: perigon.Point{
+		X: 0,              // required field will serialize as 0
+		Y: perigon.Int(1), // optional field will serialize as 1
 		// ... omitted non-required fields will not be serialized
 	},
 
-	Origin: perigonsdk.Origin{}, // the zero value of [Origin] is considered omitted
+	Origin: perigon.Origin{}, // the zero value of [Origin] is considered omitted
 }
 ```
 
@@ -111,7 +111,7 @@ params.WithExtraFields(map[string]any{
 })
 
 // Send a number instead of an object
-custom := param.OverrideObj[perigonsdk.FooParams](12)
+custom := param.OverrideObj[perigon.FooParams](12)
 ```
 
 When available, use the `.IsPresent()` method to check if an optional parameter is not omitted or `null`.
@@ -248,7 +248,7 @@ This library uses the functional options pattern. Functions defined in the
 requests. For example:
 
 ```go
-client := perigonsdk.NewClient(
+client := perigon.NewClient(
 	// Adds a header to every request made by the client
 	option.WithHeader("X-Some-Header", "custom_header_info"),
 )
@@ -275,16 +275,16 @@ with additional helper methods like `.GetNextPage()`, e.g.:
 ### Errors
 
 When the API returns a non-success status code, we return an error with type
-`*perigonsdk.Error`. This contains the `StatusCode`, `*http.Request`, and
+`*perigon.Error`. This contains the `StatusCode`, `*http.Request`, and
 `*http.Response` values of the request, as well as the JSON of the error body
 (much like other response objects in the SDK).
 
 To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
-_, err := client.All.List(context.TODO(), perigonsdk.AllListParams{})
+_, err := client.All.List(context.TODO(), perigon.AllListParams{})
 if err != nil {
-	var apierr *perigonsdk.Error
+	var apierr *perigon.Error
 	if errors.As(err, &apierr) {
 		println(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request
 		println(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response
@@ -309,7 +309,7 @@ ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 defer cancel()
 client.All.List(
 	ctx,
-	perigonsdk.AllListParams{},
+	perigon.AllListParams{},
 	// This sets the per-retry timeout
 	option.WithRequestTimeout(20*time.Second),
 )
@@ -325,7 +325,7 @@ The file name and content-type can be customized by implementing `Name() string`
 string` on the run-time type of `io.Reader`. Note that `os.File` implements `Name() string`, so a
 file returned by `os.Open` will be sent with the file name on disk.
 
-We also provide a helper `perigonsdk.File(reader io.Reader, filename string, contentType string)`
+We also provide a helper `perigon.File(reader io.Reader, filename string, contentType string)`
 which can be used to wrap any `io.Reader` with the appropriate file name and content type.
 
 ### Retries
@@ -338,14 +338,14 @@ You can use the `WithMaxRetries` option to configure or disable this:
 
 ```go
 // Configure the default for all requests:
-client := perigonsdk.NewClient(
+client := perigon.NewClient(
 	option.WithMaxRetries(0), // default is 2
 )
 
 // Override per-request:
 client.All.List(
 	context.TODO(),
-	perigonsdk.AllListParams{},
+	perigon.AllListParams{},
 	option.WithMaxRetries(5),
 )
 ```
@@ -360,7 +360,7 @@ you need to examine response headers, status codes, or other details.
 var response *http.Response
 alls, err := client.All.List(
 	context.TODO(),
-	perigonsdk.AllListParams{},
+	perigon.AllListParams{},
 	option.WithResponseInto(&response),
 )
 if err != nil {
@@ -407,7 +407,7 @@ or the `option.WithJSONSet()` methods.
 params := FooNewParams{
     ID:   "id_xxxx",
     Data: FooNewParamsData{
-        FirstName: perigonsdk.String("John"),
+        FirstName: perigon.String("John"),
     },
 }
 client.Foo.New(context.Background(), params, option.WithJSONSet("data.last_name", "Doe"))
@@ -442,7 +442,7 @@ func Logger(req *http.Request, next option.MiddlewareNext) (res *http.Response, 
     return res, err
 }
 
-client := perigonsdk.NewClient(
+client := perigon.NewClient(
 	option.WithMiddleware(Logger),
 )
 ```

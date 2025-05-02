@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-package perigonsdk_test
+package perigon_test
 
 import (
 	"context"
@@ -23,29 +23,29 @@ func TestCompanyListWithOptionalParams(t *testing.T) {
 	if !testutil.CheckTestServer(t, baseURL) {
 		return
 	}
-	client := perigonsdk.NewClient(
+	client := perigon.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 	)
-	_, err := client.Companies.List(context.TODO(), perigonsdk.CompanyListParams{
+	_, err := client.Companies.List(context.TODO(), perigon.CompanyListParams{
 		ID:               []string{"string"},
 		Country:          []string{"string"},
 		Domain:           []string{"string"},
 		Exchange:         []string{"string"},
-		Industry:         perigonsdk.String("industry"),
-		IpoFrom:          perigonsdk.Time(time.Now()),
-		IpoTo:            perigonsdk.Time(time.Now()),
-		Name:             perigonsdk.String("name"),
-		NumEmployeesFrom: perigonsdk.Int(0),
-		NumEmployeesTo:   perigonsdk.Int(0),
-		Page:             perigonsdk.Int(0),
-		Q:                perigonsdk.String("q"),
-		Sector:           perigonsdk.String("sector"),
-		Size:             perigonsdk.Int(1),
+		Industry:         perigon.String("industry"),
+		IpoFrom:          perigon.Time(time.Now()),
+		IpoTo:            perigon.Time(time.Now()),
+		Name:             perigon.String("name"),
+		NumEmployeesFrom: perigon.Int(0),
+		NumEmployeesTo:   perigon.Int(0),
+		Page:             perigon.Int(0),
+		Q:                perigon.String("q"),
+		Sector:           perigon.String("sector"),
+		Size:             perigon.Int(1),
 		Symbol:           []string{"string"},
 	})
 	if err != nil {
-		var apierr *perigonsdk.Error
+		var apierr *perigon.Error
 		if errors.As(err, &apierr) {
 			t.Log(string(apierr.DumpRequest(true)))
 		}
