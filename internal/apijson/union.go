@@ -2,7 +2,7 @@ package apijson
 
 import (
 	"errors"
-	"github.com/stainless-sdks/perigon-sdk-go/packages/param"
+	"github.com/goperigon/perigon-go-sdk/packages/param"
 	"reflect"
 
 	"github.com/tidwall/gjson"

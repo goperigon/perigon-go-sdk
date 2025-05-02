@@ -2,7 +2,7 @@
 package json
 
 import (
-	"github.com/stainless-sdks/perigon-sdk-go/internal/encoding/json/shims"
+	"github.com/goperigon/perigon-go-sdk/internal/encoding/json/shims"
 	"reflect"
 	"time"
 )

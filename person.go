@@ -7,12 +7,12 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/stainless-sdks/perigon-sdk-go/internal/apijson"
-	"github.com/stainless-sdks/perigon-sdk-go/internal/apiquery"
-	"github.com/stainless-sdks/perigon-sdk-go/internal/requestconfig"
-	"github.com/stainless-sdks/perigon-sdk-go/option"
-	"github.com/stainless-sdks/perigon-sdk-go/packages/param"
-	"github.com/stainless-sdks/perigon-sdk-go/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/internal/apijson"
+	"github.com/goperigon/perigon-go-sdk/internal/apiquery"
+	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/option"
+	"github.com/goperigon/perigon-go-sdk/packages/param"
+	"github.com/goperigon/perigon-go-sdk/packages/resp"
 )
 
 // PersonService contains methods and other services that help with interacting

@@ -1,7 +1,7 @@
 package apiform
 
 import (
-	"github.com/stainless-sdks/perigon-sdk-go/packages/param"
+	"github.com/goperigon/perigon-go-sdk/packages/param"
 	"mime/multipart"
 	"reflect"
 )

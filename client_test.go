@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/perigon-sdk-go"
-	"github.com/stainless-sdks/perigon-sdk-go/internal"
-	"github.com/stainless-sdks/perigon-sdk-go/option"
+	"github.com/goperigon/perigon-go-sdk"
+	"github.com/goperigon/perigon-go-sdk/internal"
+	"github.com/goperigon/perigon-go-sdk/option"
 )
 
 type closureTransport struct {
