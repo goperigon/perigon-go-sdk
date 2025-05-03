@@ -50,7 +50,7 @@ import (
 
 func main() {
 	client := perigon.NewClient(
-		option.WithAPIKey("My API Key"), // defaults to os.LookupEnv("PERIGON_SDK_API_KEY")
+		option.WithAPIKey("My API Key"), // defaults to os.LookupEnv("PERIGON_API_KEY")
 	)
 	alls, err := client.All.List(context.TODO(), perigon.AllListParams{})
 	if err != nil {
