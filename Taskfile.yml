@@ -1,0 +1,21 @@
+# https://taskfile.dev
+
+version: "3"
+
+dotenv: [".env"]
+
+tasks:
+  install:
+    - go mod download
+
+  test:
+    cmds:
+      - go test ./...
+
+  example:
+    desc: Run an example by name "task example -- sources" (defaults to 'all')
+    cmds:
+      - go run examples/{{.EXAMPLE}}/main.go
+    vars:
+      EXAMPLE:
+        sh: echo "${CLI_ARGS:-all}"
