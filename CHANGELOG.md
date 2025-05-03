@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-05-03)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/goperigon/perigon-go-sdk/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** update via SDK Studio ([244340a](https://github.com/goperigon/perigon-go-sdk/commit/244340a5f266846768d23aee14f73e78cac95ce1))
+
 ## 0.1.0-alpha.1 (2025-05-02)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/goperigon/perigon-go-sdk/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)

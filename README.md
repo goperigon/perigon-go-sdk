@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/goperigon/perigon-go-sdk@v0.1.0-alpha.1'
+go get -u 'github.com/goperigon/perigon-go-sdk@v0.1.0-alpha.2'
 ```
 
 <!-- x-release-please-end -->
@@ -50,7 +50,7 @@ import (
 
 func main() {
 	client := perigon.NewClient(
-		option.WithAPIKey("My API Key"), // defaults to os.LookupEnv("PERIGON_SDK_API_KEY")
+		option.WithAPIKey("My API Key"), // defaults to os.LookupEnv("PERIGON_API_KEY")
 	)
 	alls, err := client.All.List(context.TODO(), perigon.AllListParams{})
 	if err != nil {
