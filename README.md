@@ -47,8 +47,8 @@ import (
 	"fmt"
 
 	"github.com/goperigon/perigon-go-sdk"
-	"github.com/goperigon/perigon-go-sdk/option"
 )
+
 
 func main() {
 	client := perigon.NewClient(
