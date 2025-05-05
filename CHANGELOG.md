@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 (2025-05-05)
+
+Full Changelog: [v0.1.0-alpha.3...v1.0.1](https://github.com/goperigon/perigon-go-sdk/compare/v0.1.0-alpha.3...v1.0.1)
+
+### Chores
+
+* configure new SDK language ([926ec97](https://github.com/goperigon/perigon-go-sdk/commit/926ec97919d30206ca36dc16542abda83fdda1de))
+
 ## 0.1.0-alpha.3 (2025-05-03)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0-alpha.3](https://github.com/goperigon/perigon-go-sdk/compare/v0.1.0-alpha.2...v0.1.0-alpha.3)
