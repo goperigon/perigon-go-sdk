@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/goperigon/perigon-go-sdk@v0.1.0-alpha.3'
+go get -u 'github.com/goperigon/perigon-go-sdk@v1.0.0'
 ```
 
 <!-- x-release-please-end -->
@@ -36,6 +36,8 @@ This library requires Go 1.18+.
 ## Usage
 
 The full API of this library can be found in [api.md](api.md).
+
+For additional usage refer to our [examples](https://github.com/goperigon/perigon-go-sdk/tree/main/examples)
 
 ```go
 package main
