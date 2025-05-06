@@ -47,8 +47,7 @@ func (r *TopicService) List(ctx context.Context, query TopicListParams, opts ...
 type TopicListResponse struct {
 	Data  []TopicListResponseData `json:"data,nullable"`
 	Total int64                   `json:"total,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Data        resp.Field
 		Total       resp.Field
@@ -69,8 +68,7 @@ type TopicListResponseData struct {
 	Labels    TopicListResponseDataLabels `json:"labels"`
 	Name      string                      `json:"name,nullable"`
 	UpdatedAt time.Time                   `json:"updatedAt,nullable" format:"date-time"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		ID          resp.Field
 		CreatedAt   resp.Field
@@ -91,8 +89,7 @@ func (r *TopicListResponseData) UnmarshalJSON(data []byte) error {
 type TopicListResponseDataLabels struct {
 	Category    string `json:"category,nullable"`
 	Subcategory string `json:"subcategory,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Category    resp.Field
 		Subcategory resp.Field
@@ -120,10 +117,6 @@ type TopicListParams struct {
 	Subcategory param.Opt[string] `query:"subcategory,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f TopicListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [TopicListParams]'s query parameters as `url.Values`.
 func (r TopicListParams) URLQuery() (v url.Values, err error) {

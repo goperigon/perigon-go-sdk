@@ -1,4 +1,4 @@
-package param
+package paramutil
 
 import (
 	"github.com/goperigon/perigon-go-sdk/internal/encoding/json/sentinel"

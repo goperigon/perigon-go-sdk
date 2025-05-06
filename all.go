@@ -101,8 +101,7 @@ type Article struct {
 	Translation           string                 `json:"translation,nullable"`
 	URL                   string                 `json:"url,nullable"`
 	Verdict               string                 `json:"verdict,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		AddDate               resp.Field
 		ArticleID             resp.Field
@@ -160,8 +159,7 @@ func (r *Article) UnmarshalJSON(data []byte) error {
 
 type ArticleCategory struct {
 	Name string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		ExtraFields map[string]resp.Field
@@ -180,8 +178,7 @@ type ArticleCompany struct {
 	Domains []string `json:"domains,nullable"`
 	Name    string   `json:"name,nullable"`
 	Symbols []string `json:"symbols,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		ID          resp.Field
 		Domains     resp.Field
@@ -202,8 +199,7 @@ type ArticleEntity struct {
 	Data     string `json:"data,nullable"`
 	Mentions int64  `json:"mentions,nullable"`
 	Type     string `json:"type,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Data        resp.Field
 		Mentions    resp.Field
@@ -222,8 +218,7 @@ func (r *ArticleEntity) UnmarshalJSON(data []byte) error {
 type ArticleEventType struct {
 	Name string `json:"name,nullable"`
 	Type string `json:"type,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		Type        resp.Field
@@ -241,8 +236,7 @@ func (r *ArticleEventType) UnmarshalJSON(data []byte) error {
 type ArticleKeyword struct {
 	Name   string  `json:"name,nullable"`
 	Weight float64 `json:"weight,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		Weight      resp.Field
@@ -259,8 +253,7 @@ func (r *ArticleKeyword) UnmarshalJSON(data []byte) error {
 
 type ArticleLabel struct {
 	Name string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		ExtraFields map[string]resp.Field
@@ -280,8 +273,7 @@ type ArticleLocation struct {
 	Country string `json:"country,nullable"`
 	County  string `json:"county,nullable"`
 	State   string `json:"state,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Area        resp.Field
 		City        resp.Field
@@ -302,8 +294,7 @@ func (r *ArticleLocation) UnmarshalJSON(data []byte) error {
 type ArticleMatchedAuthor struct {
 	ID   string `json:"id,nullable"`
 	Name string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		ID          resp.Field
 		Name        resp.Field
@@ -321,8 +312,7 @@ func (r *ArticleMatchedAuthor) UnmarshalJSON(data []byte) error {
 type ArticlePerson struct {
 	Name       string `json:"name,nullable"`
 	WikidataID string `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		WikidataID  resp.Field
@@ -353,8 +343,7 @@ type ArticlePlace struct {
 	StateDistrict string                  `json:"stateDistrict,nullable"`
 	Suburb        string                  `json:"suburb,nullable"`
 	Town          string                  `json:"town,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Amenity       resp.Field
 		City          resp.Field
@@ -385,8 +374,7 @@ func (r *ArticlePlace) UnmarshalJSON(data []byte) error {
 type ArticlePlaceCoordinates struct {
 	Lat float64 `json:"lat,nullable"`
 	Lon float64 `json:"lon,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Lat         resp.Field
 		Lon         resp.Field
@@ -405,8 +393,7 @@ type ArticleSentiment struct {
 	Negative float64 `json:"negative,nullable"`
 	Neutral  float64 `json:"neutral,nullable"`
 	Positive float64 `json:"positive,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Negative    resp.Field
 		Neutral     resp.Field
@@ -426,8 +413,7 @@ type ArticleSource struct {
 	Domain   string                `json:"domain,nullable"`
 	Location ArticleSourceLocation `json:"location"`
 	Paywall  bool                  `json:"paywall,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Domain      resp.Field
 		Location    resp.Field
@@ -449,8 +435,7 @@ type ArticleSourceLocation struct {
 	Country     string                           `json:"country,nullable"`
 	County      string                           `json:"county,nullable"`
 	State       string                           `json:"state,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		City        resp.Field
 		Coordinates resp.Field
@@ -471,8 +456,7 @@ func (r *ArticleSourceLocation) UnmarshalJSON(data []byte) error {
 type ArticleSourceLocationCoordinates struct {
 	Lat float64 `json:"lat,nullable"`
 	Lon float64 `json:"lon,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Lat         resp.Field
 		Lon         resp.Field
@@ -490,8 +474,7 @@ func (r *ArticleSourceLocationCoordinates) UnmarshalJSON(data []byte) error {
 type ArticleTaxonomy struct {
 	Name  string  `json:"name,nullable"`
 	Score float64 `json:"score,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		Score       resp.Field
@@ -508,8 +491,7 @@ func (r *ArticleTaxonomy) UnmarshalJSON(data []byte) error {
 
 type ArticleTopic struct {
 	Name string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		ExtraFields map[string]resp.Field
@@ -527,8 +509,7 @@ type AllListResponse struct {
 	Articles   []Article `json:"articles,nullable"`
 	NumResults int64     `json:"numResults,nullable"`
 	Status     int64     `json:"status,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Articles    resp.Field
 		NumResults  resp.Field
@@ -828,10 +809,6 @@ type AllListParams struct {
 	Topic []string `query:"topic,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f AllListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [AllListParams]'s query parameters as `url.Values`.
 func (r AllListParams) URLQuery() (v url.Values, err error) {
