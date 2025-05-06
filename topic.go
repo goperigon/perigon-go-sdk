@@ -13,7 +13,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
 	"github.com/goperigon/perigon-go-sdk/option"
 	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/packages/respjson"
 )
 
 // TopicService contains methods and other services that help with interacting with
@@ -47,11 +47,11 @@ func (r *TopicService) List(ctx context.Context, query TopicListParams, opts ...
 type TopicListResponse struct {
 	Data  []TopicListResponseData `json:"data,nullable"`
 	Total int64                   `json:"total,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Data        resp.Field
-		Total       resp.Field
-		ExtraFields map[string]resp.Field
+		Data        respjson.Field
+		Total       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -68,14 +68,14 @@ type TopicListResponseData struct {
 	Labels    TopicListResponseDataLabels `json:"labels"`
 	Name      string                      `json:"name,nullable"`
 	UpdatedAt time.Time                   `json:"updatedAt,nullable" format:"date-time"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID          resp.Field
-		CreatedAt   resp.Field
-		Labels      resp.Field
-		Name        resp.Field
-		UpdatedAt   resp.Field
-		ExtraFields map[string]resp.Field
+		ID          respjson.Field
+		CreatedAt   respjson.Field
+		Labels      respjson.Field
+		Name        respjson.Field
+		UpdatedAt   respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -89,11 +89,11 @@ func (r *TopicListResponseData) UnmarshalJSON(data []byte) error {
 type TopicListResponseDataLabels struct {
 	Category    string `json:"category,nullable"`
 	Subcategory string `json:"subcategory,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Category    resp.Field
-		Subcategory resp.Field
-		ExtraFields map[string]resp.Field
+		Category    respjson.Field
+		Subcategory respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }

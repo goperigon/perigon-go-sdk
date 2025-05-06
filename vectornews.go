@@ -11,7 +11,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
 	"github.com/goperigon/perigon-go-sdk/option"
 	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/packages/respjson"
 )
 
 // VectorNewsService contains methods and other services that help with interacting
@@ -241,11 +241,11 @@ func (r ArticleSearchFilterSourceCoordinatesParam) MarshalJSON() (data []byte, e
 type VectorNewsSearchResponse struct {
 	Results []VectorNewsSearchResponseResult `json:"results,nullable"`
 	Status  int64                            `json:"status,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Results     resp.Field
-		Status      resp.Field
-		ExtraFields map[string]resp.Field
+		Results     respjson.Field
+		Status      respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -259,11 +259,11 @@ func (r *VectorNewsSearchResponse) UnmarshalJSON(data []byte) error {
 type VectorNewsSearchResponseResult struct {
 	Data  Article `json:"data"`
 	Score float64 `json:"score,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Data        resp.Field
-		Score       resp.Field
-		ExtraFields map[string]resp.Field
+		Data        respjson.Field
+		Score       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }

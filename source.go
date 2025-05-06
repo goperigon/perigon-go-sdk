@@ -12,7 +12,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
 	"github.com/goperigon/perigon-go-sdk/option"
 	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/packages/respjson"
 )
 
 // SourceService contains methods and other services that help with interacting
@@ -57,11 +57,11 @@ const (
 type SourceTopStatHolder struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Count       resp.Field
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Count       respjson.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -77,12 +77,12 @@ type SourceListResponse struct {
 	NumResults int64                      `json:"numResults,nullable"`
 	Results    []SourceListResponseResult `json:"results,nullable"`
 	Status     int64                      `json:"status,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		NumResults  resp.Field
-		Results     resp.Field
-		Status      resp.Field
-		ExtraFields map[string]resp.Field
+		NumResults  respjson.Field
+		Results     respjson.Field
+		Status      respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -117,32 +117,32 @@ type SourceListResponseResult struct {
 	TopLabels          []SourceTopStatHolder            `json:"topLabels,nullable"`
 	TopTopics          []SourceTopStatHolder            `json:"topTopics,nullable"`
 	UpdatedAt          string                           `json:"updatedAt,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                 resp.Field
-		AdFontesBiasRating resp.Field
-		AllSidesBiasRating resp.Field
-		AltNames           resp.Field
-		AvgBiasRating      resp.Field
-		AvgMonthlyPosts    resp.Field
-		Description        resp.Field
-		Domain             resp.Field
-		GlobalRank         resp.Field
-		Location           resp.Field
-		LogoFavIcon        resp.Field
-		LogoLarge          resp.Field
-		LogoSquare         resp.Field
-		MbfcBiasRating     resp.Field
-		MonthlyVisits      resp.Field
-		Name               resp.Field
-		Paywall            resp.Field
-		PrimaryRecordID    resp.Field
-		TopCategories      resp.Field
-		TopCountries       resp.Field
-		TopLabels          resp.Field
-		TopTopics          resp.Field
-		UpdatedAt          resp.Field
-		ExtraFields        map[string]resp.Field
+		ID                 respjson.Field
+		AdFontesBiasRating respjson.Field
+		AllSidesBiasRating respjson.Field
+		AltNames           respjson.Field
+		AvgBiasRating      respjson.Field
+		AvgMonthlyPosts    respjson.Field
+		Description        respjson.Field
+		Domain             respjson.Field
+		GlobalRank         respjson.Field
+		Location           respjson.Field
+		LogoFavIcon        respjson.Field
+		LogoLarge          respjson.Field
+		LogoSquare         respjson.Field
+		MbfcBiasRating     respjson.Field
+		MonthlyVisits      respjson.Field
+		Name               respjson.Field
+		Paywall            respjson.Field
+		PrimaryRecordID    respjson.Field
+		TopCategories      respjson.Field
+		TopCountries       respjson.Field
+		TopLabels          respjson.Field
+		TopTopics          respjson.Field
+		UpdatedAt          respjson.Field
+		ExtraFields        map[string]respjson.Field
 		raw                string
 	} `json:"-"`
 }
@@ -159,14 +159,14 @@ type SourceListResponseResultLocation struct {
 	Country     string                                      `json:"country,nullable"`
 	County      string                                      `json:"county,nullable"`
 	State       string                                      `json:"state,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		City        resp.Field
-		Coordinates resp.Field
-		Country     resp.Field
-		County      resp.Field
-		State       resp.Field
-		ExtraFields map[string]resp.Field
+		City        respjson.Field
+		Coordinates respjson.Field
+		Country     respjson.Field
+		County      respjson.Field
+		State       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -180,11 +180,11 @@ func (r *SourceListResponseResultLocation) UnmarshalJSON(data []byte) error {
 type SourceListResponseResultLocationCoordinates struct {
 	Lat float64 `json:"lat,nullable"`
 	Lon float64 `json:"lon,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Lat         resp.Field
-		Lon         resp.Field
-		ExtraFields map[string]resp.Field
+		Lat         respjson.Field
+		Lon         respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
