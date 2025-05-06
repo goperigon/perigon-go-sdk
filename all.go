@@ -13,7 +13,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
 	"github.com/goperigon/perigon-go-sdk/option"
 	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/packages/respjson"
 )
 
 // AllService contains methods and other services that help with interacting with
@@ -101,52 +101,52 @@ type Article struct {
 	Translation           string                 `json:"translation,nullable"`
 	URL                   string                 `json:"url,nullable"`
 	Verdict               string                 `json:"verdict,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		AddDate               resp.Field
-		ArticleID             resp.Field
-		AuthorsByline         resp.Field
-		Categories            resp.Field
-		Claim                 resp.Field
-		Cluster               resp.Field
-		ClusterID             resp.Field
-		Companies             resp.Field
-		Content               resp.Field
-		Country               resp.Field
-		Description           resp.Field
-		Entities              resp.Field
-		EventTypes            resp.Field
-		Highlights            resp.Field
-		ImageURL              resp.Field
-		Journalists           resp.Field
-		Keywords              resp.Field
-		Labels                resp.Field
-		Language              resp.Field
-		Links                 resp.Field
-		Locations             resp.Field
-		MatchedAuthors        resp.Field
-		Medium                resp.Field
-		People                resp.Field
-		Places                resp.Field
-		PubDate               resp.Field
-		RefreshDate           resp.Field
-		Reprint               resp.Field
-		ReprintGroupID        resp.Field
-		Score                 resp.Field
-		Sentiment             resp.Field
-		ShortSummary          resp.Field
-		Source                resp.Field
-		Summary               resp.Field
-		Taxonomies            resp.Field
-		Title                 resp.Field
-		Topics                resp.Field
-		TranslatedDescription resp.Field
-		TranslatedSummary     resp.Field
-		TranslatedTitle       resp.Field
-		Translation           resp.Field
-		URL                   resp.Field
-		Verdict               resp.Field
-		ExtraFields           map[string]resp.Field
+		AddDate               respjson.Field
+		ArticleID             respjson.Field
+		AuthorsByline         respjson.Field
+		Categories            respjson.Field
+		Claim                 respjson.Field
+		Cluster               respjson.Field
+		ClusterID             respjson.Field
+		Companies             respjson.Field
+		Content               respjson.Field
+		Country               respjson.Field
+		Description           respjson.Field
+		Entities              respjson.Field
+		EventTypes            respjson.Field
+		Highlights            respjson.Field
+		ImageURL              respjson.Field
+		Journalists           respjson.Field
+		Keywords              respjson.Field
+		Labels                respjson.Field
+		Language              respjson.Field
+		Links                 respjson.Field
+		Locations             respjson.Field
+		MatchedAuthors        respjson.Field
+		Medium                respjson.Field
+		People                respjson.Field
+		Places                respjson.Field
+		PubDate               respjson.Field
+		RefreshDate           respjson.Field
+		Reprint               respjson.Field
+		ReprintGroupID        respjson.Field
+		Score                 respjson.Field
+		Sentiment             respjson.Field
+		ShortSummary          respjson.Field
+		Source                respjson.Field
+		Summary               respjson.Field
+		Taxonomies            respjson.Field
+		Title                 respjson.Field
+		Topics                respjson.Field
+		TranslatedDescription respjson.Field
+		TranslatedSummary     respjson.Field
+		TranslatedTitle       respjson.Field
+		Translation           respjson.Field
+		URL                   respjson.Field
+		Verdict               respjson.Field
+		ExtraFields           map[string]respjson.Field
 		raw                   string
 	} `json:"-"`
 }
@@ -159,10 +159,10 @@ func (r *Article) UnmarshalJSON(data []byte) error {
 
 type ArticleCategory struct {
 	Name string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -178,13 +178,13 @@ type ArticleCompany struct {
 	Domains []string `json:"domains,nullable"`
 	Name    string   `json:"name,nullable"`
 	Symbols []string `json:"symbols,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID          resp.Field
-		Domains     resp.Field
-		Name        resp.Field
-		Symbols     resp.Field
-		ExtraFields map[string]resp.Field
+		ID          respjson.Field
+		Domains     respjson.Field
+		Name        respjson.Field
+		Symbols     respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -199,12 +199,12 @@ type ArticleEntity struct {
 	Data     string `json:"data,nullable"`
 	Mentions int64  `json:"mentions,nullable"`
 	Type     string `json:"type,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Data        resp.Field
-		Mentions    resp.Field
-		Type        resp.Field
-		ExtraFields map[string]resp.Field
+		Data        respjson.Field
+		Mentions    respjson.Field
+		Type        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -218,11 +218,11 @@ func (r *ArticleEntity) UnmarshalJSON(data []byte) error {
 type ArticleEventType struct {
 	Name string `json:"name,nullable"`
 	Type string `json:"type,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		Type        resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		Type        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -236,11 +236,11 @@ func (r *ArticleEventType) UnmarshalJSON(data []byte) error {
 type ArticleKeyword struct {
 	Name   string  `json:"name,nullable"`
 	Weight float64 `json:"weight,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		Weight      resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		Weight      respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -253,10 +253,10 @@ func (r *ArticleKeyword) UnmarshalJSON(data []byte) error {
 
 type ArticleLabel struct {
 	Name string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -273,14 +273,14 @@ type ArticleLocation struct {
 	Country string `json:"country,nullable"`
 	County  string `json:"county,nullable"`
 	State   string `json:"state,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Area        resp.Field
-		City        resp.Field
-		Country     resp.Field
-		County      resp.Field
-		State       resp.Field
-		ExtraFields map[string]resp.Field
+		Area        respjson.Field
+		City        respjson.Field
+		Country     respjson.Field
+		County      respjson.Field
+		State       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -294,11 +294,11 @@ func (r *ArticleLocation) UnmarshalJSON(data []byte) error {
 type ArticleMatchedAuthor struct {
 	ID   string `json:"id,nullable"`
 	Name string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID          resp.Field
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		ID          respjson.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -312,11 +312,11 @@ func (r *ArticleMatchedAuthor) UnmarshalJSON(data []byte) error {
 type ArticlePerson struct {
 	Name       string `json:"name,nullable"`
 	WikidataID string `json:"wikidataId,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		WikidataID  resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		WikidataID  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -343,24 +343,24 @@ type ArticlePlace struct {
 	StateDistrict string                  `json:"stateDistrict,nullable"`
 	Suburb        string                  `json:"suburb,nullable"`
 	Town          string                  `json:"town,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Amenity       resp.Field
-		City          resp.Field
-		Coordinates   resp.Field
-		Country       resp.Field
-		CountryCode   resp.Field
-		County        resp.Field
-		Neighbourhood resp.Field
-		OsmID         resp.Field
-		Postcode      resp.Field
-		Quarter       resp.Field
-		Road          resp.Field
-		State         resp.Field
-		StateDistrict resp.Field
-		Suburb        resp.Field
-		Town          resp.Field
-		ExtraFields   map[string]resp.Field
+		Amenity       respjson.Field
+		City          respjson.Field
+		Coordinates   respjson.Field
+		Country       respjson.Field
+		CountryCode   respjson.Field
+		County        respjson.Field
+		Neighbourhood respjson.Field
+		OsmID         respjson.Field
+		Postcode      respjson.Field
+		Quarter       respjson.Field
+		Road          respjson.Field
+		State         respjson.Field
+		StateDistrict respjson.Field
+		Suburb        respjson.Field
+		Town          respjson.Field
+		ExtraFields   map[string]respjson.Field
 		raw           string
 	} `json:"-"`
 }
@@ -374,11 +374,11 @@ func (r *ArticlePlace) UnmarshalJSON(data []byte) error {
 type ArticlePlaceCoordinates struct {
 	Lat float64 `json:"lat,nullable"`
 	Lon float64 `json:"lon,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Lat         resp.Field
-		Lon         resp.Field
-		ExtraFields map[string]resp.Field
+		Lat         respjson.Field
+		Lon         respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -393,12 +393,12 @@ type ArticleSentiment struct {
 	Negative float64 `json:"negative,nullable"`
 	Neutral  float64 `json:"neutral,nullable"`
 	Positive float64 `json:"positive,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Negative    resp.Field
-		Neutral     resp.Field
-		Positive    resp.Field
-		ExtraFields map[string]resp.Field
+		Negative    respjson.Field
+		Neutral     respjson.Field
+		Positive    respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -413,12 +413,12 @@ type ArticleSource struct {
 	Domain   string                `json:"domain,nullable"`
 	Location ArticleSourceLocation `json:"location"`
 	Paywall  bool                  `json:"paywall,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Domain      resp.Field
-		Location    resp.Field
-		Paywall     resp.Field
-		ExtraFields map[string]resp.Field
+		Domain      respjson.Field
+		Location    respjson.Field
+		Paywall     respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -435,14 +435,14 @@ type ArticleSourceLocation struct {
 	Country     string                           `json:"country,nullable"`
 	County      string                           `json:"county,nullable"`
 	State       string                           `json:"state,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		City        resp.Field
-		Coordinates resp.Field
-		Country     resp.Field
-		County      resp.Field
-		State       resp.Field
-		ExtraFields map[string]resp.Field
+		City        respjson.Field
+		Coordinates respjson.Field
+		Country     respjson.Field
+		County      respjson.Field
+		State       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -456,11 +456,11 @@ func (r *ArticleSourceLocation) UnmarshalJSON(data []byte) error {
 type ArticleSourceLocationCoordinates struct {
 	Lat float64 `json:"lat,nullable"`
 	Lon float64 `json:"lon,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Lat         resp.Field
-		Lon         resp.Field
-		ExtraFields map[string]resp.Field
+		Lat         respjson.Field
+		Lon         respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -474,11 +474,11 @@ func (r *ArticleSourceLocationCoordinates) UnmarshalJSON(data []byte) error {
 type ArticleTaxonomy struct {
 	Name  string  `json:"name,nullable"`
 	Score float64 `json:"score,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		Score       resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		Score       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -491,10 +491,10 @@ func (r *ArticleTaxonomy) UnmarshalJSON(data []byte) error {
 
 type ArticleTopic struct {
 	Name string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -509,12 +509,12 @@ type AllListResponse struct {
 	Articles   []Article `json:"articles,nullable"`
 	NumResults int64     `json:"numResults,nullable"`
 	Status     int64     `json:"status,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Articles    resp.Field
-		NumResults  resp.Field
-		Status      resp.Field
-		ExtraFields map[string]resp.Field
+		Articles    respjson.Field
+		NumResults  respjson.Field
+		Status      respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }

@@ -15,7 +15,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
 	"github.com/goperigon/perigon-go-sdk/option"
 	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/packages/respjson"
 )
 
 // JournalistService contains methods and other services that help with interacting
@@ -86,35 +86,35 @@ type Journalist struct {
 	UpdatedAt           string               `json:"updatedAt,nullable"`
 	WebsiteURL          string               `json:"websiteUrl,nullable"`
 	YoutubeURL          string               `json:"youtubeUrl,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                  resp.Field
-		AvgMonthlyPosts     resp.Field
-		BlogURL             resp.Field
-		Description         resp.Field
-		FacebookURL         resp.Field
-		FullName            resp.Field
-		Headline            resp.Field
-		ImageURL            resp.Field
-		InstagramURL        resp.Field
-		LinkedinConnections resp.Field
-		LinkedinFollowers   resp.Field
-		LinkedinURL         resp.Field
-		Locations           resp.Field
-		Name                resp.Field
-		Title               resp.Field
-		TopCategories       resp.Field
-		TopCountries        resp.Field
-		TopLabels           resp.Field
-		TopSources          resp.Field
-		TopTopics           resp.Field
-		TumblrURL           resp.Field
-		TwitterBio          resp.Field
-		TwitterHandle       resp.Field
-		UpdatedAt           resp.Field
-		WebsiteURL          resp.Field
-		YoutubeURL          resp.Field
-		ExtraFields         map[string]resp.Field
+		ID                  respjson.Field
+		AvgMonthlyPosts     respjson.Field
+		BlogURL             respjson.Field
+		Description         respjson.Field
+		FacebookURL         respjson.Field
+		FullName            respjson.Field
+		Headline            respjson.Field
+		ImageURL            respjson.Field
+		InstagramURL        respjson.Field
+		LinkedinConnections respjson.Field
+		LinkedinFollowers   respjson.Field
+		LinkedinURL         respjson.Field
+		Locations           respjson.Field
+		Name                respjson.Field
+		Title               respjson.Field
+		TopCategories       respjson.Field
+		TopCountries        respjson.Field
+		TopLabels           respjson.Field
+		TopSources          respjson.Field
+		TopTopics           respjson.Field
+		TumblrURL           respjson.Field
+		TwitterBio          respjson.Field
+		TwitterHandle       respjson.Field
+		UpdatedAt           respjson.Field
+		WebsiteURL          respjson.Field
+		YoutubeURL          respjson.Field
+		ExtraFields         map[string]respjson.Field
 		raw                 string
 	} `json:"-"`
 }
@@ -131,14 +131,14 @@ type JournalistLocation struct {
 	Country string `json:"country,nullable"`
 	County  string `json:"county,nullable"`
 	State   string `json:"state,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Area        resp.Field
-		City        resp.Field
-		Country     resp.Field
-		County      resp.Field
-		State       resp.Field
-		ExtraFields map[string]resp.Field
+		Area        respjson.Field
+		City        respjson.Field
+		Country     respjson.Field
+		County      respjson.Field
+		State       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -152,11 +152,11 @@ func (r *JournalistLocation) UnmarshalJSON(data []byte) error {
 type NameCount struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Count       resp.Field
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Count       respjson.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -172,12 +172,12 @@ type JournalistListResponse struct {
 	NumResults int64        `json:"numResults,nullable"`
 	Results    []Journalist `json:"results,nullable"`
 	Status     int64        `json:"status,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		NumResults  resp.Field
-		Results     resp.Field
-		Status      resp.Field
-		ExtraFields map[string]resp.Field
+		NumResults  respjson.Field
+		Results     respjson.Field
+		Status      respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }

@@ -13,7 +13,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
 	"github.com/goperigon/perigon-go-sdk/option"
 	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/packages/respjson"
 )
 
 // CompanyService contains methods and other services that help with interacting
@@ -50,12 +50,12 @@ type CompanyListResponse struct {
 	NumResults int64                       `json:"numResults,nullable"`
 	Results    []CompanyListResponseResult `json:"results,nullable"`
 	Status     int64                       `json:"status,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		NumResults  resp.Field
-		Results     resp.Field
-		Status      resp.Field
-		ExtraFields map[string]resp.Field
+		NumResults  respjson.Field
+		Results     respjson.Field
+		Status      respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -97,39 +97,39 @@ type CompanyListResponseResult struct {
 	WebResources      CompanyListResponseResultWebResources `json:"webResources"`
 	YearFounded       int64                                 `json:"yearFounded,nullable"`
 	Zip               string                                `json:"zip,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                resp.Field
-		Address           resp.Field
-		AltNames          resp.Field
-		Ceo               resp.Field
-		City              resp.Field
-		Country           resp.Field
-		Description       resp.Field
-		Domains           resp.Field
-		Favicon           resp.Field
-		FullTimeEmployees resp.Field
-		GlobalRank        resp.Field
-		Industry          resp.Field
-		IsActivelyTrading resp.Field
-		IsAdr             resp.Field
-		IsEtf             resp.Field
-		IsFund            resp.Field
-		Logo              resp.Field
-		MonthlyVisits     resp.Field
-		Naics             resp.Field
-		Name              resp.Field
-		PrimaryRecordID   resp.Field
-		Revenue           resp.Field
-		Sector            resp.Field
-		Sic               resp.Field
-		State             resp.Field
-		Symbols           resp.Field
-		UpdatedAt         resp.Field
-		WebResources      resp.Field
-		YearFounded       resp.Field
-		Zip               resp.Field
-		ExtraFields       map[string]resp.Field
+		ID                respjson.Field
+		Address           respjson.Field
+		AltNames          respjson.Field
+		Ceo               respjson.Field
+		City              respjson.Field
+		Country           respjson.Field
+		Description       respjson.Field
+		Domains           respjson.Field
+		Favicon           respjson.Field
+		FullTimeEmployees respjson.Field
+		GlobalRank        respjson.Field
+		Industry          respjson.Field
+		IsActivelyTrading respjson.Field
+		IsAdr             respjson.Field
+		IsEtf             respjson.Field
+		IsFund            respjson.Field
+		Logo              respjson.Field
+		MonthlyVisits     respjson.Field
+		Naics             respjson.Field
+		Name              respjson.Field
+		PrimaryRecordID   respjson.Field
+		Revenue           respjson.Field
+		Sector            respjson.Field
+		Sic               respjson.Field
+		State             respjson.Field
+		Symbols           respjson.Field
+		UpdatedAt         respjson.Field
+		WebResources      respjson.Field
+		YearFounded       respjson.Field
+		Zip               respjson.Field
+		ExtraFields       map[string]respjson.Field
 		raw               string
 	} `json:"-"`
 }
@@ -145,13 +145,13 @@ type CompanyListResponseResultSymbol struct {
 	ExchangeShortName string `json:"exchangeShortName,nullable"`
 	IpoDate           string `json:"ipoDate,nullable"`
 	Symbol            string `json:"symbol,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Exchange          resp.Field
-		ExchangeShortName resp.Field
-		IpoDate           resp.Field
-		Symbol            resp.Field
-		ExtraFields       map[string]resp.Field
+		Exchange          respjson.Field
+		ExchangeShortName respjson.Field
+		IpoDate           respjson.Field
+		Symbol            respjson.Field
+		ExtraFields       map[string]respjson.Field
 		raw               string
 	} `json:"-"`
 }
@@ -180,26 +180,26 @@ type CompanyListResponseResultWebResources struct {
 	Wikipedia string `json:"wikipedia,nullable"`
 	X         string `json:"x,nullable"`
 	Youtube   string `json:"youtube,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		About       resp.Field
-		Blog        resp.Field
-		Careers     resp.Field
-		Events      resp.Field
-		Facebook    resp.Field
-		Instagram   resp.Field
-		Linkedin    resp.Field
-		Medium      resp.Field
-		Reddit      resp.Field
-		Sitemap     resp.Field
-		Threads     resp.Field
-		Tiktok      resp.Field
-		Updates     resp.Field
-		Wellfound   resp.Field
-		Wikipedia   resp.Field
-		X           resp.Field
-		Youtube     resp.Field
-		ExtraFields map[string]resp.Field
+		About       respjson.Field
+		Blog        respjson.Field
+		Careers     respjson.Field
+		Events      respjson.Field
+		Facebook    respjson.Field
+		Instagram   respjson.Field
+		Linkedin    respjson.Field
+		Medium      respjson.Field
+		Reddit      respjson.Field
+		Sitemap     respjson.Field
+		Threads     respjson.Field
+		Tiktok      respjson.Field
+		Updates     respjson.Field
+		Wellfound   respjson.Field
+		Wikipedia   respjson.Field
+		X           respjson.Field
+		Youtube     respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }

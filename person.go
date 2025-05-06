@@ -12,7 +12,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
 	"github.com/goperigon/perigon-go-sdk/option"
 	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/packages/respjson"
 )
 
 // PersonService contains methods and other services that help with interacting
@@ -48,10 +48,10 @@ func (r *PersonService) List(ctx context.Context, query PersonListParams, opts .
 
 type ImageHolder struct {
 	URL string `json:"url,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		URL         resp.Field
-		ExtraFields map[string]resp.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -65,11 +65,11 @@ func (r *ImageHolder) UnmarshalJSON(data []byte) error {
 type WikidataDateHolder struct {
 	Precision string `json:"precision,nullable"`
 	Time      string `json:"time,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Precision   resp.Field
-		Time        resp.Field
-		ExtraFields map[string]resp.Field
+		Precision   respjson.Field
+		Time        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -83,11 +83,11 @@ func (r *WikidataDateHolder) UnmarshalJSON(data []byte) error {
 type WikidataLabelHolder struct {
 	Label      string `json:"label,nullable"`
 	WikidataID string `json:"wikidataId,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Label       resp.Field
-		WikidataID  resp.Field
-		ExtraFields map[string]resp.Field
+		Label       respjson.Field
+		WikidataID  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -103,12 +103,12 @@ type PersonListResponse struct {
 	NumResults int64                      `json:"numResults,nullable"`
 	Results    []PersonListResponseResult `json:"results,nullable"`
 	Status     int64                      `json:"status,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		NumResults  resp.Field
-		Results     resp.Field
-		Status      resp.Field
-		ExtraFields map[string]resp.Field
+		NumResults  respjson.Field
+		Results     respjson.Field
+		Status      respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -134,23 +134,23 @@ type PersonListResponseResult struct {
 	Position       []PersonListResponseResultPosition       `json:"position,nullable"`
 	UpdatedAt      string                                   `json:"updatedAt,nullable"`
 	WikidataID     string                                   `json:"wikidataId,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Abstract       resp.Field
-		Aliases        resp.Field
-		CreatedAt      resp.Field
-		DateOfBirth    resp.Field
-		DateOfDeath    resp.Field
-		Description    resp.Field
-		Gender         resp.Field
-		Image          resp.Field
-		Name           resp.Field
-		Occupation     resp.Field
-		PoliticalParty resp.Field
-		Position       resp.Field
-		UpdatedAt      resp.Field
-		WikidataID     resp.Field
-		ExtraFields    map[string]resp.Field
+		Abstract       respjson.Field
+		Aliases        respjson.Field
+		CreatedAt      respjson.Field
+		DateOfBirth    respjson.Field
+		DateOfDeath    respjson.Field
+		Description    respjson.Field
+		Gender         respjson.Field
+		Image          respjson.Field
+		Name           respjson.Field
+		Occupation     respjson.Field
+		PoliticalParty respjson.Field
+		Position       respjson.Field
+		UpdatedAt      respjson.Field
+		WikidataID     respjson.Field
+		ExtraFields    map[string]respjson.Field
 		raw            string
 	} `json:"-"`
 }
@@ -166,13 +166,13 @@ type PersonListResponseResultPoliticalParty struct {
 	Label      string             `json:"label,nullable"`
 	StartTime  WikidataDateHolder `json:"startTime"`
 	WikidataID string             `json:"wikidataId,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		EndTime     resp.Field
-		Label       resp.Field
-		StartTime   resp.Field
-		WikidataID  resp.Field
-		ExtraFields map[string]resp.Field
+		EndTime     respjson.Field
+		Label       respjson.Field
+		StartTime   respjson.Field
+		WikidataID  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -189,14 +189,14 @@ type PersonListResponseResultPosition struct {
 	Label      string              `json:"label,nullable"`
 	StartTime  WikidataDateHolder  `json:"startTime"`
 	WikidataID string              `json:"wikidataId,nullable"`
-	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Employer    resp.Field
-		EndTime     resp.Field
-		Label       resp.Field
-		StartTime   resp.Field
-		WikidataID  resp.Field
-		ExtraFields map[string]resp.Field
+		Employer    respjson.Field
+		EndTime     respjson.Field
+		Label       respjson.Field
+		StartTime   respjson.Field
+		WikidataID  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
