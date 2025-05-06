@@ -86,8 +86,7 @@ type Journalist struct {
 	UpdatedAt           string               `json:"updatedAt,nullable"`
 	WebsiteURL          string               `json:"websiteUrl,nullable"`
 	YoutubeURL          string               `json:"youtubeUrl,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		ID                  resp.Field
 		AvgMonthlyPosts     resp.Field
@@ -132,8 +131,7 @@ type JournalistLocation struct {
 	Country string `json:"country,nullable"`
 	County  string `json:"county,nullable"`
 	State   string `json:"state,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Area        resp.Field
 		City        resp.Field
@@ -154,8 +152,7 @@ func (r *JournalistLocation) UnmarshalJSON(data []byte) error {
 type NameCount struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Count       resp.Field
 		Name        resp.Field
@@ -175,8 +172,7 @@ type JournalistListResponse struct {
 	NumResults int64        `json:"numResults,nullable"`
 	Results    []Journalist `json:"results,nullable"`
 	Status     int64        `json:"status,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		NumResults  resp.Field
 		Results     resp.Field
@@ -240,10 +236,6 @@ type JournalistListParams struct {
 	Topic []string `query:"topic,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f JournalistListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [JournalistListParams]'s query parameters as `url.Values`.
 func (r JournalistListParams) URLQuery() (v url.Values, err error) {

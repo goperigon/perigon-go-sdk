@@ -204,9 +204,6 @@ type ArticleSearchFilterParam struct {
 	paramObj
 }
 
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f ArticleSearchFilterParam) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 func (r ArticleSearchFilterParam) MarshalJSON() (data []byte, err error) {
 	type shadow ArticleSearchFilterParam
 	return param.MarshalObject(r, (*shadow)(&r))
@@ -221,11 +218,6 @@ type ArticleSearchFilterCoordinatesParam struct {
 	paramObj
 }
 
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f ArticleSearchFilterCoordinatesParam) IsPresent() bool {
-	return !param.IsOmitted(f) && !f.IsNull()
-}
 func (r ArticleSearchFilterCoordinatesParam) MarshalJSON() (data []byte, err error) {
 	type shadow ArticleSearchFilterCoordinatesParam
 	return param.MarshalObject(r, (*shadow)(&r))
@@ -240,11 +232,6 @@ type ArticleSearchFilterSourceCoordinatesParam struct {
 	paramObj
 }
 
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f ArticleSearchFilterSourceCoordinatesParam) IsPresent() bool {
-	return !param.IsOmitted(f) && !f.IsNull()
-}
 func (r ArticleSearchFilterSourceCoordinatesParam) MarshalJSON() (data []byte, err error) {
 	type shadow ArticleSearchFilterSourceCoordinatesParam
 	return param.MarshalObject(r, (*shadow)(&r))
@@ -254,8 +241,7 @@ func (r ArticleSearchFilterSourceCoordinatesParam) MarshalJSON() (data []byte, e
 type VectorNewsSearchResponse struct {
 	Results []VectorNewsSearchResponseResult `json:"results,nullable"`
 	Status  int64                            `json:"status,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Results     resp.Field
 		Status      resp.Field
@@ -273,8 +259,7 @@ func (r *VectorNewsSearchResponse) UnmarshalJSON(data []byte) error {
 type VectorNewsSearchResponseResult struct {
 	Data  Article `json:"data"`
 	Score float64 `json:"score,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Data        resp.Field
 		Score       resp.Field
@@ -319,10 +304,6 @@ type VectorNewsSearchParams struct {
 	Filter ArticleSearchFilterParam `json:"filter,omitzero"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f VectorNewsSearchParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 func (r VectorNewsSearchParams) MarshalJSON() (data []byte, err error) {
 	type shadow VectorNewsSearchParams

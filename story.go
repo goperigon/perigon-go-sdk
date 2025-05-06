@@ -81,8 +81,7 @@ type NewsCluster struct {
 	UniqueCount       int64                    `json:"uniqueCount,nullable"`
 	UniqueSources     []string                 `json:"uniqueSources,nullable"`
 	UpdatedAt         string                   `json:"updatedAt,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		ID                resp.Field
 		Categories        resp.Field
@@ -133,8 +132,7 @@ func (r *NewsCluster) UnmarshalJSON(data []byte) error {
 type NewsClusterCategory struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Count       resp.Field
 		Name        resp.Field
@@ -155,8 +153,7 @@ type NewsClusterCompany struct {
 	Domains []string `json:"domains,nullable"`
 	Name    string   `json:"name,nullable"`
 	Symbols []string `json:"symbols,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		ID          resp.Field
 		Count       resp.Field
@@ -177,8 +174,7 @@ func (r *NewsClusterCompany) UnmarshalJSON(data []byte) error {
 type NewsClusterCountry struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Count       resp.Field
 		Name        resp.Field
@@ -197,8 +193,7 @@ type NewsClusterImageSource struct {
 	Domain   string                         `json:"domain,nullable"`
 	Location NewsClusterImageSourceLocation `json:"location"`
 	Paywall  bool                           `json:"paywall,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Domain      resp.Field
 		Location    resp.Field
@@ -220,8 +215,7 @@ type NewsClusterImageSourceLocation struct {
 	Country     string                                    `json:"country,nullable"`
 	County      string                                    `json:"county,nullable"`
 	State       string                                    `json:"state,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		City        resp.Field
 		Coordinates resp.Field
@@ -242,8 +236,7 @@ func (r *NewsClusterImageSourceLocation) UnmarshalJSON(data []byte) error {
 type NewsClusterImageSourceLocationCoordinates struct {
 	Lat float64 `json:"lat,nullable"`
 	Lon float64 `json:"lon,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Lat         resp.Field
 		Lon         resp.Field
@@ -261,8 +254,7 @@ func (r *NewsClusterImageSourceLocationCoordinates) UnmarshalJSON(data []byte) e
 type NewsClusterKeyPoint struct {
 	Point      string   `json:"point,nullable"`
 	References []string `json:"references,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Point       resp.Field
 		References  resp.Field
@@ -283,8 +275,7 @@ type NewsClusterLocation struct {
 	Count  int64  `json:"count,nullable"`
 	County string `json:"county,nullable"`
 	State  string `json:"state,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Area        resp.Field
 		City        resp.Field
@@ -306,8 +297,7 @@ type NewsClusterPerson struct {
 	Count      int64  `json:"count,nullable"`
 	Name       string `json:"name,nullable"`
 	WikidataID string `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Count       resp.Field
 		Name        resp.Field
@@ -327,8 +317,7 @@ type NewsClusterQuestion struct {
 	Answer     string   `json:"answer,nullable"`
 	Question   string   `json:"question,nullable"`
 	References []string `json:"references,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Answer      resp.Field
 		Question    resp.Field
@@ -348,8 +337,7 @@ type NewsClusterSentiment struct {
 	Negative float64 `json:"negative,nullable"`
 	Neutral  float64 `json:"neutral,nullable"`
 	Positive float64 `json:"positive,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Negative    resp.Field
 		Neutral     resp.Field
@@ -368,8 +356,7 @@ func (r *NewsClusterSentiment) UnmarshalJSON(data []byte) error {
 type NewsClusterTaxonomy struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Count       resp.Field
 		Name        resp.Field
@@ -386,8 +373,7 @@ func (r *NewsClusterTaxonomy) UnmarshalJSON(data []byte) error {
 
 type NewsClusterTopCategory struct {
 	Name string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		ExtraFields map[string]resp.Field
@@ -406,8 +392,7 @@ type NewsClusterTopCompany struct {
 	Domains []string `json:"domains,nullable"`
 	Name    string   `json:"name,nullable"`
 	Symbols []string `json:"symbols,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		ID          resp.Field
 		Domains     resp.Field
@@ -427,8 +412,7 @@ func (r *NewsClusterTopCompany) UnmarshalJSON(data []byte) error {
 type NewsClusterTopic struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Count       resp.Field
 		Name        resp.Field
@@ -449,8 +433,7 @@ type NewsClusterTopLocation struct {
 	Country string `json:"country,nullable"`
 	County  string `json:"county,nullable"`
 	State   string `json:"state,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Area        resp.Field
 		City        resp.Field
@@ -471,8 +454,7 @@ func (r *NewsClusterTopLocation) UnmarshalJSON(data []byte) error {
 type NewsClusterTopPerson struct {
 	Name       string `json:"name,nullable"`
 	WikidataID string `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		WikidataID  resp.Field
@@ -489,8 +471,7 @@ func (r *NewsClusterTopPerson) UnmarshalJSON(data []byte) error {
 
 type NewsClusterTopTaxonomy struct {
 	Name string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		ExtraFields map[string]resp.Field
@@ -506,8 +487,7 @@ func (r *NewsClusterTopTaxonomy) UnmarshalJSON(data []byte) error {
 
 type NewsClusterTopTopic struct {
 	Name string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Name        resp.Field
 		ExtraFields map[string]resp.Field
@@ -526,8 +506,7 @@ type StoryListResponse struct {
 	NumResults int64         `json:"numResults,nullable"`
 	Results    []NewsCluster `json:"results,nullable"`
 	Status     int64         `json:"status,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		NumResults  resp.Field
 		Results     resp.Field
@@ -681,10 +660,6 @@ type StoryListParams struct {
 	Topic []string `query:"topic,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f StoryListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [StoryListParams]'s query parameters as `url.Values`.
 func (r StoryListParams) URLQuery() (v url.Values, err error) {

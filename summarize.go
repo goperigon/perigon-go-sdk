@@ -49,8 +49,7 @@ type SummarizeNewResponse struct {
 	Results    []Article `json:"results,nullable"`
 	Status     int64     `json:"status,nullable"`
 	Summary    string    `json:"summary,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		NumResults  resp.Field
 		Results     resp.Field
@@ -380,10 +379,6 @@ type SummarizeNewParams struct {
 	Topic []string `query:"topic,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f SummarizeNewParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 func (r SummarizeNewParams) MarshalJSON() (data []byte, err error) {
 	type shadow SummarizeNewParams

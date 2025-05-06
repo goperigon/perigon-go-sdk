@@ -57,8 +57,7 @@ const (
 type SourceTopStatHolder struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Count       resp.Field
 		Name        resp.Field
@@ -78,8 +77,7 @@ type SourceListResponse struct {
 	NumResults int64                      `json:"numResults,nullable"`
 	Results    []SourceListResponseResult `json:"results,nullable"`
 	Status     int64                      `json:"status,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		NumResults  resp.Field
 		Results     resp.Field
@@ -119,8 +117,7 @@ type SourceListResponseResult struct {
 	TopLabels          []SourceTopStatHolder            `json:"topLabels,nullable"`
 	TopTopics          []SourceTopStatHolder            `json:"topTopics,nullable"`
 	UpdatedAt          string                           `json:"updatedAt,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		ID                 resp.Field
 		AdFontesBiasRating resp.Field
@@ -162,8 +159,7 @@ type SourceListResponseResultLocation struct {
 	Country     string                                      `json:"country,nullable"`
 	County      string                                      `json:"county,nullable"`
 	State       string                                      `json:"state,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		City        resp.Field
 		Coordinates resp.Field
@@ -184,8 +180,7 @@ func (r *SourceListResponseResultLocation) UnmarshalJSON(data []byte) error {
 type SourceListResponseResultLocationCoordinates struct {
 	Lat float64 `json:"lat,nullable"`
 	Lon float64 `json:"lon,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Lat         resp.Field
 		Lon         resp.Field
@@ -272,10 +267,6 @@ type SourceListParams struct {
 	Topic []string `query:"topic,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f SourceListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [SourceListParams]'s query parameters as `url.Values`.
 func (r SourceListParams) URLQuery() (v url.Values, err error) {

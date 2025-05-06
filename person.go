@@ -48,8 +48,7 @@ func (r *PersonService) List(ctx context.Context, query PersonListParams, opts .
 
 type ImageHolder struct {
 	URL string `json:"url,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		URL         resp.Field
 		ExtraFields map[string]resp.Field
@@ -66,8 +65,7 @@ func (r *ImageHolder) UnmarshalJSON(data []byte) error {
 type WikidataDateHolder struct {
 	Precision string `json:"precision,nullable"`
 	Time      string `json:"time,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Precision   resp.Field
 		Time        resp.Field
@@ -85,8 +83,7 @@ func (r *WikidataDateHolder) UnmarshalJSON(data []byte) error {
 type WikidataLabelHolder struct {
 	Label      string `json:"label,nullable"`
 	WikidataID string `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Label       resp.Field
 		WikidataID  resp.Field
@@ -106,8 +103,7 @@ type PersonListResponse struct {
 	NumResults int64                      `json:"numResults,nullable"`
 	Results    []PersonListResponseResult `json:"results,nullable"`
 	Status     int64                      `json:"status,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		NumResults  resp.Field
 		Results     resp.Field
@@ -138,8 +134,7 @@ type PersonListResponseResult struct {
 	Position       []PersonListResponseResultPosition       `json:"position,nullable"`
 	UpdatedAt      string                                   `json:"updatedAt,nullable"`
 	WikidataID     string                                   `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Abstract       resp.Field
 		Aliases        resp.Field
@@ -171,8 +166,7 @@ type PersonListResponseResultPoliticalParty struct {
 	Label      string             `json:"label,nullable"`
 	StartTime  WikidataDateHolder `json:"startTime"`
 	WikidataID string             `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		EndTime     resp.Field
 		Label       resp.Field
@@ -195,8 +189,7 @@ type PersonListResponseResultPosition struct {
 	Label      string              `json:"label,nullable"`
 	StartTime  WikidataDateHolder  `json:"startTime"`
 	WikidataID string              `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Employer    resp.Field
 		EndTime     resp.Field
@@ -233,10 +226,6 @@ type PersonListParams struct {
 	WikidataID []string `query:"wikidataId,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f PersonListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [PersonListParams]'s query parameters as `url.Values`.
 func (r PersonListParams) URLQuery() (v url.Values, err error) {

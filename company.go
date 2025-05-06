@@ -50,8 +50,7 @@ type CompanyListResponse struct {
 	NumResults int64                       `json:"numResults,nullable"`
 	Results    []CompanyListResponseResult `json:"results,nullable"`
 	Status     int64                       `json:"status,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		NumResults  resp.Field
 		Results     resp.Field
@@ -98,8 +97,7 @@ type CompanyListResponseResult struct {
 	WebResources      CompanyListResponseResultWebResources `json:"webResources"`
 	YearFounded       int64                                 `json:"yearFounded,nullable"`
 	Zip               string                                `json:"zip,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		ID                resp.Field
 		Address           resp.Field
@@ -147,8 +145,7 @@ type CompanyListResponseResultSymbol struct {
 	ExchangeShortName string `json:"exchangeShortName,nullable"`
 	IpoDate           string `json:"ipoDate,nullable"`
 	Symbol            string `json:"symbol,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		Exchange          resp.Field
 		ExchangeShortName resp.Field
@@ -183,8 +180,7 @@ type CompanyListResponseResultWebResources struct {
 	Wikipedia string `json:"wikipedia,nullable"`
 	X         string `json:"x,nullable"`
 	Youtube   string `json:"youtube,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [resp.Field.Valid].
 	JSON struct {
 		About       resp.Field
 		Blog        resp.Field
@@ -248,10 +244,6 @@ type CompanyListParams struct {
 	Symbol []string `query:"symbol,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f CompanyListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [CompanyListParams]'s query parameters as `url.Values`.
 func (r CompanyListParams) URLQuery() (v url.Values, err error) {
