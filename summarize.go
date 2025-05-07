@@ -384,6 +384,9 @@ func (r SummarizeNewParams) MarshalJSON() (data []byte, err error) {
 	type shadow SummarizeNewParams
 	return param.MarshalObject(r, (*shadow)(&r))
 }
+func (r *SummarizeNewParams) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
 
 // URLQuery serializes [SummarizeNewParams]'s query parameters as `url.Values`.
 func (r SummarizeNewParams) URLQuery() (v url.Values, err error) {
