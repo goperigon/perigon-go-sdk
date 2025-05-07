@@ -208,6 +208,9 @@ func (r ArticleSearchFilterParam) MarshalJSON() (data []byte, err error) {
 	type shadow ArticleSearchFilterParam
 	return param.MarshalObject(r, (*shadow)(&r))
 }
+func (r *ArticleSearchFilterParam) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
 
 // Filter using sources that are located on specific coordinates using Lat, lon and
 // radius.
@@ -222,6 +225,9 @@ func (r ArticleSearchFilterCoordinatesParam) MarshalJSON() (data []byte, err err
 	type shadow ArticleSearchFilterCoordinatesParam
 	return param.MarshalObject(r, (*shadow)(&r))
 }
+func (r *ArticleSearchFilterCoordinatesParam) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
 
 // Filter using sources that are located on specific coordinates using Lat, lon and
 // radius.
@@ -235,6 +241,9 @@ type ArticleSearchFilterSourceCoordinatesParam struct {
 func (r ArticleSearchFilterSourceCoordinatesParam) MarshalJSON() (data []byte, err error) {
 	type shadow ArticleSearchFilterSourceCoordinatesParam
 	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *ArticleSearchFilterSourceCoordinatesParam) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
 }
 
 // Vector search result
@@ -308,4 +317,7 @@ type VectorNewsSearchParams struct {
 func (r VectorNewsSearchParams) MarshalJSON() (data []byte, err error) {
 	type shadow VectorNewsSearchParams
 	return param.MarshalObject(r, (*shadow)(&r))
+}
+func (r *VectorNewsSearchParams) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
 }
