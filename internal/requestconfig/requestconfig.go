@@ -18,10 +18,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/goperigon/perigon-go-sdk/internal"
-	"github.com/goperigon/perigon-go-sdk/internal/apierror"
-	"github.com/goperigon/perigon-go-sdk/internal/apiform"
-	"github.com/goperigon/perigon-go-sdk/internal/apiquery"
+	"github.com/goperigon/perigon-go-sdk/v2/internal"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apierror"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apiform"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apiquery"
 )
 
 func getDefaultHeaders() map[string]string {
@@ -504,6 +504,7 @@ func (cfg *RequestConfig) Execute() (err error) {
 	}
 
 	contents, err := io.ReadAll(res.Body)
+	res.Body.Close()
 	if err != nil {
 		return fmt.Errorf("error reading response body: %w", err)
 	}

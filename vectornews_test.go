@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goperigon/perigon-go-sdk"
-	"github.com/goperigon/perigon-go-sdk/internal/testutil"
-	"github.com/goperigon/perigon-go-sdk/option"
+	"github.com/goperigon/perigon-go-sdk/v2"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/testutil"
+	"github.com/goperigon/perigon-go-sdk/v2/option"
 )
 
 func TestVectorNewsSearchWithOptionalParams(t *testing.T) {
@@ -27,9 +27,7 @@ func TestVectorNewsSearchWithOptionalParams(t *testing.T) {
 		option.WithAPIKey("My API Key"),
 	)
 	_, err := client.Vector.News.Search(context.TODO(), perigon.VectorNewsSearchParams{
-		Prompt:      "prompt",
-		AddDateFrom: perigon.Time(time.Now()),
-		AddDateTo:   perigon.Time(time.Now()),
+		Prompt: "prompt",
 		Filter: perigon.ArticleSearchFilterParam{
 			And:           []perigon.ArticleSearchFilterParam{},
 			ArticleID:     []string{"string"},
@@ -83,12 +81,11 @@ func TestVectorNewsSearchWithOptionalParams(t *testing.T) {
 			Taxonomy:      []string{"string"},
 			Topic:         []string{"string"},
 		},
-		Page:           perigon.Int(0),
-		PubDateFrom:    perigon.Time(time.Now()),
-		PubDateTo:      perigon.Time(time.Now()),
-		ScoreThreshold: perigon.Float(0),
-		ShowReprints:   perigon.Bool(true),
-		Size:           perigon.Int(1),
+		Page:         perigon.Int(0),
+		PubDateFrom:  perigon.Time(time.Now()),
+		PubDateTo:    perigon.Time(time.Now()),
+		ShowReprints: perigon.Bool(true),
+		Size:         perigon.Int(1),
 	})
 	if err != nil {
 		var apierr *perigon.Error

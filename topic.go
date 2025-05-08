@@ -8,12 +8,12 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/goperigon/perigon-go-sdk/internal/apijson"
-	"github.com/goperigon/perigon-go-sdk/internal/apiquery"
-	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
-	"github.com/goperigon/perigon-go-sdk/option"
-	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apiquery"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/v2/option"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 )
 
 // TopicService contains methods and other services that help with interacting with
@@ -45,14 +45,13 @@ func (r *TopicService) List(ctx context.Context, query TopicListParams, opts ...
 
 // Topic search result
 type TopicListResponse struct {
-	Data  []TopicListResponseData `json:"data,nullable"`
-	Total int64                   `json:"total,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	Data  []TopicListResponseData `json:"data,required"`
+	Total int64                   `json:"total,required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Data        resp.Field
-		Total       resp.Field
-		ExtraFields map[string]resp.Field
+		Data        respjson.Field
+		Total       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -69,15 +68,14 @@ type TopicListResponseData struct {
 	Labels    TopicListResponseDataLabels `json:"labels"`
 	Name      string                      `json:"name,nullable"`
 	UpdatedAt time.Time                   `json:"updatedAt,nullable" format:"date-time"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID          resp.Field
-		CreatedAt   resp.Field
-		Labels      resp.Field
-		Name        resp.Field
-		UpdatedAt   resp.Field
-		ExtraFields map[string]resp.Field
+		ID          respjson.Field
+		CreatedAt   respjson.Field
+		Labels      respjson.Field
+		Name        respjson.Field
+		UpdatedAt   respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -91,12 +89,11 @@ func (r *TopicListResponseData) UnmarshalJSON(data []byte) error {
 type TopicListResponseDataLabels struct {
 	Category    string `json:"category,nullable"`
 	Subcategory string `json:"subcategory,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Category    resp.Field
-		Subcategory resp.Field
-		ExtraFields map[string]resp.Field
+		Category    respjson.Field
+		Subcategory respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -108,22 +105,21 @@ func (r *TopicListResponseDataLabels) UnmarshalJSON(data []byte) error {
 }
 
 type TopicListParams struct {
-	// Search by category.
+	// Filter topics by broad article categories such as Politics, Tech, Sports,
+	// Business, Finance, Entertainment, etc.
 	Category param.Opt[string] `query:"category,omitzero" json:"-"`
-	// Search by name.
+	// Search for topics by exact name or partial text match. Does not support
+	// wildcards. Examples include Markets, Cryptocurrency, Climate Change, etc.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// The page number to retrieve.
+	// The specific page of results to retrieve in the paginated response. Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// The number of items per page.
+	// The number of topics to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Search by subcategory.
+	// Filter topics by their specific subcategory. Subcategories provide more granular
+	// classification beyond the main category, such as TV or Event.
 	Subcategory param.Opt[string] `query:"subcategory,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f TopicListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [TopicListParams]'s query parameters as `url.Values`.
 func (r TopicListParams) URLQuery() (v url.Values, err error) {

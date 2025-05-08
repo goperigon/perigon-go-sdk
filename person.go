@@ -7,12 +7,12 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/goperigon/perigon-go-sdk/internal/apijson"
-	"github.com/goperigon/perigon-go-sdk/internal/apiquery"
-	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
-	"github.com/goperigon/perigon-go-sdk/option"
-	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apiquery"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/v2/option"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 )
 
 // PersonService contains methods and other services that help with interacting
@@ -48,11 +48,10 @@ func (r *PersonService) List(ctx context.Context, query PersonListParams, opts .
 
 type ImageHolder struct {
 	URL string `json:"url,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		URL         resp.Field
-		ExtraFields map[string]resp.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -66,12 +65,11 @@ func (r *ImageHolder) UnmarshalJSON(data []byte) error {
 type WikidataDateHolder struct {
 	Precision string `json:"precision,nullable"`
 	Time      string `json:"time,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Precision   resp.Field
-		Time        resp.Field
-		ExtraFields map[string]resp.Field
+		Precision   respjson.Field
+		Time        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -85,12 +83,11 @@ func (r *WikidataDateHolder) UnmarshalJSON(data []byte) error {
 type WikidataLabelHolder struct {
 	Label      string `json:"label,nullable"`
 	WikidataID string `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Label       resp.Field
-		WikidataID  resp.Field
-		ExtraFields map[string]resp.Field
+		Label       respjson.Field
+		WikidataID  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -103,16 +100,15 @@ func (r *WikidataLabelHolder) UnmarshalJSON(data []byte) error {
 
 // Person search result
 type PersonListResponse struct {
-	NumResults int64                      `json:"numResults,nullable"`
-	Results    []PersonListResponseResult `json:"results,nullable"`
-	Status     int64                      `json:"status,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	NumResults int64                      `json:"numResults,required"`
+	Results    []PersonListResponseResult `json:"results,required"`
+	Status     int64                      `json:"status,required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		NumResults  resp.Field
-		Results     resp.Field
-		Status      resp.Field
-		ExtraFields map[string]resp.Field
+		NumResults  respjson.Field
+		Results     respjson.Field
+		Status      respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -138,24 +134,23 @@ type PersonListResponseResult struct {
 	Position       []PersonListResponseResultPosition       `json:"position,nullable"`
 	UpdatedAt      string                                   `json:"updatedAt,nullable"`
 	WikidataID     string                                   `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Abstract       resp.Field
-		Aliases        resp.Field
-		CreatedAt      resp.Field
-		DateOfBirth    resp.Field
-		DateOfDeath    resp.Field
-		Description    resp.Field
-		Gender         resp.Field
-		Image          resp.Field
-		Name           resp.Field
-		Occupation     resp.Field
-		PoliticalParty resp.Field
-		Position       resp.Field
-		UpdatedAt      resp.Field
-		WikidataID     resp.Field
-		ExtraFields    map[string]resp.Field
+		Abstract       respjson.Field
+		Aliases        respjson.Field
+		CreatedAt      respjson.Field
+		DateOfBirth    respjson.Field
+		DateOfDeath    respjson.Field
+		Description    respjson.Field
+		Gender         respjson.Field
+		Image          respjson.Field
+		Name           respjson.Field
+		Occupation     respjson.Field
+		PoliticalParty respjson.Field
+		Position       respjson.Field
+		UpdatedAt      respjson.Field
+		WikidataID     respjson.Field
+		ExtraFields    map[string]respjson.Field
 		raw            string
 	} `json:"-"`
 }
@@ -171,14 +166,13 @@ type PersonListResponseResultPoliticalParty struct {
 	Label      string             `json:"label,nullable"`
 	StartTime  WikidataDateHolder `json:"startTime"`
 	WikidataID string             `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		EndTime     resp.Field
-		Label       resp.Field
-		StartTime   resp.Field
-		WikidataID  resp.Field
-		ExtraFields map[string]resp.Field
+		EndTime     respjson.Field
+		Label       respjson.Field
+		StartTime   respjson.Field
+		WikidataID  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -195,15 +189,14 @@ type PersonListResponseResultPosition struct {
 	Label      string              `json:"label,nullable"`
 	StartTime  WikidataDateHolder  `json:"startTime"`
 	WikidataID string              `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Employer    resp.Field
-		EndTime     resp.Field
-		Label       resp.Field
-		StartTime   resp.Field
-		WikidataID  resp.Field
-		ExtraFields map[string]resp.Field
+		Employer    respjson.Field
+		EndTime     respjson.Field
+		Label       respjson.Field
+		StartTime   respjson.Field
+		WikidataID  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -215,28 +208,27 @@ func (r *PersonListResponseResultPosition) UnmarshalJSON(data []byte) error {
 }
 
 type PersonListParams struct {
-	// Search by name of the person. Supports exact matching with quotes ("") and
-	// Boolean operators (AND, OR, NOT).
+	// Search by person's name. Supports Boolean operators (AND, OR, NOT), exact
+	// phrases with quotes, and wildcards (\* and ?) for flexible searching.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// Search by occupation name. Supports exact matching with quotes ("") and Boolean
-	// operators (AND, OR, NOT).
+	// Search by occupation name (e.g., politician, actor, CEO, athlete). Supports
+	// Boolean operators (AND, OR, NOT), exact phrases with quotes, and wildcards (\*
+	// and ?) for flexible searching.
 	OccupationLabel param.Opt[string] `query:"occupationLabel,omitzero" json:"-"`
-	// The page number to retrieve.
+	// The specific page of results to retrieve in the paginated response. Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// The number of items per page.
+	// The number of people to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Filter by Wikidata occupation ID(s). Use this to find people with specific
-	// occupations.
+	// Filter by Wikidata occupation IDs (e.g., Q82955 for politician, Q33999 for
+	// actor, Q19546 for businessman). Finds people with specific professions. Multiple
+	// values create an OR filter.
 	OccupationID []string `query:"occupationId,omitzero" json:"-"`
-	// Filter by Wikidata entity ID(s). Use this to find specific people by their
-	// Wikidata identifiers.
+	// Filter by Wikidata entity IDs (e.g., Q7747, Q937). These are unique identifiers
+	// from Wikidata.org that precisely identify public figures and eliminate name
+	// ambiguity. Multiple values create an OR filter.
 	WikidataID []string `query:"wikidataId,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f PersonListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [PersonListParams]'s query parameters as `url.Values`.
 func (r PersonListParams) URLQuery() (v url.Values, err error) {

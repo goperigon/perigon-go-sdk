@@ -7,9 +7,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/goperigon/perigon-go-sdk"
-	"github.com/goperigon/perigon-go-sdk/internal/testutil"
-	"github.com/goperigon/perigon-go-sdk/option"
+	"github.com/goperigon/perigon-go-sdk/v2"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/testutil"
+	"github.com/goperigon/perigon-go-sdk/v2/option"
 )
 
 func TestUsage(t *testing.T) {

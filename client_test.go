@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goperigon/perigon-go-sdk"
-	"github.com/goperigon/perigon-go-sdk/internal"
-	"github.com/goperigon/perigon-go-sdk/option"
+	"github.com/goperigon/perigon-go-sdk/v2"
+	"github.com/goperigon/perigon-go-sdk/v2/internal"
+	"github.com/goperigon/perigon-go-sdk/v2/option"
 )
 
 type closureTransport struct {

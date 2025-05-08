@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/requestconfig"
 	"github.com/tidwall/sjson"
 )
 
@@ -182,7 +182,6 @@ func WithJSONSet(key string, value any) RequestOption {
 			if err != nil {
 				return err
 			}
-			return nil
 		} else {
 			return fmt.Errorf("cannot use WithJSONSet on a body that is not serialized as *bytes.Buffer")
 		}

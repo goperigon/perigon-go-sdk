@@ -8,12 +8,12 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/goperigon/perigon-go-sdk/internal/apijson"
-	"github.com/goperigon/perigon-go-sdk/internal/apiquery"
-	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
-	"github.com/goperigon/perigon-go-sdk/option"
-	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apiquery"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/v2/option"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 )
 
 // StoryService contains methods and other services that help with interacting with
@@ -81,45 +81,44 @@ type NewsCluster struct {
 	UniqueCount       int64                    `json:"uniqueCount,nullable"`
 	UniqueSources     []string                 `json:"uniqueSources,nullable"`
 	UpdatedAt         string                   `json:"updatedAt,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                resp.Field
-		Categories        resp.Field
-		Companies         resp.Field
-		Countries         resp.Field
-		CreatedAt         resp.Field
-		DuplicateOf       resp.Field
-		Highlights        resp.Field
-		ImageSource       resp.Field
-		ImageURL          resp.Field
-		InitializedAt     resp.Field
-		KeyPoints         resp.Field
-		Locations         resp.Field
-		Name              resp.Field
-		People            resp.Field
-		Questions         resp.Field
-		ReprintCount      resp.Field
-		SelectedArticles  resp.Field
-		Sentiment         resp.Field
-		ShortSummary      resp.Field
-		Slug              resp.Field
-		Summary           resp.Field
-		SummaryReferences resp.Field
-		Taxonomies        resp.Field
-		TopCategories     resp.Field
-		TopCompanies      resp.Field
-		TopCountries      resp.Field
-		Topics            resp.Field
-		TopLocations      resp.Field
-		TopPeople         resp.Field
-		TopTaxonomies     resp.Field
-		TopTopics         resp.Field
-		TotalCount        resp.Field
-		UniqueCount       resp.Field
-		UniqueSources     resp.Field
-		UpdatedAt         resp.Field
-		ExtraFields       map[string]resp.Field
+		ID                respjson.Field
+		Categories        respjson.Field
+		Companies         respjson.Field
+		Countries         respjson.Field
+		CreatedAt         respjson.Field
+		DuplicateOf       respjson.Field
+		Highlights        respjson.Field
+		ImageSource       respjson.Field
+		ImageURL          respjson.Field
+		InitializedAt     respjson.Field
+		KeyPoints         respjson.Field
+		Locations         respjson.Field
+		Name              respjson.Field
+		People            respjson.Field
+		Questions         respjson.Field
+		ReprintCount      respjson.Field
+		SelectedArticles  respjson.Field
+		Sentiment         respjson.Field
+		ShortSummary      respjson.Field
+		Slug              respjson.Field
+		Summary           respjson.Field
+		SummaryReferences respjson.Field
+		Taxonomies        respjson.Field
+		TopCategories     respjson.Field
+		TopCompanies      respjson.Field
+		TopCountries      respjson.Field
+		Topics            respjson.Field
+		TopLocations      respjson.Field
+		TopPeople         respjson.Field
+		TopTaxonomies     respjson.Field
+		TopTopics         respjson.Field
+		TotalCount        respjson.Field
+		UniqueCount       respjson.Field
+		UniqueSources     respjson.Field
+		UpdatedAt         respjson.Field
+		ExtraFields       map[string]respjson.Field
 		raw               string
 	} `json:"-"`
 }
@@ -133,12 +132,11 @@ func (r *NewsCluster) UnmarshalJSON(data []byte) error {
 type NewsClusterCategory struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Count       resp.Field
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Count       respjson.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -155,15 +153,14 @@ type NewsClusterCompany struct {
 	Domains []string `json:"domains,nullable"`
 	Name    string   `json:"name,nullable"`
 	Symbols []string `json:"symbols,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID          resp.Field
-		Count       resp.Field
-		Domains     resp.Field
-		Name        resp.Field
-		Symbols     resp.Field
-		ExtraFields map[string]resp.Field
+		ID          respjson.Field
+		Count       respjson.Field
+		Domains     respjson.Field
+		Name        respjson.Field
+		Symbols     respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -177,12 +174,11 @@ func (r *NewsClusterCompany) UnmarshalJSON(data []byte) error {
 type NewsClusterCountry struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Count       resp.Field
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Count       respjson.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -197,13 +193,12 @@ type NewsClusterImageSource struct {
 	Domain   string                         `json:"domain,nullable"`
 	Location NewsClusterImageSourceLocation `json:"location"`
 	Paywall  bool                           `json:"paywall,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Domain      resp.Field
-		Location    resp.Field
-		Paywall     resp.Field
-		ExtraFields map[string]resp.Field
+		Domain      respjson.Field
+		Location    respjson.Field
+		Paywall     respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -220,15 +215,14 @@ type NewsClusterImageSourceLocation struct {
 	Country     string                                    `json:"country,nullable"`
 	County      string                                    `json:"county,nullable"`
 	State       string                                    `json:"state,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		City        resp.Field
-		Coordinates resp.Field
-		Country     resp.Field
-		County      resp.Field
-		State       resp.Field
-		ExtraFields map[string]resp.Field
+		City        respjson.Field
+		Coordinates respjson.Field
+		Country     respjson.Field
+		County      respjson.Field
+		State       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -242,12 +236,11 @@ func (r *NewsClusterImageSourceLocation) UnmarshalJSON(data []byte) error {
 type NewsClusterImageSourceLocationCoordinates struct {
 	Lat float64 `json:"lat,nullable"`
 	Lon float64 `json:"lon,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Lat         resp.Field
-		Lon         resp.Field
-		ExtraFields map[string]resp.Field
+		Lat         respjson.Field
+		Lon         respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -261,12 +254,11 @@ func (r *NewsClusterImageSourceLocationCoordinates) UnmarshalJSON(data []byte) e
 type NewsClusterKeyPoint struct {
 	Point      string   `json:"point,nullable"`
 	References []string `json:"references,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Point       resp.Field
-		References  resp.Field
-		ExtraFields map[string]resp.Field
+		Point       respjson.Field
+		References  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -283,15 +275,14 @@ type NewsClusterLocation struct {
 	Count  int64  `json:"count,nullable"`
 	County string `json:"county,nullable"`
 	State  string `json:"state,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Area        resp.Field
-		City        resp.Field
-		Count       resp.Field
-		County      resp.Field
-		State       resp.Field
-		ExtraFields map[string]resp.Field
+		Area        respjson.Field
+		City        respjson.Field
+		Count       respjson.Field
+		County      respjson.Field
+		State       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -306,13 +297,12 @@ type NewsClusterPerson struct {
 	Count      int64  `json:"count,nullable"`
 	Name       string `json:"name,nullable"`
 	WikidataID string `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Count       resp.Field
-		Name        resp.Field
-		WikidataID  resp.Field
-		ExtraFields map[string]resp.Field
+		Count       respjson.Field
+		Name        respjson.Field
+		WikidataID  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -327,13 +317,12 @@ type NewsClusterQuestion struct {
 	Answer     string   `json:"answer,nullable"`
 	Question   string   `json:"question,nullable"`
 	References []string `json:"references,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Answer      resp.Field
-		Question    resp.Field
-		References  resp.Field
-		ExtraFields map[string]resp.Field
+		Answer      respjson.Field
+		Question    respjson.Field
+		References  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -348,13 +337,12 @@ type NewsClusterSentiment struct {
 	Negative float64 `json:"negative,nullable"`
 	Neutral  float64 `json:"neutral,nullable"`
 	Positive float64 `json:"positive,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Negative    resp.Field
-		Neutral     resp.Field
-		Positive    resp.Field
-		ExtraFields map[string]resp.Field
+		Negative    respjson.Field
+		Neutral     respjson.Field
+		Positive    respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -368,12 +356,11 @@ func (r *NewsClusterSentiment) UnmarshalJSON(data []byte) error {
 type NewsClusterTaxonomy struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Count       resp.Field
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Count       respjson.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -386,11 +373,10 @@ func (r *NewsClusterTaxonomy) UnmarshalJSON(data []byte) error {
 
 type NewsClusterTopCategory struct {
 	Name string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -406,14 +392,13 @@ type NewsClusterTopCompany struct {
 	Domains []string `json:"domains,nullable"`
 	Name    string   `json:"name,nullable"`
 	Symbols []string `json:"symbols,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID          resp.Field
-		Domains     resp.Field
-		Name        resp.Field
-		Symbols     resp.Field
-		ExtraFields map[string]resp.Field
+		ID          respjson.Field
+		Domains     respjson.Field
+		Name        respjson.Field
+		Symbols     respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -427,12 +412,11 @@ func (r *NewsClusterTopCompany) UnmarshalJSON(data []byte) error {
 type NewsClusterTopic struct {
 	Count int64  `json:"count,nullable"`
 	Name  string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Count       resp.Field
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Count       respjson.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -449,15 +433,14 @@ type NewsClusterTopLocation struct {
 	Country string `json:"country,nullable"`
 	County  string `json:"county,nullable"`
 	State   string `json:"state,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Area        resp.Field
-		City        resp.Field
-		Country     resp.Field
-		County      resp.Field
-		State       resp.Field
-		ExtraFields map[string]resp.Field
+		Area        respjson.Field
+		City        respjson.Field
+		Country     respjson.Field
+		County      respjson.Field
+		State       respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -471,12 +454,11 @@ func (r *NewsClusterTopLocation) UnmarshalJSON(data []byte) error {
 type NewsClusterTopPerson struct {
 	Name       string `json:"name,nullable"`
 	WikidataID string `json:"wikidataId,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		WikidataID  resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		WikidataID  respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -489,11 +471,10 @@ func (r *NewsClusterTopPerson) UnmarshalJSON(data []byte) error {
 
 type NewsClusterTopTaxonomy struct {
 	Name string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -506,11 +487,10 @@ func (r *NewsClusterTopTaxonomy) UnmarshalJSON(data []byte) error {
 
 type NewsClusterTopTopic struct {
 	Name string `json:"name,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Name        resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -523,16 +503,15 @@ func (r *NewsClusterTopTopic) UnmarshalJSON(data []byte) error {
 
 // Story search result
 type StoryListResponse struct {
-	NumResults int64         `json:"numResults,nullable"`
-	Results    []NewsCluster `json:"results,nullable"`
-	Status     int64         `json:"status,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	NumResults int64         `json:"numResults,required"`
+	Results    []NewsCluster `json:"results,required"`
+	Status     int64         `json:"status,required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		NumResults  resp.Field
-		Results     resp.Field
-		Status      resp.Field
-		ExtraFields map[string]resp.Field
+		NumResults  respjson.Field
+		Results     respjson.Field
+		Status      respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -544,17 +523,18 @@ func (r *StoryListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type StoryListParams struct {
-	// List of company names for filtering. Filtering is applied on topCompanies field.
+	// Filter stories by names of top mentioned companies. Performs an exact match on
+	// company names in the topCompanies field.
 	CompanyName param.Opt[string] `query:"companyName,omitzero" json:"-"`
 	// 'from' filter, will search stories created after the specified date, the date
 	// could be passed as ISO or 'yyyy-mm-dd'. Add time in ISO format, ie.
 	// 2023-03-01T00:00:00
 	From param.Opt[time.Time] `query:"from,omitzero" format:"date-time" json:"-"`
-	// 'initializedFrom' filter, will search stories that became available after
-	// provided date
+	// Filter for stories created after this date. Alternative parameter for filtering
+	// by story creation date.
 	InitializedFrom param.Opt[time.Time] `query:"initializedFrom,omitzero" format:"date-time" json:"-"`
-	// 'initializedTo' filter, will search stories that became available before
-	// provided date
+	// Filter for stories created before this date. Alternative parameter for filtering
+	// by story creation date.
 	InitializedTo param.Opt[time.Time] `query:"initializedTo,omitzero" format:"date-time" json:"-"`
 	// Filter by maximum cluster size. Maximum cluster size filter applies to number of
 	// unique articles in the cluster.
@@ -566,42 +546,46 @@ type StoryListParams struct {
 	// results. Higher values return more significant stories covered by multiple
 	// publications. Default is 3.
 	MinUniqueSources param.Opt[int64] `query:"minUniqueSources,omitzero" json:"-"`
-	// Search story by name. Supports complex query syntax, same way as q parameter
-	// from /all endpoint.
+	// Search specifically within story names. Supports Boolean operators, exact
+	// phrases with quotes, and wildcards for matching name variations.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// Returns stories with name assigned. Defaults to true.
+	// Filter to only include stories that have been assigned names. Defaults to true.
+	// Note that stories only receive names after they contain at least 5 unique
+	// articles.
 	NameExists param.Opt[bool] `query:"nameExists,omitzero" json:"-"`
-	// Filters results with a sentiment score greater than or equal to the specified
-	// value, indicating negative sentiment. See the Article Data section in Docs for
-	// an explanation of scores.
+	// Filter stories with an aggregate negative sentiment score greater than or equal
+	// to the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger negative tone.
 	NegativeSentimentFrom param.Opt[float64] `query:"negativeSentimentFrom,omitzero" json:"-"`
-	// Filters results with a sentiment score less than or equal to the specified
-	// value, indicating negative sentiment. See the Article Data section in Docs for
-	// an explanation of scores.
+	// Filter articles with an aggregate negative sentiment score less than or equal to
+	// the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger negative tone.
 	NegativeSentimentTo param.Opt[float64] `query:"negativeSentimentTo,omitzero" json:"-"`
-	// Filters results with a sentiment score greater than or equal to the specified
-	// value, indicating neutral sentiment. Explanation of sentimental values can be
-	// found in Docs under the Article Data section.
+	// Filter articles with an aggregate neutral sentiment score greater than or equal
+	// to the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger neutral tone.
 	NeutralSentimentFrom param.Opt[float64] `query:"neutralSentimentFrom,omitzero" json:"-"`
-	// Filters results with a sentiment score less than or equal to the specified
-	// value, indicating neutral sentiment. See the Article Data section in Docs for an
-	// explanation of scores.
+	// Filter articles with an aggregate neutral sentiment score less than or equal to
+	// the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger neutral tone.
 	NeutralSentimentTo param.Opt[float64] `query:"neutralSentimentTo,omitzero" json:"-"`
-	// The page number to retrieve.
+	// The specific page of results to retrieve in the paginated response. Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// List of people names. Filtering is applied on topPeople field.
-	PersonName param.Opt[string] `query:"personName,omitzero" json:"-"`
-	// Filters results with a sentiment score greater than or equal to the specified
-	// value, indicating positive sentiment. See the Article Data section in Docs for
-	// an explanation of scores.
-	PositiveSentimentFrom param.Opt[float64] `query:"positiveSentimentFrom,omitzero" json:"-"`
-	// Filters results with a sentiment score less than or equal to the specified
-	// value, indicating positive sentiment. See the Article Data section in Docs for
-	// an explanation of scores.
-	PositiveSentimentTo param.Opt[float64] `query:"positiveSentimentTo,omitzero" json:"-"`
-	// Search story by name, summary and key points. Preference is given to the name
-	// field. Supports complex query syntax, same way as q parameter from /all
+	// Filter stories by exact name matches of top mentioned people. Does not support
+	// Boolean or complex logic. For available person entities, consult the /people
 	// endpoint.
+	PersonName param.Opt[string] `query:"personName,omitzero" json:"-"`
+	// Filter articles with an aggregate positive sentiment score greater than or equal
+	// to the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger positive tone.
+	PositiveSentimentFrom param.Opt[float64] `query:"positiveSentimentFrom,omitzero" json:"-"`
+	// Filter articles with an aggregate positive sentiment score less than or equal to
+	// the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger positive tone.
+	PositiveSentimentTo param.Opt[float64] `query:"positiveSentimentTo,omitzero" json:"-"`
+	// Primary search query for filtering stories based on their name, summary, and key
+	// points. Supports Boolean operators (AND, OR, NOT), exact phrases with quotes,
+	// and wildcards (\* and ?) for flexible searching.
 	Q param.Opt[string] `query:"q,omitzero" json:"-"`
 	// Stories are deduplicated by default. If a story is deduplicated, all future
 	// articles are merged into the original story. duplicateOf field contains the
@@ -611,39 +595,46 @@ type StoryListParams struct {
 	// at 10000.
 	ShowNumResults    param.Opt[bool] `query:"showNumResults,omitzero" json:"-"`
 	ShowStoryPageInfo param.Opt[bool] `query:"showStoryPageInfo,omitzero" json:"-"`
-	// The number of items per page.
+	// The number of articles to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
 	// 'to' filter, will search stories created before the specified date, the date
 	// could be passed as ISO or 'yyyy-mm-dd'. Add time in ISO format, ie.
 	// 2023-03-01T23:59:59
 	To param.Opt[time.Time] `query:"to,omitzero" format:"date-time" json:"-"`
-	// Will return stories with 'updatedAt' >= 'updatedFrom'.
+	// Filter for stories that received new articles after this date. Useful for
+	// tracking developing news events or evolving storylines.
 	UpdatedFrom param.Opt[time.Time] `query:"updatedFrom,omitzero" format:"date-time" json:"-"`
-	// Will return stories with 'updatedAt' <= 'updatedTo'.
+	// Filter for stories that received new articles before this date. Useful for
+	// tracking developing news events or evolving storylines.
 	UpdatedTo param.Opt[time.Time] `query:"updatedTo,omitzero" format:"date-time" json:"-"`
 	// Filter local news by area. Applies only to local news, when this param is passed
 	// non-local news will not be returned. If multiple parameters are passed, they
 	// will be applied as OR operations.
 	Area []string `query:"area,omitzero" json:"-"`
-	// Filter by categories. Categories are general themes that the article is about.
-	// Examples of categories: Tech, Politics, etc. If multiple parameters are passed,
-	// they will be applied as OR operations. Use 'none' to search uncategorized
-	// articles. More ➜
+	// Filter stories by broad content categories such as Politics, Tech, Sports,
+	// Business, or Finance. Use 'none' to find uncategorized stories. Categories are
+	// derived from the articles within each story. Multiple values create an OR
+	// filter.
 	Category []string `query:"category,omitzero" json:"-"`
 	// Filter local news by city. Applies only to local news, when this param is passed
 	// non-local news will not be returned. If multiple parameters are passed, they
 	// will be applied as OR operations.
 	City []string `query:"city,omitzero" json:"-"`
-	// Filter to specific story. Passing a cluster ID will filter results to only the
-	// content found within the cluster. Multiple params could be passed.
+	// Filter to specific stories using their unique identifiers. Each clusterId
+	// represents a distinct story that groups related articles. Multiple values create
+	// an OR filter.
 	ClusterID []string `query:"clusterId,omitzero" json:"-"`
-	// List of company domains for filtering. Filtering is applied on topCompanies
-	// field.
+	// Filter stories by domains of top mentioned companies (e.g., apple.com). Returns
+	// stories where companies with these domains appear prominently. For available
+	// company entities, consult the /companies endpoint.
 	CompanyDomain []string `query:"companyDomain,omitzero" json:"-"`
-	// List of company IDs for filtering. Filtering is applied to topCompanies field.
+	// Filter stories by identifiers of top mentioned companies. Returns stories where
+	// these companies appear prominently. For a complete list of tracked companies,
+	// refer to the /companies endpoint.
 	CompanyID []string `query:"companyId,omitzero" json:"-"`
-	// List of company tickers for filtering. Filtering is applied on topCompanies
-	// field.
+	// Filter stories by stock symbols of top mentioned companies. Returns stories
+	// where companies with these symbols appear prominently. For available company
+	// entities and their symbols, consult the /companies endpoint.
 	CompanySymbol []string `query:"companySymbol,omitzero" json:"-"`
 	// Country code to filter by country. If multiple parameters are passed, they will
 	// be applied as OR operations.
@@ -651,40 +642,45 @@ type StoryListParams struct {
 	// Excludes specific stories from the results by their unique identifiers. Use this
 	// parameter to filter out unwanted or previously seen stories.
 	ExcludeClusterID []string `query:"excludeClusterId,omitzero" json:"-"`
-	// List of person Wikidata IDs for filtering. Filter is applied on topPeople field.
+	// Filter stories by Wikidata IDs of top mentioned people. Returns stories where
+	// these individuals appear prominently. Refer to the /people endpoint for a
+	// complete list of tracked individuals.
 	PersonWikidataID []string `query:"personWikidataId,omitzero" json:"-"`
-	// Sort stories by count ('count'), total count ('totalCount'), creation date
-	// ('createdAt'), last updated date ('updatedAt'), or relevance ('relevance'). By
-	// default is sorted by 'createdAt'
+	// Determines the story sorting order. Options include createdAt (default, when
+	// stories first emerged), updatedAt (when stories received new articles, best for
+	// tracking developing events), relevance (best match to query), count (by unique
+	// article count), and totalCount (by total article count including reprints).
 	//
 	// Any of "createdAt", "updatedAt", "relevance", "count", "totalCount".
 	SortBy SortBy `query:"sortBy,omitzero" json:"-"`
-	// Filter stories by sources that wrote articles belonging to this story. At least
-	// 1 article is required for story to match. Multiple parameters could be passed.
+	// Filter stories that contain articles from specific publisher domains or
+	// subdomains. Supports wildcards (_ and ?) for pattern matching (e.g., _.cnn.com).
+	// A story will match if it contains at least one article from any of the specified
+	// sources. Multiple values create an OR filter.
 	Source []string `query:"source,omitzero" json:"-"`
-	// Filter stories by sources that wrote articles belonging to this story. Source
-	// groups are expanded into a list of sources. At least 1 article by the source is
-	// required for story to match. Multiple params could be passed.
+	// Filter stories that contain articles from publishers in Perigon's curated
+	// bundles (e.g., top100, top25crypto). A story will match if it contains at least
+	// one article from any publisher in the specified bundles. Multiple values create
+	// an OR filter.
 	SourceGroup []string `query:"sourceGroup,omitzero" json:"-"`
 	// Filter local news by state. Applies only to local news, when this param is
 	// passed non-local news will not be returned. If multiple parameters are passed,
 	// they will be applied as OR operations.
 	State []string `query:"state,omitzero" json:"-"`
-	// Filters by Google Content Categories. This field will accept 1 or more
-	// categories, must pass the full name of the category. Example:
-	// taxonomy=/Finance/Banking/Other, /Finance/Investing/Funds
+	// Filter stories by Google Content Categories. Must pass the full hierarchical
+	// path of the category. Example:
+	// taxonomy=/Finance/Banking/Other,/Finance/Investing/Funds. Stories are
+	// categorized based on their constituent articles. Multiple values create an OR
+	// filter.
 	Taxonomy []string `query:"taxonomy,omitzero" json:"-"`
-	// Filter by topics. Each topic is some kind of entity that the article is about.
-	// Examples of topics: Markets, Joe Biden, Green Energy, Climate Change,
-	// Cryptocurrency, etc. If multiple parameters are passed, they will be applied as
-	// OR operations.
+	// Filter stories by specific topics such as Markets, Crime, Cryptocurrency, or
+	// College Sports. Topics are more granular than categories, and stories can
+	// include multiple topics based on their constituent articles. Use the /topics
+	// endpoint for a complete list of available topics. Multiple values create an OR
+	// filter.
 	Topic []string `query:"topic,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f StoryListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [StoryListParams]'s query parameters as `url.Values`.
 func (r StoryListParams) URLQuery() (v url.Values, err error) {

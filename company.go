@@ -8,12 +8,12 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/goperigon/perigon-go-sdk/internal/apijson"
-	"github.com/goperigon/perigon-go-sdk/internal/apiquery"
-	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
-	"github.com/goperigon/perigon-go-sdk/option"
-	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apiquery"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/v2/option"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 )
 
 // CompanyService contains methods and other services that help with interacting
@@ -47,16 +47,15 @@ func (r *CompanyService) List(ctx context.Context, query CompanyListParams, opts
 
 // Company search result
 type CompanyListResponse struct {
-	NumResults int64                       `json:"numResults,nullable"`
-	Results    []CompanyListResponseResult `json:"results,nullable"`
-	Status     int64                       `json:"status,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	NumResults int64                       `json:"numResults,required"`
+	Results    []CompanyListResponseResult `json:"results,required"`
+	Status     int64                       `json:"status,required"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		NumResults  resp.Field
-		Results     resp.Field
-		Status      resp.Field
-		ExtraFields map[string]resp.Field
+		NumResults  respjson.Field
+		Results     respjson.Field
+		Status      respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -98,40 +97,39 @@ type CompanyListResponseResult struct {
 	WebResources      CompanyListResponseResultWebResources `json:"webResources"`
 	YearFounded       int64                                 `json:"yearFounded,nullable"`
 	Zip               string                                `json:"zip,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                resp.Field
-		Address           resp.Field
-		AltNames          resp.Field
-		Ceo               resp.Field
-		City              resp.Field
-		Country           resp.Field
-		Description       resp.Field
-		Domains           resp.Field
-		Favicon           resp.Field
-		FullTimeEmployees resp.Field
-		GlobalRank        resp.Field
-		Industry          resp.Field
-		IsActivelyTrading resp.Field
-		IsAdr             resp.Field
-		IsEtf             resp.Field
-		IsFund            resp.Field
-		Logo              resp.Field
-		MonthlyVisits     resp.Field
-		Naics             resp.Field
-		Name              resp.Field
-		PrimaryRecordID   resp.Field
-		Revenue           resp.Field
-		Sector            resp.Field
-		Sic               resp.Field
-		State             resp.Field
-		Symbols           resp.Field
-		UpdatedAt         resp.Field
-		WebResources      resp.Field
-		YearFounded       resp.Field
-		Zip               resp.Field
-		ExtraFields       map[string]resp.Field
+		ID                respjson.Field
+		Address           respjson.Field
+		AltNames          respjson.Field
+		Ceo               respjson.Field
+		City              respjson.Field
+		Country           respjson.Field
+		Description       respjson.Field
+		Domains           respjson.Field
+		Favicon           respjson.Field
+		FullTimeEmployees respjson.Field
+		GlobalRank        respjson.Field
+		Industry          respjson.Field
+		IsActivelyTrading respjson.Field
+		IsAdr             respjson.Field
+		IsEtf             respjson.Field
+		IsFund            respjson.Field
+		Logo              respjson.Field
+		MonthlyVisits     respjson.Field
+		Naics             respjson.Field
+		Name              respjson.Field
+		PrimaryRecordID   respjson.Field
+		Revenue           respjson.Field
+		Sector            respjson.Field
+		Sic               respjson.Field
+		State             respjson.Field
+		Symbols           respjson.Field
+		UpdatedAt         respjson.Field
+		WebResources      respjson.Field
+		YearFounded       respjson.Field
+		Zip               respjson.Field
+		ExtraFields       map[string]respjson.Field
 		raw               string
 	} `json:"-"`
 }
@@ -147,14 +145,13 @@ type CompanyListResponseResultSymbol struct {
 	ExchangeShortName string `json:"exchangeShortName,nullable"`
 	IpoDate           string `json:"ipoDate,nullable"`
 	Symbol            string `json:"symbol,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		Exchange          resp.Field
-		ExchangeShortName resp.Field
-		IpoDate           resp.Field
-		Symbol            resp.Field
-		ExtraFields       map[string]resp.Field
+		Exchange          respjson.Field
+		ExchangeShortName respjson.Field
+		IpoDate           respjson.Field
+		Symbol            respjson.Field
+		ExtraFields       map[string]respjson.Field
 		raw               string
 	} `json:"-"`
 }
@@ -183,27 +180,26 @@ type CompanyListResponseResultWebResources struct {
 	Wikipedia string `json:"wikipedia,nullable"`
 	X         string `json:"x,nullable"`
 	Youtube   string `json:"youtube,nullable"`
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		About       resp.Field
-		Blog        resp.Field
-		Careers     resp.Field
-		Events      resp.Field
-		Facebook    resp.Field
-		Instagram   resp.Field
-		Linkedin    resp.Field
-		Medium      resp.Field
-		Reddit      resp.Field
-		Sitemap     resp.Field
-		Threads     resp.Field
-		Tiktok      resp.Field
-		Updates     resp.Field
-		Wellfound   resp.Field
-		Wikipedia   resp.Field
-		X           resp.Field
-		Youtube     resp.Field
-		ExtraFields map[string]resp.Field
+		About       respjson.Field
+		Blog        respjson.Field
+		Careers     respjson.Field
+		Events      respjson.Field
+		Facebook    respjson.Field
+		Instagram   respjson.Field
+		Linkedin    respjson.Field
+		Medium      respjson.Field
+		Reddit      respjson.Field
+		Sitemap     respjson.Field
+		Threads     respjson.Field
+		Tiktok      respjson.Field
+		Updates     respjson.Field
+		Wellfound   respjson.Field
+		Wikipedia   respjson.Field
+		X           respjson.Field
+		Youtube     respjson.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 }
@@ -215,43 +211,50 @@ func (r *CompanyListResponseResultWebResources) UnmarshalJSON(data []byte) error
 }
 
 type CompanyListParams struct {
-	// Search by industry. Boolean operators and logic are supported.
+	// Filter by company industry classifications. Supports Boolean operators (AND, OR,
+	// NOT), exact phrases with quotes, and wildcards (\* and ?) for flexible
+	// searching.
 	Industry param.Opt[string] `query:"industry,omitzero" json:"-"`
-	// Starting IPO date.
+	// Filter for companies that went public on or after this date. Accepts ISO 8601
+	// format (e.g., 2023-01-01T00:00:00) or yyyy-mm-dd format.
 	IpoFrom param.Opt[time.Time] `query:"ipoFrom,omitzero" format:"date-time" json:"-"`
-	// Ending IPO date.
+	// Filter for companies that went public on or before this date. Accepts ISO 8601
+	// format (e.g., 2023-12-31T23:59:59) or yyyy-mm-dd format.
 	IpoTo param.Opt[time.Time] `query:"ipoTo,omitzero" format:"date-time" json:"-"`
-	// Search by company name. Boolean operators and logic are supported.
+	// Search within company names. Supports Boolean operators (AND, OR, NOT), exact
+	// phrases with quotes, and wildcards (\* and ?) for flexible searching.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// Minimum number of employees.
+	// Filter for companies with at least this many employees.
 	NumEmployeesFrom param.Opt[int64] `query:"numEmployeesFrom,omitzero" json:"-"`
-	// Maximum number of employees.
+	// Filter for companies with no more than this many employees.
 	NumEmployeesTo param.Opt[int64] `query:"numEmployeesTo,omitzero" json:"-"`
-	// The page number to retrieve.
+	// The specific page of results to retrieve in the paginated response. Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// Search companies over 'name', 'altNames', 'domains' and 'symbols.symbol' fields.
-	// Boolean operators and logic are supported.
+	// Primary search query for filtering companies across name, alternative names,
+	// domains, and ticker symbols. Supports Boolean operators (AND, OR, NOT), exact
+	// phrases with quotes, and wildcards (\* and ?) for flexible searching.
 	Q param.Opt[string] `query:"q,omitzero" json:"-"`
-	// Search by sector. Boolean operators and logic are supported.
+	// Filter by company sector classifications. Supports Boolean operators (AND, OR,
+	// NOT), exact phrases with quotes, and wildcards (\* and ?) for flexible
+	// searching.
 	Sector param.Opt[string] `query:"sector,omitzero" json:"-"`
-	// The number of items per page.
+	// The number of companies to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Search by company id.
+	// Filter by unique company identifiers. Multiple values create an OR filter.
 	ID []string `query:"id,omitzero" json:"-"`
-	// Search by company country.
+	// Filter by company headquarters country. Multiple values create an OR filter.
 	Country []string `query:"country,omitzero" json:"-"`
-	// Search by company domain.
+	// Filter by company domains or websites (e.g., apple.com, microsoft.com). Multiple
+	// values create an OR filter.
 	Domain []string `query:"domain,omitzero" json:"-"`
-	// Search by exchange name.
+	// Filter by stock exchange where companies are listed (e.g., NASDAQ, NYSE).
+	// Multiple values create an OR filter.
 	Exchange []string `query:"exchange,omitzero" json:"-"`
-	// Search by ticker symbol.
+	// Filter by company stock ticker symbols (e.g., AAPL, MSFT, GOOGL). Multiple
+	// values create an OR filter.
 	Symbol []string `query:"symbol,omitzero" json:"-"`
 	paramObj
 }
-
-// IsPresent returns true if the field's value is not omitted and not the JSON
-// "null". To check if this field is omitted, use [param.IsOmitted].
-func (f CompanyListParams) IsPresent() bool { return !param.IsOmitted(f) && !f.IsNull() }
 
 // URLQuery serializes [CompanyListParams]'s query parameters as `url.Values`.
 func (r CompanyListParams) URLQuery() (v url.Values, err error) {

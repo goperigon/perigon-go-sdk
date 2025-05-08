@@ -7,18 +7,17 @@ import (
 	"net/http"
 	"net/http/httputil"
 
-	"github.com/goperigon/perigon-go-sdk/internal/apijson"
-	"github.com/goperigon/perigon-go-sdk/packages/resp"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 )
 
 // Error represents an error that originates from the API, i.e. when a request is
 // made and the API returns a response with a HTTP status code. Other errors are
 // not wrapped by this SDK.
 type Error struct {
-	// Metadata for the response, check the presence of optional fields with the
-	// [resp.Field.IsPresent] method.
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ExtraFields map[string]resp.Field
+		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
 	StatusCode int

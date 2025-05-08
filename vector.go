@@ -3,7 +3,7 @@
 package perigon
 
 import (
-	"github.com/goperigon/perigon-go-sdk/option"
+	"github.com/goperigon/perigon-go-sdk/v2/option"
 )
 
 // VectorService contains methods and other services that help with interacting

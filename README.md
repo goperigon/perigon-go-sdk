@@ -1,6 +1,6 @@
 # Perigon Go API Library
 
-<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk"><img src="https://pkg.go.dev/badge/github.com/goperigon/perigon-go-sdk.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2"><img src="https://pkg.go.dev/badge/github.com/goperigon/perigon-go-sdk.svg" alt="Go Reference"></a>
 
 The Perigon Go library provides convenient access to the [Perigon REST API](https://docs.perigon.io/discuss)
 from applications written in Go.
@@ -13,7 +13,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ```go
 import (
-	"github.com/goperigon/perigon-go-sdk" // imported as perigon
+	"github.com/goperigon/perigon-go-sdk/v2" // imported as perigon
 )
 ```
 
@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/goperigon/perigon-go-sdk@v1.0.1'
+go get -u 'github.com/goperigon/perigon-go-sdk@v2.0.0'
 ```
 
 <!-- x-release-please-end -->
@@ -46,7 +46,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/goperigon/perigon-go-sdk"
+	"github.com/goperigon/perigon-go-sdk/v2"
 )
 
 
@@ -76,8 +76,10 @@ Optional primitive types are wrapped in a `param.Opt[T]`. These fields can be se
 Any `param.Opt[T]`, map, slice, struct or string enum uses the
 tag <code>\`json:"...,omitzero"\`</code>. Its zero value is considered omitted.
 
+The `param.IsOmitted(any)` function can confirm the presence of any `omitzero` field.
+
 ```go
-params := perigon.ExampleParams{
+p := perigon.ExampleParams{
 	ID:   "id_xxx",              // required property
 	Name: perigon.String("..."), // optional property
 
@@ -91,33 +93,33 @@ params := perigon.ExampleParams{
 }
 ```
 
-To send `null` instead of a `param.Opt[T]`, use `param.NullOpt[T]()`.
-To send `null` instead of a struct `T`, use `param.NullObj[T]()`.
+To send `null` instead of a `param.Opt[T]`, use `param.Null[T]()`.
+To send `null` instead of a struct `T`, use `param.NullStruct[T]()`.
 
 ```go
-params.Description = param.NullOpt[string]() // explicit null string property
-params.Point = param.NullObj[Point]()        // explicit null struct property
+p.Name = param.Null[string]()       // 'null' instead of string
+p.Point = param.NullStruct[Point]() // 'null' instead of struct
+
+param.IsNull(p.Name)  // true
+param.IsNull(p.Point) // true
 ```
 
-Request structs contain a `.WithExtraFields(map[string]any)` method which can send non-conforming
+Request structs contain a `.SetExtraFields(map[string]any)` method which can send non-conforming
 fields in the request body. Extra fields overwrite any struct fields with a matching
-key. For security reasons, only use `WithExtraFields` with trusted data.
+key. For security reasons, only use `SetExtraFields` with trusted data.
 
-To send a custom value instead of a struct, use `param.OverrideObj[T](value)`.
+To send a custom value instead of a struct, use `param.Override[T](value)`.
 
 ```go
 // In cases where the API specifies a given type,
-// but you want to send something else, use [WithExtraFields]:
-params.WithExtraFields(map[string]any{
+// but you want to send something else, use [SetExtraFields]:
+p.SetExtraFields(map[string]any{
 	"x": 0.01, // send "x" as a float instead of int
 })
 
 // Send a number instead of an object
-custom := param.OverrideObj[perigon.FooParams](12)
+custom := param.Override[perigon.FooParams](12)
 ```
-
-When available, use the `.IsPresent()` method to check if an optional parameter is not omitted or `null`.
-The `param.IsOmitted(any)` function can confirm the presence of any `omitzero` field.
 
 ### Request unions
 
@@ -161,17 +163,18 @@ type Animal struct {
 	Owners int    `json:"owners"`
 	Age    int    `json:"age"`
 	JSON   struct {
-		Name        resp.Field
-		Owner       resp.Field
-		Age         resp.Field
-		ExtraFields map[string]resp.Field
+		Name        respjson.Field
+		Owner       respjson.Field
+		Age         respjson.Field
+		ExtraFields map[string]respjson.Field
 	} `json:"-"`
 }
 ```
 
-To handle optional data, use the `IsPresent()` method on the JSON field.
-If a field is `null`, not present, or invalid, the corresponding field
-will simply be its zero value.
+To handle optional data, use the `.Valid()` method on the JSON field.
+`.Valid()` returns true if a field is not `null`, not present, or couldn't be marshaled.
+
+If `.Valid()` is false, the corresponding field will simply be its zero value.
 
 ```go
 raw := `{"owners": 1, "name": null}`
@@ -179,20 +182,25 @@ raw := `{"owners": 1, "name": null}`
 var res Animal
 json.Unmarshal([]byte(raw), &res)
 
-// Use the IsPresent() method to handle optional fields
-res.Owners                  // 1
-res.JSON.Owners.IsPresent() // true
-res.JSON.Owners.Raw()       // "1"
+// Accessing regular fields
 
-res.Age                  // 0
-res.JSON.Age.IsPresent() // false
-res.JSON.Age.Raw()       // ""
+res.Owners // 1
+res.Name   // ""
+res.Age    // 0
 
-// Use the IsExplicitNull() method to differentiate null and omitted
-res.Name                       // ""
-res.JSON.Name.IsPresent()      // false
-res.JSON.Name.Raw()            // "null"
-res.JSON.Name.IsExplicitNull() // true
+// Optional field checks
+
+res.JSON.Owners.Valid() // true
+res.JSON.Name.Valid()   // false
+res.JSON.Age.Valid()    // false
+
+// Raw JSON values
+
+res.JSON.Owners.Raw()                  // "1"
+res.JSON.Name.Raw() == "null"          // true
+res.JSON.Name.Raw() == respjson.Null   // true
+res.JSON.Age.Raw() == ""               // true
+res.JSON.Age.Raw() == respjson.Omitted // true
 ```
 
 These `.JSON` structs also include an `ExtraFields` map containing
@@ -222,8 +230,9 @@ type AnimalUnion struct {
 	// From variant [Cat]
 	CatBreed string `json:"cat_breed"`
 	// ...
+
 	JSON struct {
-		Owner resp.Field
+		Owner respjson.Field
 		// ...
 	} `json:"-"`
 }
