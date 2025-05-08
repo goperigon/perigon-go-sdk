@@ -41,7 +41,7 @@ To use a local version of this library from source in another project, edit the 
 directive. This can be done through the CLI with the following:
 
 ```sh
-$ go mod edit -replace github.com/goperigon/perigon-go-sdk=/path/to/perigon-go-sdk
+$ go mod edit -replace github.com/goperigon/perigon-go-sdk/v2=/path/to/perigon-go-sdk
 ```
 
 ## Running tests
