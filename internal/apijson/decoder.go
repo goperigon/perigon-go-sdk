@@ -7,7 +7,7 @@ package apijson
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/goperigon/perigon-go-sdk/packages/param"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
 	"reflect"
 	"strconv"
 	"sync"

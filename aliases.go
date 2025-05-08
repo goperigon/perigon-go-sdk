@@ -3,8 +3,8 @@
 package perigon
 
 import (
-	"github.com/goperigon/perigon-go-sdk/internal/apierror"
-	"github.com/goperigon/perigon-go-sdk/packages/param"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apierror"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
 )
 
 // aliased to make [param.APIUnion] private when embedding

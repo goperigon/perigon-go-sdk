@@ -1,5 +1,34 @@
 # Changelog
 
+## 2.0.0 (2025-05-08)
+
+Full Changelog: [v1.0.1...v2.0.0](https://github.com/goperigon/perigon-go-sdk/compare/v1.0.1...v2.0.0)
+
+### ⚠ BREAKING CHANGES
+
+* **client:** rename resp package
+* **client:** improve core function names
+
+### Features
+
+* **api:** update via SDK Studio ([bca7862](https://github.com/goperigon/perigon-go-sdk/commit/bca78628e16c4f1691d360cfd0841e28bbd0e150))
+* **client:** experimental support for unmarshalling into param structs ([3e34248](https://github.com/goperigon/perigon-go-sdk/commit/3e34248acf3b0778995ea2cf3d887c50e5ba20e6))
+* **client:** rename resp package ([4bf8999](https://github.com/goperigon/perigon-go-sdk/commit/4bf8999e1de8e551e12cd9b861a68d5d3922b1e7))
+
+
+### Bug Fixes
+
+* bad example in readme ([#6](https://github.com/goperigon/perigon-go-sdk/issues/6)) ([b34bed5](https://github.com/goperigon/perigon-go-sdk/commit/b34bed5b21b13fcc50acecdc11ce76e09e1ec1ec))
+* **client:** clean up reader resources ([f8469b5](https://github.com/goperigon/perigon-go-sdk/commit/f8469b583111797eb22a1f48e23928c36063cebd))
+* **client:** correctly update body in WithJSONSet ([24fbc3c](https://github.com/goperigon/perigon-go-sdk/commit/24fbc3cd10dcfa185ea044b0c95927ecdc881d07))
+* **client:** improve core function names ([da48a8a](https://github.com/goperigon/perigon-go-sdk/commit/da48a8a702c0fb94233a2e0c3fbcf2f9c23ec3cb))
+* **client:** unmarshal responses properly ([8255c0a](https://github.com/goperigon/perigon-go-sdk/commit/8255c0a1809bba231ff623d3ad0be2dd84e9d707))
+
+
+### Chores
+
+* **docs:** update respjson package name ([83a1435](https://github.com/goperigon/perigon-go-sdk/commit/83a143524951f69493a835acaa0dc70ab8c34e74))
+
 ## 1.0.1 (2025-05-05)
 
 Full Changelog: [v0.1.0-alpha.3...v1.0.1](https://github.com/goperigon/perigon-go-sdk/compare/v0.1.0-alpha.3...v1.0.1)

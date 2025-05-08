@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/requestconfig"
 	"github.com/tidwall/sjson"
 )
 

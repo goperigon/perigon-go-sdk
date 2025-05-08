@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"time"
 
-	shimjson "github.com/goperigon/perigon-go-sdk/internal/encoding/json"
+	shimjson "github.com/goperigon/perigon-go-sdk/v2/internal/encoding/json"
 
 	"github.com/tidwall/sjson"
 )

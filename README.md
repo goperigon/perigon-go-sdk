@@ -1,6 +1,6 @@
 # Perigon Go API Library
 
-<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk"><img src="https://pkg.go.dev/badge/github.com/goperigon/perigon-go-sdk.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2"><img src="https://pkg.go.dev/badge/github.com/goperigon/perigon-go-sdk.svg" alt="Go Reference"></a>
 
 The Perigon Go library provides convenient access to the [Perigon REST API](https://docs.perigon.io/discuss)
 from applications written in Go.
@@ -13,7 +13,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ```go
 import (
-	"github.com/goperigon/perigon-go-sdk" // imported as perigon
+	"github.com/goperigon/perigon-go-sdk/v2" // imported as perigon
 )
 ```
 
@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/goperigon/perigon-go-sdk@v1.0.1'
+go get -u 'github.com/goperigon/perigon-go-sdk@v2.0.0'
 ```
 
 <!-- x-release-please-end -->
@@ -46,7 +46,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/goperigon/perigon-go-sdk"
+	"github.com/goperigon/perigon-go-sdk/v2"
 )
 
 

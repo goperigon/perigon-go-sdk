@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
-	"github.com/goperigon/perigon-go-sdk/option"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/v2/option"
 )
 
 // Client creates a struct with services and top level methods that help with

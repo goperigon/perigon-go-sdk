@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/goperigon/perigon-go-sdk"
+	"github.com/goperigon/perigon-go-sdk/v2"
 )
 
 func main() {

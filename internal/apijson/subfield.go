@@ -1,7 +1,7 @@
 package apijson
 
 import (
-	"github.com/goperigon/perigon-go-sdk/packages/respjson"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 	"reflect"
 )
 
