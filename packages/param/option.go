@@ -3,7 +3,7 @@ package param
 import (
 	"encoding/json"
 	"fmt"
-	shimjson "github.com/goperigon/perigon-go-sdk/internal/encoding/json"
+	shimjson "github.com/goperigon/perigon-go-sdk/v2/internal/encoding/json"
 	"time"
 )
 

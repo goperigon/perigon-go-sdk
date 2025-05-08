@@ -8,12 +8,12 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/goperigon/perigon-go-sdk/internal/apijson"
-	"github.com/goperigon/perigon-go-sdk/internal/apiquery"
-	"github.com/goperigon/perigon-go-sdk/internal/requestconfig"
-	"github.com/goperigon/perigon-go-sdk/option"
-	"github.com/goperigon/perigon-go-sdk/packages/param"
-	"github.com/goperigon/perigon-go-sdk/packages/respjson"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apiquery"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/requestconfig"
+	"github.com/goperigon/perigon-go-sdk/v2/option"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 )
 
 // CompanyService contains methods and other services that help with interacting

@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/goperigon/perigon-go-sdk/packages/param"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
 )
 
 type Struct struct {

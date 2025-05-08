@@ -1,7 +1,7 @@
 package apiquery
 
 import (
-	"github.com/goperigon/perigon-go-sdk/packages/param"
+	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
 	"net/url"
 	"testing"
 	"time"

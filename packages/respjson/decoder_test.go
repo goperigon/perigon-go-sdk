@@ -3,8 +3,8 @@ package respjson_test
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/goperigon/perigon-go-sdk/internal/apijson"
-	rj "github.com/goperigon/perigon-go-sdk/packages/respjson"
+	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
+	rj "github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 	"reflect"
 	"testing"
 )
