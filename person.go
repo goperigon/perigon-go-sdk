@@ -100,9 +100,9 @@ func (r *WikidataLabelHolder) UnmarshalJSON(data []byte) error {
 
 // Person search result
 type PersonListResponse struct {
-	NumResults int64                      `json:"numResults,nullable"`
-	Results    []PersonListResponseResult `json:"results,nullable"`
-	Status     int64                      `json:"status,nullable"`
+	NumResults int64                      `json:"numResults,required"`
+	Results    []PersonListResponseResult `json:"results,required"`
+	Status     int64                      `json:"status,required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		NumResults  respjson.Field
@@ -208,21 +208,24 @@ func (r *PersonListResponseResultPosition) UnmarshalJSON(data []byte) error {
 }
 
 type PersonListParams struct {
-	// Search by name of the person. Supports exact matching with quotes ("") and
-	// Boolean operators (AND, OR, NOT).
+	// Search by person's name. Supports Boolean operators (AND, OR, NOT), exact
+	// phrases with quotes, and wildcards (\* and ?) for flexible searching.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// Search by occupation name. Supports exact matching with quotes ("") and Boolean
-	// operators (AND, OR, NOT).
+	// Search by occupation name (e.g., politician, actor, CEO, athlete). Supports
+	// Boolean operators (AND, OR, NOT), exact phrases with quotes, and wildcards (\*
+	// and ?) for flexible searching.
 	OccupationLabel param.Opt[string] `query:"occupationLabel,omitzero" json:"-"`
-	// The page number to retrieve.
+	// The specific page of results to retrieve in the paginated response. Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// The number of items per page.
+	// The number of people to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Filter by Wikidata occupation ID(s). Use this to find people with specific
-	// occupations.
+	// Filter by Wikidata occupation IDs (e.g., Q82955 for politician, Q33999 for
+	// actor, Q19546 for businessman). Finds people with specific professions. Multiple
+	// values create an OR filter.
 	OccupationID []string `query:"occupationId,omitzero" json:"-"`
-	// Filter by Wikidata entity ID(s). Use this to find specific people by their
-	// Wikidata identifiers.
+	// Filter by Wikidata entity IDs (e.g., Q7747, Q937). These are unique identifiers
+	// from Wikidata.org that precisely identify public figures and eliminate name
+	// ambiguity. Multiple values create an OR filter.
 	WikidataID []string `query:"wikidataId,omitzero" json:"-"`
 	paramObj
 }

@@ -43,117 +43,126 @@ func (r *VectorNewsService) Search(ctx context.Context, body VectorNewsSearchPar
 	return
 }
 
-// A versatile filter object to refine search results based on articles, clusters,
-// sources, languages, categories, locations, companies, and people. Supports
-// logical operators (AND, OR, NOT) for complex queries. Accepts single values or
-// arrays, with arrays applied as OR operations.
+// Complex filter structure for article searches that supports nested logical
+// operations (AND, OR, NOT) and multiple filtering criteria.
 type ArticleSearchFilterParam struct {
 	// Adds additional AND filter objects. These objects must be of the same type as
 	// the original filter object and will be combined with the existing filter using
 	// the AND logical operator.
 	And []ArticleSearchFilterParam `json:"AND,omitzero"`
-	// Filter by specific article(s). Array of article IDs. For convenience, a single
-	// string ID is also accepted.
+	// Filter by specific article identifiers. Accepts either a single ID or an array
+	// of IDs. Returns only articles matching these IDs.
 	ArticleID []string `json:"articleId,omitzero"`
-	// Filter by categories. Categories are general themes that the article is about.
-	// Examples of categories: Tech, Politics, etc. If multiple parameters are passed,
-	// they will be applied as OR operations. Use 'none' to search uncategorized
-	// articles.
+	// Filter by broad content categories such as Politics, Tech, Sports, Business, or
+	// Finance. Accepts either a single category or an array. Use none to find
+	// uncategorized articles. Multiple values create an OR filter.
 	Category []string `json:"category,omitzero"`
-	// Filters articles where a specified city plays a central role in the content,
-	// beyond mere mentions, to ensure the results are deeply relevant to the urban
-	// area in question. If multiple parameters are passed, they will be applied as OR
-	// operations.
+	// Filter articles that mention or are related to specific cities. Accepts either a
+	// single city name or an array. Multiple values create an OR filter.
 	City []string `json:"city,omitzero"`
-	// Filter by specific cluster(s). Accepts either a single string or an array of
-	// strings.
+	// Filter by specific story identifiers. Accepts either a single ID or an array of
+	// IDs. Returns only articles belonging to these stories.
 	ClusterID []string `json:"clusterId,omitzero"`
-	// Search by company domains for filtering. E.g. companyDomain=apple.com.
+	// Filter articles by company domains (e.g., apple.com). Accepts either a single
+	// domain or an array. Multiple values create an OR filter. For a complete list of
+	// tracked companies and their domains, refer to the /companies endpoint.
 	CompanyDomain []string `json:"companyDomain,omitzero"`
-	// List of company IDs to filter by.
+	// Filter articles by company identifiers. Accepts either a single ID or an array.
+	// Multiple values create an OR filter. For a complete list of tracked companies
+	// and their IDs, refer to the /companies endpoint.
 	CompanyID []string `json:"companyId,omitzero"`
-	// Search by company name.
+	// Filter articles by company name mentions. Accepts either a single name or an
+	// array. Performs exact matching on company names. Multiple values create an OR
+	// filter. For a complete list of tracked companies and their names, refer to the
+	// /companies endpoint.
 	CompanyName []string `json:"companyName,omitzero"`
-	// Search by company symbols.
+	// Filter articles by company stock symbols (e.g., AAPL, MSFT). Accepts either a
+	// single symbol or an array. Multiple values create an OR filter. For a complete
+	// list of tracked companies and their symbols, refer to the /companies endpoint.
 	CompanySymbol []string `json:"companySymbol,omitzero"`
-	// Country code to filter by country. If multiple parameters are passed, they will
-	// be applied as OR operations. Only accepts country ISO codes.
+	// Filter articles by countries they mention using two-letter country codes in
+	// lowercase (e.g., us, gb, jp). Accepts either a single country code or an array.
+	// Multiple values create an OR filter. See documentation for supported country
+	// codes.
 	Country []string `json:"country,omitzero"`
-	// Filters articles where a specified state plays a central role in the content,
-	// beyond mere mentions, to ensure the results are deeply relevant to the state in
-	// question. If multiple parameters are passed, they will be applied as OR
-	// operations.
+	// Filter articles that mention or are related to specific counties. Accepts either
+	// a single county name or an array. Multiple values create an OR filter. County
+	// names typically include the word 'County' (e.g., Los Angeles County).
 	County []string `json:"county,omitzero"`
-	// A list of cities to exclude from the results. Articles that are associated with
-	// any of the specified cities will be filtered out.
+	// Exclude articles that mention or are related to specific cities. Accepts either
+	// a single city name or an array. Multiple values create an AND-exclude filter.
 	ExcludeCity []string `json:"excludeCity,omitzero"`
-	// A list of company domains to exclude. If an article is related to a company that
-	// uses one of the specified domains (for instance, "example.com"), it will not be
-	// returned in the results.
+	// Exclude articles related to companies with specific domains. Accepts either a
+	// single domain or an array. Multiple values create an AND-exclude filter. For a
+	// complete list of tracked companies and their domains, refer to the /companies
+	// endpoint.
 	ExcludeCompanyDomain []string `json:"excludeCompanyDomain,omitzero"`
-	// A list of company identifiers. Articles associated with companies that have any
-	// of these unique IDs will be filtered out from the returned results, ensuring
-	// that certain companies or corporate entities are not included.
+	// Exclude articles mentioning companies with specific identifiers. Accepts either
+	// a single ID or an array. Multiple values create an AND-exclude filter. For a
+	// complete list of tracked companies and their IDs, refer to the /companies
+	// endpoint.
 	ExcludeCompanyID []string `json:"excludeCompanyId,omitzero"`
-	// A list of stock symbols (ticker symbols) that identify companies to be excluded.
-	// Articles related to companies using any of these symbols will be omitted, which
-	// is useful for targeting or avoiding specific public companies.
+	// Exclude articles related to companies with specific stock symbols. Accepts
+	// either a single symbol or an array. Multiple values create an AND-exclude
+	// filter. For a complete list of tracked companies and their symbols, refer to the
+	// /companies endpoint.
 	ExcludeCompanySymbol []string `json:"excludeCompanySymbol,omitzero"`
-	// Excludes articles from specific countries in the vector search results. Accepts
-	// a list of country codes (e.g., 'US', 'UK', 'CA'). Use this parameter to filter
-	// out articles published in countries you don't want to include in your search
-	// results. See the Country and Language Support section in the documentation for a
-	// full list of supported country codes.
+	// Exclude articles from specific countries using two-letter country codes in
+	// lowercase. Accepts either a single country code or an array. Multiple values
+	// create an AND-exclude filter. See documentation for supported country codes.
 	ExcludeCountry []string `json:"excludeCountry,omitzero"`
-	// Excludes articles from specific counties or administrative divisions in the
-	// vector search results. Accepts either a single county name or a list of county
-	// names. County names should match the format used in article metadata (e.g., 'Los
-	// Angeles County', 'Cook County'). This parameter allows for more granular
-	// geographic filter
+	// Exclude articles that mention or are related to specific counties. Accepts
+	// either a single county name or an array. Multiple values create an AND-exclude
+	// filter. County names should match the format in article metadata (e.g., Los
+	// Angeles County, Cook County).
 	ExcludeCounty []string `json:"excludeCounty,omitzero"`
-	// Exclude results that include specific labels (Opinion, Non-news, Paid News,
-	// etc.). You can filter multiple by repeating the parameter.
+	// Exclude articles with specific editorial labels. Accepts either a single label
+	// or an array. Multiple values create an AND-exclude filter, removing all content
+	// with any of these labels.
 	ExcludeLabel []string `json:"excludeLabel,omitzero"`
-	// A list of languages to be excluded. Any article published in one of the
-	// languages provided in this filter will not be returned. This is useful when you
-	// are interested only in news published in specific languages.
+	// Exclude articles in specific languages using ISO-639 two-letter codes in
+	// lowercase. Accepts either a single language code or an array. Multiple values
+	// create an AND-exclude filter.
 	ExcludeLanguage []string `json:"excludeLanguage,omitzero"`
-	// Excludes articles where a specified country plays a central role in the content,
-	// ensuring results are not deeply relevant to the country in question. If multiple
-	// parameters are passed, they will be applied as AND operations, excluding
-	// articles relevant to any of the specified countries.
+	// Exclude articles where specified countries play a central role in the content.
+	// Accepts either a single country code or an array. Multiple values create an
+	// AND-exclude filter, removing articles focused on any of these countries. See
+	// documentation for supported country codes.
 	ExcludeLocationsCountry []string `json:"excludeLocationsCountry,omitzero"`
-	// A list of person names that, when associated with the content, cause the article
-	// to be excluded. This filter removes articles related to any individuals whose
-	// names match those on the list.
+	// Exclude articles mentioning specific people by name. Accepts either a single
+	// name or an array. Multiple values create an AND-exclude filter. For a complete
+	// list of tracked individuals and their names, refer to the /people endpoint.
 	ExcludePersonName []string `json:"excludePersonName,omitzero"`
-	// A list of Wikidata identifiers for individuals. Articles mentioning persons with
-	// any of these Wikidata IDs will be filtered out. This is particularly helpful
-	// when using a unique identifier to prevent ambiguity in names.
+	// Exclude articles mentioning people with specific Wikidata IDs. Accepts either a
+	// single ID or an array. Multiple values create an AND-exclude filter. For a
+	// complete list of tracked individuals and their Wikidata IDs, refer to the
+	// /people endpoint.
 	ExcludePersonWikidataID []string `json:"excludePersonWikidataId,omitzero"`
-	// The domain of the website, which should be excluded from the search. Multiple
-	// parameters could be provided. Wildcards (_ and ?) are suported (e.g. _.cnn.com).
+	// Exclude articles from specific publisher domains or subdomains. Accepts either a
+	// single domain or an array of domains. Multiple values create an AND-exclude
+	// filter.
 	ExcludeSource []string `json:"excludeSource,omitzero"`
-	// A list of states to exclude. Articles that include, or are associated with, any
-	// of the states provided here will be filtered out. This is especially useful if
-	// you want to ignore news tied to certain geographical areas (e.g., US states).
+	// Exclude articles where specified states play a central role. Accepts either a
+	// single state code or an array. Multiple values create an AND-exclude filter,
+	// removing articles focused on any of these states. See documentation for
+	// supported state codes.
 	ExcludeState []string `json:"excludeState,omitzero"`
-	// Filter by excluding topics. Each topic is some kind of entity that the article
-	// is about. Examples of topics: Markets, Joe Biden, Green Energy, Climate Change,
-	// Cryptocurrency, etc. If multiple parameters are passed, they will be applied as
-	// OR operations.
+	// Exclude articles with specific topics. Accepts either a single topic or an
+	// array. Multiple values create an AND-exclude filter, removing all content with
+	// any of these topics.
 	ExcludeTopic []string `json:"excludeTopic,omitzero"`
-	// Labels to filter by, could be 'Opinion', 'Paid-news', 'Non-news', etc. If
-	// multiple parameters are passed, they will be applied as OR operations.
+	// Filter articles by editorial labels such as Opinion, Paid-news, Non-news, Fact
+	// Check, or Press Release. View our docs for an exhaustive list of labels. Accepts
+	// either a single label or an array. Multiple values create an OR filter.
 	Label []string `json:"label,omitzero"`
-	// Language code to filter by language. If an array parameters are passed, they
-	// will be applied as OR operations. For example: ['en', 'es']. Language ISO codes
-	// must be provided.
+	// Filter articles by their language using ISO-639 two-letter codes in lowercase
+	// (e.g., en, es, fr). Accepts either a single language code or an array. Multiple
+	// values create an OR filter.
 	Language []string `json:"language,omitzero"`
-	// Filters articles where a specified country plays a central role in the content,
-	// beyond mere mentions, to ensure the results are deeply relevant to the country
-	// in question. If multiple parameters are passed, they will be applied as OR
-	// operations. Only accepts country ISO codes.
+	// Filter articles where specified countries play a central role in the content,
+	// not just mentioned. Uses two-letter country codes in lowercase. Accepts either a
+	// single country code or an array. Multiple values create an OR filter. See
+	// documentation for supported country codes.
 	LocationsCountry []string `json:"locationsCountry,omitzero"`
 	// A filter object for logical NOT operations
 	Not []ArticleSearchFilterParam `json:"NOT,omitzero"`
@@ -161,45 +170,58 @@ type ArticleSearchFilterParam struct {
 	// original filter object and will be combined with the existing filter using the
 	// OR logical operator.
 	Or []ArticleSearchFilterParam `json:"OR,omitzero"`
-	// List of person names for exact matches. Boolean and complex logic is not
-	// supported on this filter.
+	// Filter articles by exact person name matches. Accepts either a single name or an
+	// array. Does not support Boolean operators or wildcards. Multiple values create
+	// an OR filter. For a complete list of tracked individuals and their names, refer
+	// to the /people endpoint.
 	PersonName []string `json:"personName,omitzero"`
-	// List of person Wikidata IDs for filtering.
+	// Filter articles by Wikidata IDs of mentioned people. Accepts either a single ID
+	// or an array. Multiple values create an OR filter. For a complete list of tracked
+	// individuals and their Wikidata IDs, refer to the /people endpoint.
 	PersonWikidataID []string `json:"personWikidataId,omitzero"`
-	// Filter by specific source(s). Accepts either a single string or an array of
-	// strings.
+	// Filter articles by specific publisher domains or subdomains. Accepts either a
+	// single domain or an array of domains. Multiple values create an OR filter.
 	Source []string `json:"source,omitzero"`
-	// Find articles published by sources that are located within a given city.
+	// Filter for articles from publishers based in specific cities. Accepts either a
+	// single city name or an array. Multiple values create an OR filter.
 	SourceCity []string `json:"sourceCity,omitzero"`
-	// Find articles published by sources that are located within a given country. Must
-	// be 2 character country code (i.e. us, gb, etc).
+	// Filter for articles from publishers based in specific countries. Accepts either
+	// a single country code or an array. Uses two-letter country codes in lowercase
+	// (e.g., us, gb). See documentation for supported country codes.
 	SourceCountry []string `json:"sourceCountry,omitzero"`
-	// Find articles published by sources that are located within a given county.
+	// Filter for articles from publishers based in specific counties. Accepts either a
+	// single county name or an array. Multiple values create an OR filter.
 	SourceCounty []string `json:"sourceCounty,omitzero"`
-	// Filter by specific source group, for example: 'top100'. Accepts either a single
-	// string or an array of strings.
+	// Filter articles using Perigon's curated publisher bundles (e.g., top100,
+	// top25tech). Accepts either a single source group or an array. Multiple values
+	// create an OR filter to include articles from any of the specified bundles.
 	SourceGroup []string `json:"sourceGroup,omitzero"`
-	// Find articles published by sources that are located within a given state.
+	// Filter for articles from publishers based in specific states or regions. Accepts
+	// either a single state code or an array. Uses two-letter state codes in
+	// lowercase. See documentation for supported state codes.
 	SourceState []string `json:"sourceState,omitzero"`
-	// Filters articles where a specified state plays a central role in the content,
-	// beyond mere mentions, to ensure the results are deeply relevant to the state in
-	// question. If multiple parameters are passed, they will be applied as OR
-	// operations. Only accepts state ISO codes.
+	// Filter articles where specified states play a central role in the content.
+	// Accepts either a single state code or an array. Multiple values create an OR
+	// filter. Uses two-letter state codes in lowercase. See documentation for
+	// supported state codes.
 	State []string `json:"state,omitzero"`
-	// Filters by Google Content Categories. This field will accept 1 or more
-	// categories, must pass the full name of the category. Example:
-	// taxonomy=/Finance/Banking/Other, /Finance/Investing/Funds
+	// Filter by Google Content Categories. Must pass the full hierarchical path of the
+	// category. Accepts either a single path or an array. Example:
+	// taxonomy=/Finance/Banking/Other,/Finance/Investing/Funds. Multiple values create
+	// an OR filter.
 	Taxonomy []string `json:"taxonomy,omitzero"`
-	// Filter by topics. Each topic is some kind of entity that the article is about.
-	// Examples of topics: Markets, Joe Biden, Green Energy, Climate Change,
-	// Cryptocurrency, etc. If multiple parameters are passed, they will be applied as
-	// OR operations.
+	// Filter by specific topics such as Markets, Crime, Cryptocurrency, or College
+	// Sports. Accepts either a single topic or an array. Topics are more granular than
+	// categories, and articles can have multiple topics. Multiple values create an OR
+	// filter.
 	Topic []string `json:"topic,omitzero"`
-	// Filter using sources that are located on specific coordinates using Lat, lon and
-	// radius.
+	// Filter articles from publishers based at specific geographic locations. Uses
+	// latitude, longitude, and radius parameters to define a circular search area for
+	// publisher locations.
 	Coordinates ArticleSearchFilterCoordinatesParam `json:"coordinates,omitzero"`
-	// Filter using sources that are located on specific coordinates using Lat, lon and
-	// radius.
+	// Filter articles from publishers based at specific geographic locations. Uses
+	// latitude, longitude, and radius parameters to define a circular search area for
+	// publisher locations.
 	SourceCoordinates ArticleSearchFilterSourceCoordinatesParam `json:"sourceCoordinates,omitzero"`
 	paramObj
 }
@@ -212,8 +234,9 @@ func (r *ArticleSearchFilterParam) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-// Filter using sources that are located on specific coordinates using Lat, lon and
-// radius.
+// Filter articles from publishers based at specific geographic locations. Uses
+// latitude, longitude, and radius parameters to define a circular search area for
+// publisher locations.
 type ArticleSearchFilterCoordinatesParam struct {
 	Lat    param.Opt[float64] `json:"lat,omitzero"`
 	Lon    param.Opt[float64] `json:"lon,omitzero"`
@@ -229,8 +252,9 @@ func (r *ArticleSearchFilterCoordinatesParam) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-// Filter using sources that are located on specific coordinates using Lat, lon and
-// radius.
+// Filter articles from publishers based at specific geographic locations. Uses
+// latitude, longitude, and radius parameters to define a circular search area for
+// publisher locations.
 type ArticleSearchFilterSourceCoordinatesParam struct {
 	Lat    param.Opt[float64] `json:"lat,omitzero"`
 	Lon    param.Opt[float64] `json:"lon,omitzero"`
@@ -248,8 +272,8 @@ func (r *ArticleSearchFilterSourceCoordinatesParam) UnmarshalJSON(data []byte) e
 
 // Vector search result
 type VectorNewsSearchResponse struct {
-	Results []VectorNewsSearchResponseResult `json:"results,nullable"`
-	Status  int64                            `json:"status,nullable"`
+	Results []VectorNewsSearchResponseResult `json:"results,required"`
+	Status  int64                            `json:"status,required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Results     respjson.Field
@@ -285,9 +309,7 @@ func (r *VectorNewsSearchResponseResult) UnmarshalJSON(data []byte) error {
 
 type VectorNewsSearchParams struct {
 	// Natural language query to search the news articles database
-	Prompt      string               `json:"prompt,required"`
-	AddDateFrom param.Opt[time.Time] `json:"addDateFrom,omitzero" format:"date-time"`
-	AddDateTo   param.Opt[time.Time] `json:"addDateTo,omitzero" format:"date-time"`
+	Prompt string `json:"prompt,required"`
 	// The page number to retrieve.
 	Page param.Opt[int64] `json:"page,omitzero"`
 	// 'pubDateFrom' filter, will search articles published after the specified date,
@@ -298,18 +320,15 @@ type VectorNewsSearchParams struct {
 	// 'pubDateFrom' filter, will search articles published before the specified date,
 	// the date could be passed as ISO or 'yyyy-mm-dd'. Date time in ISO format, ie.
 	// 2024-01-01T00:00:00
-	PubDateTo      param.Opt[time.Time] `json:"pubDateTo,omitzero" format:"date-time"`
-	ScoreThreshold param.Opt[float64]   `json:"scoreThreshold,omitzero"`
+	PubDateTo param.Opt[time.Time] `json:"pubDateTo,omitzero" format:"date-time"`
 	// Whether to return reprints in the response or not. Reprints are usually wired
 	// articles from sources like AP or Reuters that are reprinted in multiple sources
 	// at the same time. By default, this parameter is 'true'.
 	ShowReprints param.Opt[bool] `json:"showReprints,omitzero"`
 	// The number of items per page.
 	Size param.Opt[int64] `json:"size,omitzero"`
-	// A versatile filter object to refine search results based on articles, clusters,
-	// sources, languages, categories, locations, companies, and people. Supports
-	// logical operators (AND, OR, NOT) for complex queries. Accepts single values or
-	// arrays, with arrays applied as OR operations.
+	// Complex filter structure for article searches that supports nested logical
+	// operations (AND, OR, NOT) and multiple filtering criteria.
 	Filter ArticleSearchFilterParam `json:"filter,omitzero"`
 	paramObj
 }

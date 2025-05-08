@@ -74,9 +74,9 @@ func (r *SourceTopStatHolder) UnmarshalJSON(data []byte) error {
 
 // Source search result
 type SourceListResponse struct {
-	NumResults int64                      `json:"numResults,nullable"`
-	Results    []SourceListResponseResult `json:"results,nullable"`
-	Status     int64                      `json:"status,nullable"`
+	NumResults int64                      `json:"numResults,required"`
+	Results    []SourceListResponseResult `json:"results,required"`
+	Status     int64                      `json:"status,required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		NumResults  respjson.Field
@@ -196,74 +196,91 @@ func (r *SourceListResponseResultLocationCoordinates) UnmarshalJSON(data []byte)
 }
 
 type SourceListParams struct {
-	// Returns the sources that have at most this number of average monthly posts.
+	// Filter for sources that publish no more than this many articles per month. Used
+	// to target publishers by content volume.
 	MaxMonthlyPosts param.Opt[int64] `query:"maxMonthlyPosts,omitzero" json:"-"`
-	// Enter a maximum number of monthly visits that the source must have in order to
-	// match your query.
+	// Filter for sources with no more than this many monthly visitors. Used to target
+	// publishers by audience size.
 	MaxMonthlyVisits param.Opt[int64] `query:"maxMonthlyVisits,omitzero" json:"-"`
-	// Returns the sources that have at least this number of average monthly posts.
+	// Filter for sources that publish at least this many articles per month. Used to
+	// target publishers by content volume.
 	MinMonthlyPosts param.Opt[int64] `query:"minMonthlyPosts,omitzero" json:"-"`
-	// Filter by popularity. Enter a minimum number of monthly visits that the source
-	// must have in order to match your query.
+	// Filter for sources with at least this many monthly visitors. Used to target
+	// publishers by audience size.
 	MinMonthlyVisits param.Opt[int64] `query:"minMonthlyVisits,omitzero" json:"-"`
-	// Search by name of source. This parameter supports complex boolean search
-	// operators, and also searches the altNames field for alternative names of the
-	// source.
+	// Search by source name or alternative names. Supports Boolean operators (AND, OR,
+	// NOT), exact phrases with quotes, and wildcards (\* and ?) for flexible
+	// searching.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// The page number to retrieve.
+	// The specific page of results to retrieve in the paginated response. Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// Use 'true' to find only sources known to have a paywall, or use 'false' to
-	// filter for only sources that do not have a paywall.
+	// Filter by paywall status. Set to true to find sources with paywalls, or false to
+	// find sources without paywalls.
 	Paywall param.Opt[bool] `query:"paywall,omitzero" json:"-"`
-	// If 'true', shows accurate number of results matched by the query. By default,
-	// the counter is accurate only up to 10,000 results due performance reasons.
+	// Controls whether to return the exact result count. When false (default), counts
+	// are capped at 10,000 for performance reasons. Set to true for precise counts in
+	// smaller result sets.
 	ShowNumResults param.Opt[bool] `query:"showNumResults,omitzero" json:"-"`
-	// Controls whether subdomains are included in the response. When set to true
-	// (default), all relevant subdomains of media sources will be returned as separate
-	// results. Set to false to consolidate results to parent domains only.
+	// Controls whether subdomains are included as separate results. When true
+	// (default), subdomains appear as distinct sources. When false, results are
+	// consolidated to parent domains only.
 	ShowSubdomains param.Opt[bool] `query:"showSubdomains,omitzero" json:"-"`
-	// The number of items per page.
+	// The number of sources to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Find all sources within a sourceGroup. Find Source Groups in the guided part of
-	// our documentation...
+	// Filter by predefined publisher bundles (e.g., top100, top50tech). Returns all
+	// sources within the specified group. See documentation for available source
+	// groups.
 	SourceGroup param.Opt[string] `query:"sourceGroup,omitzero" json:"-"`
-	// Latitude of the center point to search local publications.
+	// Latitude coordinate for filtering local publications by geographic proximity.
+	// Used with sourceLon and sourceMaxDistance for radius search.
 	SourceLat param.Opt[float64] `query:"sourceLat,omitzero" json:"-"`
-	// Longitude of the center point to search local publications.
+	// Longitude coordinate for filtering local publications by geographic proximity.
+	// Used with sourceLat and sourceMaxDistance for radius search.
 	SourceLon param.Opt[float64] `query:"sourceLon,omitzero" json:"-"`
-	// Maximum distance from starting point to search local publications.
+	// Maximum distance in kilometers from the coordinates defined by sourceLat and
+	// sourceLon. Defines the radius for local publication searches.
 	SourceMaxDistance param.Opt[float64] `query:"sourceMaxDistance,omitzero" json:"-"`
-	// Filter by categories. Categories are general themes that the article is about.
-	// Examples of categories: Tech, Politics, etc. If multiple parameters are passed,
-	// they will be applied as OR operations.
+	// Filter sources by their primary content categories such as Politics, Tech,
+	// Sports, Business, or Finance. Returns sources that frequently cover these
+	// topics. Multiple values create an OR filter.
 	Category []string `query:"category,omitzero" json:"-"`
-	// Country code to filter sources by the countries in which they most commonly
-	// cover. If multiple parameters are passed, they will be applied as OR operations.
+	// Filter sources by countries they commonly cover in their reporting. Uses ISO
+	// 3166-1 alpha-2 two-letter country codes in lowercase (e.g., us, gb, jp). See
+	// documentation for supported country codes. Multiple values create an OR filter.
 	Country []string `query:"country,omitzero" json:"-"`
-	// Domain name for the media source to lookup. This parameter supports wildcard
-	// queries, ie. "\*.cnn.com" will match all subdomains for cnn.com.
+	// Filter by specific publisher domains or subdomains. Supports wildcards (_ and ?)
+	// for pattern matching (e.g., _.cnn.com, us?.nytimes.com). Multiple values create
+	// an OR filter.
 	Domain []string `query:"domain,omitzero" json:"-"`
-	// Filter sources by label. For example, searching 'Opinion' will return the
-	// sources where 'Opinion'-type articles is one of the top labels for the articles
-	// they publish.
+	// Filter sources by their content label patterns (e.g., Opinion, Paid-news,
+	// Non-news). Returns sources where the specified label is common in their
+	// published content. See documentation for all available labels. Multiple values
+	// create an OR filter.
 	Label []string `query:"label,omitzero" json:"-"`
-	// Use 'relevance' to sort by relevance to the query, 'globalRank' for top ranked
-	// sources based on popularity, 'monthlyVisits' for sources with the largest
-	// audience, 'avgMonthlyPosts' for sources with the highest publishing frequency.
-	// Defaults to 'relevance'.
+	// Determines the source sorting order. Options include relevance (default, best
+	// match to query), globalRank (by overall traffic and popularity), monthlyVisits
+	// (by total monthly visitor count), and avgMonthlyPosts (by number of articles
+	// published monthly).
 	//
 	// Any of "createdAt", "updatedAt", "relevance", "count", "totalCount".
 	SortBy SortBy `query:"sortBy,omitzero" json:"-"`
-	// Find all local publications that are located within a given city.
+	// Filter for local publications based in specific cities. Multiple values create
+	// an OR filter.
 	SourceCity []string `query:"sourceCity,omitzero" json:"-"`
-	// Find all local publications that are located within a given country.
+	// Filter for local publications based in specific countries. Uses ISO 3166-1
+	// alpha-2 two-letter country codes in lowercase (e.g., us, gb, jp). See
+	// documentation for supported country codes. Multiple values create an OR filter.
 	SourceCountry []string `query:"sourceCountry,omitzero" json:"-"`
-	// Find all local publications that are located within a given county.
+	// Filter for local publications based in specific counties. Multiple values create
+	// an OR filter.
 	SourceCounty []string `query:"sourceCounty,omitzero" json:"-"`
-	// Find all local publications that are located within a given state.
+	// Filter for local publications based in specific states or regions. Uses standard
+	// two-letter state codes in lowercase (e.g., ca, ny, tx). See documentation for
+	// supported state codes. Multiple values create an OR filter.
 	SourceState []string `query:"sourceState,omitzero" json:"-"`
-	// Find sources by topic. For example, searching 'Markets' will return the sources
-	// where 'Markets' is one of the top 10 topics that they cover.
+	// Filter sources by their frequently covered topics (e.g., Markets,
+	// Cryptocurrency, Climate Change). Returns sources where the specified topic is
+	// among their top 10 covered areas. Multiple values create an OR filter.
 	Topic []string `query:"topic,omitzero" json:"-"`
 	paramObj
 }

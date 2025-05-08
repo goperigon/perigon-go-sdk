@@ -169,9 +169,9 @@ func (r *NameCount) UnmarshalJSON(data []byte) error {
 
 // Journalist search result
 type JournalistListResponse struct {
-	NumResults int64        `json:"numResults,nullable"`
-	Results    []Journalist `json:"results,nullable"`
-	Status     int64        `json:"status,nullable"`
+	NumResults int64        `json:"numResults,required"`
+	Results    []Journalist `json:"results,required"`
+	Status     int64        `json:"status,required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		NumResults  respjson.Field
@@ -189,50 +189,54 @@ func (r *JournalistListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type JournalistListParams struct {
-	// Returns the journalist with the maximum indicated number of average monthly
-	// posts.
+	// Filter for journalists who publish no more than this many articles per month.
 	MaxMonthlyPosts param.Opt[int64] `query:"maxMonthlyPosts,omitzero" json:"-"`
-	// Returns the journalists with the minimum indicated number of average monthly
-	// posts.
+	// Filter for journalists who publish at least this many articles per month. Used
+	// to identify more active journalists.
 	MinMonthlyPosts param.Opt[int64] `query:"minMonthlyPosts,omitzero" json:"-"`
-	// Searches through journalist names, scores and ranks them, returns results sorted
-	// by relevance.
+	// Search specifically within journalist names. Supports Boolean operators (AND,
+	// OR, NOT), exact phrases with quotes, and wildcards (\* and ?) for flexible
+	// searching.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// The page number to retrieve.
+	// The specific page of results to retrieve in the paginated response. Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// Searches through name, title, twitterBio fields with priority given to the name,
-	// then to the title, then to the twitter bio. Returns results sorted by relevance.
+	// Primary search query for filtering journalists based on their name, title, and
+	// Twitter bio. Supports Boolean operators (AND, OR, NOT), exact phrases with
+	// quotes, and wildcards (\* and ?) for flexible searching.
 	Q param.Opt[string] `query:"q,omitzero" json:"-"`
-	// If 'true', shows accurate number of results matched by the query. By default,
-	// the counter is accurate only up to 10,000 results due performance reasons.
+	// Controls whether to return the exact result count. When false (default), counts
+	// are capped at 10,000 for performance reasons. Set to true for precise counts in
+	// smaller result sets.
 	ShowNumResults param.Opt[bool] `query:"showNumResults,omitzero" json:"-"`
-	// The number of items per page.
+	// The number of journalists to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Searches for journalists by (exact match) twitter handle.
+	// Filter journalists by their exact Twitter handle, without the @ symbol.
 	Twitter param.Opt[string] `query:"twitter,omitzero" json:"-"`
-	// Starting date when the record was last updated.
+	// Filter for journalist profiles updated on or after this date. Accepts ISO 8601
+	// format (e.g., 2023-03-01T00:00:00) or yyyy-mm-dd format.
 	UpdatedAtFrom param.Opt[time.Time] `query:"updatedAtFrom,omitzero" format:"date-time" json:"-"`
-	// Ending date when the record was last updated.
+	// Filter for journalist profiles updated on or before this date. Accepts ISO 8601
+	// format (e.g., 2023-03-01T23:59:59) or yyyy-mm-dd format.
 	UpdatedAtTo param.Opt[time.Time] `query:"updatedAtTo,omitzero" format:"date-time" json:"-"`
-	// Filter by journalist ID. Journalist IDs are unique journalist identifiers which
-	// can be found through the Journalist API, or in the matchedAuthors field.
+	// Filter by unique journalist identifiers. Multiple values create an OR filter to
+	// find journalists matching any of the specified IDs.
 	ID []string `query:"id,omitzero" json:"-"`
-	// Filter by categories. Categories are general themes that the article is about.
-	// Examples of categories: Tech, Politics, etc. If multiple parameters are passed,
-	// they will be applied as OR operations.
+	// Filter journalists by the content categories they typically write about (e.g.,
+	// Politics, Tech, Sports, Business). Multiple values create an OR filter.
 	Category []string `query:"category,omitzero" json:"-"`
-	// Country code to filter by country. If multiple parameters are passed, they will
-	// be applied as OR operations.
+	// Filter journalists by countries they commonly cover in their reporting. Uses ISO
+	// 3166-1 alpha-2 two-letter country codes in lowercase (e.g., us, gb, jp).
+	// Multiple values create an OR filter.
 	Country []string `query:"country,omitzero" json:"-"`
-	// Filter journalists by label. For example, searching 'Opinion' will return the
-	// journalists where 'Opinion'-type articles is one of the top labels for the
-	// articles they publish.
+	// Filter journalists by the type of content they typically produce (e.g., Opinion,
+	// Paid-news, Non-news). Multiple values create an OR filter.
 	Label []string `query:"label,omitzero" json:"-"`
-	// Search for journalist by the publisher's domain can include a subdomain. If
-	// multiple parameters are passed, they will be applied as OR operations. Wildcards
-	// (_ and ?) are suported (e.g. _.cnn.com).
+	// Filter journalists by the publisher domains they write for. Supports wildcards
+	// (_ and ?) for pattern matching (e.g., _.cnn.com). Multiple values create an OR
+	// filter.
 	Source []string `query:"source,omitzero" json:"-"`
-	// Searches for journalists by topic.
+	// Filter journalists by the topics they frequently cover. Multiple values create
+	// an OR filter to find journalists covering any of the specified topics.
 	Topic []string `query:"topic,omitzero" json:"-"`
 	paramObj
 }

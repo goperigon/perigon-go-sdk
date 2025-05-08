@@ -45,8 +45,8 @@ func (r *TopicService) List(ctx context.Context, query TopicListParams, opts ...
 
 // Topic search result
 type TopicListResponse struct {
-	Data  []TopicListResponseData `json:"data,nullable"`
-	Total int64                   `json:"total,nullable"`
+	Data  []TopicListResponseData `json:"data,required"`
+	Total int64                   `json:"total,required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -105,15 +105,18 @@ func (r *TopicListResponseDataLabels) UnmarshalJSON(data []byte) error {
 }
 
 type TopicListParams struct {
-	// Search by category.
+	// Filter topics by broad article categories such as Politics, Tech, Sports,
+	// Business, Finance, Entertainment, etc.
 	Category param.Opt[string] `query:"category,omitzero" json:"-"`
-	// Search by name.
+	// Search for topics by exact name or partial text match. Does not support
+	// wildcards. Examples include Markets, Cryptocurrency, Climate Change, etc.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// The page number to retrieve.
+	// The specific page of results to retrieve in the paginated response. Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// The number of items per page.
+	// The number of topics to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Search by subcategory.
+	// Filter topics by their specific subcategory. Subcategories provide more granular
+	// classification beyond the main category, such as TV or Event.
 	Subcategory param.Opt[string] `query:"subcategory,omitzero" json:"-"`
 	paramObj
 }
