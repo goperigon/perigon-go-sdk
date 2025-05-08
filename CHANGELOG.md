@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.1 (2025-05-08)
+
+Full Changelog: [v2.0.0...v2.0.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.0.0...v2.0.1)
+
+### Chores
+
+* **internal:** version bump ([c9ba3f4](https://github.com/goperigon/perigon-go-sdk/commit/c9ba3f4c6a809e7249517e0fb33a9e9f452be1c5))
+
 ## 2.0.0 (2025-05-08)
 
 Full Changelog: [v1.0.1...v2.0.0](https://github.com/goperigon/perigon-go-sdk/compare/v1.0.1...v2.0.0)
