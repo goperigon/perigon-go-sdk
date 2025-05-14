@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.1.0 (2025-05-14)
+
+Full Changelog: [v2.0.0...v2.1.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.0.0...v2.1.0)
+
+### Features
+
+* **client:** add support for endpoint-specific base URLs in python ([1e064b1](https://github.com/goperigon/perigon-go-sdk/commit/1e064b18946da36468ee91e50721cff6c9138217))
+
+
+### Chores
+
+* **internal:** version bump ([c9ba3f4](https://github.com/goperigon/perigon-go-sdk/commit/c9ba3f4c6a809e7249517e0fb33a9e9f452be1c5))
+
 ## 2.0.0 (2025-05-08)
 
 Full Changelog: [v1.0.1...v2.0.0](https://github.com/goperigon/perigon-go-sdk/compare/v1.0.1...v2.0.0)
