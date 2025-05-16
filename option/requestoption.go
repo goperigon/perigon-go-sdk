@@ -19,7 +19,7 @@ import (
 // which can be supplied to clients, services, and methods. You can read more about this functional
 // options pattern in our [README].
 //
-// [README]: https://pkg.go.dev/github.com/goperigon/perigon-go-sdk#readme-requestoptions
+// [README]: https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#readme-requestoptions
 type RequestOption = requestconfig.RequestOption
 
 // WithBaseURL returns a RequestOption that sets the BaseURL for the client.
@@ -262,7 +262,7 @@ func WithRequestTimeout(dur time.Duration) RequestOption {
 // environment to be the "production" environment. An environment specifies which base URL
 // to use by default.
 func WithEnvironmentProduction() RequestOption {
-	return WithBaseURL("https://api.perigon.io/")
+	return requestconfig.WithDefaultBaseURL("https://api.perigon.io/")
 }
 
 // WithAPIKey returns a RequestOption that sets the client setting "api_key".
