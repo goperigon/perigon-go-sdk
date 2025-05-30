@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.1.1 (2025-05-30)
+
+Full Changelog: [v2.1.0...v2.1.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.1.0...v2.1.1)
+
+### Bug Fixes
+
+* **client:** correctly set stream key for multipart ([72d0ce6](https://github.com/goperigon/perigon-go-sdk/commit/72d0ce64e80465193c2d884826fcfdce12ca0833))
+* **client:** don't panic on marshal with extra null field ([beac890](https://github.com/goperigon/perigon-go-sdk/commit/beac890f4f4fcae989fc62802f517e06e9cfa991))
+* fix error ([29eaf73](https://github.com/goperigon/perigon-go-sdk/commit/29eaf739b68e5c3ebe07daa7ba91320f456d02be))
+
+
+### Chores
+
+* **docs:** grammar improvements ([f376994](https://github.com/goperigon/perigon-go-sdk/commit/f376994468180a0620a20204e53f5c70a586b1a5))
+* improve devcontainer setup ([5b7f17b](https://github.com/goperigon/perigon-go-sdk/commit/5b7f17b676b3e9027c70b312ff25dbbba2653f7b))
+
 ## 2.1.0 (2025-05-14)
 
 Full Changelog: [v2.0.0...v2.1.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.0.0...v2.1.0)
