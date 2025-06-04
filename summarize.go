@@ -99,6 +99,22 @@ type SummarizeNewParams struct {
 	// Filter for articles published after this date. Accepts ISO 8601 format (e.g.,
 	// 2023-03-01T00:00:00) or yyyy-mm-dd format.
 	From param.Opt[time.Time] `query:"from,omitzero" format:"date-time" json:"-"`
+	// Specifies the size in characters of each highlighted text fragment. Defaults to
+	// 100 if not specified.
+	HighlightFragmentSize param.Opt[int64] `query:"highlightFragmentSize,omitzero" json:"-"`
+	// Controls the maximum number of highlighted fragments to return per field.
+	HighlightNumFragments param.Opt[int64] `query:"highlightNumFragments,omitzero" json:"-"`
+	// Defines the HTML tag that appears after highlighted text. Defaults to '</em>' if
+	// not specified.
+	HighlightPostTag param.Opt[string] `query:"highlightPostTag,omitzero" json:"-"`
+	// Defines the HTML tag that appears before highlighted text. Defaults to '<em>' if
+	// not specified.
+	HighlightPreTag param.Opt[string] `query:"highlightPreTag,omitzero" json:"-"`
+	// Specifies a separate query for highlighting, allowing highlights based on terms
+	// different from the main search query. Example: main query 'q=climate change'
+	// with 'highlightQ=renewable OR solar' will highlight terms 'renewable' and
+	// 'solar' in results about climate change.
+	HighlightQ param.Opt[string] `query:"highlightQ,omitzero" json:"-"`
 	// Latitude of the center point to search places
 	Lat param.Opt[float64] `query:"lat,omitzero" json:"-"`
 	// Returns only articles that contain links to the specified URL pattern. Matches
@@ -161,6 +177,8 @@ type SummarizeNewParams struct {
 	// Expand search to include translated content fields for non-English articles.
 	// When true, searches translated title, description, and content fields.
 	SearchTranslation param.Opt[bool] `query:"searchTranslation,omitzero" json:"-"`
+	// When set to true, enables text highlighting in search results.
+	ShowHighlighting param.Opt[bool] `query:"showHighlighting,omitzero" json:"-"`
 	// Whether to show the total number of all matched articles. Default value is false
 	// which makes queries a bit more efficient but also counts up to 10000 articles.
 	ShowNumResults param.Opt[bool] `query:"showNumResults,omitzero" json:"-"`
@@ -267,8 +285,8 @@ type SummarizeNewParams struct {
 	// is useful for targeting or avoiding specific public companies.
 	ExcludeCompanySymbol []string `query:"excludeCompanySymbol,omitzero" json:"-"`
 	// Excludes articles from specific counties or administrative divisions in the
-	// vector search results. Accepts either a single county name or a list of county
-	// names. County names should match the format used in article metadata (e.g., 'Los
+	// search results. Accepts either a single county name or a list of county names.
+	// County names should match the format used in article metadata (e.g., 'Los
 	// Angeles County', 'Cook County'). This parameter allows for more granular
 	// geographic filter
 	ExcludeCounty []string `query:"excludeCounty,omitzero" json:"-"`

@@ -24,9 +24,9 @@ func TestUsage(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAPIKey("My API Key"),
 	)
-	alls, err := client.All.List(context.TODO(), perigon.AllListParams{})
+	companies, err := client.Companies.List(context.TODO(), perigon.CompanyListParams{})
 	if err != nil {
 		t.Fatalf("err should be nil: %s", err.Error())
 	}
-	t.Logf("%+v\n", alls.Articles)
+	t.Logf("%+v\n", companies.NumResults)
 }
