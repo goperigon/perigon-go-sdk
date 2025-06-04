@@ -52,11 +52,11 @@ func main() {
 	client := perigon.NewClient(
 		option.WithAPIKey("My API Key"), // defaults to os.LookupEnv("PERIGON_API_KEY")
 	)
-	companies, err := client.Companies.List(context.TODO(), perigon.CompanyListParams{})
+	alls, err := client.All.List(context.TODO(), perigon.AllListParams{})
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", companies.NumResults)
+	fmt.Printf("%+v\n", alls.Articles)
 }
 
 ```
@@ -262,7 +262,7 @@ client := perigon.NewClient(
 	option.WithHeader("X-Some-Header", "custom_header_info"),
 )
 
-client.Companies.List(context.TODO(), ...,
+client.All.List(context.TODO(), ...,
 	// Override the header
 	option.WithHeader("X-Some-Header", "some_other_custom_header_info"),
 	// Add an undocumented field to the request body, using sjson syntax
@@ -291,14 +291,14 @@ When the API returns a non-success status code, we return an error with type
 To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
-_, err := client.Companies.List(context.TODO(), perigon.CompanyListParams{})
+_, err := client.All.List(context.TODO(), perigon.AllListParams{})
 if err != nil {
 	var apierr *perigon.Error
 	if errors.As(err, &apierr) {
 		println(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request
 		println(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response
 	}
-	panic(err.Error()) // GET "/v1/companies/all": 400 Bad Request { ... }
+	panic(err.Error()) // GET "/v1/articles/all": 400 Bad Request { ... }
 }
 ```
 
@@ -316,9 +316,9 @@ To set a per-retry timeout, use `option.WithRequestTimeout()`.
 // This sets the timeout for the request, including all the retries.
 ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 defer cancel()
-client.Companies.List(
+client.All.List(
 	ctx,
-	perigon.CompanyListParams{},
+	perigon.AllListParams{},
 	// This sets the per-retry timeout
 	option.WithRequestTimeout(20*time.Second),
 )
@@ -352,9 +352,9 @@ client := perigon.NewClient(
 )
 
 // Override per-request:
-client.Companies.List(
+client.All.List(
 	context.TODO(),
-	perigon.CompanyListParams{},
+	perigon.AllListParams{},
 	option.WithMaxRetries(5),
 )
 ```
@@ -367,15 +367,15 @@ you need to examine response headers, status codes, or other details.
 ```go
 // Create a variable to store the HTTP response
 var response *http.Response
-companies, err := client.Companies.List(
+alls, err := client.All.List(
 	context.TODO(),
-	perigon.CompanyListParams{},
+	perigon.AllListParams{},
 	option.WithResponseInto(&response),
 )
 if err != nil {
 	// handle error
 }
-fmt.Printf("%+v\n", companies)
+fmt.Printf("%+v\n", alls)
 
 fmt.Printf("Status Code: %d\n", response.StatusCode)
 fmt.Printf("Headers: %+#v\n", response.Header)

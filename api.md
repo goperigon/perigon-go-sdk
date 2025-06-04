@@ -7,6 +7,11 @@ Params Types:
 Response Types:
 
 - <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#Article">Article</a>
+- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#AllListResponse">AllListResponse</a>
+
+Methods:
+
+- <code title="get /v1/articles/all">client.All.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#AllService.List">List</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, query <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#AllListParams">AllListParams</a>) (<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#AllListResponse">AllListResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
 
 # Companies
 
