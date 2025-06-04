@@ -530,6 +530,22 @@ type StoryListParams struct {
 	// could be passed as ISO or 'yyyy-mm-dd'. Add time in ISO format, ie.
 	// 2023-03-01T00:00:00
 	From param.Opt[time.Time] `query:"from,omitzero" format:"date-time" json:"-"`
+	// Specifies the size in characters of each highlighted text fragment. Defaults to
+	// 100 if not specified.
+	HighlightFragmentSize param.Opt[int64] `query:"highlightFragmentSize,omitzero" json:"-"`
+	// Controls the maximum number of highlighted fragments to return per field.
+	HighlightNumFragments param.Opt[int64] `query:"highlightNumFragments,omitzero" json:"-"`
+	// Defines the HTML tag that appears after highlighted text. Defaults to '</em>' if
+	// not specified.
+	HighlightPostTag param.Opt[string] `query:"highlightPostTag,omitzero" json:"-"`
+	// Defines the HTML tag that appears before highlighted text. Defaults to '<em>' if
+	// not specified.
+	HighlightPreTag param.Opt[string] `query:"highlightPreTag,omitzero" json:"-"`
+	// Specifies a separate query for highlighting, allowing highlights based on terms
+	// different from the main search query. Example: main query 'q=climate change'
+	// with 'highlightQ=renewable OR solar' will highlight terms 'renewable' and
+	// 'solar' in results about climate change.
+	HighlightQ param.Opt[string] `query:"highlightQ,omitzero" json:"-"`
 	// Filter for stories created after this date. Alternative parameter for filtering
 	// by story creation date.
 	InitializedFrom param.Opt[time.Time] `query:"initializedFrom,omitzero" format:"date-time" json:"-"`
@@ -591,6 +607,8 @@ type StoryListParams struct {
 	// articles are merged into the original story. duplicateOf field contains the
 	// original cluster Id. When showDuplicates=true, all stories are shown.
 	ShowDuplicates param.Opt[bool] `query:"showDuplicates,omitzero" json:"-"`
+	// When set to true, enables text highlighting in search results.
+	ShowHighlighting param.Opt[bool] `query:"showHighlighting,omitzero" json:"-"`
 	// Show total number of results. By default set to false, will cap result count
 	// at 10000.
 	ShowNumResults    param.Opt[bool] `query:"showNumResults,omitzero" json:"-"`

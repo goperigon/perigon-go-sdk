@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.2.0 (2025-06-04)
+
+Full Changelog: [v2.1.1...v2.2.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.1.1...v2.2.0)
+
+### Features
+
+* **api:** update via SDK Studio ([860f76b](https://github.com/goperigon/perigon-go-sdk/commit/860f76b336656e61025527a5447b39fa36c55af8))
+* **api:** update via SDK Studio ([2fc33ae](https://github.com/goperigon/perigon-go-sdk/commit/2fc33ae1c3370c666c5bef5fc73f904a090eeb58))
+* **client:** allow overriding unions ([93dde3a](https://github.com/goperigon/perigon-go-sdk/commit/93dde3a391ceaef1aafc1cbb9b5f4cfebb0b8afd))
+
+
+### Chores
+
+* make go mod tidy continue on error ([cec4f3e](https://github.com/goperigon/perigon-go-sdk/commit/cec4f3e26a1cc6c6e47e89a92dcc9f50b61bd912))
+
 ## 2.1.1 (2025-05-30)
 
 Full Changelog: [v2.1.0...v2.1.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.1.0...v2.1.1)
