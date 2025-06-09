@@ -483,3 +483,11 @@ We are keen for your feedback; please open an [issue](https://www.github.com/gop
 ## Contributing
 
 See [the contributing documentation](./CONTRIBUTING.md).
+
+
+## Usage Examples
+We have put together basic and advanced examples of accessing and using the Perigon API using the python SDK inside the **examples/** folder.
+
+
+## License
+MIT
