@@ -270,6 +270,8 @@ client.All.List(context.TODO(), ...,
 )
 ```
 
+The request option `option.WithDebugLog(nil)` may be helpful while debugging.
+
 See the [full list of request options](https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2/option).
 
 ### Pagination
