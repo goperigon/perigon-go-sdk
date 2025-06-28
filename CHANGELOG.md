@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.3.0 (2025-06-28)
+
+Full Changelog: [v2.2.0...v2.3.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.2.0...v2.3.0)
+
+### Features
+
+* **client:** add debug log helper ([e330b9c](https://github.com/goperigon/perigon-go-sdk/commit/e330b9c5fbff9fee6d7bcc61a313c2225a14f4a0))
+* **client:** add escape hatch for null slice & maps ([c19b4a7](https://github.com/goperigon/perigon-go-sdk/commit/c19b4a77484664f519e3f7a1abdbed141f60e78d))
+
+
+### Bug Fixes
+
+* don't try to deserialize as json when ResponseBodyInto is []byte ([98641ec](https://github.com/goperigon/perigon-go-sdk/commit/98641ecd0feb09be8022033a158dfc11d7e0e8ea))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([55a4d17](https://github.com/goperigon/perigon-go-sdk/commit/55a4d17c9a357bcd6f4b91c0ab06a7413e019d63))
+* **ci:** only run for pushes and fork pull requests ([e07881f](https://github.com/goperigon/perigon-go-sdk/commit/e07881f8b4d79a0149242a666eaff0086cab3d07))
+* fix documentation of null map ([22e2b39](https://github.com/goperigon/perigon-go-sdk/commit/22e2b39e30ba349bb027c50b908854f90594a1eb))
+
 ## 2.2.0 (2025-06-04)
 
 Full Changelog: [v2.1.1...v2.2.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.1.1...v2.2.0)
