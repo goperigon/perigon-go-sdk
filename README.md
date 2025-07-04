@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/goperigon/perigon-go-sdk/v2@v2.2.0'
+go get -u 'github.com/goperigon/perigon-go-sdk/v2@v2.3.0'
 ```
 
 <!-- x-release-please-end -->
@@ -271,6 +271,8 @@ client.All.List(context.TODO(), ...,
 	option.WithJSONSet("some.json.path", map[string]string{"my": "object"}),
 )
 ```
+
+The request option `option.WithDebugLog(nil)` may be helpful while debugging.
 
 See the [full list of request options](https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2/option).
 
