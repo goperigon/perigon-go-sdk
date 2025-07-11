@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.3.1 (2025-07-11)
+
+Full Changelog: [v2.3.0...v2.3.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.3.0...v2.3.1)
+
+### Chores
+
+* **internal:** fix lint script for tests ([47eae65](https://github.com/goperigon/perigon-go-sdk/commit/47eae65b69d6b6e60d26975a6cb6e5ab1af47cf7))
+* lint tests ([9e2661a](https://github.com/goperigon/perigon-go-sdk/commit/9e2661a9384fe741dce782011d0c8281f5449b2f))
+* lint tests in subpackages ([270fec6](https://github.com/goperigon/perigon-go-sdk/commit/270fec68975193089bb7790cdaf6f80116900e61))
+
 ## 2.3.0 (2025-06-28)
 
 Full Changelog: [v2.2.0...v2.3.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.2.0...v2.3.0)
