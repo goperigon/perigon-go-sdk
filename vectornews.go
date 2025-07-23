@@ -270,7 +270,7 @@ func (r *ArticleSearchFilterSourceCoordinatesParam) UnmarshalJSON(data []byte) e
 	return apijson.UnmarshalRoot(data, r)
 }
 
-// Vector search result
+// Articles vector search result
 type VectorNewsSearchResponse struct {
 	Results []VectorNewsSearchResponseResult `json:"results,required"`
 	Status  int64                            `json:"status,required"`
