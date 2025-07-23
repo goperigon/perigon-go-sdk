@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.3.2 (2025-07-22)
+
+Full Changelog: [v2.3.1...v2.3.2](https://github.com/goperigon/perigon-go-sdk/compare/v2.3.1...v2.3.2)
+
+### Bug Fixes
+
+* **client:** process custom base url ahead of time ([6352f4d](https://github.com/goperigon/perigon-go-sdk/commit/6352f4d07046f9c19b56e95eb50063df721c109c))
+
 ## 2.3.1 (2025-07-11)
 
 Full Changelog: [v2.3.0...v2.3.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.3.0...v2.3.1)
