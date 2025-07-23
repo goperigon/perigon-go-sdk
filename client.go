@@ -25,6 +25,7 @@ type Client struct {
 	Summarize   SummarizeService
 	Topics      TopicService
 	Vector      VectorService
+	Wikipedia   WikipediaService
 }
 
 // DefaultClientOptions read from the environment (PERIGON_API_KEY,
@@ -58,6 +59,7 @@ func NewClient(opts ...option.RequestOption) (r Client) {
 	r.Summarize = NewSummarizeService(opts...)
 	r.Topics = NewTopicService(opts...)
 	r.Vector = NewVectorService(opts...)
+	r.Wikipedia = NewWikipediaService(opts...)
 
 	return
 }

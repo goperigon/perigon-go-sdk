@@ -14,6 +14,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/v2/option"
 	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
 	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
+	"github.com/goperigon/perigon-go-sdk/v2/shared"
 )
 
 // StoryService contains methods and other services that help with interacting with
@@ -46,41 +47,41 @@ func (r *StoryService) List(ctx context.Context, query StoryListParams, opts ...
 }
 
 type NewsCluster struct {
-	ID                string                   `json:"id,nullable"`
-	Categories        []NewsClusterCategory    `json:"categories,nullable"`
-	Companies         []NewsClusterCompany     `json:"companies,nullable"`
-	Countries         []NewsClusterCountry     `json:"countries,nullable"`
-	CreatedAt         string                   `json:"createdAt,nullable"`
-	DuplicateOf       string                   `json:"duplicateOf,nullable"`
-	Highlights        map[string][]string      `json:"highlights,nullable"`
-	ImageSource       NewsClusterImageSource   `json:"imageSource"`
-	ImageURL          string                   `json:"imageUrl,nullable"`
-	InitializedAt     string                   `json:"initializedAt,nullable"`
-	KeyPoints         []NewsClusterKeyPoint    `json:"keyPoints,nullable"`
-	Locations         []NewsClusterLocation    `json:"locations,nullable"`
-	Name              string                   `json:"name,nullable"`
-	People            []NewsClusterPerson      `json:"people,nullable"`
-	Questions         []NewsClusterQuestion    `json:"questions,nullable"`
-	ReprintCount      int64                    `json:"reprintCount,nullable"`
-	SelectedArticles  []Article                `json:"selectedArticles,nullable"`
-	Sentiment         NewsClusterSentiment     `json:"sentiment"`
-	ShortSummary      string                   `json:"shortSummary,nullable"`
-	Slug              string                   `json:"slug,nullable"`
-	Summary           string                   `json:"summary,nullable"`
-	SummaryReferences []string                 `json:"summaryReferences,nullable"`
-	Taxonomies        []NewsClusterTaxonomy    `json:"taxonomies,nullable"`
-	TopCategories     []NewsClusterTopCategory `json:"topCategories,nullable"`
-	TopCompanies      []NewsClusterTopCompany  `json:"topCompanies,nullable"`
-	TopCountries      []string                 `json:"topCountries,nullable"`
-	Topics            []NewsClusterTopic       `json:"topics,nullable"`
-	TopLocations      []NewsClusterTopLocation `json:"topLocations,nullable"`
-	TopPeople         []NewsClusterTopPerson   `json:"topPeople,nullable"`
-	TopTaxonomies     []NewsClusterTopTaxonomy `json:"topTaxonomies,nullable"`
-	TopTopics         []NewsClusterTopTopic    `json:"topTopics,nullable"`
-	TotalCount        int64                    `json:"totalCount,nullable"`
-	UniqueCount       int64                    `json:"uniqueCount,nullable"`
-	UniqueSources     []string                 `json:"uniqueSources,nullable"`
-	UpdatedAt         string                   `json:"updatedAt,nullable"`
+	ID                string                  `json:"id,nullable"`
+	Categories        []RecordStatHolder      `json:"categories,nullable"`
+	Companies         []NewsClusterCompany    `json:"companies,nullable"`
+	Countries         []RecordStatHolder      `json:"countries,nullable"`
+	CreatedAt         string                  `json:"createdAt,nullable"`
+	DuplicateOf       string                  `json:"duplicateOf,nullable"`
+	Highlights        map[string][]string     `json:"highlights,nullable"`
+	ImageSource       NewsClusterImageSource  `json:"imageSource"`
+	ImageURL          string                  `json:"imageUrl,nullable"`
+	InitializedAt     string                  `json:"initializedAt,nullable"`
+	KeyPoints         []NewsClusterKeyPoint   `json:"keyPoints,nullable"`
+	Locations         []NewsClusterLocation   `json:"locations,nullable"`
+	Name              string                  `json:"name,nullable"`
+	People            []NewsClusterPerson     `json:"people,nullable"`
+	Questions         []NewsClusterQuestion   `json:"questions,nullable"`
+	ReprintCount      int64                   `json:"reprintCount,nullable"`
+	SelectedArticles  []Article               `json:"selectedArticles,nullable"`
+	Sentiment         NewsClusterSentiment    `json:"sentiment"`
+	ShortSummary      string                  `json:"shortSummary,nullable"`
+	Slug              string                  `json:"slug,nullable"`
+	Summary           string                  `json:"summary,nullable"`
+	SummaryReferences []string                `json:"summaryReferences,nullable"`
+	Taxonomies        []RecordStatHolder      `json:"taxonomies,nullable"`
+	TopCategories     []shared.CategoryHolder `json:"topCategories,nullable"`
+	TopCompanies      []NewsClusterTopCompany `json:"topCompanies,nullable"`
+	TopCountries      []string                `json:"topCountries,nullable"`
+	Topics            []RecordStatHolder      `json:"topics,nullable"`
+	TopLocations      []shared.LocationHolder `json:"topLocations,nullable"`
+	TopPeople         []NewsClusterTopPerson  `json:"topPeople,nullable"`
+	TopTaxonomies     []shared.CategoryHolder `json:"topTaxonomies,nullable"`
+	TopTopics         []NewsClusterTopTopic   `json:"topTopics,nullable"`
+	TotalCount        int64                   `json:"totalCount,nullable"`
+	UniqueCount       int64                   `json:"uniqueCount,nullable"`
+	UniqueSources     []string                `json:"uniqueSources,nullable"`
+	UpdatedAt         string                  `json:"updatedAt,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                respjson.Field
@@ -129,24 +130,6 @@ func (r *NewsCluster) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type NewsClusterCategory struct {
-	Count int64  `json:"count,nullable"`
-	Name  string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Count       respjson.Field
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r NewsClusterCategory) RawJSON() string { return r.JSON.raw }
-func (r *NewsClusterCategory) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type NewsClusterCompany struct {
 	ID      string   `json:"id,nullable"`
 	Count   int64    `json:"count,nullable"`
@@ -171,28 +154,10 @@ func (r *NewsClusterCompany) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type NewsClusterCountry struct {
-	Count int64  `json:"count,nullable"`
-	Name  string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Count       respjson.Field
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r NewsClusterCountry) RawJSON() string { return r.JSON.raw }
-func (r *NewsClusterCountry) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type NewsClusterImageSource struct {
-	Domain   string                         `json:"domain,nullable"`
-	Location NewsClusterImageSourceLocation `json:"location"`
-	Paywall  bool                           `json:"paywall,nullable"`
+	Domain   string                `json:"domain,nullable"`
+	Location shared.SourceLocation `json:"location"`
+	Paywall  bool                  `json:"paywall,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Domain      respjson.Field
@@ -206,48 +171,6 @@ type NewsClusterImageSource struct {
 // Returns the unmodified JSON received from the API
 func (r NewsClusterImageSource) RawJSON() string { return r.JSON.raw }
 func (r *NewsClusterImageSource) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type NewsClusterImageSourceLocation struct {
-	City        string                                    `json:"city,nullable"`
-	Coordinates NewsClusterImageSourceLocationCoordinates `json:"coordinates"`
-	Country     string                                    `json:"country,nullable"`
-	County      string                                    `json:"county,nullable"`
-	State       string                                    `json:"state,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		City        respjson.Field
-		Coordinates respjson.Field
-		Country     respjson.Field
-		County      respjson.Field
-		State       respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r NewsClusterImageSourceLocation) RawJSON() string { return r.JSON.raw }
-func (r *NewsClusterImageSourceLocation) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type NewsClusterImageSourceLocationCoordinates struct {
-	Lat float64 `json:"lat,nullable"`
-	Lon float64 `json:"lon,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Lat         respjson.Field
-		Lon         respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r NewsClusterImageSourceLocationCoordinates) RawJSON() string { return r.JSON.raw }
-func (r *NewsClusterImageSourceLocationCoordinates) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -353,40 +276,6 @@ func (r *NewsClusterSentiment) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type NewsClusterTaxonomy struct {
-	Count int64  `json:"count,nullable"`
-	Name  string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Count       respjson.Field
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r NewsClusterTaxonomy) RawJSON() string { return r.JSON.raw }
-func (r *NewsClusterTaxonomy) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type NewsClusterTopCategory struct {
-	Name string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r NewsClusterTopCategory) RawJSON() string { return r.JSON.raw }
-func (r *NewsClusterTopCategory) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type NewsClusterTopCompany struct {
 	ID      string   `json:"id,nullable"`
 	Domains []string `json:"domains,nullable"`
@@ -409,48 +298,6 @@ func (r *NewsClusterTopCompany) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type NewsClusterTopic struct {
-	Count int64  `json:"count,nullable"`
-	Name  string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Count       respjson.Field
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r NewsClusterTopic) RawJSON() string { return r.JSON.raw }
-func (r *NewsClusterTopic) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type NewsClusterTopLocation struct {
-	Area    string `json:"area,nullable"`
-	City    string `json:"city,nullable"`
-	Country string `json:"country,nullable"`
-	County  string `json:"county,nullable"`
-	State   string `json:"state,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Area        respjson.Field
-		City        respjson.Field
-		Country     respjson.Field
-		County      respjson.Field
-		State       respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r NewsClusterTopLocation) RawJSON() string { return r.JSON.raw }
-func (r *NewsClusterTopLocation) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type NewsClusterTopPerson struct {
 	Name       string `json:"name,nullable"`
 	WikidataID string `json:"wikidataId,nullable"`
@@ -469,22 +316,6 @@ func (r *NewsClusterTopPerson) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type NewsClusterTopTaxonomy struct {
-	Name string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r NewsClusterTopTaxonomy) RawJSON() string { return r.JSON.raw }
-func (r *NewsClusterTopTaxonomy) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type NewsClusterTopTopic struct {
 	Name string `json:"name,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
@@ -498,6 +329,24 @@ type NewsClusterTopTopic struct {
 // Returns the unmodified JSON received from the API
 func (r NewsClusterTopTopic) RawJSON() string { return r.JSON.raw }
 func (r *NewsClusterTopTopic) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type RecordStatHolder struct {
+	Count int64  `json:"count,nullable"`
+	Name  string `json:"name,nullable"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Count       respjson.Field
+		Name        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r RecordStatHolder) RawJSON() string { return r.JSON.raw }
+func (r *RecordStatHolder) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
