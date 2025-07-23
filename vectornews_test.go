@@ -38,7 +38,7 @@ func TestVectorNewsSearchWithOptionalParams(t *testing.T) {
 			CompanyID:     []string{"string"},
 			CompanyName:   []string{"string"},
 			CompanySymbol: []string{"string"},
-			Coordinates: perigon.ArticleSearchFilterCoordinatesParam{
+			Coordinates: perigon.CoordinateFilterParam{
 				Lat:    perigon.Float(0),
 				Lon:    perigon.Float(0),
 				Radius: perigon.Float(0),
@@ -68,7 +68,7 @@ func TestVectorNewsSearchWithOptionalParams(t *testing.T) {
 			PersonWikidataID:        []string{"string"},
 			Source:                  []string{"string"},
 			SourceCity:              []string{"string"},
-			SourceCoordinates: perigon.ArticleSearchFilterSourceCoordinatesParam{
+			SourceCoordinates: perigon.CoordinateFilterParam{
 				Lat:    perigon.Float(0),
 				Lon:    perigon.Float(0),
 				Radius: perigon.Float(0),
