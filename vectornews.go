@@ -218,11 +218,11 @@ type ArticleSearchFilterParam struct {
 	// Filter articles from publishers based at specific geographic locations. Uses
 	// latitude, longitude, and radius parameters to define a circular search area for
 	// publisher locations.
-	Coordinates ArticleSearchFilterCoordinatesParam `json:"coordinates,omitzero"`
+	Coordinates CoordinateFilterParam `json:"coordinates,omitzero"`
 	// Filter articles from publishers based at specific geographic locations. Uses
 	// latitude, longitude, and radius parameters to define a circular search area for
 	// publisher locations.
-	SourceCoordinates ArticleSearchFilterSourceCoordinatesParam `json:"sourceCoordinates,omitzero"`
+	SourceCoordinates CoordinateFilterParam `json:"sourceCoordinates,omitzero"`
 	paramObj
 }
 
@@ -237,40 +237,22 @@ func (r *ArticleSearchFilterParam) UnmarshalJSON(data []byte) error {
 // Filter articles from publishers based at specific geographic locations. Uses
 // latitude, longitude, and radius parameters to define a circular search area for
 // publisher locations.
-type ArticleSearchFilterCoordinatesParam struct {
+type CoordinateFilterParam struct {
 	Lat    param.Opt[float64] `json:"lat,omitzero"`
 	Lon    param.Opt[float64] `json:"lon,omitzero"`
 	Radius param.Opt[float64] `json:"radius,omitzero"`
 	paramObj
 }
 
-func (r ArticleSearchFilterCoordinatesParam) MarshalJSON() (data []byte, err error) {
-	type shadow ArticleSearchFilterCoordinatesParam
+func (r CoordinateFilterParam) MarshalJSON() (data []byte, err error) {
+	type shadow CoordinateFilterParam
 	return param.MarshalObject(r, (*shadow)(&r))
 }
-func (r *ArticleSearchFilterCoordinatesParam) UnmarshalJSON(data []byte) error {
+func (r *CoordinateFilterParam) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-// Filter articles from publishers based at specific geographic locations. Uses
-// latitude, longitude, and radius parameters to define a circular search area for
-// publisher locations.
-type ArticleSearchFilterSourceCoordinatesParam struct {
-	Lat    param.Opt[float64] `json:"lat,omitzero"`
-	Lon    param.Opt[float64] `json:"lon,omitzero"`
-	Radius param.Opt[float64] `json:"radius,omitzero"`
-	paramObj
-}
-
-func (r ArticleSearchFilterSourceCoordinatesParam) MarshalJSON() (data []byte, err error) {
-	type shadow ArticleSearchFilterSourceCoordinatesParam
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *ArticleSearchFilterSourceCoordinatesParam) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-// Vector search result
+// Articles vector search result
 type VectorNewsSearchResponse struct {
 	Results []VectorNewsSearchResponseResult `json:"results,required"`
 	Status  int64                            `json:"status,required"`

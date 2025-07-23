@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.4.0 (2025-07-23)
+
+Full Changelog: [v2.3.2...v2.4.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.3.2...v2.4.0)
+
+### Features
+
+* **api:** add wikipedia endpoints ([73bf2a5](https://github.com/goperigon/perigon-go-sdk/commit/73bf2a583c67f56da04009961f19f0d2f840a762))
+* **api:** api update ([3c973f7](https://github.com/goperigon/perigon-go-sdk/commit/3c973f7834483a27deb8027c2f4737ae1f8d777e))
+
 ## 2.3.2 (2025-07-22)
 
 Full Changelog: [v2.3.1...v2.3.2](https://github.com/goperigon/perigon-go-sdk/compare/v2.3.1...v2.3.2)
