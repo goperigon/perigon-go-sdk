@@ -16,6 +16,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/v2/option"
 	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
 	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
+	"github.com/goperigon/perigon-go-sdk/v2/shared"
 )
 
 // JournalistService contains methods and other services that help with interacting
@@ -60,32 +61,32 @@ func (r *JournalistService) List(ctx context.Context, query JournalistListParams
 }
 
 type Journalist struct {
-	ID                  string               `json:"id,nullable"`
-	AvgMonthlyPosts     int64                `json:"avgMonthlyPosts,nullable"`
-	BlogURL             string               `json:"blogUrl,nullable"`
-	Description         string               `json:"description,nullable"`
-	FacebookURL         string               `json:"facebookUrl,nullable"`
-	FullName            string               `json:"fullName,nullable"`
-	Headline            string               `json:"headline,nullable"`
-	ImageURL            string               `json:"imageUrl,nullable"`
-	InstagramURL        string               `json:"instagramUrl,nullable"`
-	LinkedinConnections int64                `json:"linkedinConnections,nullable"`
-	LinkedinFollowers   int64                `json:"linkedinFollowers,nullable"`
-	LinkedinURL         string               `json:"linkedinUrl,nullable"`
-	Locations           []JournalistLocation `json:"locations,nullable"`
-	Name                string               `json:"name,nullable"`
-	Title               string               `json:"title,nullable"`
-	TopCategories       []NameCount          `json:"topCategories,nullable"`
-	TopCountries        []NameCount          `json:"topCountries,nullable"`
-	TopLabels           []NameCount          `json:"topLabels,nullable"`
-	TopSources          []NameCount          `json:"topSources,nullable"`
-	TopTopics           []NameCount          `json:"topTopics,nullable"`
-	TumblrURL           string               `json:"tumblrUrl,nullable"`
-	TwitterBio          string               `json:"twitterBio,nullable"`
-	TwitterHandle       string               `json:"twitterHandle,nullable"`
-	UpdatedAt           string               `json:"updatedAt,nullable"`
-	WebsiteURL          string               `json:"websiteUrl,nullable"`
-	YoutubeURL          string               `json:"youtubeUrl,nullable"`
+	ID                  string                  `json:"id,nullable"`
+	AvgMonthlyPosts     int64                   `json:"avgMonthlyPosts,nullable"`
+	BlogURL             string                  `json:"blogUrl,nullable"`
+	Description         string                  `json:"description,nullable"`
+	FacebookURL         string                  `json:"facebookUrl,nullable"`
+	FullName            string                  `json:"fullName,nullable"`
+	Headline            string                  `json:"headline,nullable"`
+	ImageURL            string                  `json:"imageUrl,nullable"`
+	InstagramURL        string                  `json:"instagramUrl,nullable"`
+	LinkedinConnections int64                   `json:"linkedinConnections,nullable"`
+	LinkedinFollowers   int64                   `json:"linkedinFollowers,nullable"`
+	LinkedinURL         string                  `json:"linkedinUrl,nullable"`
+	Locations           []shared.LocationHolder `json:"locations,nullable"`
+	Name                string                  `json:"name,nullable"`
+	Title               string                  `json:"title,nullable"`
+	TopCategories       []NameCount             `json:"topCategories,nullable"`
+	TopCountries        []NameCount             `json:"topCountries,nullable"`
+	TopLabels           []NameCount             `json:"topLabels,nullable"`
+	TopSources          []NameCount             `json:"topSources,nullable"`
+	TopTopics           []NameCount             `json:"topTopics,nullable"`
+	TumblrURL           string                  `json:"tumblrUrl,nullable"`
+	TwitterBio          string                  `json:"twitterBio,nullable"`
+	TwitterHandle       string                  `json:"twitterHandle,nullable"`
+	UpdatedAt           string                  `json:"updatedAt,nullable"`
+	WebsiteURL          string                  `json:"websiteUrl,nullable"`
+	YoutubeURL          string                  `json:"youtubeUrl,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                  respjson.Field
@@ -122,30 +123,6 @@ type Journalist struct {
 // Returns the unmodified JSON received from the API
 func (r Journalist) RawJSON() string { return r.JSON.raw }
 func (r *Journalist) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type JournalistLocation struct {
-	Area    string `json:"area,nullable"`
-	City    string `json:"city,nullable"`
-	Country string `json:"country,nullable"`
-	County  string `json:"county,nullable"`
-	State   string `json:"state,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Area        respjson.Field
-		City        respjson.Field
-		Country     respjson.Field
-		County      respjson.Field
-		State       respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r JournalistLocation) RawJSON() string { return r.JSON.raw }
-func (r *JournalistLocation) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

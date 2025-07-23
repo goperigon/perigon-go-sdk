@@ -13,6 +13,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/v2/option"
 	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
 	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
+	"github.com/goperigon/perigon-go-sdk/v2/shared"
 )
 
 // SourceService contains methods and other services that help with interacting
@@ -94,29 +95,29 @@ func (r *SourceListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type SourceListResponseResult struct {
-	ID                 string                           `json:"id,nullable"`
-	AdFontesBiasRating string                           `json:"adFontesBiasRating,nullable"`
-	AllSidesBiasRating string                           `json:"allSidesBiasRating,nullable"`
-	AltNames           []string                         `json:"altNames,nullable"`
-	AvgBiasRating      string                           `json:"avgBiasRating,nullable"`
-	AvgMonthlyPosts    int64                            `json:"avgMonthlyPosts,nullable"`
-	Description        string                           `json:"description,nullable"`
-	Domain             string                           `json:"domain,nullable"`
-	GlobalRank         int64                            `json:"globalRank,nullable"`
-	Location           SourceListResponseResultLocation `json:"location"`
-	LogoFavIcon        ImageHolder                      `json:"logoFavIcon"`
-	LogoLarge          ImageHolder                      `json:"logoLarge"`
-	LogoSquare         ImageHolder                      `json:"logoSquare"`
-	MbfcBiasRating     string                           `json:"mbfcBiasRating,nullable"`
-	MonthlyVisits      int64                            `json:"monthlyVisits,nullable"`
-	Name               string                           `json:"name,nullable"`
-	Paywall            bool                             `json:"paywall,nullable"`
-	PrimaryRecordID    string                           `json:"primaryRecordId,nullable"`
-	TopCategories      []SourceTopStatHolder            `json:"topCategories,nullable"`
-	TopCountries       []SourceTopStatHolder            `json:"topCountries,nullable"`
-	TopLabels          []SourceTopStatHolder            `json:"topLabels,nullable"`
-	TopTopics          []SourceTopStatHolder            `json:"topTopics,nullable"`
-	UpdatedAt          string                           `json:"updatedAt,nullable"`
+	ID                 string                `json:"id,nullable"`
+	AdFontesBiasRating string                `json:"adFontesBiasRating,nullable"`
+	AllSidesBiasRating string                `json:"allSidesBiasRating,nullable"`
+	AltNames           []string              `json:"altNames,nullable"`
+	AvgBiasRating      string                `json:"avgBiasRating,nullable"`
+	AvgMonthlyPosts    int64                 `json:"avgMonthlyPosts,nullable"`
+	Description        string                `json:"description,nullable"`
+	Domain             string                `json:"domain,nullable"`
+	GlobalRank         int64                 `json:"globalRank,nullable"`
+	Location           shared.SourceLocation `json:"location"`
+	LogoFavIcon        ImageHolder           `json:"logoFavIcon"`
+	LogoLarge          ImageHolder           `json:"logoLarge"`
+	LogoSquare         ImageHolder           `json:"logoSquare"`
+	MbfcBiasRating     string                `json:"mbfcBiasRating,nullable"`
+	MonthlyVisits      int64                 `json:"monthlyVisits,nullable"`
+	Name               string                `json:"name,nullable"`
+	Paywall            bool                  `json:"paywall,nullable"`
+	PrimaryRecordID    string                `json:"primaryRecordId,nullable"`
+	TopCategories      []SourceTopStatHolder `json:"topCategories,nullable"`
+	TopCountries       []SourceTopStatHolder `json:"topCountries,nullable"`
+	TopLabels          []SourceTopStatHolder `json:"topLabels,nullable"`
+	TopTopics          []SourceTopStatHolder `json:"topTopics,nullable"`
+	UpdatedAt          string                `json:"updatedAt,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                 respjson.Field
@@ -150,48 +151,6 @@ type SourceListResponseResult struct {
 // Returns the unmodified JSON received from the API
 func (r SourceListResponseResult) RawJSON() string { return r.JSON.raw }
 func (r *SourceListResponseResult) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type SourceListResponseResultLocation struct {
-	City        string                                      `json:"city,nullable"`
-	Coordinates SourceListResponseResultLocationCoordinates `json:"coordinates"`
-	Country     string                                      `json:"country,nullable"`
-	County      string                                      `json:"county,nullable"`
-	State       string                                      `json:"state,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		City        respjson.Field
-		Coordinates respjson.Field
-		Country     respjson.Field
-		County      respjson.Field
-		State       respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r SourceListResponseResultLocation) RawJSON() string { return r.JSON.raw }
-func (r *SourceListResponseResultLocation) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type SourceListResponseResultLocationCoordinates struct {
-	Lat float64 `json:"lat,nullable"`
-	Lon float64 `json:"lon,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Lat         respjson.Field
-		Lon         respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r SourceListResponseResultLocationCoordinates) RawJSON() string { return r.JSON.raw }
-func (r *SourceListResponseResultLocationCoordinates) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

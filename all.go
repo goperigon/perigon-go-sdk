@@ -14,6 +14,7 @@ import (
 	"github.com/goperigon/perigon-go-sdk/v2/option"
 	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
 	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
+	"github.com/goperigon/perigon-go-sdk/v2/shared"
 )
 
 // AllService contains methods and other services that help with interacting with
@@ -58,49 +59,49 @@ const (
 )
 
 type Article struct {
-	AddDate               string                 `json:"addDate,nullable"`
-	ArticleID             string                 `json:"articleId,nullable"`
-	AuthorsByline         string                 `json:"authorsByline,nullable"`
-	Categories            []ArticleCategory      `json:"categories,nullable"`
-	Claim                 string                 `json:"claim,nullable"`
-	Cluster               NewsCluster            `json:"cluster"`
-	ClusterID             string                 `json:"clusterId,nullable"`
-	Companies             []ArticleCompany       `json:"companies,nullable"`
-	Content               string                 `json:"content,nullable"`
-	Country               string                 `json:"country,nullable"`
-	Description           string                 `json:"description,nullable"`
-	Entities              []ArticleEntity        `json:"entities,nullable"`
-	EventTypes            []ArticleEventType     `json:"eventTypes,nullable"`
-	Highlights            map[string][]string    `json:"highlights,nullable"`
-	ImageURL              string                 `json:"imageUrl,nullable"`
-	Journalists           []Journalist           `json:"journalists,nullable"`
-	Keywords              []ArticleKeyword       `json:"keywords,nullable"`
-	Labels                []ArticleLabel         `json:"labels,nullable"`
-	Language              string                 `json:"language,nullable"`
-	Links                 []string               `json:"links,nullable"`
-	Locations             []ArticleLocation      `json:"locations,nullable"`
-	MatchedAuthors        []ArticleMatchedAuthor `json:"matchedAuthors,nullable"`
-	Medium                string                 `json:"medium,nullable"`
-	People                []ArticlePerson        `json:"people,nullable"`
-	Places                []ArticlePlace         `json:"places,nullable"`
-	PubDate               string                 `json:"pubDate,nullable"`
-	RefreshDate           string                 `json:"refreshDate,nullable"`
-	Reprint               bool                   `json:"reprint,nullable"`
-	ReprintGroupID        string                 `json:"reprintGroupId,nullable"`
-	Score                 float64                `json:"score,nullable"`
-	Sentiment             ArticleSentiment       `json:"sentiment"`
-	ShortSummary          string                 `json:"shortSummary,nullable"`
-	Source                ArticleSource          `json:"source"`
-	Summary               string                 `json:"summary,nullable"`
-	Taxonomies            []ArticleTaxonomy      `json:"taxonomies,nullable"`
-	Title                 string                 `json:"title,nullable"`
-	Topics                []ArticleTopic         `json:"topics,nullable"`
-	TranslatedDescription string                 `json:"translatedDescription,nullable"`
-	TranslatedSummary     string                 `json:"translatedSummary,nullable"`
-	TranslatedTitle       string                 `json:"translatedTitle,nullable"`
-	Translation           string                 `json:"translation,nullable"`
-	URL                   string                 `json:"url,nullable"`
-	Verdict               string                 `json:"verdict,nullable"`
+	AddDate               string                  `json:"addDate,nullable"`
+	ArticleID             string                  `json:"articleId,nullable"`
+	AuthorsByline         string                  `json:"authorsByline,nullable"`
+	Categories            []shared.CategoryHolder `json:"categories,nullable"`
+	Claim                 string                  `json:"claim,nullable"`
+	Cluster               NewsCluster             `json:"cluster"`
+	ClusterID             string                  `json:"clusterId,nullable"`
+	Companies             []ArticleCompany        `json:"companies,nullable"`
+	Content               string                  `json:"content,nullable"`
+	Country               string                  `json:"country,nullable"`
+	Description           string                  `json:"description,nullable"`
+	Entities              []ArticleEntity         `json:"entities,nullable"`
+	EventTypes            []ArticleEventType      `json:"eventTypes,nullable"`
+	Highlights            map[string][]string     `json:"highlights,nullable"`
+	ImageURL              string                  `json:"imageUrl,nullable"`
+	Journalists           []Journalist            `json:"journalists,nullable"`
+	Keywords              []ArticleKeyword        `json:"keywords,nullable"`
+	Labels                []ArticleLabel          `json:"labels,nullable"`
+	Language              string                  `json:"language,nullable"`
+	Links                 []string                `json:"links,nullable"`
+	Locations             []shared.LocationHolder `json:"locations,nullable"`
+	MatchedAuthors        []ArticleMatchedAuthor  `json:"matchedAuthors,nullable"`
+	Medium                string                  `json:"medium,nullable"`
+	People                []ArticlePerson         `json:"people,nullable"`
+	Places                []ArticlePlace          `json:"places,nullable"`
+	PubDate               string                  `json:"pubDate,nullable"`
+	RefreshDate           string                  `json:"refreshDate,nullable"`
+	Reprint               bool                    `json:"reprint,nullable"`
+	ReprintGroupID        string                  `json:"reprintGroupId,nullable"`
+	Score                 float64                 `json:"score,nullable"`
+	Sentiment             ArticleSentiment        `json:"sentiment"`
+	ShortSummary          string                  `json:"shortSummary,nullable"`
+	Source                ArticleSource           `json:"source"`
+	Summary               string                  `json:"summary,nullable"`
+	Taxonomies            []ArticleTaxonomy       `json:"taxonomies,nullable"`
+	Title                 string                  `json:"title,nullable"`
+	Topics                []ArticleTopic          `json:"topics,nullable"`
+	TranslatedDescription string                  `json:"translatedDescription,nullable"`
+	TranslatedSummary     string                  `json:"translatedSummary,nullable"`
+	TranslatedTitle       string                  `json:"translatedTitle,nullable"`
+	Translation           string                  `json:"translation,nullable"`
+	URL                   string                  `json:"url,nullable"`
+	Verdict               string                  `json:"verdict,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		AddDate               respjson.Field
@@ -154,22 +155,6 @@ type Article struct {
 // Returns the unmodified JSON received from the API
 func (r Article) RawJSON() string { return r.JSON.raw }
 func (r *Article) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type ArticleCategory struct {
-	Name string `json:"name,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r ArticleCategory) RawJSON() string { return r.JSON.raw }
-func (r *ArticleCategory) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -267,30 +252,6 @@ func (r *ArticleLabel) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type ArticleLocation struct {
-	Area    string `json:"area,nullable"`
-	City    string `json:"city,nullable"`
-	Country string `json:"country,nullable"`
-	County  string `json:"county,nullable"`
-	State   string `json:"state,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Area        respjson.Field
-		City        respjson.Field
-		Country     respjson.Field
-		County      respjson.Field
-		State       respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r ArticleLocation) RawJSON() string { return r.JSON.raw }
-func (r *ArticleLocation) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type ArticleMatchedAuthor struct {
 	ID   string `json:"id,nullable"`
 	Name string `json:"name,nullable"`
@@ -328,21 +289,21 @@ func (r *ArticlePerson) UnmarshalJSON(data []byte) error {
 }
 
 type ArticlePlace struct {
-	Amenity       string                  `json:"amenity,nullable"`
-	City          string                  `json:"city,nullable"`
-	Coordinates   ArticlePlaceCoordinates `json:"coordinates"`
-	Country       string                  `json:"country,nullable"`
-	CountryCode   string                  `json:"countryCode,nullable"`
-	County        string                  `json:"county,nullable"`
-	Neighbourhood string                  `json:"neighbourhood,nullable"`
-	OsmID         string                  `json:"osmId,nullable"`
-	Postcode      string                  `json:"postcode,nullable"`
-	Quarter       string                  `json:"quarter,nullable"`
-	Road          string                  `json:"road,nullable"`
-	State         string                  `json:"state,nullable"`
-	StateDistrict string                  `json:"stateDistrict,nullable"`
-	Suburb        string                  `json:"suburb,nullable"`
-	Town          string                  `json:"town,nullable"`
+	Amenity       string            `json:"amenity,nullable"`
+	City          string            `json:"city,nullable"`
+	Coordinates   shared.Coordinate `json:"coordinates"`
+	Country       string            `json:"country,nullable"`
+	CountryCode   string            `json:"countryCode,nullable"`
+	County        string            `json:"county,nullable"`
+	Neighbourhood string            `json:"neighbourhood,nullable"`
+	OsmID         string            `json:"osmId,nullable"`
+	Postcode      string            `json:"postcode,nullable"`
+	Quarter       string            `json:"quarter,nullable"`
+	Road          string            `json:"road,nullable"`
+	State         string            `json:"state,nullable"`
+	StateDistrict string            `json:"stateDistrict,nullable"`
+	Suburb        string            `json:"suburb,nullable"`
+	Town          string            `json:"town,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Amenity       respjson.Field
@@ -371,24 +332,6 @@ func (r *ArticlePlace) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
-type ArticlePlaceCoordinates struct {
-	Lat float64 `json:"lat,nullable"`
-	Lon float64 `json:"lon,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Lat         respjson.Field
-		Lon         respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r ArticlePlaceCoordinates) RawJSON() string { return r.JSON.raw }
-func (r *ArticlePlaceCoordinates) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 type ArticleSentiment struct {
 	Negative float64 `json:"negative,nullable"`
 	Neutral  float64 `json:"neutral,nullable"`
@@ -411,7 +354,7 @@ func (r *ArticleSentiment) UnmarshalJSON(data []byte) error {
 
 type ArticleSource struct {
 	Domain   string                `json:"domain,nullable"`
-	Location ArticleSourceLocation `json:"location"`
+	Location shared.SourceLocation `json:"location"`
 	Paywall  bool                  `json:"paywall,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -426,48 +369,6 @@ type ArticleSource struct {
 // Returns the unmodified JSON received from the API
 func (r ArticleSource) RawJSON() string { return r.JSON.raw }
 func (r *ArticleSource) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type ArticleSourceLocation struct {
-	City        string                           `json:"city,nullable"`
-	Coordinates ArticleSourceLocationCoordinates `json:"coordinates"`
-	Country     string                           `json:"country,nullable"`
-	County      string                           `json:"county,nullable"`
-	State       string                           `json:"state,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		City        respjson.Field
-		Coordinates respjson.Field
-		Country     respjson.Field
-		County      respjson.Field
-		State       respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r ArticleSourceLocation) RawJSON() string { return r.JSON.raw }
-func (r *ArticleSourceLocation) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-type ArticleSourceLocationCoordinates struct {
-	Lat float64 `json:"lat,nullable"`
-	Lon float64 `json:"lon,nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Lat         respjson.Field
-		Lon         respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r ArticleSourceLocationCoordinates) RawJSON() string { return r.JSON.raw }
-func (r *ArticleSourceLocationCoordinates) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 

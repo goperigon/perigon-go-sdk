@@ -1,5 +1,53 @@
 # Changelog
 
+## 2.4.0 (2025-07-23)
+
+Full Changelog: [v2.3.2...v2.4.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.3.2...v2.4.0)
+
+### Features
+
+* **api:** add wikipedia endpoints ([73bf2a5](https://github.com/goperigon/perigon-go-sdk/commit/73bf2a583c67f56da04009961f19f0d2f840a762))
+* **api:** api update ([3c973f7](https://github.com/goperigon/perigon-go-sdk/commit/3c973f7834483a27deb8027c2f4737ae1f8d777e))
+
+## 2.3.2 (2025-07-22)
+
+Full Changelog: [v2.3.1...v2.3.2](https://github.com/goperigon/perigon-go-sdk/compare/v2.3.1...v2.3.2)
+
+### Bug Fixes
+
+* **client:** process custom base url ahead of time ([6352f4d](https://github.com/goperigon/perigon-go-sdk/commit/6352f4d07046f9c19b56e95eb50063df721c109c))
+
+## 2.3.1 (2025-07-11)
+
+Full Changelog: [v2.3.0...v2.3.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.3.0...v2.3.1)
+
+### Chores
+
+* **internal:** fix lint script for tests ([47eae65](https://github.com/goperigon/perigon-go-sdk/commit/47eae65b69d6b6e60d26975a6cb6e5ab1af47cf7))
+* lint tests ([9e2661a](https://github.com/goperigon/perigon-go-sdk/commit/9e2661a9384fe741dce782011d0c8281f5449b2f))
+* lint tests in subpackages ([270fec6](https://github.com/goperigon/perigon-go-sdk/commit/270fec68975193089bb7790cdaf6f80116900e61))
+
+## 2.3.0 (2025-06-28)
+
+Full Changelog: [v2.2.0...v2.3.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.2.0...v2.3.0)
+
+### Features
+
+* **client:** add debug log helper ([e330b9c](https://github.com/goperigon/perigon-go-sdk/commit/e330b9c5fbff9fee6d7bcc61a313c2225a14f4a0))
+* **client:** add escape hatch for null slice & maps ([c19b4a7](https://github.com/goperigon/perigon-go-sdk/commit/c19b4a77484664f519e3f7a1abdbed141f60e78d))
+
+
+### Bug Fixes
+
+* don't try to deserialize as json when ResponseBodyInto is []byte ([98641ec](https://github.com/goperigon/perigon-go-sdk/commit/98641ecd0feb09be8022033a158dfc11d7e0e8ea))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([55a4d17](https://github.com/goperigon/perigon-go-sdk/commit/55a4d17c9a357bcd6f4b91c0ab06a7413e019d63))
+* **ci:** only run for pushes and fork pull requests ([e07881f](https://github.com/goperigon/perigon-go-sdk/commit/e07881f8b4d79a0149242a666eaff0086cab3d07))
+* fix documentation of null map ([22e2b39](https://github.com/goperigon/perigon-go-sdk/commit/22e2b39e30ba349bb027c50b908854f90594a1eb))
+
 ## 2.2.0 (2025-06-04)
 
 Full Changelog: [v2.1.1...v2.2.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.1.1...v2.2.0)

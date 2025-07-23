@@ -1,3 +1,10 @@
+# Shared Response Types
+
+- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2/shared">shared</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2/shared#CategoryHolder">CategoryHolder</a>
+- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2/shared">shared</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2/shared#Coordinate">Coordinate</a>
+- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2/shared">shared</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2/shared#LocationHolder">LocationHolder</a>
+- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2/shared">shared</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2/shared#SourceLocation">SourceLocation</a>
+
 # All
 
 Params Types:
@@ -69,6 +76,7 @@ Methods:
 Response Types:
 
 - <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#NewsCluster">NewsCluster</a>
+- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#RecordStatHolder">RecordStatHolder</a>
 - <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#StoryListResponse">StoryListResponse</a>
 
 Methods:
@@ -102,6 +110,7 @@ Methods:
 Params Types:
 
 - <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#ArticleSearchFilterParam">ArticleSearchFilterParam</a>
+- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#CoordinateFilterParam">CoordinateFilterParam</a>
 
 Response Types:
 
@@ -110,3 +119,19 @@ Response Types:
 Methods:
 
 - <code title="post /v1/vector/news/all">client.Vector.News.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#VectorNewsService.Search">Search</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, body <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#VectorNewsSearchParams">VectorNewsSearchParams</a>) (<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#VectorNewsSearchResponse">VectorNewsSearchResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
+
+# Wikipedia
+
+Params Types:
+
+- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#WikipediaSearchFilterParam">WikipediaSearchFilterParam</a>
+
+Response Types:
+
+- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#WikipediaSearchResponse">WikipediaSearchResponse</a>
+- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#WikipediaVectorSearchResponse">WikipediaVectorSearchResponse</a>
+
+Methods:
+
+- <code title="get /v1/wikipedia/all">client.Wikipedia.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#WikipediaService.Search">Search</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, query <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#WikipediaSearchParams">WikipediaSearchParams</a>) (<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#WikipediaSearchResponse">WikipediaSearchResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
+- <code title="post /v1/vector/wikipedia/all">client.Wikipedia.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#WikipediaService.VectorSearch">VectorSearch</a>(ctx <a href="https://pkg.go.dev/context">context</a>.<a href="https://pkg.go.dev/context#Context">Context</a>, body <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#WikipediaVectorSearchParams">WikipediaVectorSearchParams</a>) (<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#WikipediaVectorSearchResponse">WikipediaVectorSearchResponse</a>, <a href="https://pkg.go.dev/builtin#error">error</a>)</code>
