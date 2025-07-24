@@ -7,6 +7,10 @@ from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
+## API Documentation
+
+You can learn everything about the Perigon API on our [Docs](https://dev.perigon.io/docs)
+
 ## Installation
 
 <!-- x-release-please-start-version -->
