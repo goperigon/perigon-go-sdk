@@ -104,10 +104,10 @@ type SourceListResponseResult struct {
 	Description        string                `json:"description,nullable"`
 	Domain             string                `json:"domain,nullable"`
 	GlobalRank         int64                 `json:"globalRank,nullable"`
-	Location           shared.SourceLocation `json:"location"`
-	LogoFavIcon        ImageHolder           `json:"logoFavIcon"`
-	LogoLarge          ImageHolder           `json:"logoLarge"`
-	LogoSquare         ImageHolder           `json:"logoSquare"`
+	Location           shared.SourceLocation `json:"location,nullable"`
+	LogoFavIcon        ImageHolder           `json:"logoFavIcon,nullable"`
+	LogoLarge          ImageHolder           `json:"logoLarge,nullable"`
+	LogoSquare         ImageHolder           `json:"logoSquare,nullable"`
 	MbfcBiasRating     string                `json:"mbfcBiasRating,nullable"`
 	MonthlyVisits      int64                 `json:"monthlyVisits,nullable"`
 	Name               string                `json:"name,nullable"`

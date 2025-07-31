@@ -54,7 +54,7 @@ type NewsCluster struct {
 	CreatedAt         string                  `json:"createdAt,nullable"`
 	DuplicateOf       string                  `json:"duplicateOf,nullable"`
 	Highlights        map[string][]string     `json:"highlights,nullable"`
-	ImageSource       NewsClusterImageSource  `json:"imageSource"`
+	ImageSource       NewsClusterImageSource  `json:"imageSource,nullable"`
 	ImageURL          string                  `json:"imageUrl,nullable"`
 	InitializedAt     string                  `json:"initializedAt,nullable"`
 	KeyPoints         []NewsClusterKeyPoint   `json:"keyPoints,nullable"`
@@ -64,7 +64,7 @@ type NewsCluster struct {
 	Questions         []NewsClusterQuestion   `json:"questions,nullable"`
 	ReprintCount      int64                   `json:"reprintCount,nullable"`
 	SelectedArticles  []Article               `json:"selectedArticles,nullable"`
-	Sentiment         NewsClusterSentiment    `json:"sentiment"`
+	Sentiment         NewsClusterSentiment    `json:"sentiment,nullable"`
 	ShortSummary      string                  `json:"shortSummary,nullable"`
 	Slug              string                  `json:"slug,nullable"`
 	Summary           string                  `json:"summary,nullable"`
@@ -156,7 +156,7 @@ func (r *NewsClusterCompany) UnmarshalJSON(data []byte) error {
 
 type NewsClusterImageSource struct {
 	Domain   string                `json:"domain,nullable"`
-	Location shared.SourceLocation `json:"location"`
+	Location shared.SourceLocation `json:"location,nullable"`
 	Paywall  bool                  `json:"paywall,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {

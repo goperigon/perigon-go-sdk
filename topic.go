@@ -65,7 +65,7 @@ func (r *TopicListResponse) UnmarshalJSON(data []byte) error {
 type TopicListResponseData struct {
 	ID        int64                       `json:"id,nullable"`
 	CreatedAt time.Time                   `json:"createdAt,nullable" format:"date-time"`
-	Labels    TopicListResponseDataLabels `json:"labels"`
+	Labels    TopicListResponseDataLabels `json:"labels,nullable"`
 	Name      string                      `json:"name,nullable"`
 	UpdatedAt time.Time                   `json:"updatedAt,nullable" format:"date-time"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].

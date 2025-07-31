@@ -64,7 +64,7 @@ type Article struct {
 	AuthorsByline         string                  `json:"authorsByline,nullable"`
 	Categories            []shared.CategoryHolder `json:"categories,nullable"`
 	Claim                 string                  `json:"claim,nullable"`
-	Cluster               NewsCluster             `json:"cluster"`
+	Cluster               NewsCluster             `json:"cluster,nullable"`
 	ClusterID             string                  `json:"clusterId,nullable"`
 	Companies             []ArticleCompany        `json:"companies,nullable"`
 	Content               string                  `json:"content,nullable"`
@@ -89,9 +89,9 @@ type Article struct {
 	Reprint               bool                    `json:"reprint,nullable"`
 	ReprintGroupID        string                  `json:"reprintGroupId,nullable"`
 	Score                 float64                 `json:"score,nullable"`
-	Sentiment             ArticleSentiment        `json:"sentiment"`
+	Sentiment             ArticleSentiment        `json:"sentiment,nullable"`
 	ShortSummary          string                  `json:"shortSummary,nullable"`
-	Source                ArticleSource           `json:"source"`
+	Source                ArticleSource           `json:"source,nullable"`
 	Summary               string                  `json:"summary,nullable"`
 	Taxonomies            []ArticleTaxonomy       `json:"taxonomies,nullable"`
 	Title                 string                  `json:"title,nullable"`
@@ -291,7 +291,7 @@ func (r *ArticlePerson) UnmarshalJSON(data []byte) error {
 type ArticlePlace struct {
 	Amenity       string            `json:"amenity,nullable"`
 	City          string            `json:"city,nullable"`
-	Coordinates   shared.Coordinate `json:"coordinates"`
+	Coordinates   shared.Coordinate `json:"coordinates,nullable"`
 	Country       string            `json:"country,nullable"`
 	CountryCode   string            `json:"countryCode,nullable"`
 	County        string            `json:"county,nullable"`
@@ -354,7 +354,7 @@ func (r *ArticleSentiment) UnmarshalJSON(data []byte) error {
 
 type ArticleSource struct {
 	Domain   string                `json:"domain,nullable"`
-	Location shared.SourceLocation `json:"location"`
+	Location shared.SourceLocation `json:"location,nullable"`
 	Paywall  bool                  `json:"paywall,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
