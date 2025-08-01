@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.5.0 (2025-08-01)
+
+Full Changelog: [v2.4.1...v2.5.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.4.1...v2.5.0)
+
+### Features
+
+* **api:** api update ([0302dfa](https://github.com/goperigon/perigon-go-sdk/commit/0302dfa6d7470c37f76f18cbf7e7db14a28b38f2))
+
 ## 2.4.1 (2025-07-29)
 
 Full Changelog: [v2.4.0...v2.4.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.4.0...v2.4.1)
