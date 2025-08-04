@@ -74,7 +74,7 @@ func (r *LocationHolder) UnmarshalJSON(data []byte) error {
 
 type SourceLocation struct {
 	City        string     `json:"city,nullable"`
-	Coordinates Coordinate `json:"coordinates"`
+	Coordinates Coordinate `json:"coordinates,nullable"`
 	Country     string     `json:"country,nullable"`
 	County      string     `json:"county,nullable"`
 	State       string     `json:"state,nullable"`

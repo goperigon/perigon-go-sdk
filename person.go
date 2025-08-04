@@ -123,11 +123,11 @@ type PersonListResponseResult struct {
 	Abstract       string                                   `json:"abstract,nullable"`
 	Aliases        []string                                 `json:"aliases,nullable"`
 	CreatedAt      string                                   `json:"createdAt,nullable"`
-	DateOfBirth    WikidataDateHolder                       `json:"dateOfBirth"`
-	DateOfDeath    WikidataDateHolder                       `json:"dateOfDeath"`
+	DateOfBirth    WikidataDateHolder                       `json:"dateOfBirth,nullable"`
+	DateOfDeath    WikidataDateHolder                       `json:"dateOfDeath,nullable"`
 	Description    string                                   `json:"description,nullable"`
-	Gender         WikidataLabelHolder                      `json:"gender"`
-	Image          ImageHolder                              `json:"image"`
+	Gender         WikidataLabelHolder                      `json:"gender,nullable"`
+	Image          ImageHolder                              `json:"image,nullable"`
 	Name           string                                   `json:"name,nullable"`
 	Occupation     []WikidataLabelHolder                    `json:"occupation,nullable"`
 	PoliticalParty []PersonListResponseResultPoliticalParty `json:"politicalParty,nullable"`
@@ -162,9 +162,9 @@ func (r *PersonListResponseResult) UnmarshalJSON(data []byte) error {
 }
 
 type PersonListResponseResultPoliticalParty struct {
-	EndTime    WikidataDateHolder `json:"endTime"`
+	EndTime    WikidataDateHolder `json:"endTime,nullable"`
 	Label      string             `json:"label,nullable"`
-	StartTime  WikidataDateHolder `json:"startTime"`
+	StartTime  WikidataDateHolder `json:"startTime,nullable"`
 	WikidataID string             `json:"wikidataId,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -184,10 +184,10 @@ func (r *PersonListResponseResultPoliticalParty) UnmarshalJSON(data []byte) erro
 }
 
 type PersonListResponseResultPosition struct {
-	Employer   WikidataLabelHolder `json:"employer"`
-	EndTime    WikidataDateHolder  `json:"endTime"`
+	Employer   WikidataLabelHolder `json:"employer,nullable"`
+	EndTime    WikidataDateHolder  `json:"endTime,nullable"`
 	Label      string              `json:"label,nullable"`
-	StartTime  WikidataDateHolder  `json:"startTime"`
+	StartTime  WikidataDateHolder  `json:"startTime,nullable"`
 	WikidataID string              `json:"wikidataId,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {

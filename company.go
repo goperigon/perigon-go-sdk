@@ -94,7 +94,7 @@ type CompanyListResponseResult struct {
 	State             string                                `json:"state,nullable"`
 	Symbols           []CompanyListResponseResultSymbol     `json:"symbols,nullable"`
 	UpdatedAt         string                                `json:"updatedAt,nullable"`
-	WebResources      CompanyListResponseResultWebResources `json:"webResources"`
+	WebResources      CompanyListResponseResultWebResources `json:"webResources,nullable"`
 	YearFounded       int64                                 `json:"yearFounded,nullable"`
 	Zip               string                                `json:"zip,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].

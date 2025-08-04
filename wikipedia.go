@@ -224,7 +224,7 @@ func (r *WikipediaVectorSearchResponse) UnmarshalJSON(data []byte) error {
 }
 
 type WikipediaVectorSearchResponseResult struct {
-	Data  WikipediaVectorSearchResponseResultData `json:"data"`
+	Data  WikipediaVectorSearchResponseResultData `json:"data,nullable"`
 	Score float64                                 `json:"score,nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
