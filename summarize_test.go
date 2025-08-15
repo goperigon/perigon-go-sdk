@@ -119,7 +119,7 @@ func TestSummarizeNewWithOptionalParams(t *testing.T) {
 		Model:                   perigon.SummarizeNewParamsModelGpt4o,
 		Prompt:                  perigon.String("prompt"),
 		ReturnedArticleCount:    perigon.Int(1),
-		SummarizeFields:         perigon.SummarizeNewParamsSummarizeFieldsTitle,
+		SummarizeFields:         []string{"TITLE"},
 		Temperature:             perigon.Float(0),
 		TopP:                    perigon.Float(0),
 	})
