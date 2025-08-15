@@ -299,7 +299,7 @@ type VectorNewsSearchParams struct {
 	// 2024-01-01T00:00:00 - Default: Only articles with a pubDate within the last 30
 	// days of the request
 	PubDateFrom param.Opt[time.Time] `json:"pubDateFrom,omitzero" format:"date-time"`
-	// 'pubDateFrom' filter, will search articles published before the specified date,
+	// 'pubDateTo' filter, will search articles published before the specified date,
 	// the date could be passed as ISO or 'yyyy-mm-dd'. Date time in ISO format, ie.
 	// 2024-01-01T00:00:00
 	PubDateTo param.Opt[time.Time] `json:"pubDateTo,omitzero" format:"date-time"`

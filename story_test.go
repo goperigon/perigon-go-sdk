@@ -37,6 +37,7 @@ func TestStoryListWithOptionalParams(t *testing.T) {
 		CompanySymbol:         []string{"string"},
 		Country:               []string{"string"},
 		ExcludeClusterID:      []string{"string"},
+		ExpandArticles:        perigon.Bool(true),
 		From:                  perigon.Time(time.Now()),
 		HighlightFragmentSize: perigon.Int(0),
 		HighlightNumFragments: perigon.Int(0),

@@ -208,24 +208,25 @@ func (r *PersonListResponseResultPosition) UnmarshalJSON(data []byte) error {
 }
 
 type PersonListParams struct {
-	// Search by person's name. Supports Boolean operators (AND, OR, NOT), exact
-	// phrases with quotes, and wildcards (\* and ?) for flexible searching.
+	// String. Search by person's name. Supports Boolean operators (AND, OR, NOT),
+	// exact phrases with quotes, and wildcards (\* and ?) for flexible searching.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// Search by occupation name (e.g., politician, actor, CEO, athlete). Supports
-	// Boolean operators (AND, OR, NOT), exact phrases with quotes, and wildcards (\*
-	// and ?) for flexible searching.
+	// String. Search by occupation name (e.g., politician, actor, CEO, athlete).
+	// Supports Boolean operators (AND, OR, NOT), exact phrases with quotes, and
+	// wildcards (\* and ?) for flexible searching.
 	OccupationLabel param.Opt[string] `query:"occupationLabel,omitzero" json:"-"`
-	// The specific page of results to retrieve in the paginated response. Starts at 0.
+	// Integer. The specific page of results to retrieve in the paginated response.
+	// Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// The number of people to return per page in the paginated response.
+	// Integer. The number of people to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Filter by Wikidata occupation IDs (e.g., Q82955 for politician, Q33999 for
-	// actor, Q19546 for businessman). Finds people with specific professions. Multiple
-	// values create an OR filter.
+	// String Array. Filter by Wikidata occupation IDs (e.g., Q82955 for politician,
+	// Q33999 for actor, Q19546 for businessman). Finds people with specific
+	// professions. Multiple values create an OR filter.
 	OccupationID []string `query:"occupationId,omitzero" json:"-"`
-	// Filter by Wikidata entity IDs (e.g., Q7747, Q937). These are unique identifiers
-	// from Wikidata.org that precisely identify public figures and eliminate name
-	// ambiguity. Multiple values create an OR filter.
+	// String Array. Filter by Wikidata entity IDs (e.g., Q7747, Q937). These are
+	// unique identifiers from Wikidata.org that precisely identify public figures and
+	// eliminate name ambiguity. Multiple values create an OR filter.
 	WikidataID []string `query:"wikidataId,omitzero" json:"-"`
 	paramObj
 }
