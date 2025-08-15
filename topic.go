@@ -105,18 +105,19 @@ func (r *TopicListResponseDataLabels) UnmarshalJSON(data []byte) error {
 }
 
 type TopicListParams struct {
-	// Filter topics by broad article categories such as Politics, Tech, Sports,
-	// Business, Finance, Entertainment, etc.
+	// String. Filter topics by broad article categories such as Politics, Tech,
+	// Sports, Business, Finance, Entertainment, etc.
 	Category param.Opt[string] `query:"category,omitzero" json:"-"`
-	// Search for topics by exact name or partial text match. Does not support
+	// String. Search for topics by exact name or partial text match. Does not support
 	// wildcards. Examples include Markets, Cryptocurrency, Climate Change, etc.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// The specific page of results to retrieve in the paginated response. Starts at 0.
+	// Integer. The specific page of results to retrieve in the paginated response.
+	// Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// The number of topics to return per page in the paginated response.
+	// Integer. The number of topics to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Filter topics by their specific subcategory. Subcategories provide more granular
-	// classification beyond the main category, such as TV or Event.
+	// String. Filter topics by their specific subcategory. Subcategories provide more
+	// granular classification beyond the main category, such as TV or Event.
 	Subcategory param.Opt[string] `query:"subcategory,omitzero" json:"-"`
 	paramObj
 }
