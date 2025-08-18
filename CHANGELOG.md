@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.6.0 (2025-08-18)
+
+Full Changelog: [v2.5.0...v2.6.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.5.0...v2.6.0)
+
+### Features
+
+* **api:** api update ([06a4c4e](https://github.com/goperigon/perigon-go-sdk/commit/06a4c4ef53e6f40c683c221ad2f81b9b18f624e9))
+* **client:** support optional json html escaping ([73538f2](https://github.com/goperigon/perigon-go-sdk/commit/73538f242c8a56d22cd959a312bbdd7a5000e82b))
+
+
+### Chores
+
+* **internal:** update comment in script ([63f0013](https://github.com/goperigon/perigon-go-sdk/commit/63f0013b653d60b0bcd5a337d04e4238a3158136))
+* update @stainless-api/prism-cli to v5.15.0 ([68fc890](https://github.com/goperigon/perigon-go-sdk/commit/68fc890aa08a52d10d0b58eacc5ae0f8b7563e66))
+
 ## 2.5.0 (2025-08-01)
 
 Full Changelog: [v2.4.1...v2.5.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.4.1...v2.5.0)
