@@ -286,87 +286,94 @@ func (r *WikipediaVectorSearchResponseResultData) UnmarshalJSON(data []byte) err
 }
 
 type WikipediaSearchParams struct {
-	// The specific page of results to retrieve in the paginated response. Starts at 0.
+	// Integer. The specific page of results to retrieve in the paginated response.
+	// Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// Retrieve pages with the average number of views per day higher than the provided
-	// value.
+	// Integer. Retrieve pages with the average number of views per day higher than the
+	// provided value.
 	PageviewsFrom param.Opt[int64] `query:"pageviewsFrom,omitzero" json:"-"`
-	// Retrieve pages with the average number of views per day lower than the provided
-	// value.
+	// Integer. Retrieve pages with the average number of views per day lower than the
+	// provided value.
 	PageviewsTo param.Opt[int64] `query:"pageviewsTo,omitzero" json:"-"`
-	// Primary search query for filtering pages based on their title, summary, and
-	// content. Supports Boolean operators (AND, OR, NOT), exact phrases with quotes,
-	// and wildcards (\* and ?) for flexible searching.
+	// String. Primary search query for filtering pages based on their title, summary,
+	// and content. Supports Boolean operators (AND, OR, NOT), exact phrases with
+	// quotes, and wildcards (\* and ?) for flexible searching.
 	Q param.Opt[string] `query:"q,omitzero" json:"-"`
-	// Search specifically across page's references. Supports Boolean operators, exact
-	// phrases with quotes, and wildcards for matching title variations.
+	// String. Search specifically across page's references. Supports Boolean
+	// operators, exact phrases with quotes, and wildcards for matching title
+	// variations.
 	Reference param.Opt[string] `query:"reference,omitzero" json:"-"`
-	// Retrieve pages scraped after this date. Accepts ISO 8601 format (e.g.,
+	// Date. Retrieve pages scraped after this date. Accepts ISO 8601 format (e.g.,
 	// 2023-03-01T00:00:00) or yyyy-mm-dd format.
 	ScrapedAtFrom param.Opt[time.Time] `query:"scrapedAtFrom,omitzero" format:"date-time" json:"-"`
-	// Retrieve pages scraped before this date. Accepts ISO 8601 format (e.g.,
+	// Date. Retrieve pages scraped before this date. Accepts ISO 8601 format (e.g.,
 	// 2023-03-01T00:00:00) or yyyy-mm-dd format.
 	ScrapedAtTo param.Opt[time.Time] `query:"scrapedAtTo,omitzero" format:"date-time" json:"-"`
-	// Whether to show the total number of all matched pages. Default value is false
-	// which makes queries a bit more efficient but also counts up to 10000 pages.
+	// Boolean. Whether to show the total number of all matched pages. Default value is
+	// false which makes queries a bit more efficient but also counts up to 10000
+	// pages.
 	ShowNumResults param.Opt[bool] `query:"showNumResults,omitzero" json:"-"`
-	// The number of articles to return per page in the paginated response.
+	// Integer. The number of articles to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Search specifically within page summary. Supports Boolean operators, exact
-	// phrases with quotes, and wildcards for matching title variations.
+	// String. Search specifically within page summary. Supports Boolean operators,
+	// exact phrases with quotes, and wildcards for matching title variations.
 	Summary param.Opt[string] `query:"summary,omitzero" json:"-"`
-	// Search specifically within the page's content (across all sections). Supports
-	// Boolean operators, exact phrases with quotes, and wildcards for matching title
-	// variations.
+	// String. Search specifically within the page's content (across all sections).
+	// Supports Boolean operators, exact phrases with quotes, and wildcards for
+	// matching title variations.
 	Text param.Opt[string] `query:"text,omitzero" json:"-"`
-	// Search specifically within page titles. Supports Boolean operators, exact
-	// phrases with quotes, and wildcards for matching title variations.
+	// String. Search specifically within page titles. Supports Boolean operators,
+	// exact phrases with quotes, and wildcards for matching title variations.
 	Title param.Opt[string] `query:"title,omitzero" json:"-"`
-	// Retrieve pages modified after this date. Accepts ISO 8601 format (e.g.,
+	// Date. Retrieve pages modified after this date. Accepts ISO 8601 format (e.g.,
 	// 2023-03-01T00:00:00) or yyyy-mm-dd format.
 	WikiRevisionFrom param.Opt[time.Time] `query:"wikiRevisionFrom,omitzero" format:"date-time" json:"-"`
-	// Retrieve pages modified before this date. Accepts ISO 8601 format (e.g.,
+	// Date. Retrieve pages modified before this date. Accepts ISO 8601 format (e.g.,
 	// 2023-03-01T00:00:00) or yyyy-mm-dd format.
 	WikiRevisionTo param.Opt[time.Time] `query:"wikiRevisionTo,omitzero" format:"date-time" json:"-"`
-	// Retrieve pages that have any viewership statistics available for them. If
-	// `false` (the default) - return all pages.
+	// Boolean. Retrieve pages that have any viewership statistics available for them.
+	// If `false` (the default) - return all pages.
 	WithPageviews param.Opt[bool] `query:"withPageviews,omitzero" json:"-"`
-	// Retrieve specific pages by their unique Perigon identifiers. Multiple IDs can be
-	// provided to return a collection of specific pages.
+	// String Array. Retrieve specific pages by their unique Perigon identifiers.
+	// Multiple IDs can be provided to return a collection of specific pages.
 	ID []string `query:"id,omitzero" json:"-"`
-	// Retrieve all pages for specified categories.
+	// String Array. Retrieve all pages for specified categories.
 	Category []string `query:"category,omitzero" json:"-"`
-	// Retrieve pages containing provided section ids. Each section ID is unique.
+	// String Array. Retrieve pages containing provided section ids. Each section ID is
+	// unique.
 	SectionID []string `query:"sectionId,omitzero" json:"-"`
-	// Determines the Wikipedia page sorting order. Options include relevance
+	// String. Determines the Wikipedia page sorting order. Options include relevance
 	// (default), revisionTsDesc (recently edited first), revisionTsAsc (recently
 	// edited last), pageViewsDesc (highest viewership first), pageViewsAsc (highest
 	// viewership last), scrapedAtDesc (recently scraped first), scrapedAtAsc (recently
 	// scraped last).
 	//
-	// Any of "createdAt", "updatedAt", "relevance", "count", "totalCount".
-	SortBy SortBy `query:"sortBy,omitzero" json:"-"`
-	// Retrieve pages only from specified wiki projects. Currently, the only accepted
-	// value is `enwiki`.
+	// Any of "relevance", "revisionTsDesc", "revisionTsAsc", "pageViewsDesc",
+	// "pageViewsAsc", "scrapedAtDesc", "scrapedAtAsc".
+	SortBy WikipediaSearchParamsSortBy `query:"sortBy,omitzero" json:"-"`
+	// String Array. Retrieve pages only from specified wiki projects. Currently, the
+	// only accepted value is `enwiki`.
 	WikiCode []string `query:"wikiCode,omitzero" json:"-"`
-	// Retrieve pages by the ids corresponding to their Wikidata entities.
+	// String Array. Retrieve pages by the ids corresponding to their Wikidata
+	// entities.
 	WikidataID []string `query:"wikidataId,omitzero" json:"-"`
-	// Retrieve all pages whose Wikidata entities are instances of these provided ids.
+	// String Array. Retrieve all pages whose Wikidata entities are instances of these
+	// provided ids.
 	WikidataInstanceOfID []string `query:"wikidataInstanceOfId,omitzero" json:"-"`
-	// Retrieve all pages whose Wikidata entities are instances of these ids (provided
-	// as labels).
+	// String Array. Retrieve all pages whose Wikidata entities are instances of these
+	// ids (provided as labels).
 	WikidataInstanceOfLabel []string `query:"wikidataInstanceOfLabel,omitzero" json:"-"`
-	// Retrieve pages only from specified wiki namespace. Currently, only the main
-	// namespace (0) is available.
+	// Integer Array. Retrieve pages only from specified wiki namespace. Currently,
+	// only the main namespace (0) is available.
 	WikiNamespace []int64 `query:"wikiNamespace,omitzero" json:"-"`
-	// Retrieve specific pages by their Wikipedia identifiers. These are unique only in
-	// a combination with `wikiCode` parameter. Multiple IDs can be provided to return
-	// a collection of specific pages.
-	WikiPageID []int64 `query:"wikiPageId,omitzero" json:"-"`
-	// Retrieve specific pages by their Wikipedia revision identifiers. These are
+	// Integer Array. Retrieve specific pages by their Wikipedia identifiers. These are
 	// unique only in a combination with `wikiCode` parameter. Multiple IDs can be
-	// provided to return a collection of specific pages. This ID changes each time a
-	// page is edited.
+	// provided to return a collection of specific pages.
+	WikiPageID []int64 `query:"wikiPageId,omitzero" json:"-"`
+	// Integer Array. Retrieve specific pages by their Wikipedia revision identifiers.
+	// These are unique only in a combination with `wikiCode` parameter. Multiple IDs
+	// can be provided to return a collection of specific pages. This ID changes each
+	// time a page is edited.
 	WikiRevisionID []int64 `query:"wikiRevisionId,omitzero" json:"-"`
 	paramObj
 }
@@ -378,6 +385,23 @@ func (r WikipediaSearchParams) URLQuery() (v url.Values, err error) {
 		NestedFormat: apiquery.NestedQueryFormatBrackets,
 	})
 }
+
+// String. Determines the Wikipedia page sorting order. Options include relevance
+// (default), revisionTsDesc (recently edited first), revisionTsAsc (recently
+// edited last), pageViewsDesc (highest viewership first), pageViewsAsc (highest
+// viewership last), scrapedAtDesc (recently scraped first), scrapedAtAsc (recently
+// scraped last).
+type WikipediaSearchParamsSortBy string
+
+const (
+	WikipediaSearchParamsSortByRelevance      WikipediaSearchParamsSortBy = "relevance"
+	WikipediaSearchParamsSortByRevisionTsDesc WikipediaSearchParamsSortBy = "revisionTsDesc"
+	WikipediaSearchParamsSortByRevisionTsAsc  WikipediaSearchParamsSortBy = "revisionTsAsc"
+	WikipediaSearchParamsSortByPageViewsDesc  WikipediaSearchParamsSortBy = "pageViewsDesc"
+	WikipediaSearchParamsSortByPageViewsAsc   WikipediaSearchParamsSortBy = "pageViewsAsc"
+	WikipediaSearchParamsSortByScrapedAtDesc  WikipediaSearchParamsSortBy = "scrapedAtDesc"
+	WikipediaSearchParamsSortByScrapedAtAsc   WikipediaSearchParamsSortBy = "scrapedAtAsc"
+)
 
 type WikipediaVectorSearchParams struct {
 	// Natural language query to search the Wikipedia pages database

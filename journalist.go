@@ -166,54 +166,61 @@ func (r *JournalistListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type JournalistListParams struct {
-	// Filter for journalists who publish no more than this many articles per month.
+	// Integer. Filter for journalists who publish no more than this many articles per
+	// month.
 	MaxMonthlyPosts param.Opt[int64] `query:"maxMonthlyPosts,omitzero" json:"-"`
-	// Filter for journalists who publish at least this many articles per month. Used
-	// to identify more active journalists.
+	// Integer. Filter for journalists who publish at least this many articles per
+	// month. Used to identify more active journalists.
 	MinMonthlyPosts param.Opt[int64] `query:"minMonthlyPosts,omitzero" json:"-"`
-	// Search specifically within journalist names. Supports Boolean operators (AND,
-	// OR, NOT), exact phrases with quotes, and wildcards (\* and ?) for flexible
+	// String. Search specifically within journalist names. Supports Boolean operators
+	// (AND, OR, NOT), exact phrases with quotes, and wildcards (\* and ?) for flexible
 	// searching.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// The specific page of results to retrieve in the paginated response. Starts at 0.
+	// Integer. The specific page of results to retrieve in the paginated response.
+	// Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// Primary search query for filtering journalists based on their name, title, and
-	// Twitter bio. Supports Boolean operators (AND, OR, NOT), exact phrases with
-	// quotes, and wildcards (\* and ?) for flexible searching.
+	// String. Primary search query for filtering journalists based on their name,
+	// title, and Twitter bio. Supports Boolean operators (AND, OR, NOT), exact phrases
+	// with quotes, and wildcards (\* and ?) for flexible searching.
 	Q param.Opt[string] `query:"q,omitzero" json:"-"`
-	// Controls whether to return the exact result count. When false (default), counts
-	// are capped at 10,000 for performance reasons. Set to true for precise counts in
-	// smaller result sets.
+	// Boolean. Controls whether to return the exact result count. When false
+	// (default), counts are capped at 10,000 for performance reasons. Set to true for
+	// precise counts in smaller result sets.
 	ShowNumResults param.Opt[bool] `query:"showNumResults,omitzero" json:"-"`
-	// The number of journalists to return per page in the paginated response.
+	// Integer. The number of journalists to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Filter journalists by their exact Twitter handle, without the @ symbol.
+	// String. Filter journalists by their exact Twitter handle, without the @ symbol.
 	Twitter param.Opt[string] `query:"twitter,omitzero" json:"-"`
-	// Filter for journalist profiles updated on or after this date. Accepts ISO 8601
-	// format (e.g., 2023-03-01T00:00:00) or yyyy-mm-dd format.
+	// Date. Filter for journalist profiles updated on or after this date. Accepts ISO
+	// 8601 format (e.g., 2023-03-01T00:00:00) or yyyy-mm-dd format.
 	UpdatedAtFrom param.Opt[time.Time] `query:"updatedAtFrom,omitzero" format:"date-time" json:"-"`
-	// Filter for journalist profiles updated on or before this date. Accepts ISO 8601
-	// format (e.g., 2023-03-01T23:59:59) or yyyy-mm-dd format.
+	// Date. Filter for journalist profiles updated on or before this date. Accepts ISO
+	// 8601 format (e.g., 2023-03-01T23:59:59) or yyyy-mm-dd format.
 	UpdatedAtTo param.Opt[time.Time] `query:"updatedAtTo,omitzero" format:"date-time" json:"-"`
-	// Filter by unique journalist identifiers. Multiple values create an OR filter to
-	// find journalists matching any of the specified IDs.
+	// String Array. Filter by unique journalist identifiers. Multiple values create an
+	// OR filter to find journalists matching any of the specified IDs.
 	ID []string `query:"id,omitzero" json:"-"`
-	// Filter journalists by the content categories they typically write about (e.g.,
-	// Politics, Tech, Sports, Business). Multiple values create an OR filter.
+	// String Array. Filter journalists by the top categories they cover. Categories
+	// are general themes that the article is about. Examples of categories: Tech,
+	// Politics, etc. If multiple parameters are passed, they will be applied as OR
+	// operations. (Searches inside the topCategories data field.)
 	Category []string `query:"category,omitzero" json:"-"`
-	// Filter journalists by countries they commonly cover in their reporting. Uses ISO
-	// 3166-1 alpha-2 two-letter country codes in lowercase (e.g., us, gb, jp).
-	// Multiple values create an OR filter.
+	// String Array. Filter journalists by countries they commonly cover in their
+	// reporting. Uses ISO 3166-1 alpha-2 two-letter country codes in lowercase (e.g.,
+	// us, gb, jp). Multiple values create an OR filter.
 	Country []string `query:"country,omitzero" json:"-"`
-	// Filter journalists by the type of content they typically produce (e.g., Opinion,
-	// Paid-news, Non-news). Multiple values create an OR filter.
+	// String Array. Filter journalists by the most common label tagged to the articles
+	// they publish. This accepts labels like 'Opinion' or 'Pop Culture'. (Searches the
+	// topLabels data field.)
 	Label []string `query:"label,omitzero" json:"-"`
-	// Filter journalists by the publisher domains they write for. Supports wildcards
-	// (_ and ?) for pattern matching (e.g., _.cnn.com). Multiple values create an OR
-	// filter.
+	// String Array. Filter journalists by the publisher domains they write for.
+	// Supports wildcards (_ and ?) for pattern matching (e.g., _.cnn.com). Multiple
+	// values create an OR filter.
 	Source []string `query:"source,omitzero" json:"-"`
-	// Filter journalists by the topics they frequently cover. Multiple values create
-	// an OR filter to find journalists covering any of the specified topics.
+	// String Array. Filter journalists by the top topics they cover. Topics are more
+	// specific themes that the article is about. Examples of topics: 'Economy', 'Real
+	// Estate', 'Cryptocurrency'. If multiple parameters are passed, they will be
+	// applied as OR operations. (Searches inside the topCategories data field.)
 	Topic []string `query:"topic,omitzero" json:"-"`
 	paramObj
 }

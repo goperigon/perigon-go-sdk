@@ -211,47 +211,50 @@ func (r *CompanyListResponseResultWebResources) UnmarshalJSON(data []byte) error
 }
 
 type CompanyListParams struct {
-	// Filter by company industry classifications. Supports Boolean operators (AND, OR,
-	// NOT), exact phrases with quotes, and wildcards (\* and ?) for flexible
+	// String. Filter by company industry classifications. Supports Boolean operators
+	// (AND, OR, NOT), exact phrases with quotes, and wildcards (\* and ?) for flexible
 	// searching.
 	Industry param.Opt[string] `query:"industry,omitzero" json:"-"`
-	// Filter for companies that went public on or after this date. Accepts ISO 8601
-	// format (e.g., 2023-01-01T00:00:00) or yyyy-mm-dd format.
+	// Date. Filter for companies that went public on or after this date. Accepts ISO
+	// 8601 format (e.g., 2023-01-01T00:00:00) or yyyy-mm-dd format.
 	IpoFrom param.Opt[time.Time] `query:"ipoFrom,omitzero" format:"date-time" json:"-"`
-	// Filter for companies that went public on or before this date. Accepts ISO 8601
-	// format (e.g., 2023-12-31T23:59:59) or yyyy-mm-dd format.
+	// Date. Filter for companies that went public on or before this date. Accepts ISO
+	// 8601 format (e.g., 2023-12-31T23:59:59) or yyyy-mm-dd format.
 	IpoTo param.Opt[time.Time] `query:"ipoTo,omitzero" format:"date-time" json:"-"`
-	// Search within company names. Supports Boolean operators (AND, OR, NOT), exact
-	// phrases with quotes, and wildcards (\* and ?) for flexible searching.
+	// String. Search within company names. Supports Boolean operators (AND, OR, NOT),
+	// exact phrases with quotes, and wildcards (\* and ?) for flexible searching.
 	Name param.Opt[string] `query:"name,omitzero" json:"-"`
-	// Filter for companies with at least this many employees.
+	// Integer. Filter for companies with at least this many employees.
 	NumEmployeesFrom param.Opt[int64] `query:"numEmployeesFrom,omitzero" json:"-"`
-	// Filter for companies with no more than this many employees.
+	// Integer. Filter for companies with no more than this many employees.
 	NumEmployeesTo param.Opt[int64] `query:"numEmployeesTo,omitzero" json:"-"`
-	// The specific page of results to retrieve in the paginated response. Starts at 0.
+	// Integer. The specific page of results to retrieve in the paginated response.
+	// Starts at 0.
 	Page param.Opt[int64] `query:"page,omitzero" json:"-"`
-	// Primary search query for filtering companies across name, alternative names,
-	// domains, and ticker symbols. Supports Boolean operators (AND, OR, NOT), exact
-	// phrases with quotes, and wildcards (\* and ?) for flexible searching.
+	// String. Primary search query for filtering companies across name, alternative
+	// names, domains, and ticker symbols. Supports Boolean operators (AND, OR, NOT),
+	// exact phrases with quotes, and wildcards (\* and ?) for flexible searching.
 	Q param.Opt[string] `query:"q,omitzero" json:"-"`
-	// Filter by company sector classifications. Supports Boolean operators (AND, OR,
-	// NOT), exact phrases with quotes, and wildcards (\* and ?) for flexible
+	// String. Filter by company sector classifications. Supports Boolean operators
+	// (AND, OR, NOT), exact phrases with quotes, and wildcards (\* and ?) for flexible
 	// searching.
 	Sector param.Opt[string] `query:"sector,omitzero" json:"-"`
-	// The number of companies to return per page in the paginated response.
+	// Integer. The number of companies to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Filter by unique company identifiers. Multiple values create an OR filter.
+	// String Array. Filter by unique company identifiers. Multiple values create an OR
+	// filter.
 	ID []string `query:"id,omitzero" json:"-"`
-	// Filter by company headquarters country. Multiple values create an OR filter.
+	// String Array. Filter by company headquarters country. Multiple values create an
+	// OR filter.
 	Country []string `query:"country,omitzero" json:"-"`
-	// Filter by company domains or websites (e.g., apple.com, microsoft.com). Multiple
-	// values create an OR filter.
+	// String Array. Filter by company domains or websites (e.g., apple.com,
+	// microsoft.com). Multiple values create an OR filter.
 	Domain []string `query:"domain,omitzero" json:"-"`
-	// Filter by stock exchange where companies are listed (e.g., NASDAQ, NYSE).
-	// Multiple values create an OR filter.
+	// String Array. Filter by stock exchange where companies are listed (e.g., NASDAQ,
+	// NYSE). Multiple values create an OR filter.
 	Exchange []string `query:"exchange,omitzero" json:"-"`
-	// Filter by company stock ticker symbols (e.g., AAPL, MSFT, GOOGL). Multiple
-	// values create an OR filter.
+	// String Array. Filter by company stock ticker symbols (e.g., AAPL, MSFT, GOOGL).
+	// Multiple values create an OR filter.
 	Symbol []string `query:"symbol,omitzero" json:"-"`
 	paramObj
 }
