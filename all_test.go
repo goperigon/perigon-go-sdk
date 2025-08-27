@@ -61,6 +61,7 @@ func TestAllListWithOptionalParams(t *testing.T) {
 		ExcludeSourceGroup:      []string{"string"},
 		ExcludeState:            []string{"string"},
 		ExcludeTopic:            []string{"string"},
+		ExcludeWatchlist:        []string{"string"},
 		From:                    perigon.Time(time.Now()),
 		HighlightFragmentSize:   perigon.Int(0),
 		HighlightNumFragments:   perigon.Int(0),
@@ -113,6 +114,7 @@ func TestAllListWithOptionalParams(t *testing.T) {
 		To:                      perigon.Time(time.Now()),
 		Topic:                   []string{"string"},
 		URL:                     perigon.String("url"),
+		Watchlist:               []string{"string"},
 	})
 	if err != nil {
 		var apierr *perigon.Error
