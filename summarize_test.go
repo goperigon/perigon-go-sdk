@@ -63,7 +63,6 @@ func TestSummarizeNewWithOptionalParams(t *testing.T) {
 		ExcludeTopic:            []string{"string"},
 		ExcludeWatchlist:        []string{"string"},
 		From:                    perigon.Time(time.Now()),
-		HasSummary:              perigon.Bool(true),
 		HighlightFragmentSize:   perigon.Int(0),
 		HighlightNumFragments:   perigon.Int(0),
 		HighlightPostTag:        perigon.String("highlightPostTag"),
