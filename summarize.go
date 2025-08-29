@@ -100,6 +100,10 @@ type SummarizeNewParams struct {
 	// Date. Filter for articles published after this date. Accepts ISO 8601 format
 	// (e.g., 2023-03-01T00:00:00) or yyyy-mm-dd format.
 	From param.Opt[time.Time] `query:"from,omitzero" format:"date-time" json:"-"`
+	// Boolean. Filter to show only results where the article has a summary (true) or
+	// does not have a summary (false). Performs an exists check on the 'summary'
+	// field.
+	HasSummary param.Opt[bool] `query:"hasSummary,omitzero" json:"-"`
 	// Integer. Specifies the size in characters of each highlighted text fragment.
 	// Defaults to 100 if not specified.
 	HighlightFragmentSize param.Opt[int64] `query:"highlightFragmentSize,omitzero" json:"-"`
@@ -202,6 +206,9 @@ type SummarizeNewParams struct {
 	// Float. Maximum distance from starting point to search articles created by local
 	// publications.
 	SourceMaxDistance param.Opt[float64] `query:"sourceMaxDistance,omitzero" json:"-"`
+	// String. Search within article summary fields. Supports Boolean expressions,
+	// exact phrase matching with quotes, and wildcards for flexible pattern matching.
+	Summary param.Opt[string] `query:"summary,omitzero" json:"-"`
 	// String. Search specifically within article headlines/titles. Supports Boolean
 	// operators, exact phrases with quotes, and wildcards for matching title
 	// variations.
