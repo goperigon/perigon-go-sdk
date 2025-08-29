@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.7.0 (2025-08-29)
+
+Full Changelog: [v2.6.0...v2.7.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.6.0...v2.7.0)
+
+### Features
+
+* **api:** api update ([ee132db](https://github.com/goperigon/perigon-go-sdk/commit/ee132db9e39d62c73f63d2949c2fb94c9409aebc))
+* **api:** api update ([9292ad6](https://github.com/goperigon/perigon-go-sdk/commit/9292ad6c16b64ceef475f54e77f4ef83f794b604))
+* **api:** api update ([eebf091](https://github.com/goperigon/perigon-go-sdk/commit/eebf09145d8dda17af7996bd307f79d90a9350b2))
+
+
+### Bug Fixes
+
+* close body before retrying ([e27d271](https://github.com/goperigon/perigon-go-sdk/commit/e27d27104be3893877ea205ca54df8336b398caa))
+
 ## 2.6.0 (2025-08-18)
 
 Full Changelog: [v2.5.0...v2.6.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.5.0...v2.6.0)
