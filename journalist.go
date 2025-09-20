@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"slices"
 	"time"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
@@ -41,7 +42,7 @@ func NewJournalistService(opts ...option.RequestOption) (r JournalistService) {
 // Find additional details on a journalist by using the journalist ID found in an
 // article response object.
 func (r *JournalistService) Get(ctx context.Context, id string, opts ...option.RequestOption) (res *Journalist, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	if id == "" {
 		err = errors.New("missing required id parameter")
 		return
@@ -54,7 +55,7 @@ func (r *JournalistService) Get(ctx context.Context, id string, opts ...option.R
 // Search journalists using broad search attributes. Our database contains over
 // 230,000 journalists from around the world and is refreshed frequently.
 func (r *JournalistService) List(ctx context.Context, query JournalistListParams, opts ...option.RequestOption) (res *JournalistListResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/journalists/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return

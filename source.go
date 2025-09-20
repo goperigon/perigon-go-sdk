@@ -6,6 +6,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"slices"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apiquery"
@@ -39,7 +40,7 @@ func NewSourceService(opts ...option.RequestOption) (r SourceService) {
 // result includes a list of individual media sources that were matched to your
 // specific criteria.
 func (r *SourceService) List(ctx context.Context, query SourceListParams, opts ...option.RequestOption) (res *SourceListResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/sources/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return

@@ -6,6 +6,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"slices"
 	"time"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
@@ -39,7 +40,7 @@ func NewCompanyService(opts ...option.RequestOption) (r CompanyService) {
 // industry, and more. Supports Boolean search logic and filtering by metadata such
 // as country, exchange, employee count, and IPO date.
 func (r *CompanyService) List(ctx context.Context, query CompanyListParams, opts ...option.RequestOption) (res *CompanyListResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/companies/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return
