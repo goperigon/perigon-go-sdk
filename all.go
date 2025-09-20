@@ -6,6 +6,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"slices"
 	"time"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
@@ -40,7 +41,7 @@ func NewAllService(opts ...option.RequestOption) (r AllService) {
 // includes a list of individual articles that were matched to your specific
 // criteria.
 func (r *AllService) List(ctx context.Context, query AllListParams, opts ...option.RequestOption) (res *AllListResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/articles/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return

@@ -5,6 +5,7 @@ package perigon
 import (
 	"context"
 	"net/http"
+	"slices"
 	"time"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
@@ -37,7 +38,7 @@ func NewVectorNewsService(opts ...option.RequestOption) (r VectorNewsService) {
 // using semantic relevance. The result includes a list of articles most closely
 // matched to your query intent.
 func (r *VectorNewsService) Search(ctx context.Context, body VectorNewsSearchParams, opts ...option.RequestOption) (res *VectorNewsSearchResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/vector/news/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return

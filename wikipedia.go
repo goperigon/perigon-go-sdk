@@ -6,6 +6,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"slices"
 	"time"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
@@ -38,7 +39,7 @@ func NewWikipediaService(opts ...option.RequestOption) (r WikipediaService) {
 // Search and filter all Wikipedia pages available via the Perigon API. The result
 // includes a list of individual pages that were matched to your specific criteria.
 func (r *WikipediaService) Search(ctx context.Context, query WikipediaSearchParams, opts ...option.RequestOption) (res *WikipediaSearchResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/wikipedia/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return
@@ -48,7 +49,7 @@ func (r *WikipediaService) Search(ctx context.Context, query WikipediaSearchPara
 // The result includes a list of page sections most closely matched to your query
 // intent.
 func (r *WikipediaService) VectorSearch(ctx context.Context, body WikipediaVectorSearchParams, opts ...option.RequestOption) (res *WikipediaVectorSearchResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/vector/wikipedia/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
 	return

@@ -6,6 +6,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"slices"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apiquery"
@@ -40,7 +41,7 @@ func NewPersonService(opts ...option.RequestOption) (r PersonService) {
 // frequently. People data is derived from Wikidata and includes a wikidataId field
 // that can be used to lookup even more information on Wikidata's website.
 func (r *PersonService) List(ctx context.Context, query PersonListParams, opts ...option.RequestOption) (res *PersonListResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/people/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return

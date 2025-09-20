@@ -6,6 +6,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"slices"
 	"time"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
@@ -38,7 +39,7 @@ func NewSummarizeService(opts ...option.RequestOption) (r SummarizeService) {
 // Produce a single, concise summary over the full corpus of articles matching your
 // filters, using your prompt to guide which insights to highlight.
 func (r *SummarizeService) New(ctx context.Context, params SummarizeNewParams, opts ...option.RequestOption) (res *SummarizeNewResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/summarize"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, params, &res, opts...)
 	return

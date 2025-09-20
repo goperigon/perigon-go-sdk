@@ -6,6 +6,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"slices"
 	"time"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
@@ -37,7 +38,7 @@ func NewTopicService(opts ...option.RequestOption) (r TopicService) {
 
 // Search through all available Topics that exist within the Perigon Database.
 func (r *TopicService) List(ctx context.Context, query TopicListParams, opts ...option.RequestOption) (res *TopicListResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/topics/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return

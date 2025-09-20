@@ -6,6 +6,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"slices"
 	"time"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
@@ -51,7 +52,7 @@ func NewStoryService(opts ...option.RequestOption) (r StoryService) {
 // To fetch all articles within a specific story, query the `/articles/all`
 // endpoint using the `clusterId` parameter.
 func (r *StoryService) List(ctx context.Context, query StoryListParams, opts ...option.RequestOption) (res *StoryListResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/stories/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return
