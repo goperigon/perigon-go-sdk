@@ -71,6 +71,7 @@ type Article struct {
 	Content               string                  `json:"content,nullable"`
 	Country               string                  `json:"country,nullable"`
 	Description           string                  `json:"description,nullable"`
+	EnContentWordCount    int64                   `json:"enContentWordCount,nullable"`
 	Entities              []ArticleEntity         `json:"entities,nullable"`
 	EventTypes            []ArticleEventType      `json:"eventTypes,nullable"`
 	Highlights            map[string][]string     `json:"highlights,nullable"`
@@ -116,6 +117,7 @@ type Article struct {
 		Content               respjson.Field
 		Country               respjson.Field
 		Description           respjson.Field
+		EnContentWordCount    respjson.Field
 		Entities              respjson.Field
 		EventTypes            respjson.Field
 		Highlights            respjson.Field
