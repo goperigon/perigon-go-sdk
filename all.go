@@ -6,6 +6,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"slices"
 	"time"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/apijson"
@@ -40,7 +41,7 @@ func NewAllService(opts ...option.RequestOption) (r AllService) {
 // includes a list of individual articles that were matched to your specific
 // criteria.
 func (r *AllService) List(ctx context.Context, query AllListParams, opts ...option.RequestOption) (res *AllListResponse, err error) {
-	opts = append(r.Options[:], opts...)
+	opts = slices.Concat(r.Options, opts)
 	path := "v1/articles/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return
@@ -70,6 +71,7 @@ type Article struct {
 	Content               string                  `json:"content,nullable"`
 	Country               string                  `json:"country,nullable"`
 	Description           string                  `json:"description,nullable"`
+	EnContentWordCount    int64                   `json:"enContentWordCount,nullable"`
 	Entities              []ArticleEntity         `json:"entities,nullable"`
 	EventTypes            []ArticleEventType      `json:"eventTypes,nullable"`
 	Highlights            map[string][]string     `json:"highlights,nullable"`
@@ -115,6 +117,7 @@ type Article struct {
 		Content               respjson.Field
 		Country               respjson.Field
 		Description           respjson.Field
+		EnContentWordCount    respjson.Field
 		Entities              respjson.Field
 		EventTypes            respjson.Field
 		Highlights            respjson.Field
@@ -548,6 +551,9 @@ type AllListParams struct {
 	// Float. Maximum distance from starting point to search articles created by local
 	// publications.
 	SourceMaxDistance param.Opt[float64] `query:"sourceMaxDistance,omitzero" json:"-"`
+	// String. Search within article summary fields. Supports Boolean expressions,
+	// exact phrase matching with quotes, and wildcards for flexible pattern matching.
+	Summary param.Opt[string] `query:"summary,omitzero" json:"-"`
 	// String. Search specifically within article headlines/titles. Supports Boolean
 	// operators, exact phrases with quotes, and wildcards for matching title
 	// variations.
@@ -669,6 +675,10 @@ type AllListParams struct {
 	// String Array. Exclude articles with specific topics. Multiple values create an
 	// AND-exclude filter, removing all content with any of these topics.
 	ExcludeTopic []string `query:"excludeTopic,omitzero" json:"-"`
+	// String Array. Exclude articles mentioning entities from specified watchlists.
+	// Multiple values create an AND-exclude filter, removing content mentioning any
+	// entity from the specified watchlists.
+	ExcludeWatchlist []string `query:"excludeWatchlist,omitzero" json:"-"`
 	// String Array. Filter by unique journalist identifiers which can be found through
 	// the Journalist API or in the matchedAuthors field. Multiple values create an OR
 	// filter.
@@ -743,6 +753,10 @@ type AllListParams struct {
 	// have multiple topics. Use the /topics endpoint for a complete list of available
 	// topics. Multiple values create an OR filter.
 	Topic []string `query:"topic,omitzero" json:"-"`
+	// String Array. Filter articles using watchlists of people and companies. Multiple
+	// values create an OR filter to include articles mentioning any entity from the
+	// specified watchlists.
+	Watchlist []string `query:"watchlist,omitzero" json:"-"`
 	paramObj
 }
 

@@ -1,5 +1,34 @@
 # Changelog
 
+## 2.7.0 (2025-09-26)
+
+Full Changelog: [v2.6.0...v2.7.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.6.0...v2.7.0)
+
+### Features
+
+* **api:** api update ([b8ed800](https://github.com/goperigon/perigon-go-sdk/commit/b8ed800e0842bbd82e55d0080eecd3dceadb7ad4))
+* **api:** api update ([ee132db](https://github.com/goperigon/perigon-go-sdk/commit/ee132db9e39d62c73f63d2949c2fb94c9409aebc))
+* **api:** api update ([9292ad6](https://github.com/goperigon/perigon-go-sdk/commit/9292ad6c16b64ceef475f54e77f4ef83f794b604))
+* **api:** api update ([eebf091](https://github.com/goperigon/perigon-go-sdk/commit/eebf09145d8dda17af7996bd307f79d90a9350b2))
+
+
+### Bug Fixes
+
+* bugfix for setting JSON keys with special characters ([0779e86](https://github.com/goperigon/perigon-go-sdk/commit/0779e8619cbd2ccbb62225a83596abd83ef256ee))
+* close body before retrying ([e27d271](https://github.com/goperigon/perigon-go-sdk/commit/e27d27104be3893877ea205ca54df8336b398caa))
+* **internal:** unmarshal correctly when there are multiple discriminators ([0616fab](https://github.com/goperigon/perigon-go-sdk/commit/0616fabc84cd33f698cde144e6b6df29585dfbb1))
+* use slices.Concat instead of sometimes modifying r.Options ([750a6b0](https://github.com/goperigon/perigon-go-sdk/commit/750a6b07b94a6446edf381f72f7e67a36e71397a))
+
+
+### Chores
+
+* bump minimum go version to 1.22 ([8bb93db](https://github.com/goperigon/perigon-go-sdk/commit/8bb93db1cf79cd513c5985b1cb4d062626168149))
+* do not install brew dependencies in ./scripts/bootstrap by default ([dcc099c](https://github.com/goperigon/perigon-go-sdk/commit/dcc099c605ed0c2a726d7562159d12fae26d5104))
+* **internal:** codegen related update ([e8f0c15](https://github.com/goperigon/perigon-go-sdk/commit/e8f0c15dfe03b5e4b9c0a4c0075561e2db328053))
+* **internal:** improve examples ([a3ef5e8](https://github.com/goperigon/perigon-go-sdk/commit/a3ef5e819a7d8120d402591c1e520fae3682533d))
+* **internal:** use some smaller example values ([1c87e17](https://github.com/goperigon/perigon-go-sdk/commit/1c87e17d9019fccd013703929e16557c63b94c87))
+* update more docs for 1.22 ([6205199](https://github.com/goperigon/perigon-go-sdk/commit/620519946e724c5a794a78394078d241b34953d1))
+
 ## 2.6.0 (2025-08-18)
 
 Full Changelog: [v2.5.0...v2.6.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.5.0...v2.6.0)

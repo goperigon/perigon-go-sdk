@@ -1,6 +1,10 @@
 # Perigon Go API Library
 
+<!-- x-release-please-start-version -->
+
 <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2"><img src="https://pkg.go.dev/badge/github.com/goperigon/perigon-go-sdk/v2.svg" alt="Go Reference"></a>
+
+<!-- x-release-please-end -->
 
 The Perigon Go library provides convenient access to the [Perigon REST API](https://docs.perigon.io/discuss)
 from applications written in Go.
@@ -28,14 +32,14 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/goperigon/perigon-go-sdk/v2@v2.6.0'
+go get -u 'github.com/goperigon/perigon-go-sdk/v2@v2.7.0'
 ```
 
 <!-- x-release-please-end -->
 
 ## Requirements
 
-This library requires Go 1.18+.
+This library requires Go 1.22+.
 
 ## Usage
 
