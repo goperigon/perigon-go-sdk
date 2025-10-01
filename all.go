@@ -65,7 +65,7 @@ type Article struct {
 	AuthorsByline         string                  `json:"authorsByline,nullable"`
 	Categories            []shared.CategoryHolder `json:"categories,nullable"`
 	Claim                 string                  `json:"claim,nullable"`
-	Cluster               NewsCluster             `json:"cluster,nullable"`
+	Cluster               *NewsCluster            `json:"cluster,nullable"`
 	ClusterID             string                  `json:"clusterId,nullable"`
 	Companies             []ArticleCompany        `json:"companies,nullable"`
 	Content               string                  `json:"content,nullable"`
