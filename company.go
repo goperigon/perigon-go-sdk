@@ -72,8 +72,10 @@ type CompanyListResponseResult struct {
 	Address           string                                `json:"address,nullable"`
 	AltNames          []string                              `json:"altNames,nullable"`
 	Ceo               string                                `json:"ceo,nullable"`
+	Cik               string                                `json:"cik,nullable"`
 	City              string                                `json:"city,nullable"`
 	Country           string                                `json:"country,nullable"`
+	Cusip             string                                `json:"cusip,nullable"`
 	Description       string                                `json:"description,nullable"`
 	Domains           []string                              `json:"domains,nullable"`
 	Favicon           string                                `json:"favicon,nullable"`
@@ -84,6 +86,7 @@ type CompanyListResponseResult struct {
 	IsAdr             bool                                  `json:"isAdr,nullable"`
 	IsEtf             bool                                  `json:"isEtf,nullable"`
 	IsFund            bool                                  `json:"isFund,nullable"`
+	Isin              string                                `json:"isin,nullable"`
 	Logo              string                                `json:"logo,nullable"`
 	MonthlyVisits     int64                                 `json:"monthlyVisits,nullable"`
 	Naics             string                                `json:"naics,nullable"`
@@ -104,8 +107,10 @@ type CompanyListResponseResult struct {
 		Address           respjson.Field
 		AltNames          respjson.Field
 		Ceo               respjson.Field
+		Cik               respjson.Field
 		City              respjson.Field
 		Country           respjson.Field
+		Cusip             respjson.Field
 		Description       respjson.Field
 		Domains           respjson.Field
 		Favicon           respjson.Field
@@ -116,6 +121,7 @@ type CompanyListResponseResult struct {
 		IsAdr             respjson.Field
 		IsEtf             respjson.Field
 		IsFund            respjson.Field
+		Isin              respjson.Field
 		Logo              respjson.Field
 		MonthlyVisits     respjson.Field
 		Naics             respjson.Field
