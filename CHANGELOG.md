@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.8.0 (2025-10-10)
+
+Full Changelog: [v2.7.0...v2.8.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.7.0...v2.8.0)
+
+### Features
+
+* **api:** api update ([edec337](https://github.com/goperigon/perigon-go-sdk/commit/edec3375c8e729e6bfeb5bcac9e387d2d611e82a))
+* **client:** handle recursive schemas properly ([baafdcb](https://github.com/goperigon/perigon-go-sdk/commit/baafdcbc5caff1016aeabbc2c341184ee582f2ad))
+
 ## 2.7.0 (2025-09-26)
 
 Full Changelog: [v2.6.0...v2.7.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.6.0...v2.7.0)
