@@ -1,4 +1,4 @@
 configured_endpoints: 12
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/perigon%2Fperigon-sdk-4305ea5b432230530205fabdba6c05c4af82d54532d9a2602afa877044072a61.yml
-openapi_spec_hash: cd234269a40e868a1dca54d5200133e7
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/perigon%2Fperigon-sdk-633d2710bbb6e050994ab0e1953802672ebc721909397864a6fa7fe98cb9ee60.yml
+openapi_spec_hash: 281dcf11d952504a871cd33a1be8dad3
 config_hash: e34b71f512bb740dd356fd497f00a8b1
