@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.8.1 (2025-11-06)
+
+Full Changelog: [v2.8.0...v2.8.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.8.0...v2.8.1)
+
+### Chores
+
+* **internal:** grammar fix (it's -&gt; its) ([d6506a5](https://github.com/goperigon/perigon-go-sdk/commit/d6506a547ffdb053be250d12e0abf0aec11bdacc))
+
 ## 2.8.0 (2025-10-10)
 
 Full Changelog: [v2.7.0...v2.8.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.7.0...v2.8.0)
