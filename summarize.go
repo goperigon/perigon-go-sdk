@@ -225,7 +225,7 @@ type SummarizeNewParams struct {
 	// The underlying LLM model to use for generation.
 	//
 	// Any of "gpt-4o", "gpt-4o-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano",
-	// "llama-3.3-70b-versatile", "deepseek-r1-distill-llama-70b".
+	// "llama-3.3-70b-versatile", "openai/gpt-oss-120b".
 	Model SummarizeNewParamsModel `json:"model,omitzero"`
 	// Which article fields to include when generating the summary. Up to three values
 	// from TITLE, CONTENT, SUMMARY.
@@ -456,11 +456,11 @@ const (
 type SummarizeNewParamsModel string
 
 const (
-	SummarizeNewParamsModelGpt4o                     SummarizeNewParamsModel = "gpt-4o"
-	SummarizeNewParamsModelGpt4oMini                 SummarizeNewParamsModel = "gpt-4o-mini"
-	SummarizeNewParamsModelGpt4_1                    SummarizeNewParamsModel = "gpt-4.1"
-	SummarizeNewParamsModelGpt4_1Mini                SummarizeNewParamsModel = "gpt-4.1-mini"
-	SummarizeNewParamsModelGpt4_1Nano                SummarizeNewParamsModel = "gpt-4.1-nano"
-	SummarizeNewParamsModelLlama3_3_70bVersatile     SummarizeNewParamsModel = "llama-3.3-70b-versatile"
-	SummarizeNewParamsModelDeepseekR1DistillLlama70b SummarizeNewParamsModel = "deepseek-r1-distill-llama-70b"
+	SummarizeNewParamsModelGpt4o                 SummarizeNewParamsModel = "gpt-4o"
+	SummarizeNewParamsModelGpt4oMini             SummarizeNewParamsModel = "gpt-4o-mini"
+	SummarizeNewParamsModelGpt4_1                SummarizeNewParamsModel = "gpt-4.1"
+	SummarizeNewParamsModelGpt4_1Mini            SummarizeNewParamsModel = "gpt-4.1-mini"
+	SummarizeNewParamsModelGpt4_1Nano            SummarizeNewParamsModel = "gpt-4.1-nano"
+	SummarizeNewParamsModelLlama3_3_70bVersatile SummarizeNewParamsModel = "llama-3.3-70b-versatile"
+	SummarizeNewParamsModelOpenAIGptOss120b      SummarizeNewParamsModel = "openai/gpt-oss-120b"
 )

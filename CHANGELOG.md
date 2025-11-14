@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.9.0 (2025-11-14)
+
+Full Changelog: [v2.8.1...v2.9.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.8.1...v2.9.0)
+
+### Features
+
+* **api:** api update ([5772320](https://github.com/goperigon/perigon-go-sdk/commit/577232077f881ef93da54ac04a533beec35c98a5))
+
+
+### Chores
+
+* bump gjson version ([c8167cf](https://github.com/goperigon/perigon-go-sdk/commit/c8167cf15570e634993cf2c78c7c4a253e6cd7b4))
+
 ## 2.8.1 (2025-11-06)
 
 Full Changelog: [v2.8.0...v2.8.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.8.0...v2.8.1)
