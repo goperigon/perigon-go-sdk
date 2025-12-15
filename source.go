@@ -36,7 +36,7 @@ func NewSourceService(opts ...option.RequestOption) (r SourceService) {
 	return
 }
 
-// Search and filter the 142,000+ media sources available via the Perigon API. The
+// Search and filter the 200,000+ media sources available via the Perigon API. The
 // result includes a list of individual media sources that were matched to your
 // specific criteria.
 func (r *SourceService) List(ctx context.Context, query SourceListParams, opts ...option.RequestOption) (res *SourceListResponse, err error) {
