@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.10.0 (2025-12-15)
+
+Full Changelog: [v2.9.0...v2.10.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.9.0...v2.10.0)
+
+### Features
+
+* **api:** api update ([8c7cebe](https://github.com/goperigon/perigon-go-sdk/commit/8c7cebe8b701591f19ba43c33785bce199361ceb))
+* **encoder:** support bracket encoding form-data object members ([6fc005e](https://github.com/goperigon/perigon-go-sdk/commit/6fc005ecac8e52bdf7d71fee7e3b8bac12fc0858))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([a882a2c](https://github.com/goperigon/perigon-go-sdk/commit/a882a2cbc32607f5418d781bf0f927859f42d2d9))
+* rename param to avoid collision ([da5ae42](https://github.com/goperigon/perigon-go-sdk/commit/da5ae4270943192f68108ba84f8d512f52aa24fe))
+
+
+### Chores
+
+* elide duplicate aliases ([7f1b4fc](https://github.com/goperigon/perigon-go-sdk/commit/7f1b4fc4b3703e1a3940ba95f449089be822b21a))
+* **internal:** codegen related update ([36f4470](https://github.com/goperigon/perigon-go-sdk/commit/36f4470421733087ff5d35d4e14015e846bb72d4))
+
 ## 2.9.0 (2025-11-14)
 
 Full Changelog: [v2.8.1...v2.9.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.8.1...v2.9.0)
