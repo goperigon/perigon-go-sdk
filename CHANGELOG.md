@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.11.0 (2026-01-05)
+
+Full Changelog: [v2.10.0...v2.11.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.10.0...v2.11.0)
+
+### Features
+
+* **api:** api update ([83636e0](https://github.com/goperigon/perigon-go-sdk/commit/83636e0000e80e17b5ffb57b446d4f20917add20))
+* **api:** api update ([67c5e07](https://github.com/goperigon/perigon-go-sdk/commit/67c5e07ea90a2b8bdae05e69a5497ed3bcc867df))
+
+
+### Chores
+
+* add float64 to valid types for RegisterFieldValidator ([93700c1](https://github.com/goperigon/perigon-go-sdk/commit/93700c169c732bb2d7910bba9a94dcc951eb0a1e))
+
 ## 2.10.0 (2025-12-15)
 
 Full Changelog: [v2.9.0...v2.10.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.9.0...v2.10.0)
