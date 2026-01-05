@@ -330,10 +330,22 @@ type SummarizeNewParams struct {
 	// Supports wildcards (_ and ?) for pattern matching (e.g., _.cnn.com). Multiple
 	// values create an AND-exclude filter.
 	ExcludeSource []string `query:"excludeSource,omitzero" json:"-"`
+	// String Array. Excludes articles published by sources that are located within the
+	// specified cities.
+	ExcludeSourceCity []string `query:"excludeSourceCity,omitzero" json:"-"`
+	// String Array. Excludes articles published by sources that are located within the
+	// specified countries. Must be 2 character country codes (e.g., us, gb).
+	ExcludeSourceCountry []string `query:"excludeSourceCountry,omitzero" json:"-"`
+	// String Array. Excludes articles published by sources that are located within the
+	// specified counties.
+	ExcludeSourceCounty []string `query:"excludeSourceCounty,omitzero" json:"-"`
 	// String Array. Exclude articles from specified Perigon source groups. Multiple
 	// values create an AND-exclude filter, removing content from publishers in any of
 	// the specified bundles (e.g., top10, top100).
 	ExcludeSourceGroup []string `query:"excludeSourceGroup,omitzero" json:"-"`
+	// String Array. Excludes articles published by sources that are located within the
+	// specified states.
+	ExcludeSourceState []string `query:"excludeSourceState,omitzero" json:"-"`
 	// String Array. A list of states to exclude. Articles that include, or are
 	// associated with, any of the states provided here will be filtered out. This is
 	// especially useful if you want to ignore news tied to certain geographical areas
