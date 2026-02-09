@@ -1,5 +1,25 @@
 # Changelog
 
+## 2.12.0 (2026-02-09)
+
+Full Changelog: [v2.11.0...v2.12.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.11.0...v2.12.0)
+
+### Features
+
+* **api:** manual updates ([79253e4](https://github.com/goperigon/perigon-go-sdk/commit/79253e40df6d25fc993d71dda3126b12230b1403))
+* **client:** add a convenient param.SetJSON helper ([1744116](https://github.com/goperigon/perigon-go-sdk/commit/1744116bed82d912b40d8f141434cdeee01f94f8))
+
+
+### Bug Fixes
+
+* **docs:** add missing pointer prefix to api.md return types ([8eaabc9](https://github.com/goperigon/perigon-go-sdk/commit/8eaabc9dd0a732c33cb513b9a4db09e3b05f810f))
+* **docs:** fix mcp installation instructions for remote servers ([d893fce](https://github.com/goperigon/perigon-go-sdk/commit/d893fceb2bbd4d31d69ee9677b6a343c20ca1405))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([3518696](https://github.com/goperigon/perigon-go-sdk/commit/35186960fe1d0a30dd59804d1a29e72c031ddbc2))
+
 ## 2.11.0 (2026-01-05)
 
 Full Changelog: [v2.10.0...v2.11.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.10.0...v2.11.0)
