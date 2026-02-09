@@ -11,10 +11,6 @@ from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
-## API Documentation
-
-You can learn everything about the Perigon API on our [Docs](https://dev.perigon.io/docs)
-
 ## Installation
 
 <!-- x-release-please-start-version -->
@@ -32,7 +28,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/goperigon/perigon-go-sdk/v2@v2.11.0'
+go get -u 'github.com/goperigon/perigon-go-sdk/v2@v2.12.0'
 ```
 
 <!-- x-release-please-end -->
