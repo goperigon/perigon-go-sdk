@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.12.1 (2026-02-11)
+
+Full Changelog: [v2.12.0...v2.12.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.12.0...v2.12.1)
+
+### Bug Fixes
+
+* **encoder:** correctly serialize NullStruct ([aedc958](https://github.com/goperigon/perigon-go-sdk/commit/aedc95810107bc6c96655554216447f42379bee0))
+
 ## 2.12.0 (2026-02-09)
 
 Full Changelog: [v2.11.0...v2.12.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.11.0...v2.12.0)
