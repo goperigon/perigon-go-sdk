@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.12.2 (2026-02-21)
+
+Full Changelog: [v2.12.1...v2.12.2](https://github.com/goperigon/perigon-go-sdk/compare/v2.12.1...v2.12.2)
+
+### Bug Fixes
+
+* allow canceling a request while it is waiting to retry ([85a09f7](https://github.com/goperigon/perigon-go-sdk/commit/85a09f781e8c15b822b5a62d4678005077a73409))
+
+
+### Chores
+
+* update mock server docs ([3c9db42](https://github.com/goperigon/perigon-go-sdk/commit/3c9db42096fc3f7d4563d1d449526be6ca9677ee))
+
 ## 2.12.1 (2026-02-11)
 
 Full Changelog: [v2.12.0...v2.12.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.12.0...v2.12.1)
