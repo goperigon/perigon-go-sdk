@@ -60,50 +60,50 @@ const (
 )
 
 type Article struct {
-	AddDate               string                  `json:"addDate,nullable"`
-	ArticleID             string                  `json:"articleId,nullable"`
-	AuthorsByline         string                  `json:"authorsByline,nullable"`
-	Categories            []shared.CategoryHolder `json:"categories,nullable"`
-	Claim                 string                  `json:"claim,nullable"`
-	Cluster               *NewsCluster            `json:"cluster,nullable"`
-	ClusterID             string                  `json:"clusterId,nullable"`
-	Companies             []ArticleCompany        `json:"companies,nullable"`
-	Content               string                  `json:"content,nullable"`
-	Country               string                  `json:"country,nullable"`
-	Description           string                  `json:"description,nullable"`
-	EnContentWordCount    int64                   `json:"enContentWordCount,nullable"`
-	Entities              []ArticleEntity         `json:"entities,nullable"`
-	EventTypes            []ArticleEventType      `json:"eventTypes,nullable"`
-	Highlights            map[string][]string     `json:"highlights,nullable"`
-	ImageURL              string                  `json:"imageUrl,nullable"`
-	Journalists           []Journalist            `json:"journalists,nullable"`
-	Keywords              []ArticleKeyword        `json:"keywords,nullable"`
-	Labels                []ArticleLabel          `json:"labels,nullable"`
-	Language              string                  `json:"language,nullable"`
-	Links                 []string                `json:"links,nullable"`
-	Locations             []shared.LocationHolder `json:"locations,nullable"`
-	MatchedAuthors        []ArticleMatchedAuthor  `json:"matchedAuthors,nullable"`
-	Medium                string                  `json:"medium,nullable"`
-	People                []ArticlePerson         `json:"people,nullable"`
-	Places                []ArticlePlace          `json:"places,nullable"`
-	PubDate               string                  `json:"pubDate,nullable"`
-	RefreshDate           string                  `json:"refreshDate,nullable"`
-	Reprint               bool                    `json:"reprint,nullable"`
-	ReprintGroupID        string                  `json:"reprintGroupId,nullable"`
-	Score                 float64                 `json:"score,nullable"`
-	Sentiment             ArticleSentiment        `json:"sentiment,nullable"`
-	ShortSummary          string                  `json:"shortSummary,nullable"`
-	Source                ArticleSource           `json:"source,nullable"`
-	Summary               string                  `json:"summary,nullable"`
-	Taxonomies            []ArticleTaxonomy       `json:"taxonomies,nullable"`
-	Title                 string                  `json:"title,nullable"`
-	Topics                []ArticleTopic          `json:"topics,nullable"`
-	TranslatedDescription string                  `json:"translatedDescription,nullable"`
-	TranslatedSummary     string                  `json:"translatedSummary,nullable"`
-	TranslatedTitle       string                  `json:"translatedTitle,nullable"`
-	Translation           string                  `json:"translation,nullable"`
-	URL                   string                  `json:"url,nullable"`
-	Verdict               string                  `json:"verdict,nullable"`
+	AddDate               string                  `json:"addDate" api:"nullable"`
+	ArticleID             string                  `json:"articleId" api:"nullable"`
+	AuthorsByline         string                  `json:"authorsByline" api:"nullable"`
+	Categories            []shared.CategoryHolder `json:"categories" api:"nullable"`
+	Claim                 string                  `json:"claim" api:"nullable"`
+	Cluster               *NewsCluster            `json:"cluster" api:"nullable"`
+	ClusterID             string                  `json:"clusterId" api:"nullable"`
+	Companies             []ArticleCompany        `json:"companies" api:"nullable"`
+	Content               string                  `json:"content" api:"nullable"`
+	Country               string                  `json:"country" api:"nullable"`
+	Description           string                  `json:"description" api:"nullable"`
+	EnContentWordCount    int64                   `json:"enContentWordCount" api:"nullable"`
+	Entities              []ArticleEntity         `json:"entities" api:"nullable"`
+	EventTypes            []ArticleEventType      `json:"eventTypes" api:"nullable"`
+	Highlights            map[string][]string     `json:"highlights" api:"nullable"`
+	ImageURL              string                  `json:"imageUrl" api:"nullable"`
+	Journalists           []Journalist            `json:"journalists" api:"nullable"`
+	Keywords              []ArticleKeyword        `json:"keywords" api:"nullable"`
+	Labels                []ArticleLabel          `json:"labels" api:"nullable"`
+	Language              string                  `json:"language" api:"nullable"`
+	Links                 []string                `json:"links" api:"nullable"`
+	Locations             []shared.LocationHolder `json:"locations" api:"nullable"`
+	MatchedAuthors        []ArticleMatchedAuthor  `json:"matchedAuthors" api:"nullable"`
+	Medium                string                  `json:"medium" api:"nullable"`
+	People                []ArticlePerson         `json:"people" api:"nullable"`
+	Places                []ArticlePlace          `json:"places" api:"nullable"`
+	PubDate               string                  `json:"pubDate" api:"nullable"`
+	RefreshDate           string                  `json:"refreshDate" api:"nullable"`
+	Reprint               bool                    `json:"reprint" api:"nullable"`
+	ReprintGroupID        string                  `json:"reprintGroupId" api:"nullable"`
+	Score                 float64                 `json:"score" api:"nullable"`
+	Sentiment             ArticleSentiment        `json:"sentiment" api:"nullable"`
+	ShortSummary          string                  `json:"shortSummary" api:"nullable"`
+	Source                ArticleSource           `json:"source" api:"nullable"`
+	Summary               string                  `json:"summary" api:"nullable"`
+	Taxonomies            []ArticleTaxonomy       `json:"taxonomies" api:"nullable"`
+	Title                 string                  `json:"title" api:"nullable"`
+	Topics                []ArticleTopic          `json:"topics" api:"nullable"`
+	TranslatedDescription string                  `json:"translatedDescription" api:"nullable"`
+	TranslatedSummary     string                  `json:"translatedSummary" api:"nullable"`
+	TranslatedTitle       string                  `json:"translatedTitle" api:"nullable"`
+	Translation           string                  `json:"translation" api:"nullable"`
+	URL                   string                  `json:"url" api:"nullable"`
+	Verdict               string                  `json:"verdict" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		AddDate               respjson.Field
@@ -162,10 +162,10 @@ func (r *Article) UnmarshalJSON(data []byte) error {
 }
 
 type ArticleCompany struct {
-	ID      string   `json:"id,nullable"`
-	Domains []string `json:"domains,nullable"`
-	Name    string   `json:"name,nullable"`
-	Symbols []string `json:"symbols,nullable"`
+	ID      string   `json:"id" api:"nullable"`
+	Domains []string `json:"domains" api:"nullable"`
+	Name    string   `json:"name" api:"nullable"`
+	Symbols []string `json:"symbols" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID          respjson.Field
@@ -184,9 +184,9 @@ func (r *ArticleCompany) UnmarshalJSON(data []byte) error {
 }
 
 type ArticleEntity struct {
-	Data     string `json:"data,nullable"`
-	Mentions int64  `json:"mentions,nullable"`
-	Type     string `json:"type,nullable"`
+	Data     string `json:"data" api:"nullable"`
+	Mentions int64  `json:"mentions" api:"nullable"`
+	Type     string `json:"type" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -204,8 +204,8 @@ func (r *ArticleEntity) UnmarshalJSON(data []byte) error {
 }
 
 type ArticleEventType struct {
-	Name string `json:"name,nullable"`
-	Type string `json:"type,nullable"`
+	Name string `json:"name" api:"nullable"`
+	Type string `json:"type" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Name        respjson.Field
@@ -222,8 +222,8 @@ func (r *ArticleEventType) UnmarshalJSON(data []byte) error {
 }
 
 type ArticleKeyword struct {
-	Name   string  `json:"name,nullable"`
-	Weight float64 `json:"weight,nullable"`
+	Name   string  `json:"name" api:"nullable"`
+	Weight float64 `json:"weight" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Name        respjson.Field
@@ -240,7 +240,7 @@ func (r *ArticleKeyword) UnmarshalJSON(data []byte) error {
 }
 
 type ArticleLabel struct {
-	Name string `json:"name,nullable"`
+	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Name        respjson.Field
@@ -256,8 +256,8 @@ func (r *ArticleLabel) UnmarshalJSON(data []byte) error {
 }
 
 type ArticleMatchedAuthor struct {
-	ID   string `json:"id,nullable"`
-	Name string `json:"name,nullable"`
+	ID   string `json:"id" api:"nullable"`
+	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID          respjson.Field
@@ -274,8 +274,8 @@ func (r *ArticleMatchedAuthor) UnmarshalJSON(data []byte) error {
 }
 
 type ArticlePerson struct {
-	Name       string `json:"name,nullable"`
-	WikidataID string `json:"wikidataId,nullable"`
+	Name       string `json:"name" api:"nullable"`
+	WikidataID string `json:"wikidataId" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Name        respjson.Field
@@ -292,21 +292,21 @@ func (r *ArticlePerson) UnmarshalJSON(data []byte) error {
 }
 
 type ArticlePlace struct {
-	Amenity       string            `json:"amenity,nullable"`
-	City          string            `json:"city,nullable"`
-	Coordinates   shared.Coordinate `json:"coordinates,nullable"`
-	Country       string            `json:"country,nullable"`
-	CountryCode   string            `json:"countryCode,nullable"`
-	County        string            `json:"county,nullable"`
-	Neighbourhood string            `json:"neighbourhood,nullable"`
-	OsmID         string            `json:"osmId,nullable"`
-	Postcode      string            `json:"postcode,nullable"`
-	Quarter       string            `json:"quarter,nullable"`
-	Road          string            `json:"road,nullable"`
-	State         string            `json:"state,nullable"`
-	StateDistrict string            `json:"stateDistrict,nullable"`
-	Suburb        string            `json:"suburb,nullable"`
-	Town          string            `json:"town,nullable"`
+	Amenity       string            `json:"amenity" api:"nullable"`
+	City          string            `json:"city" api:"nullable"`
+	Coordinates   shared.Coordinate `json:"coordinates" api:"nullable"`
+	Country       string            `json:"country" api:"nullable"`
+	CountryCode   string            `json:"countryCode" api:"nullable"`
+	County        string            `json:"county" api:"nullable"`
+	Neighbourhood string            `json:"neighbourhood" api:"nullable"`
+	OsmID         string            `json:"osmId" api:"nullable"`
+	Postcode      string            `json:"postcode" api:"nullable"`
+	Quarter       string            `json:"quarter" api:"nullable"`
+	Road          string            `json:"road" api:"nullable"`
+	State         string            `json:"state" api:"nullable"`
+	StateDistrict string            `json:"stateDistrict" api:"nullable"`
+	Suburb        string            `json:"suburb" api:"nullable"`
+	Town          string            `json:"town" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Amenity       respjson.Field
@@ -336,9 +336,9 @@ func (r *ArticlePlace) UnmarshalJSON(data []byte) error {
 }
 
 type ArticleSentiment struct {
-	Negative float64 `json:"negative,nullable"`
-	Neutral  float64 `json:"neutral,nullable"`
-	Positive float64 `json:"positive,nullable"`
+	Negative float64 `json:"negative" api:"nullable"`
+	Neutral  float64 `json:"neutral" api:"nullable"`
+	Positive float64 `json:"positive" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Negative    respjson.Field
@@ -356,9 +356,9 @@ func (r *ArticleSentiment) UnmarshalJSON(data []byte) error {
 }
 
 type ArticleSource struct {
-	Domain   string                `json:"domain,nullable"`
-	Location shared.SourceLocation `json:"location,nullable"`
-	Paywall  bool                  `json:"paywall,nullable"`
+	Domain   string                `json:"domain" api:"nullable"`
+	Location shared.SourceLocation `json:"location" api:"nullable"`
+	Paywall  bool                  `json:"paywall" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Domain      respjson.Field
@@ -376,8 +376,8 @@ func (r *ArticleSource) UnmarshalJSON(data []byte) error {
 }
 
 type ArticleTaxonomy struct {
-	Name  string  `json:"name,nullable"`
-	Score float64 `json:"score,nullable"`
+	Name  string  `json:"name" api:"nullable"`
+	Score float64 `json:"score" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Name        respjson.Field
@@ -394,7 +394,7 @@ func (r *ArticleTaxonomy) UnmarshalJSON(data []byte) error {
 }
 
 type ArticleTopic struct {
-	Name string `json:"name,nullable"`
+	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Name        respjson.Field
@@ -410,9 +410,9 @@ func (r *ArticleTopic) UnmarshalJSON(data []byte) error {
 }
 
 type AllListResponse struct {
-	Articles   []Article `json:"articles,required"`
-	NumResults int64     `json:"numResults,required"`
-	Status     int64     `json:"status,required"`
+	Articles   []Article `json:"articles" api:"required"`
+	NumResults int64     `json:"numResults" api:"required"`
+	Status     int64     `json:"status" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Articles    respjson.Field
