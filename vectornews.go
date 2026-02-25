@@ -255,8 +255,8 @@ func (r *CoordinateFilterParam) UnmarshalJSON(data []byte) error {
 
 // Articles vector search result
 type VectorNewsSearchResponse struct {
-	Results []VectorNewsSearchResponseResult `json:"results,required"`
-	Status  int64                            `json:"status,required"`
+	Results []VectorNewsSearchResponseResult `json:"results" api:"required"`
+	Status  int64                            `json:"status" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Results     respjson.Field
@@ -273,8 +273,8 @@ func (r *VectorNewsSearchResponse) UnmarshalJSON(data []byte) error {
 }
 
 type VectorNewsSearchResponseResult struct {
-	Data  Article `json:"data,nullable"`
-	Score float64 `json:"score,nullable"`
+	Data  Article `json:"data" api:"nullable"`
+	Score float64 `json:"score" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -292,7 +292,7 @@ func (r *VectorNewsSearchResponseResult) UnmarshalJSON(data []byte) error {
 
 type VectorNewsSearchParams struct {
 	// Natural language query to search the news articles database
-	Prompt string `json:"prompt,required"`
+	Prompt string `json:"prompt" api:"required"`
 	// The page number to retrieve.
 	Page param.Opt[int64] `json:"page,omitzero"`
 	// 'pubDateFrom' filter, will search articles published after the specified date,

@@ -48,9 +48,9 @@ func (r *CompanyService) List(ctx context.Context, query CompanyListParams, opts
 
 // Company search result
 type CompanyListResponse struct {
-	NumResults int64                       `json:"numResults,required"`
-	Results    []CompanyListResponseResult `json:"results,required"`
-	Status     int64                       `json:"status,required"`
+	NumResults int64                       `json:"numResults" api:"required"`
+	Results    []CompanyListResponseResult `json:"results" api:"required"`
+	Status     int64                       `json:"status" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		NumResults  respjson.Field
@@ -68,39 +68,39 @@ func (r *CompanyListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type CompanyListResponseResult struct {
-	ID                string                                `json:"id,nullable"`
-	Address           string                                `json:"address,nullable"`
-	AltNames          []string                              `json:"altNames,nullable"`
-	Ceo               string                                `json:"ceo,nullable"`
-	Cik               string                                `json:"cik,nullable"`
-	City              string                                `json:"city,nullable"`
-	Country           string                                `json:"country,nullable"`
-	Cusip             string                                `json:"cusip,nullable"`
-	Description       string                                `json:"description,nullable"`
-	Domains           []string                              `json:"domains,nullable"`
-	Favicon           string                                `json:"favicon,nullable"`
-	FullTimeEmployees int64                                 `json:"fullTimeEmployees,nullable"`
-	GlobalRank        int64                                 `json:"globalRank,nullable"`
-	Industry          string                                `json:"industry,nullable"`
-	IsActivelyTrading bool                                  `json:"isActivelyTrading,nullable"`
-	IsAdr             bool                                  `json:"isAdr,nullable"`
-	IsEtf             bool                                  `json:"isEtf,nullable"`
-	IsFund            bool                                  `json:"isFund,nullable"`
-	Isin              string                                `json:"isin,nullable"`
-	Logo              string                                `json:"logo,nullable"`
-	MonthlyVisits     int64                                 `json:"monthlyVisits,nullable"`
-	Naics             string                                `json:"naics,nullable"`
-	Name              string                                `json:"name,nullable"`
-	PrimaryRecordID   string                                `json:"primaryRecordId,nullable"`
-	Revenue           string                                `json:"revenue,nullable"`
-	Sector            string                                `json:"sector,nullable"`
-	Sic               string                                `json:"sic,nullable"`
-	State             string                                `json:"state,nullable"`
-	Symbols           []CompanyListResponseResultSymbol     `json:"symbols,nullable"`
-	UpdatedAt         string                                `json:"updatedAt,nullable"`
-	WebResources      CompanyListResponseResultWebResources `json:"webResources,nullable"`
-	YearFounded       int64                                 `json:"yearFounded,nullable"`
-	Zip               string                                `json:"zip,nullable"`
+	ID                string                                `json:"id" api:"nullable"`
+	Address           string                                `json:"address" api:"nullable"`
+	AltNames          []string                              `json:"altNames" api:"nullable"`
+	Ceo               string                                `json:"ceo" api:"nullable"`
+	Cik               string                                `json:"cik" api:"nullable"`
+	City              string                                `json:"city" api:"nullable"`
+	Country           string                                `json:"country" api:"nullable"`
+	Cusip             string                                `json:"cusip" api:"nullable"`
+	Description       string                                `json:"description" api:"nullable"`
+	Domains           []string                              `json:"domains" api:"nullable"`
+	Favicon           string                                `json:"favicon" api:"nullable"`
+	FullTimeEmployees int64                                 `json:"fullTimeEmployees" api:"nullable"`
+	GlobalRank        int64                                 `json:"globalRank" api:"nullable"`
+	Industry          string                                `json:"industry" api:"nullable"`
+	IsActivelyTrading bool                                  `json:"isActivelyTrading" api:"nullable"`
+	IsAdr             bool                                  `json:"isAdr" api:"nullable"`
+	IsEtf             bool                                  `json:"isEtf" api:"nullable"`
+	IsFund            bool                                  `json:"isFund" api:"nullable"`
+	Isin              string                                `json:"isin" api:"nullable"`
+	Logo              string                                `json:"logo" api:"nullable"`
+	MonthlyVisits     int64                                 `json:"monthlyVisits" api:"nullable"`
+	Naics             string                                `json:"naics" api:"nullable"`
+	Name              string                                `json:"name" api:"nullable"`
+	PrimaryRecordID   string                                `json:"primaryRecordId" api:"nullable"`
+	Revenue           string                                `json:"revenue" api:"nullable"`
+	Sector            string                                `json:"sector" api:"nullable"`
+	Sic               string                                `json:"sic" api:"nullable"`
+	State             string                                `json:"state" api:"nullable"`
+	Symbols           []CompanyListResponseResultSymbol     `json:"symbols" api:"nullable"`
+	UpdatedAt         string                                `json:"updatedAt" api:"nullable"`
+	WebResources      CompanyListResponseResultWebResources `json:"webResources" api:"nullable"`
+	YearFounded       int64                                 `json:"yearFounded" api:"nullable"`
+	Zip               string                                `json:"zip" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                respjson.Field
@@ -148,10 +148,10 @@ func (r *CompanyListResponseResult) UnmarshalJSON(data []byte) error {
 }
 
 type CompanyListResponseResultSymbol struct {
-	Exchange          string `json:"exchange,nullable"`
-	ExchangeShortName string `json:"exchangeShortName,nullable"`
-	IpoDate           string `json:"ipoDate,nullable"`
-	Symbol            string `json:"symbol,nullable"`
+	Exchange          string `json:"exchange" api:"nullable"`
+	ExchangeShortName string `json:"exchangeShortName" api:"nullable"`
+	IpoDate           string `json:"ipoDate" api:"nullable"`
+	Symbol            string `json:"symbol" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Exchange          respjson.Field
@@ -170,23 +170,23 @@ func (r *CompanyListResponseResultSymbol) UnmarshalJSON(data []byte) error {
 }
 
 type CompanyListResponseResultWebResources struct {
-	About     string `json:"about,nullable"`
-	Blog      string `json:"blog,nullable"`
-	Careers   string `json:"careers,nullable"`
-	Events    string `json:"events,nullable"`
-	Facebook  string `json:"facebook,nullable"`
-	Instagram string `json:"instagram,nullable"`
-	Linkedin  string `json:"linkedin,nullable"`
-	Medium    string `json:"medium,nullable"`
-	Reddit    string `json:"reddit,nullable"`
-	Sitemap   string `json:"sitemap,nullable"`
-	Threads   string `json:"threads,nullable"`
-	Tiktok    string `json:"tiktok,nullable"`
-	Updates   string `json:"updates,nullable"`
-	Wellfound string `json:"wellfound,nullable"`
-	Wikipedia string `json:"wikipedia,nullable"`
-	X         string `json:"x,nullable"`
-	Youtube   string `json:"youtube,nullable"`
+	About     string `json:"about" api:"nullable"`
+	Blog      string `json:"blog" api:"nullable"`
+	Careers   string `json:"careers" api:"nullable"`
+	Events    string `json:"events" api:"nullable"`
+	Facebook  string `json:"facebook" api:"nullable"`
+	Instagram string `json:"instagram" api:"nullable"`
+	Linkedin  string `json:"linkedin" api:"nullable"`
+	Medium    string `json:"medium" api:"nullable"`
+	Reddit    string `json:"reddit" api:"nullable"`
+	Sitemap   string `json:"sitemap" api:"nullable"`
+	Threads   string `json:"threads" api:"nullable"`
+	Tiktok    string `json:"tiktok" api:"nullable"`
+	Updates   string `json:"updates" api:"nullable"`
+	Wellfound string `json:"wellfound" api:"nullable"`
+	Wikipedia string `json:"wikipedia" api:"nullable"`
+	X         string `json:"x" api:"nullable"`
+	Youtube   string `json:"youtube" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		About       respjson.Field

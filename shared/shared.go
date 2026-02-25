@@ -15,7 +15,7 @@ type paramUnion = param.APIUnion
 type paramObj = param.APIObject
 
 type CategoryHolder struct {
-	Name string `json:"name,nullable"`
+	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Name        respjson.Field
@@ -31,8 +31,8 @@ func (r *CategoryHolder) UnmarshalJSON(data []byte) error {
 }
 
 type Coordinate struct {
-	Lat float64 `json:"lat,nullable"`
-	Lon float64 `json:"lon,nullable"`
+	Lat float64 `json:"lat" api:"nullable"`
+	Lon float64 `json:"lon" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Lat         respjson.Field
@@ -49,11 +49,11 @@ func (r *Coordinate) UnmarshalJSON(data []byte) error {
 }
 
 type LocationHolder struct {
-	Area    string `json:"area,nullable"`
-	City    string `json:"city,nullable"`
-	Country string `json:"country,nullable"`
-	County  string `json:"county,nullable"`
-	State   string `json:"state,nullable"`
+	Area    string `json:"area" api:"nullable"`
+	City    string `json:"city" api:"nullable"`
+	Country string `json:"country" api:"nullable"`
+	County  string `json:"county" api:"nullable"`
+	State   string `json:"state" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Area        respjson.Field
@@ -73,11 +73,11 @@ func (r *LocationHolder) UnmarshalJSON(data []byte) error {
 }
 
 type SourceLocation struct {
-	City        string     `json:"city,nullable"`
-	Coordinates Coordinate `json:"coordinates,nullable"`
-	Country     string     `json:"country,nullable"`
-	County      string     `json:"county,nullable"`
-	State       string     `json:"state,nullable"`
+	City        string     `json:"city" api:"nullable"`
+	Coordinates Coordinate `json:"coordinates" api:"nullable"`
+	Country     string     `json:"country" api:"nullable"`
+	County      string     `json:"county" api:"nullable"`
+	State       string     `json:"state" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		City        respjson.Field

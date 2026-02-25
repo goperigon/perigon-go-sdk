@@ -57,8 +57,8 @@ const (
 )
 
 type SourceTopStatHolder struct {
-	Count int64  `json:"count,nullable"`
-	Name  string `json:"name,nullable"`
+	Count int64  `json:"count" api:"nullable"`
+	Name  string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Count       respjson.Field
@@ -76,9 +76,9 @@ func (r *SourceTopStatHolder) UnmarshalJSON(data []byte) error {
 
 // Source search result
 type SourceListResponse struct {
-	NumResults int64                      `json:"numResults,required"`
-	Results    []SourceListResponseResult `json:"results,required"`
-	Status     int64                      `json:"status,required"`
+	NumResults int64                      `json:"numResults" api:"required"`
+	Results    []SourceListResponseResult `json:"results" api:"required"`
+	Status     int64                      `json:"status" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		NumResults  respjson.Field
@@ -96,29 +96,29 @@ func (r *SourceListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type SourceListResponseResult struct {
-	ID                 string                `json:"id,nullable"`
-	AdFontesBiasRating string                `json:"adFontesBiasRating,nullable"`
-	AllSidesBiasRating string                `json:"allSidesBiasRating,nullable"`
-	AltNames           []string              `json:"altNames,nullable"`
-	AvgBiasRating      string                `json:"avgBiasRating,nullable"`
-	AvgMonthlyPosts    int64                 `json:"avgMonthlyPosts,nullable"`
-	Description        string                `json:"description,nullable"`
-	Domain             string                `json:"domain,nullable"`
-	GlobalRank         int64                 `json:"globalRank,nullable"`
-	Location           shared.SourceLocation `json:"location,nullable"`
-	LogoFavIcon        ImageHolder           `json:"logoFavIcon,nullable"`
-	LogoLarge          ImageHolder           `json:"logoLarge,nullable"`
-	LogoSquare         ImageHolder           `json:"logoSquare,nullable"`
-	MbfcBiasRating     string                `json:"mbfcBiasRating,nullable"`
-	MonthlyVisits      int64                 `json:"monthlyVisits,nullable"`
-	Name               string                `json:"name,nullable"`
-	Paywall            bool                  `json:"paywall,nullable"`
-	PrimaryRecordID    string                `json:"primaryRecordId,nullable"`
-	TopCategories      []SourceTopStatHolder `json:"topCategories,nullable"`
-	TopCountries       []SourceTopStatHolder `json:"topCountries,nullable"`
-	TopLabels          []SourceTopStatHolder `json:"topLabels,nullable"`
-	TopTopics          []SourceTopStatHolder `json:"topTopics,nullable"`
-	UpdatedAt          string                `json:"updatedAt,nullable"`
+	ID                 string                `json:"id" api:"nullable"`
+	AdFontesBiasRating string                `json:"adFontesBiasRating" api:"nullable"`
+	AllSidesBiasRating string                `json:"allSidesBiasRating" api:"nullable"`
+	AltNames           []string              `json:"altNames" api:"nullable"`
+	AvgBiasRating      string                `json:"avgBiasRating" api:"nullable"`
+	AvgMonthlyPosts    int64                 `json:"avgMonthlyPosts" api:"nullable"`
+	Description        string                `json:"description" api:"nullable"`
+	Domain             string                `json:"domain" api:"nullable"`
+	GlobalRank         int64                 `json:"globalRank" api:"nullable"`
+	Location           shared.SourceLocation `json:"location" api:"nullable"`
+	LogoFavIcon        ImageHolder           `json:"logoFavIcon" api:"nullable"`
+	LogoLarge          ImageHolder           `json:"logoLarge" api:"nullable"`
+	LogoSquare         ImageHolder           `json:"logoSquare" api:"nullable"`
+	MbfcBiasRating     string                `json:"mbfcBiasRating" api:"nullable"`
+	MonthlyVisits      int64                 `json:"monthlyVisits" api:"nullable"`
+	Name               string                `json:"name" api:"nullable"`
+	Paywall            bool                  `json:"paywall" api:"nullable"`
+	PrimaryRecordID    string                `json:"primaryRecordId" api:"nullable"`
+	TopCategories      []SourceTopStatHolder `json:"topCategories" api:"nullable"`
+	TopCountries       []SourceTopStatHolder `json:"topCountries" api:"nullable"`
+	TopLabels          []SourceTopStatHolder `json:"topLabels" api:"nullable"`
+	TopTopics          []SourceTopStatHolder `json:"topTopics" api:"nullable"`
+	UpdatedAt          string                `json:"updatedAt" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                 respjson.Field
