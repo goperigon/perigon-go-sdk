@@ -59,41 +59,41 @@ func (r *StoryService) List(ctx context.Context, query StoryListParams, opts ...
 }
 
 type NewsCluster struct {
-	ID                string                  `json:"id,nullable"`
-	Categories        []RecordStatHolder      `json:"categories,nullable"`
-	Companies         []NewsClusterCompany    `json:"companies,nullable"`
-	Countries         []RecordStatHolder      `json:"countries,nullable"`
-	CreatedAt         string                  `json:"createdAt,nullable"`
-	DuplicateOf       string                  `json:"duplicateOf,nullable"`
-	Highlights        map[string][]string     `json:"highlights,nullable"`
-	ImageSource       NewsClusterImageSource  `json:"imageSource,nullable"`
-	ImageURL          string                  `json:"imageUrl,nullable"`
-	InitializedAt     string                  `json:"initializedAt,nullable"`
-	KeyPoints         []NewsClusterKeyPoint   `json:"keyPoints,nullable"`
-	Locations         []NewsClusterLocation   `json:"locations,nullable"`
-	Name              string                  `json:"name,nullable"`
-	People            []NewsClusterPerson     `json:"people,nullable"`
-	Questions         []NewsClusterQuestion   `json:"questions,nullable"`
-	ReprintCount      int64                   `json:"reprintCount,nullable"`
-	SelectedArticles  []Article               `json:"selectedArticles,nullable"`
-	Sentiment         NewsClusterSentiment    `json:"sentiment,nullable"`
-	ShortSummary      string                  `json:"shortSummary,nullable"`
-	Slug              string                  `json:"slug,nullable"`
-	Summary           string                  `json:"summary,nullable"`
-	SummaryReferences []string                `json:"summaryReferences,nullable"`
-	Taxonomies        []RecordStatHolder      `json:"taxonomies,nullable"`
-	TopCategories     []shared.CategoryHolder `json:"topCategories,nullable"`
-	TopCompanies      []NewsClusterTopCompany `json:"topCompanies,nullable"`
-	TopCountries      []string                `json:"topCountries,nullable"`
-	Topics            []RecordStatHolder      `json:"topics,nullable"`
-	TopLocations      []shared.LocationHolder `json:"topLocations,nullable"`
-	TopPeople         []NewsClusterTopPerson  `json:"topPeople,nullable"`
-	TopTaxonomies     []shared.CategoryHolder `json:"topTaxonomies,nullable"`
-	TopTopics         []NewsClusterTopTopic   `json:"topTopics,nullable"`
-	TotalCount        int64                   `json:"totalCount,nullable"`
-	UniqueCount       int64                   `json:"uniqueCount,nullable"`
-	UniqueSources     []string                `json:"uniqueSources,nullable"`
-	UpdatedAt         string                  `json:"updatedAt,nullable"`
+	ID                string                  `json:"id" api:"nullable"`
+	Categories        []RecordStatHolder      `json:"categories" api:"nullable"`
+	Companies         []NewsClusterCompany    `json:"companies" api:"nullable"`
+	Countries         []RecordStatHolder      `json:"countries" api:"nullable"`
+	CreatedAt         string                  `json:"createdAt" api:"nullable"`
+	DuplicateOf       string                  `json:"duplicateOf" api:"nullable"`
+	Highlights        map[string][]string     `json:"highlights" api:"nullable"`
+	ImageSource       NewsClusterImageSource  `json:"imageSource" api:"nullable"`
+	ImageURL          string                  `json:"imageUrl" api:"nullable"`
+	InitializedAt     string                  `json:"initializedAt" api:"nullable"`
+	KeyPoints         []NewsClusterKeyPoint   `json:"keyPoints" api:"nullable"`
+	Locations         []NewsClusterLocation   `json:"locations" api:"nullable"`
+	Name              string                  `json:"name" api:"nullable"`
+	People            []NewsClusterPerson     `json:"people" api:"nullable"`
+	Questions         []NewsClusterQuestion   `json:"questions" api:"nullable"`
+	ReprintCount      int64                   `json:"reprintCount" api:"nullable"`
+	SelectedArticles  []Article               `json:"selectedArticles" api:"nullable"`
+	Sentiment         NewsClusterSentiment    `json:"sentiment" api:"nullable"`
+	ShortSummary      string                  `json:"shortSummary" api:"nullable"`
+	Slug              string                  `json:"slug" api:"nullable"`
+	Summary           string                  `json:"summary" api:"nullable"`
+	SummaryReferences []string                `json:"summaryReferences" api:"nullable"`
+	Taxonomies        []RecordStatHolder      `json:"taxonomies" api:"nullable"`
+	TopCategories     []shared.CategoryHolder `json:"topCategories" api:"nullable"`
+	TopCompanies      []NewsClusterTopCompany `json:"topCompanies" api:"nullable"`
+	TopCountries      []string                `json:"topCountries" api:"nullable"`
+	Topics            []RecordStatHolder      `json:"topics" api:"nullable"`
+	TopLocations      []shared.LocationHolder `json:"topLocations" api:"nullable"`
+	TopPeople         []NewsClusterTopPerson  `json:"topPeople" api:"nullable"`
+	TopTaxonomies     []shared.CategoryHolder `json:"topTaxonomies" api:"nullable"`
+	TopTopics         []NewsClusterTopTopic   `json:"topTopics" api:"nullable"`
+	TotalCount        int64                   `json:"totalCount" api:"nullable"`
+	UniqueCount       int64                   `json:"uniqueCount" api:"nullable"`
+	UniqueSources     []string                `json:"uniqueSources" api:"nullable"`
+	UpdatedAt         string                  `json:"updatedAt" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                respjson.Field
@@ -143,11 +143,11 @@ func (r *NewsCluster) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterCompany struct {
-	ID      string   `json:"id,nullable"`
-	Count   int64    `json:"count,nullable"`
-	Domains []string `json:"domains,nullable"`
-	Name    string   `json:"name,nullable"`
-	Symbols []string `json:"symbols,nullable"`
+	ID      string   `json:"id" api:"nullable"`
+	Count   int64    `json:"count" api:"nullable"`
+	Domains []string `json:"domains" api:"nullable"`
+	Name    string   `json:"name" api:"nullable"`
+	Symbols []string `json:"symbols" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID          respjson.Field
@@ -167,9 +167,9 @@ func (r *NewsClusterCompany) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterImageSource struct {
-	Domain   string                `json:"domain,nullable"`
-	Location shared.SourceLocation `json:"location,nullable"`
-	Paywall  bool                  `json:"paywall,nullable"`
+	Domain   string                `json:"domain" api:"nullable"`
+	Location shared.SourceLocation `json:"location" api:"nullable"`
+	Paywall  bool                  `json:"paywall" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Domain      respjson.Field
@@ -187,8 +187,8 @@ func (r *NewsClusterImageSource) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterKeyPoint struct {
-	Point      string   `json:"point,nullable"`
-	References []string `json:"references,nullable"`
+	Point      string   `json:"point" api:"nullable"`
+	References []string `json:"references" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Point       respjson.Field
@@ -205,11 +205,11 @@ func (r *NewsClusterKeyPoint) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterLocation struct {
-	Area   string `json:"area,nullable"`
-	City   string `json:"city,nullable"`
-	Count  int64  `json:"count,nullable"`
-	County string `json:"county,nullable"`
-	State  string `json:"state,nullable"`
+	Area   string `json:"area" api:"nullable"`
+	City   string `json:"city" api:"nullable"`
+	Count  int64  `json:"count" api:"nullable"`
+	County string `json:"county" api:"nullable"`
+	State  string `json:"state" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Area        respjson.Field
@@ -229,9 +229,9 @@ func (r *NewsClusterLocation) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterPerson struct {
-	Count      int64  `json:"count,nullable"`
-	Name       string `json:"name,nullable"`
-	WikidataID string `json:"wikidataId,nullable"`
+	Count      int64  `json:"count" api:"nullable"`
+	Name       string `json:"name" api:"nullable"`
+	WikidataID string `json:"wikidataId" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Count       respjson.Field
@@ -249,9 +249,9 @@ func (r *NewsClusterPerson) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterQuestion struct {
-	Answer     string   `json:"answer,nullable"`
-	Question   string   `json:"question,nullable"`
-	References []string `json:"references,nullable"`
+	Answer     string   `json:"answer" api:"nullable"`
+	Question   string   `json:"question" api:"nullable"`
+	References []string `json:"references" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Answer      respjson.Field
@@ -269,9 +269,9 @@ func (r *NewsClusterQuestion) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterSentiment struct {
-	Negative float64 `json:"negative,nullable"`
-	Neutral  float64 `json:"neutral,nullable"`
-	Positive float64 `json:"positive,nullable"`
+	Negative float64 `json:"negative" api:"nullable"`
+	Neutral  float64 `json:"neutral" api:"nullable"`
+	Positive float64 `json:"positive" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Negative    respjson.Field
@@ -289,10 +289,10 @@ func (r *NewsClusterSentiment) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterTopCompany struct {
-	ID      string   `json:"id,nullable"`
-	Domains []string `json:"domains,nullable"`
-	Name    string   `json:"name,nullable"`
-	Symbols []string `json:"symbols,nullable"`
+	ID      string   `json:"id" api:"nullable"`
+	Domains []string `json:"domains" api:"nullable"`
+	Name    string   `json:"name" api:"nullable"`
+	Symbols []string `json:"symbols" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID          respjson.Field
@@ -311,8 +311,8 @@ func (r *NewsClusterTopCompany) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterTopPerson struct {
-	Name       string `json:"name,nullable"`
-	WikidataID string `json:"wikidataId,nullable"`
+	Name       string `json:"name" api:"nullable"`
+	WikidataID string `json:"wikidataId" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Name        respjson.Field
@@ -329,7 +329,7 @@ func (r *NewsClusterTopPerson) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterTopTopic struct {
-	Name string `json:"name,nullable"`
+	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Name        respjson.Field
@@ -345,8 +345,8 @@ func (r *NewsClusterTopTopic) UnmarshalJSON(data []byte) error {
 }
 
 type RecordStatHolder struct {
-	Count int64  `json:"count,nullable"`
-	Name  string `json:"name,nullable"`
+	Count int64  `json:"count" api:"nullable"`
+	Name  string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Count       respjson.Field
@@ -364,9 +364,9 @@ func (r *RecordStatHolder) UnmarshalJSON(data []byte) error {
 
 // Story search result
 type StoryListResponse struct {
-	NumResults int64         `json:"numResults,required"`
-	Results    []NewsCluster `json:"results,required"`
-	Status     int64         `json:"status,required"`
+	NumResults int64         `json:"numResults" api:"required"`
+	Results    []NewsCluster `json:"results" api:"required"`
+	Status     int64         `json:"status" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		NumResults  respjson.Field

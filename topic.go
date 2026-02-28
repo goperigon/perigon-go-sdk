@@ -46,8 +46,8 @@ func (r *TopicService) List(ctx context.Context, query TopicListParams, opts ...
 
 // Topic search result
 type TopicListResponse struct {
-	Data  []TopicListResponseData `json:"data,required"`
-	Total int64                   `json:"total,required"`
+	Data  []TopicListResponseData `json:"data" api:"required"`
+	Total int64                   `json:"total" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -64,11 +64,11 @@ func (r *TopicListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type TopicListResponseData struct {
-	ID        int64                       `json:"id,nullable"`
-	CreatedAt time.Time                   `json:"createdAt,nullable" format:"date-time"`
-	Labels    TopicListResponseDataLabels `json:"labels,nullable"`
-	Name      string                      `json:"name,nullable"`
-	UpdatedAt time.Time                   `json:"updatedAt,nullable" format:"date-time"`
+	ID        int64                       `json:"id" api:"nullable"`
+	CreatedAt time.Time                   `json:"createdAt" api:"nullable" format:"date-time"`
+	Labels    TopicListResponseDataLabels `json:"labels" api:"nullable"`
+	Name      string                      `json:"name" api:"nullable"`
+	UpdatedAt time.Time                   `json:"updatedAt" api:"nullable" format:"date-time"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID          respjson.Field
@@ -88,8 +88,8 @@ func (r *TopicListResponseData) UnmarshalJSON(data []byte) error {
 }
 
 type TopicListResponseDataLabels struct {
-	Category    string `json:"category,nullable"`
-	Subcategory string `json:"subcategory,nullable"`
+	Category    string `json:"category" api:"nullable"`
+	Subcategory string `json:"subcategory" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Category    respjson.Field

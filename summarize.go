@@ -46,10 +46,10 @@ func (r *SummarizeService) New(ctx context.Context, params SummarizeNewParams, o
 }
 
 type SummarizeNewResponse struct {
-	NumResults int64     `json:"numResults,required"`
-	Results    []Article `json:"results,required"`
-	Status     int64     `json:"status,required"`
-	Summary    string    `json:"summary,required"`
+	NumResults int64     `json:"numResults" api:"required"`
+	Results    []Article `json:"results" api:"required"`
+	Status     int64     `json:"status" api:"required"`
+	Summary    string    `json:"summary" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		NumResults  respjson.Field
