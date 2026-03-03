@@ -273,12 +273,14 @@ func (r *VectorNewsSearchResponse) UnmarshalJSON(data []byte) error {
 }
 
 type VectorNewsSearchResponseResult struct {
-	Data  Article `json:"data" api:"nullable"`
-	Score float64 `json:"score" api:"nullable"`
+	Data   Article                              `json:"data" api:"nullable"`
+	Score  float64                              `json:"score" api:"nullable"`
+	Vector VectorNewsSearchResponseResultVector `json:"vector" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
 		Score       respjson.Field
+		Vector      respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
@@ -287,6 +289,24 @@ type VectorNewsSearchResponseResult struct {
 // Returns the unmodified JSON received from the API
 func (r VectorNewsSearchResponseResult) RawJSON() string { return r.JSON.raw }
 func (r *VectorNewsSearchResponseResult) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type VectorNewsSearchResponseResultVector struct {
+	Data    []float64 `json:"data" api:"nullable"`
+	Version int64     `json:"version" api:"nullable"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Data        respjson.Field
+		Version     respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r VectorNewsSearchResponseResultVector) RawJSON() string { return r.JSON.raw }
+func (r *VectorNewsSearchResponseResultVector) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
