@@ -20,6 +20,10 @@ import (
 	"github.com/goperigon/perigon-go-sdk/v2/shared"
 )
 
+// Core endpoints for the Perigon News API v1, providing access to aggregated news
+// stories, articles, and related content. These endpoints enable searching,
+// filtering, and retrieving media content across multiple sources.
+//
 // JournalistService contains methods and other services that help with interacting
 // with the perigon API.
 //

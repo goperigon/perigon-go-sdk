@@ -16,17 +16,44 @@ import (
 // interacting with the perigon API. You should not instantiate this client
 // directly, and instead use the [NewClient] method instead.
 type Client struct {
-	Options     []option.RequestOption
-	All         AllService
-	Companies   CompanyService
+	Options []option.RequestOption
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	All AllService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Companies CompanyService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
 	Journalists JournalistService
-	People      PersonService
-	Sources     SourceService
-	Stories     StoryService
-	Summarize   SummarizeService
-	Topics      TopicService
-	Vector      VectorService
-	Wikipedia   WikipediaService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	People PersonService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Sources SourceService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Stories StoryService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Summarize SummarizeService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Topics TopicService
+	Vector VectorService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Wikipedia WikipediaService
 }
 
 // DefaultClientOptions read from the environment (PERIGON_API_KEY,
