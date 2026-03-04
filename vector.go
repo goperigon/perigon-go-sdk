@@ -14,7 +14,10 @@ import (
 // the [NewVectorService] method instead.
 type VectorService struct {
 	Options []option.RequestOption
-	News    VectorNewsService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	News VectorNewsService
 }
 
 // NewVectorService generates a new service that applies the given options to each
