@@ -107,6 +107,7 @@ type Article struct {
 	TranslatedTitle       string                  `json:"translatedTitle" api:"nullable"`
 	Translation           string                  `json:"translation" api:"nullable"`
 	URL                   string                  `json:"url" api:"nullable"`
+	Vectors               []ArticleVector         `json:"vectors" api:"nullable"`
 	Verdict               string                  `json:"verdict" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -153,6 +154,7 @@ type Article struct {
 		TranslatedTitle       respjson.Field
 		Translation           respjson.Field
 		URL                   respjson.Field
+		Vectors               respjson.Field
 		Verdict               respjson.Field
 		ExtraFields           map[string]respjson.Field
 		raw                   string
@@ -410,6 +412,24 @@ type ArticleTopic struct {
 // Returns the unmodified JSON received from the API
 func (r ArticleTopic) RawJSON() string { return r.JSON.raw }
 func (r *ArticleTopic) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type ArticleVector struct {
+	Data    []float64 `json:"data" api:"nullable"`
+	Version int64     `json:"version" api:"nullable"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Data        respjson.Field
+		Version     respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r ArticleVector) RawJSON() string { return r.JSON.raw }
+func (r *ArticleVector) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
