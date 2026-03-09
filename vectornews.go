@@ -277,14 +277,14 @@ func (r *VectorNewsSearchResponse) UnmarshalJSON(data []byte) error {
 }
 
 type VectorNewsSearchResponseResult struct {
-	Data   Article                              `json:"data" api:"nullable"`
-	Score  float64                              `json:"score" api:"nullable"`
-	Vector VectorNewsSearchResponseResultVector `json:"vector" api:"nullable"`
+	Data    Article                                `json:"data" api:"nullable"`
+	Score   float64                                `json:"score" api:"nullable"`
+	Vectors []VectorNewsSearchResponseResultVector `json:"vectors" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
 		Score       respjson.Field
-		Vector      respjson.Field
+		Vectors     respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
