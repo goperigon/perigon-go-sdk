@@ -38,7 +38,7 @@ func TestUserAgentHeader(t *testing.T) {
 			},
 		}),
 	)
-	client.All.List(context.Background(), perigon.AllListParams{})
+	_, _ = client.All.List(context.Background(), perigon.AllListParams{})
 	if userAgent != fmt.Sprintf("Perigon/Go %s", internal.PackageVersion) {
 		t.Errorf("Expected User-Agent to be correct, but got: %#v", userAgent)
 	}
