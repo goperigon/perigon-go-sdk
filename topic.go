@@ -45,7 +45,7 @@ func (r *TopicService) List(ctx context.Context, query TopicListParams, opts ...
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/topics/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Topic search result

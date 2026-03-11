@@ -47,7 +47,7 @@ func (r *SourceService) List(ctx context.Context, query SourceListParams, opts .
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/sources/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 type SortBy string

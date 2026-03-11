@@ -59,7 +59,7 @@ func (r *StoryService) List(ctx context.Context, query StoryListParams, opts ...
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/stories/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 type NewsCluster struct {

@@ -48,7 +48,7 @@ func (r *PersonService) List(ctx context.Context, query PersonListParams, opts .
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/people/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 type ImageHolder struct {

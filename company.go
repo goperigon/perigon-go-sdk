@@ -47,7 +47,7 @@ func (r *CompanyService) List(ctx context.Context, query CompanyListParams, opts
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/companies/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Company search result
