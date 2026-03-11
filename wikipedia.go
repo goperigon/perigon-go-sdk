@@ -46,7 +46,7 @@ func (r *WikipediaService) Search(ctx context.Context, query WikipediaSearchPara
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/wikipedia/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Perform a natural language search over Wikipedia pages using semantic relevance.
@@ -56,7 +56,7 @@ func (r *WikipediaService) VectorSearch(ctx context.Context, body WikipediaVecto
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/vector/wikipedia/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // Complex filter structure for Wikipedia page searches that supports nested

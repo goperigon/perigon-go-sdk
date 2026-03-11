@@ -49,11 +49,11 @@ func (r *JournalistService) Get(ctx context.Context, id string, opts ...option.R
 	opts = slices.Concat(r.Options, opts)
 	if id == "" {
 		err = errors.New("missing required id parameter")
-		return
+		return nil, err
 	}
 	path := fmt.Sprintf("v1/journalists/%s", id)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	return res, err
 }
 
 // Search journalists using broad search attributes. Our database contains over
@@ -62,7 +62,7 @@ func (r *JournalistService) List(ctx context.Context, query JournalistListParams
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/journalists/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 type Journalist struct {

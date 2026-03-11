@@ -45,7 +45,7 @@ func (r *VectorNewsService) Search(ctx context.Context, body VectorNewsSearchPar
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/vector/news/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // Complex filter structure for article searches that supports nested logical

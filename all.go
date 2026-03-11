@@ -48,7 +48,7 @@ func (r *AllService) List(ctx context.Context, query AllListParams, opts ...opti
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/articles/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 type AllEndpointSortBy string

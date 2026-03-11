@@ -46,7 +46,7 @@ func (r *SummarizeService) New(ctx context.Context, params SummarizeNewParams, o
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/summarize"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, params, &res, opts...)
-	return
+	return res, err
 }
 
 type SummarizeNewResponse struct {
