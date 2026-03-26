@@ -209,16 +209,18 @@ func (r *NewsClusterKeyPoint) UnmarshalJSON(data []byte) error {
 }
 
 type NewsClusterLocation struct {
-	Area   string `json:"area" api:"nullable"`
-	City   string `json:"city" api:"nullable"`
-	Count  int64  `json:"count" api:"nullable"`
-	County string `json:"county" api:"nullable"`
-	State  string `json:"state" api:"nullable"`
+	Area    string `json:"area" api:"nullable"`
+	City    string `json:"city" api:"nullable"`
+	Count   int64  `json:"count" api:"nullable"`
+	Country string `json:"country" api:"nullable"`
+	County  string `json:"county" api:"nullable"`
+	State   string `json:"state" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Area        respjson.Field
 		City        respjson.Field
 		Count       respjson.Field
+		Country     respjson.Field
 		County      respjson.Field
 		State       respjson.Field
 		ExtraFields map[string]respjson.Field
