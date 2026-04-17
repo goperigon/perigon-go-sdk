@@ -123,7 +123,7 @@ func TestSummarizeNewWithOptionalParams(t *testing.T) {
 		MaxArticleCount:         perigon.Int(1),
 		MaxTokens:               perigon.Int(0),
 		Method:                  perigon.SummarizeNewParamsMethodArticles,
-		Model:                   perigon.SummarizeNewParamsModelGpt4o,
+		Model:                   perigon.SummarizeNewParamsModelGpt5_4Mini,
 		Prompt:                  perigon.String("prompt"),
 		ReturnedArticleCount:    perigon.Int(1),
 		SummarizeFields:         []string{"TITLE"},

@@ -228,7 +228,8 @@ type SummarizeNewParams struct {
 	Method SummarizeNewParamsMethod `json:"method,omitzero"`
 	// The underlying LLM model to use for generation.
 	//
-	// Any of "gpt-4o", "gpt-4o-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano",
+	// Any of "gpt-5.4-mini", "gpt-5.4-nano", "gpt-5-mini", "gpt-5-nano", "gpt-4o",
+	// "gpt-4o-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano",
 	// "llama-3.3-70b-versatile", "openai/gpt-oss-120b".
 	Model SummarizeNewParamsModel `json:"model,omitzero"`
 	// Which article fields to include when generating the summary. Up to three values
@@ -472,6 +473,10 @@ const (
 type SummarizeNewParamsModel string
 
 const (
+	SummarizeNewParamsModelGpt5_4Mini            SummarizeNewParamsModel = "gpt-5.4-mini"
+	SummarizeNewParamsModelGpt5_4Nano            SummarizeNewParamsModel = "gpt-5.4-nano"
+	SummarizeNewParamsModelGpt5Mini              SummarizeNewParamsModel = "gpt-5-mini"
+	SummarizeNewParamsModelGpt5Nano              SummarizeNewParamsModel = "gpt-5-nano"
 	SummarizeNewParamsModelGpt4o                 SummarizeNewParamsModel = "gpt-4o"
 	SummarizeNewParamsModelGpt4oMini             SummarizeNewParamsModel = "gpt-4o-mini"
 	SummarizeNewParamsModelGpt4_1                SummarizeNewParamsModel = "gpt-4.1"
