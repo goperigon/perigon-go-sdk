@@ -782,7 +782,7 @@ type AllListParams struct {
 	// String Array. Filters by Google Content Categories. This field will accept 1 or
 	// more categories, must pass the full name of the category. Example:
 	// taxonomy=/Finance/Banking/Other, /Finance/Investing/Funds.
-	// [Full list](https://cloud.google.com/natural-language/docs/categories)
+	// [Full list](https://docs.cloud.google.com/natural-language/docs/categories#version_2)
 	Taxonomy []string `query:"taxonomy,omitzero" json:"-"`
 	// String Array. Filter by specific topics such as Markets, Crime, Cryptocurrency,
 	// or College Sports. Topics are more granular than categories, and articles can
