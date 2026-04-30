@@ -1,5 +1,46 @@
 # Changelog
 
+## 2.13.0 (2026-04-30)
+
+Full Changelog: [v2.12.1...v2.13.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.12.1...v2.13.0)
+
+### Features
+
+* **api:** api update ([a876073](https://github.com/goperigon/perigon-go-sdk/commit/a876073c9d5c0a98473b53f65e538a9e57a97dcf))
+* **api:** api update ([9146ae0](https://github.com/goperigon/perigon-go-sdk/commit/9146ae001d16ea0445d981cb3d6b3a3eb79eee5e))
+* **api:** api update ([5f3d2b7](https://github.com/goperigon/perigon-go-sdk/commit/5f3d2b7a7e8d2614182fecec96f5bca435f3220a))
+* **api:** api update ([f9a42ae](https://github.com/goperigon/perigon-go-sdk/commit/f9a42ae05078c8cecbf7a0686ee68f5248664628))
+* **api:** api update ([696b95b](https://github.com/goperigon/perigon-go-sdk/commit/696b95bbba02c0ae9607a0adb2504b6ac083f031))
+* **api:** api update ([9f260f8](https://github.com/goperigon/perigon-go-sdk/commit/9f260f8397d0eea7d5d0313c0e6de067d476e689))
+* **api:** api update ([b47e8b8](https://github.com/goperigon/perigon-go-sdk/commit/b47e8b85c4c83f884a7ec74028c6c22cdaef00a5))
+* **api:** manual updates ([d0e0393](https://github.com/goperigon/perigon-go-sdk/commit/d0e03939615e6368748bb005e6a34bf6bda7e7f4))
+* **api:** manual updates v2 ([7177d1e](https://github.com/goperigon/perigon-go-sdk/commit/7177d1ee86c1a11512f0bde57bc6f260e91cb965))
+* **internal:** support comma format in multipart form encoding ([57c4cd6](https://github.com/goperigon/perigon-go-sdk/commit/57c4cd62f87bb7244e4713a7d743e018e3bb9845))
+* support setting headers via env ([1bbd347](https://github.com/goperigon/perigon-go-sdk/commit/1bbd34731e935f97f7d153812240851616765586))
+
+
+### Bug Fixes
+
+* prevent duplicate ? in query params ([7b68ad8](https://github.com/goperigon/perigon-go-sdk/commit/7b68ad8499c982e8bd3b756125f8ba4a9ca7c93e))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([4e7d0dc](https://github.com/goperigon/perigon-go-sdk/commit/4e7d0dce1e3b69515f98fd93c49a92a2d4b03e16))
+* **ci:** support opting out of skipping builds on metadata-only commits ([cc9f0ef](https://github.com/goperigon/perigon-go-sdk/commit/cc9f0ef4b5b3678067a41e0d608282d3c9058e42))
+* **client:** fix multipart serialisation of Default() fields ([bb9aa18](https://github.com/goperigon/perigon-go-sdk/commit/bb9aa1897deab1829aeb9bd685a36702b44c142b))
+* **internal:** support default value struct tag ([d24889f](https://github.com/goperigon/perigon-go-sdk/commit/d24889f5b3e55880c0715b1e43353e7448660cbb))
+* **internal:** update gitignore ([41afe25](https://github.com/goperigon/perigon-go-sdk/commit/41afe257621a24e14106659d661222824a4502f1))
+* remove unnecessary error check for url parsing ([492cc54](https://github.com/goperigon/perigon-go-sdk/commit/492cc547f4abf2ae07ba84580f60735c6ca72194))
+* **tests:** bump steady to v0.19.4 ([39e80dc](https://github.com/goperigon/perigon-go-sdk/commit/39e80dc4be7de6b37dfdec99c5cc8d0d4e150ef0))
+* **tests:** bump steady to v0.19.5 ([a8b05fd](https://github.com/goperigon/perigon-go-sdk/commit/a8b05fdfc3594cd0a9948e4156d531556c26ce80))
+* **tests:** bump steady to v0.19.6 ([c26fdbc](https://github.com/goperigon/perigon-go-sdk/commit/c26fdbc4931c02cff611a4b1ec935bbc903d417d))
+* **tests:** bump steady to v0.19.7 ([720c026](https://github.com/goperigon/perigon-go-sdk/commit/720c0263bc22a2d0d489ce69a3216654bab84c42))
+* **tests:** bump steady to v0.20.1 ([7ad7da6](https://github.com/goperigon/perigon-go-sdk/commit/7ad7da6f8a9409a348ce6e782e36a74afb7e1426))
+* **tests:** bump steady to v0.20.2 ([71afa91](https://github.com/goperigon/perigon-go-sdk/commit/71afa91326f2640189dd75a77cb493d994253415))
+* **tests:** bump steady to v0.22.1 ([9d506e1](https://github.com/goperigon/perigon-go-sdk/commit/9d506e1dae15206fbaf124bcc33d18cdc1eb6e65))
+* update docs for api:"required" ([7f590e4](https://github.com/goperigon/perigon-go-sdk/commit/7f590e435de31f2513c3a207df99d8c8e49c3795))
+
 ## 2.12.1 (2026-02-11)
 
 Full Changelog: [v2.12.0...v2.12.1](https://github.com/goperigon/perigon-go-sdk/compare/v2.12.0...v2.12.1)
