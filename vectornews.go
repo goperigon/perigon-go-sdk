@@ -15,6 +15,10 @@ import (
 	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 )
 
+// Core endpoints for the Perigon News API v1, providing access to aggregated news
+// stories, articles, and related content. These endpoints enable searching,
+// filtering, and retrieving media content across multiple sources.
+//
 // VectorNewsService contains methods and other services that help with interacting
 // with the perigon API.
 //
@@ -41,7 +45,7 @@ func (r *VectorNewsService) Search(ctx context.Context, body VectorNewsSearchPar
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/vector/news/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // Complex filter structure for article searches that supports nested logical
@@ -255,8 +259,8 @@ func (r *CoordinateFilterParam) UnmarshalJSON(data []byte) error {
 
 // Articles vector search result
 type VectorNewsSearchResponse struct {
-	Results []VectorNewsSearchResponseResult `json:"results,required"`
-	Status  int64                            `json:"status,required"`
+	Results []VectorNewsSearchResponseResult `json:"results" api:"required"`
+	Status  int64                            `json:"status" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Results     respjson.Field
@@ -273,12 +277,14 @@ func (r *VectorNewsSearchResponse) UnmarshalJSON(data []byte) error {
 }
 
 type VectorNewsSearchResponseResult struct {
-	Data  Article `json:"data,nullable"`
-	Score float64 `json:"score,nullable"`
+	Data    Article                                `json:"data" api:"nullable"`
+	Score   float64                                `json:"score" api:"nullable"`
+	Vectors []VectorNewsSearchResponseResultVector `json:"vectors" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
 		Score       respjson.Field
+		Vectors     respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
@@ -290,9 +296,27 @@ func (r *VectorNewsSearchResponseResult) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+type VectorNewsSearchResponseResultVector struct {
+	Data    []float64 `json:"data" api:"nullable"`
+	Version int64     `json:"version" api:"nullable"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Data        respjson.Field
+		Version     respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r VectorNewsSearchResponseResultVector) RawJSON() string { return r.JSON.raw }
+func (r *VectorNewsSearchResponseResultVector) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
 type VectorNewsSearchParams struct {
 	// Natural language query to search the news articles database
-	Prompt string `json:"prompt,required"`
+	Prompt string `json:"prompt" api:"required"`
 	// The page number to retrieve.
 	Page param.Opt[int64] `json:"page,omitzero"`
 	// 'pubDateFrom' filter, will search articles published after the specified date,

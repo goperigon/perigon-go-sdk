@@ -17,6 +17,10 @@ import (
 	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 )
 
+// Core endpoints for the Perigon News API v1, providing access to aggregated news
+// stories, articles, and related content. These endpoints enable searching,
+// filtering, and retrieving media content across multiple sources.
+//
 // WikipediaService contains methods and other services that help with interacting
 // with the perigon API.
 //
@@ -42,7 +46,7 @@ func (r *WikipediaService) Search(ctx context.Context, query WikipediaSearchPara
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/wikipedia/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	return res, err
 }
 
 // Perform a natural language search over Wikipedia pages using semantic relevance.
@@ -52,7 +56,7 @@ func (r *WikipediaService) VectorSearch(ctx context.Context, body WikipediaVecto
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/vector/wikipedia/all"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
-	return
+	return res, err
 }
 
 // Complex filter structure for Wikipedia page searches that supports nested
@@ -108,9 +112,9 @@ func (r *WikipediaSearchFilterParam) UnmarshalJSON(data []byte) error {
 
 // Wikipedia search result
 type WikipediaSearchResponse struct {
-	NumResults int64                           `json:"numResults,required"`
-	Results    []WikipediaSearchResponseResult `json:"results,required"`
-	Status     int64                           `json:"status,required"`
+	NumResults int64                           `json:"numResults" api:"required"`
+	Results    []WikipediaSearchResponseResult `json:"results" api:"required"`
+	Status     int64                           `json:"status" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		NumResults  respjson.Field
@@ -128,25 +132,25 @@ func (r *WikipediaSearchResponse) UnmarshalJSON(data []byte) error {
 }
 
 type WikipediaSearchResponseResult struct {
-	ID                 string                                 `json:"id,nullable"`
-	Categories         []string                               `json:"categories,nullable"`
-	ExternalLinks      []string                               `json:"externalLinks,nullable"`
-	Pageviews          int64                                  `json:"pageviews,nullable"`
-	RedirectTitles     []string                               `json:"redirectTitles,nullable"`
-	References         []string                               `json:"references,nullable"`
-	ScrapedAt          string                                 `json:"scrapedAt,nullable"`
-	Sections           []WikipediaSearchResponseResultSection `json:"sections,nullable"`
-	Summary            string                                 `json:"summary,nullable"`
-	TopImage           string                                 `json:"topImage,nullable"`
-	URL                string                                 `json:"url,nullable"`
-	WikiCode           string                                 `json:"wikiCode,nullable"`
-	WikidataID         string                                 `json:"wikidataId,nullable"`
-	WikidataInstanceOf []WikidataLabelHolder                  `json:"wikidataInstanceOf,nullable"`
-	WikiNamespace      int64                                  `json:"wikiNamespace,nullable"`
-	WikiPageID         int64                                  `json:"wikiPageId,nullable"`
-	WikiRevisionID     int64                                  `json:"wikiRevisionId,nullable"`
-	WikiRevisionTs     string                                 `json:"wikiRevisionTs,nullable"`
-	WikiTitle          string                                 `json:"wikiTitle,nullable"`
+	ID                 string                                 `json:"id" api:"nullable"`
+	Categories         []string                               `json:"categories" api:"nullable"`
+	ExternalLinks      []string                               `json:"externalLinks" api:"nullable"`
+	Pageviews          int64                                  `json:"pageviews" api:"nullable"`
+	RedirectTitles     []string                               `json:"redirectTitles" api:"nullable"`
+	References         []string                               `json:"references" api:"nullable"`
+	ScrapedAt          string                                 `json:"scrapedAt" api:"nullable"`
+	Sections           []WikipediaSearchResponseResultSection `json:"sections" api:"nullable"`
+	Summary            string                                 `json:"summary" api:"nullable"`
+	TopImage           string                                 `json:"topImage" api:"nullable"`
+	URL                string                                 `json:"url" api:"nullable"`
+	WikiCode           string                                 `json:"wikiCode" api:"nullable"`
+	WikidataID         string                                 `json:"wikidataId" api:"nullable"`
+	WikidataInstanceOf []WikidataLabelHolder                  `json:"wikidataInstanceOf" api:"nullable"`
+	WikiNamespace      int64                                  `json:"wikiNamespace" api:"nullable"`
+	WikiPageID         int64                                  `json:"wikiPageId" api:"nullable"`
+	WikiRevisionID     int64                                  `json:"wikiRevisionId" api:"nullable"`
+	WikiRevisionTs     string                                 `json:"wikiRevisionTs" api:"nullable"`
+	WikiTitle          string                                 `json:"wikiTitle" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                 respjson.Field
@@ -180,12 +184,12 @@ func (r *WikipediaSearchResponseResult) UnmarshalJSON(data []byte) error {
 }
 
 type WikipediaSearchResponseResultSection struct {
-	ID         string  `json:"id,nullable"`
-	Loc        []int64 `json:"loc,nullable"`
-	StyleLevel int64   `json:"styleLevel,nullable"`
-	TextRaw    string  `json:"textRaw,nullable"`
-	TextRich   string  `json:"textRich,nullable"`
-	Title      string  `json:"title,nullable"`
+	ID         string  `json:"id" api:"nullable"`
+	Loc        []int64 `json:"loc" api:"nullable"`
+	StyleLevel int64   `json:"styleLevel" api:"nullable"`
+	TextRaw    string  `json:"textRaw" api:"nullable"`
+	TextRich   string  `json:"textRich" api:"nullable"`
+	Title      string  `json:"title" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID          respjson.Field
@@ -207,8 +211,8 @@ func (r *WikipediaSearchResponseResultSection) UnmarshalJSON(data []byte) error 
 
 // Wikipedia vector search result
 type WikipediaVectorSearchResponse struct {
-	Results []WikipediaVectorSearchResponseResult `json:"results,required"`
-	Status  int64                                 `json:"status,required"`
+	Results []WikipediaVectorSearchResponseResult `json:"results" api:"required"`
+	Status  int64                                 `json:"status" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Results     respjson.Field
@@ -225,12 +229,14 @@ func (r *WikipediaVectorSearchResponse) UnmarshalJSON(data []byte) error {
 }
 
 type WikipediaVectorSearchResponseResult struct {
-	Data  WikipediaVectorSearchResponseResultData `json:"data,nullable"`
-	Score float64                                 `json:"score,nullable"`
+	Data    WikipediaVectorSearchResponseResultData     `json:"data" api:"nullable"`
+	Score   float64                                     `json:"score" api:"nullable"`
+	Vectors []WikipediaVectorSearchResponseResultVector `json:"vectors" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
 		Score       respjson.Field
+		Vectors     respjson.Field
 		ExtraFields map[string]respjson.Field
 		raw         string
 	} `json:"-"`
@@ -243,21 +249,21 @@ func (r *WikipediaVectorSearchResponseResult) UnmarshalJSON(data []byte) error {
 }
 
 type WikipediaVectorSearchResponseResultData struct {
-	Content            string                `json:"content,nullable"`
-	PageID             string                `json:"pageId,nullable"`
-	Pageviews          int64                 `json:"pageviews,nullable"`
-	RedirectTitles     []string              `json:"redirectTitles,nullable"`
-	SectionID          string                `json:"sectionId,nullable"`
-	StyleLevel         int64                 `json:"styleLevel,nullable"`
-	Title              string                `json:"title,nullable"`
-	WikiCode           string                `json:"wikiCode,nullable"`
-	WikidataID         string                `json:"wikidataId,nullable"`
-	WikidataInstanceOf []WikidataLabelHolder `json:"wikidataInstanceOf,nullable"`
-	WikiNamespace      int64                 `json:"wikiNamespace,nullable"`
-	WikiPageID         int64                 `json:"wikiPageId,nullable"`
-	WikiRevisionID     int64                 `json:"wikiRevisionId,nullable"`
-	WikiRevisionTs     string                `json:"wikiRevisionTs,nullable"`
-	WikiTitle          string                `json:"wikiTitle,nullable"`
+	Content            string                `json:"content" api:"nullable"`
+	PageID             string                `json:"pageId" api:"nullable"`
+	Pageviews          int64                 `json:"pageviews" api:"nullable"`
+	RedirectTitles     []string              `json:"redirectTitles" api:"nullable"`
+	SectionID          string                `json:"sectionId" api:"nullable"`
+	StyleLevel         int64                 `json:"styleLevel" api:"nullable"`
+	Title              string                `json:"title" api:"nullable"`
+	WikiCode           string                `json:"wikiCode" api:"nullable"`
+	WikidataID         string                `json:"wikidataId" api:"nullable"`
+	WikidataInstanceOf []WikidataLabelHolder `json:"wikidataInstanceOf" api:"nullable"`
+	WikiNamespace      int64                 `json:"wikiNamespace" api:"nullable"`
+	WikiPageID         int64                 `json:"wikiPageId" api:"nullable"`
+	WikiRevisionID     int64                 `json:"wikiRevisionId" api:"nullable"`
+	WikiRevisionTs     string                `json:"wikiRevisionTs" api:"nullable"`
+	WikiTitle          string                `json:"wikiTitle" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Content            respjson.Field
@@ -283,6 +289,24 @@ type WikipediaVectorSearchResponseResultData struct {
 // Returns the unmodified JSON received from the API
 func (r WikipediaVectorSearchResponseResultData) RawJSON() string { return r.JSON.raw }
 func (r *WikipediaVectorSearchResponseResultData) UnmarshalJSON(data []byte) error {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+type WikipediaVectorSearchResponseResultVector struct {
+	Data    []float64 `json:"data" api:"nullable"`
+	Version int64     `json:"version" api:"nullable"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Data        respjson.Field
+		Version     respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+}
+
+// Returns the unmodified JSON received from the API
+func (r WikipediaVectorSearchResponseResultVector) RawJSON() string { return r.JSON.raw }
+func (r *WikipediaVectorSearchResponseResultVector) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
@@ -406,7 +430,7 @@ const (
 
 type WikipediaVectorSearchParams struct {
 	// Natural language query to search the Wikipedia pages database
-	Prompt string `json:"prompt,required"`
+	Prompt string `json:"prompt" api:"required"`
 	// The page number to retrieve.
 	Page param.Opt[int64] `json:"page,omitzero"`
 	// 'pageviewsFrom' filter, will search pages with at least the provided number of

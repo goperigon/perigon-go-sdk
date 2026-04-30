@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"slices"
+	"strings"
 
 	"github.com/goperigon/perigon-go-sdk/v2/internal/requestconfig"
 	"github.com/goperigon/perigon-go-sdk/v2/option"
@@ -16,28 +17,63 @@ import (
 // interacting with the perigon API. You should not instantiate this client
 // directly, and instead use the [NewClient] method instead.
 type Client struct {
-	Options     []option.RequestOption
-	All         AllService
-	Companies   CompanyService
+	Options []option.RequestOption
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	All AllService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Companies CompanyService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
 	Journalists JournalistService
-	People      PersonService
-	Sources     SourceService
-	Stories     StoryService
-	Summarize   SummarizeService
-	Topics      TopicService
-	Vector      VectorService
-	Wikipedia   WikipediaService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	People PersonService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Sources SourceService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Stories StoryService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Summarize SummarizeService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Topics TopicService
+	Vector VectorService
+	// Core endpoints for the Perigon News API v1, providing access to aggregated news
+	// stories, articles, and related content. These endpoints enable searching,
+	// filtering, and retrieving media content across multiple sources.
+	Wikipedia WikipediaService
 }
 
 // DefaultClientOptions read from the environment (PERIGON_API_KEY,
 // PERIGON_BASE_URL). This should be used to initialize new clients.
 func DefaultClientOptions() []option.RequestOption {
-	defaults := []option.RequestOption{option.WithEnvironmentProduction()}
+	defaults := []option.RequestOption{option.WithHTTPClient(defaultHTTPClient()), option.WithEnvironmentProduction()}
 	if o, ok := os.LookupEnv("PERIGON_BASE_URL"); ok {
 		defaults = append(defaults, option.WithBaseURL(o))
 	}
 	if o, ok := os.LookupEnv("PERIGON_API_KEY"); ok {
 		defaults = append(defaults, option.WithAPIKey(o))
+	}
+	if o, ok := os.LookupEnv("PERIGON_CUSTOM_HEADERS"); ok {
+		for _, line := range strings.Split(o, "\n") {
+			colon := strings.Index(line, ":")
+			if colon >= 0 {
+				defaults = append(defaults, option.WithHeader(strings.TrimSpace(line[:colon]), strings.TrimSpace(line[colon+1:])))
+			}
+		}
 	}
 	return defaults
 }

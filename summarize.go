@@ -17,6 +17,10 @@ import (
 	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
 )
 
+// Core endpoints for the Perigon News API v1, providing access to aggregated news
+// stories, articles, and related content. These endpoints enable searching,
+// filtering, and retrieving media content across multiple sources.
+//
 // SummarizeService contains methods and other services that help with interacting
 // with the perigon API.
 //
@@ -42,14 +46,14 @@ func (r *SummarizeService) New(ctx context.Context, params SummarizeNewParams, o
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/summarize"
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, params, &res, opts...)
-	return
+	return res, err
 }
 
 type SummarizeNewResponse struct {
-	NumResults int64     `json:"numResults,required"`
-	Results    []Article `json:"results,required"`
-	Status     int64     `json:"status,required"`
-	Summary    string    `json:"summary,required"`
+	NumResults int64     `json:"numResults" api:"required"`
+	Results    []Article `json:"results" api:"required"`
+	Status     int64     `json:"status" api:"required"`
+	Summary    string    `json:"summary" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		NumResults  respjson.Field
@@ -224,8 +228,9 @@ type SummarizeNewParams struct {
 	Method SummarizeNewParamsMethod `json:"method,omitzero"`
 	// The underlying LLM model to use for generation.
 	//
-	// Any of "gpt-4o", "gpt-4o-mini", "gpt-4.1", "gpt-4.1-mini", "gpt-4.1-nano",
-	// "llama-3.3-70b-versatile", "openai/gpt-oss-120b".
+	// Any of "gpt-5.4-mini", "gpt-5.4-nano", "gpt-5-mini", "gpt-5-nano", "gpt-4o",
+	// "gpt-4o-mini", "gpt-4.1", "gpt-4.1-mini", "llama-3.3-70b-versatile",
+	// "openai/gpt-oss-120b".
 	Model SummarizeNewParamsModel `json:"model,omitzero"`
 	// Which article fields to include when generating the summary. Up to three values
 	// from TITLE, CONTENT, SUMMARY.
@@ -425,7 +430,7 @@ type SummarizeNewParams struct {
 	// String Array. Filters by Google Content Categories. This field will accept 1 or
 	// more categories, must pass the full name of the category. Example:
 	// taxonomy=/Finance/Banking/Other, /Finance/Investing/Funds.
-	// [Full list](https://cloud.google.com/natural-language/docs/categories)
+	// [Full list](https://docs.cloud.google.com/natural-language/docs/categories#version_2)
 	Taxonomy []string `query:"taxonomy,omitzero" json:"-"`
 	// String Array. Filter by specific topics such as Markets, Crime, Cryptocurrency,
 	// or College Sports. Topics are more granular than categories, and articles can
@@ -468,11 +473,14 @@ const (
 type SummarizeNewParamsModel string
 
 const (
+	SummarizeNewParamsModelGpt5_4Mini            SummarizeNewParamsModel = "gpt-5.4-mini"
+	SummarizeNewParamsModelGpt5_4Nano            SummarizeNewParamsModel = "gpt-5.4-nano"
+	SummarizeNewParamsModelGpt5Mini              SummarizeNewParamsModel = "gpt-5-mini"
+	SummarizeNewParamsModelGpt5Nano              SummarizeNewParamsModel = "gpt-5-nano"
 	SummarizeNewParamsModelGpt4o                 SummarizeNewParamsModel = "gpt-4o"
 	SummarizeNewParamsModelGpt4oMini             SummarizeNewParamsModel = "gpt-4o-mini"
 	SummarizeNewParamsModelGpt4_1                SummarizeNewParamsModel = "gpt-4.1"
 	SummarizeNewParamsModelGpt4_1Mini            SummarizeNewParamsModel = "gpt-4.1-mini"
-	SummarizeNewParamsModelGpt4_1Nano            SummarizeNewParamsModel = "gpt-4.1-nano"
 	SummarizeNewParamsModelLlama3_3_70bVersatile SummarizeNewParamsModel = "llama-3.3-70b-versatile"
 	SummarizeNewParamsModelOpenAIGptOss120b      SummarizeNewParamsModel = "openai/gpt-oss-120b"
 )
