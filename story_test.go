@@ -48,6 +48,7 @@ func TestStoryListWithOptionalParams(t *testing.T) {
 		InitializedTo:         perigon.Time(time.Now()),
 		MaxClusterSize:        perigon.Int(0),
 		MinClusterSize:        perigon.Int(1),
+		MinSourceDiversity:    perigon.Float(0),
 		MinUniqueSources:      perigon.Int(1),
 		Name:                  perigon.String("name"),
 		NameExists:            perigon.Bool(true),
