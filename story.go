@@ -83,6 +83,7 @@ type NewsCluster struct {
 	Sentiment         NewsClusterSentiment    `json:"sentiment" api:"nullable"`
 	ShortSummary      string                  `json:"shortSummary" api:"nullable"`
 	Slug              string                  `json:"slug" api:"nullable"`
+	SourceDiversity   float64                 `json:"sourceDiversity" api:"nullable"`
 	Summary           string                  `json:"summary" api:"nullable"`
 	SummaryReferences []string                `json:"summaryReferences" api:"nullable"`
 	Taxonomies        []RecordStatHolder      `json:"taxonomies" api:"nullable"`
@@ -120,6 +121,7 @@ type NewsCluster struct {
 		Sentiment         respjson.Field
 		ShortSummary      respjson.Field
 		Slug              respjson.Field
+		SourceDiversity   respjson.Field
 		Summary           respjson.Field
 		SummaryReferences respjson.Field
 		Taxonomies        respjson.Field
