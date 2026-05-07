@@ -83,6 +83,7 @@ type NewsCluster struct {
 	Sentiment         NewsClusterSentiment    `json:"sentiment" api:"nullable"`
 	ShortSummary      string                  `json:"shortSummary" api:"nullable"`
 	Slug              string                  `json:"slug" api:"nullable"`
+	SourceDiversity   float64                 `json:"sourceDiversity" api:"nullable"`
 	Summary           string                  `json:"summary" api:"nullable"`
 	SummaryReferences []string                `json:"summaryReferences" api:"nullable"`
 	Taxonomies        []RecordStatHolder      `json:"taxonomies" api:"nullable"`
@@ -120,6 +121,7 @@ type NewsCluster struct {
 		Sentiment         respjson.Field
 		ShortSummary      respjson.Field
 		Slug              respjson.Field
+		SourceDiversity   respjson.Field
 		Summary           respjson.Field
 		SummaryReferences respjson.Field
 		Taxonomies        respjson.Field
@@ -428,6 +430,11 @@ type StoryListParams struct {
 	// Integer. Filter by minimum cluster size. Minimum cluster size filter applies to
 	// number of unique articles.
 	MinClusterSize param.Opt[int64] `query:"minClusterSize,omitzero" json:"-"`
+	// Float. Minimum ratio of unique sources to unique articles (uniqueSources /
+	// uniqueCount). Filters out stories dominated by a single publisher. For example,
+	// a value of 0.05 requires at least 1 unique source per 20 articles. Not applied
+	// by default.
+	MinSourceDiversity param.Opt[float64] `query:"minSourceDiversity,omitzero" json:"-"`
 	// Integer. Specifies the minimum number of unique sources required for a story to
 	// appear in results. Higher values return more significant stories covered by
 	// multiple publications. Default is 3.

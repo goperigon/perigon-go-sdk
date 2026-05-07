@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.14.0 (2026-05-04)
+
+Full Changelog: [v2.13.0...v2.14.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.13.0...v2.14.0)
+
+### Features
+
+* **api:** api update ([99e46b7](https://github.com/goperigon/perigon-go-sdk/commit/99e46b72be44e1848e08cc9f4b586c84e17d21e5))
+* **api:** api update ([82c5cd6](https://github.com/goperigon/perigon-go-sdk/commit/82c5cd66409364d6218b45a44a5bac87d1411e05))
+* **api:** api update ([768e967](https://github.com/goperigon/perigon-go-sdk/commit/768e9675e4d35b083eb04529879ab9e0ec412dde))
+
+
+### Chores
+
+* avoid embedding reflect.Type for dead code elimination ([db02b19](https://github.com/goperigon/perigon-go-sdk/commit/db02b19a3888e4a52808cf07b66e192899664714))
+
 ## 2.13.0 (2026-04-30)
 
 Full Changelog: [v2.12.1...v2.13.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.12.1...v2.13.0)
