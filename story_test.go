@@ -67,7 +67,7 @@ func TestStoryListWithOptionalParams(t *testing.T) {
 		ShowNumResults:        perigon.Bool(true),
 		ShowStoryPageInfo:     perigon.Bool(true),
 		Size:                  perigon.Int(0),
-		SortBy:                perigon.SortByCreatedAt,
+		SortBy:                perigon.StoryListParamsSortByCreatedAt,
 		Source:                []string{"string"},
 		SourceGroup:           []string{"string"},
 		State:                 []string{"string"},

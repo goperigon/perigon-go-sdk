@@ -40,7 +40,7 @@ func TestSourceListWithOptionalParams(t *testing.T) {
 		ShowNumResults:    perigon.Bool(true),
 		ShowSubdomains:    perigon.Bool(true),
 		Size:              perigon.Int(1),
-		SortBy:            perigon.SortByCreatedAt,
+		SortBy:            perigon.SourceListParamsSortByGlobalRank,
 		SourceCity:        []string{"string"},
 		SourceCountry:     []string{"string"},
 		SourceCounty:      []string{"string"},
