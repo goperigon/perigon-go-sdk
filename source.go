@@ -50,16 +50,6 @@ func (r *SourceService) List(ctx context.Context, query SourceListParams, opts .
 	return res, err
 }
 
-type SortBy string
-
-const (
-	SortByCreatedAt  SortBy = "createdAt"
-	SortByUpdatedAt  SortBy = "updatedAt"
-	SortByRelevance  SortBy = "relevance"
-	SortByCount      SortBy = "count"
-	SortByTotalCount SortBy = "totalCount"
-)
-
 type SourceTopStatHolder struct {
 	Count int64  `json:"count" api:"nullable"`
 	Name  string `json:"name" api:"nullable"`
@@ -228,8 +218,8 @@ type SourceListParams struct {
 	// monthlyVisits (by total monthly visitor count), and avgMonthlyPosts (by number
 	// of articles published monthly).
 	//
-	// Any of "createdAt", "updatedAt", "relevance", "count", "totalCount".
-	SortBy SortBy `query:"sortBy,omitzero" json:"-"`
+	// Any of "globalRank", "relevance", "monthlyVisits", "avgMonthlyPosts".
+	SortBy SourceListParamsSortBy `query:"sortBy,omitzero" json:"-"`
 	// String Array. Filter for local publications based in specific cities. Multiple
 	// values create an OR filter.
 	SourceCity []string `query:"sourceCity,omitzero" json:"-"`
@@ -258,3 +248,16 @@ func (r SourceListParams) URLQuery() (v url.Values, err error) {
 		NestedFormat: apiquery.NestedQueryFormatBrackets,
 	})
 }
+
+// String. Determines the source sorting order. Options include relevance (default,
+// best match to query), globalRank (by overall traffic and popularity),
+// monthlyVisits (by total monthly visitor count), and avgMonthlyPosts (by number
+// of articles published monthly).
+type SourceListParamsSortBy string
+
+const (
+	SourceListParamsSortByGlobalRank      SourceListParamsSortBy = "globalRank"
+	SourceListParamsSortByRelevance       SourceListParamsSortBy = "relevance"
+	SourceListParamsSortByMonthlyVisits   SourceListParamsSortBy = "monthlyVisits"
+	SourceListParamsSortByAvgMonthlyPosts SourceListParamsSortBy = "avgMonthlyPosts"
+)

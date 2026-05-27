@@ -551,7 +551,7 @@ type StoryListParams struct {
 	// reprints).
 	//
 	// Any of "createdAt", "updatedAt", "relevance", "count", "totalCount".
-	SortBy SortBy `query:"sortBy,omitzero" json:"-"`
+	SortBy StoryListParamsSortBy `query:"sortBy,omitzero" json:"-"`
 	// String Array. Filter stories that contain articles from specific publisher
 	// domains or subdomains. Supports wildcards (_ and ?) for pattern matching (e.g.,
 	// _.cnn.com). A story will match if it contains at least one article from any of
@@ -588,3 +588,18 @@ func (r StoryListParams) URLQuery() (v url.Values, err error) {
 		NestedFormat: apiquery.NestedQueryFormatBrackets,
 	})
 }
+
+// String. Determines the story sorting order. Options include createdAt (default,
+// when stories first emerged), updatedAt (when stories received new articles, best
+// for tracking developing events), relevance (best match to query), count (by
+// unique article count), and totalCount (by total article count including
+// reprints).
+type StoryListParamsSortBy string
+
+const (
+	StoryListParamsSortByCreatedAt  StoryListParamsSortBy = "createdAt"
+	StoryListParamsSortByUpdatedAt  StoryListParamsSortBy = "updatedAt"
+	StoryListParamsSortByRelevance  StoryListParamsSortBy = "relevance"
+	StoryListParamsSortByCount      StoryListParamsSortBy = "count"
+	StoryListParamsSortByTotalCount StoryListParamsSortBy = "totalCount"
+)
