@@ -90,29 +90,30 @@ func (r *SourceListResponse) UnmarshalJSON(data []byte) error {
 }
 
 type SourceListResponseResult struct {
-	ID                 string                `json:"id" api:"nullable"`
-	AdFontesBiasRating string                `json:"adFontesBiasRating" api:"nullable"`
-	AllSidesBiasRating string                `json:"allSidesBiasRating" api:"nullable"`
-	AltNames           []string              `json:"altNames" api:"nullable"`
-	AvgBiasRating      string                `json:"avgBiasRating" api:"nullable"`
-	AvgMonthlyPosts    int64                 `json:"avgMonthlyPosts" api:"nullable"`
-	Description        string                `json:"description" api:"nullable"`
-	Domain             string                `json:"domain" api:"nullable"`
-	GlobalRank         int64                 `json:"globalRank" api:"nullable"`
-	Location           shared.SourceLocation `json:"location" api:"nullable"`
-	LogoFavIcon        ImageHolder           `json:"logoFavIcon" api:"nullable"`
-	LogoLarge          ImageHolder           `json:"logoLarge" api:"nullable"`
-	LogoSquare         ImageHolder           `json:"logoSquare" api:"nullable"`
-	MbfcBiasRating     string                `json:"mbfcBiasRating" api:"nullable"`
-	MonthlyVisits      int64                 `json:"monthlyVisits" api:"nullable"`
-	Name               string                `json:"name" api:"nullable"`
-	Paywall            bool                  `json:"paywall" api:"nullable"`
-	PrimaryRecordID    string                `json:"primaryRecordId" api:"nullable"`
-	TopCategories      []SourceTopStatHolder `json:"topCategories" api:"nullable"`
-	TopCountries       []SourceTopStatHolder `json:"topCountries" api:"nullable"`
-	TopLabels          []SourceTopStatHolder `json:"topLabels" api:"nullable"`
-	TopTopics          []SourceTopStatHolder `json:"topTopics" api:"nullable"`
-	UpdatedAt          string                `json:"updatedAt" api:"nullable"`
+	ID                 string   `json:"id" api:"nullable"`
+	AdFontesBiasRating string   `json:"adFontesBiasRating" api:"nullable"`
+	AllSidesBiasRating string   `json:"allSidesBiasRating" api:"nullable"`
+	AltNames           []string `json:"altNames" api:"nullable"`
+	AvgBiasRating      string   `json:"avgBiasRating" api:"nullable"`
+	AvgMonthlyPosts    int64    `json:"avgMonthlyPosts" api:"nullable"`
+	Description        string   `json:"description" api:"nullable"`
+	Domain             string   `json:"domain" api:"nullable"`
+	GlobalRank         int64    `json:"globalRank" api:"nullable"`
+	// Geographic location of the publisher, when available.
+	Location        shared.SourceLocation `json:"location" api:"nullable"`
+	LogoFavIcon     ImageHolder           `json:"logoFavIcon" api:"nullable"`
+	LogoLarge       ImageHolder           `json:"logoLarge" api:"nullable"`
+	LogoSquare      ImageHolder           `json:"logoSquare" api:"nullable"`
+	MbfcBiasRating  string                `json:"mbfcBiasRating" api:"nullable"`
+	MonthlyVisits   int64                 `json:"monthlyVisits" api:"nullable"`
+	Name            string                `json:"name" api:"nullable"`
+	Paywall         bool                  `json:"paywall" api:"nullable"`
+	PrimaryRecordID string                `json:"primaryRecordId" api:"nullable"`
+	TopCategories   []SourceTopStatHolder `json:"topCategories" api:"nullable"`
+	TopCountries    []SourceTopStatHolder `json:"topCountries" api:"nullable"`
+	TopLabels       []SourceTopStatHolder `json:"topLabels" api:"nullable"`
+	TopTopics       []SourceTopStatHolder `json:"topTopics" api:"nullable"`
+	UpdatedAt       string                `json:"updatedAt" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                 respjson.Field

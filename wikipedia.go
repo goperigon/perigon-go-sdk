@@ -292,9 +292,12 @@ func (r *WikipediaVectorSearchResponseResultData) UnmarshalJSON(data []byte) err
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Vector embeddings associated with the article, when requested.
 type WikipediaVectorSearchResponseResultVector struct {
-	Data    []float64 `json:"data" api:"nullable"`
-	Version int64     `json:"version" api:"nullable"`
+	// Numeric values in the vector embedding.
+	Data []float64 `json:"data" api:"nullable"`
+	// Version of the embedding representation.
+	Version int64 `json:"version" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field

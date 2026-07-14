@@ -65,33 +65,60 @@ func (r *JournalistService) List(ctx context.Context, query JournalistListParams
 	return res, err
 }
 
+// Expanded journalist details, when requested and available.
 type Journalist struct {
-	ID                  string                  `json:"id" api:"nullable"`
-	AvgMonthlyPosts     int64                   `json:"avgMonthlyPosts" api:"nullable"`
-	BlogURL             string                  `json:"blogUrl" api:"nullable"`
-	Description         string                  `json:"description" api:"nullable"`
-	FacebookURL         string                  `json:"facebookUrl" api:"nullable"`
-	FullName            string                  `json:"fullName" api:"nullable"`
-	Headline            string                  `json:"headline" api:"nullable"`
-	ImageURL            string                  `json:"imageUrl" api:"nullable"`
-	InstagramURL        string                  `json:"instagramUrl" api:"nullable"`
-	LinkedinConnections int64                   `json:"linkedinConnections" api:"nullable"`
-	LinkedinFollowers   int64                   `json:"linkedinFollowers" api:"nullable"`
-	LinkedinURL         string                  `json:"linkedinUrl" api:"nullable"`
-	Locations           []shared.LocationHolder `json:"locations" api:"nullable"`
-	Name                string                  `json:"name" api:"nullable"`
-	Title               string                  `json:"title" api:"nullable"`
-	TopCategories       []NameCount             `json:"topCategories" api:"nullable"`
-	TopCountries        []NameCount             `json:"topCountries" api:"nullable"`
-	TopLabels           []NameCount             `json:"topLabels" api:"nullable"`
-	TopSources          []NameCount             `json:"topSources" api:"nullable"`
-	TopTopics           []NameCount             `json:"topTopics" api:"nullable"`
-	TumblrURL           string                  `json:"tumblrUrl" api:"nullable"`
-	TwitterBio          string                  `json:"twitterBio" api:"nullable"`
-	TwitterHandle       string                  `json:"twitterHandle" api:"nullable"`
-	UpdatedAt           string                  `json:"updatedAt" api:"nullable"`
-	WebsiteURL          string                  `json:"websiteUrl" api:"nullable"`
-	YoutubeURL          string                  `json:"youtubeUrl" api:"nullable"`
+	// Unique Perigon identifier for the journalist.
+	ID string `json:"id" api:"nullable"`
+	// Average number of articles published by the journalist per month.
+	AvgMonthlyPosts int64 `json:"avgMonthlyPosts" api:"nullable"`
+	// Blog URL for the journalist.
+	BlogURL string `json:"blogUrl" api:"nullable"`
+	// Biographical description of the journalist.
+	Description string `json:"description" api:"nullable"`
+	// Facebook profile URL for the journalist.
+	FacebookURL string `json:"facebookUrl" api:"nullable"`
+	// Full name of the journalist.
+	FullName string `json:"fullName" api:"nullable"`
+	// Professional headline associated with the journalist.
+	Headline string `json:"headline" api:"nullable"`
+	// Profile image URL for the journalist.
+	ImageURL string `json:"imageUrl" api:"nullable"`
+	// Instagram profile URL for the journalist.
+	InstagramURL string `json:"instagramUrl" api:"nullable"`
+	// LinkedIn connection count for the journalist, when available.
+	LinkedinConnections int64 `json:"linkedinConnections" api:"nullable"`
+	// LinkedIn follower count for the journalist, when available.
+	LinkedinFollowers int64 `json:"linkedinFollowers" api:"nullable"`
+	// LinkedIn profile URL for the journalist.
+	LinkedinURL string `json:"linkedinUrl" api:"nullable"`
+	// Locations associated with the journalist.
+	Locations []shared.LocationHolder `json:"locations" api:"nullable"`
+	// Common display name of the journalist.
+	Name string `json:"name" api:"nullable"`
+	// Professional title of the journalist.
+	Title string `json:"title" api:"nullable"`
+	// Categories most frequently covered by the journalist.
+	TopCategories []NameCount `json:"topCategories" api:"nullable"`
+	// Countries most frequently associated with the journalist's articles.
+	TopCountries []NameCount `json:"topCountries" api:"nullable"`
+	// Editorial labels most frequently associated with the journalist's articles.
+	TopLabels []NameCount `json:"topLabels" api:"nullable"`
+	// Publishers most frequently associated with the journalist.
+	TopSources []NameCount `json:"topSources" api:"nullable"`
+	// Topics most frequently covered by the journalist.
+	TopTopics []NameCount `json:"topTopics" api:"nullable"`
+	// Tumblr profile URL for the journalist.
+	TumblrURL string `json:"tumblrUrl" api:"nullable"`
+	// Biography from the journalist's X or Twitter profile.
+	TwitterBio string `json:"twitterBio" api:"nullable"`
+	// Journalist's X or Twitter handle.
+	TwitterHandle string `json:"twitterHandle" api:"nullable"`
+	// Date and time the journalist record was last refreshed, in ISO 8601 format.
+	UpdatedAt string `json:"updatedAt" api:"nullable"`
+	// Personal or professional website URL for the journalist.
+	WebsiteURL string `json:"websiteUrl" api:"nullable"`
+	// YouTube channel URL for the journalist.
+	YoutubeURL string `json:"youtubeUrl" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                  respjson.Field
@@ -131,9 +158,12 @@ func (r *Journalist) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Countries most frequently associated with the journalist's articles.
 type NameCount struct {
-	Count int64  `json:"count" api:"nullable"`
-	Name  string `json:"name" api:"nullable"`
+	// Number of matching records for the value.
+	Count int64 `json:"count" api:"nullable"`
+	// Name of the aggregated value.
+	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Count       respjson.Field
