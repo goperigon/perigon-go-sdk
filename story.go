@@ -609,6 +609,11 @@ type StoryListParams struct {
 	// stories where these companies appear prominently. For a complete list of tracked
 	// companies, refer to the /companies endpoint.
 	CompanyID []string `query:"companyId,omitzero" json:"-"`
+	// String Array. Filter stories by ISIN codes of top mentioned companies
+	// (International Securities Identification Numbers). Returns stories where
+	// companies with these ISINs appear prominently. For available company entities
+	// and their ISINs, consult the /companies endpoint.
+	CompanyIsin []string `query:"companyIsin,omitzero" json:"-"`
 	// String Array. Filter stories by stock symbols of top mentioned companies.
 	// Returns stories where companies with these symbols appear prominently. For
 	// available company entities and their symbols, consult the /companies endpoint.

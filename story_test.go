@@ -33,6 +33,7 @@ func TestStoryListWithOptionalParams(t *testing.T) {
 		ClusterID:             []string{"string"},
 		CompanyDomain:         []string{"string"},
 		CompanyID:             []string{"string"},
+		CompanyIsin:           []string{"string"},
 		CompanyName:           perigon.String("companyName"),
 		CompanySymbol:         []string{"string"},
 		Country:               []string{"string"},

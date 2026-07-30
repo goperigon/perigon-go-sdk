@@ -278,6 +278,10 @@ type SummarizeNewParams struct {
 	// String Array. Filter articles by company identifiers. For a complete list of
 	// tracked companies, refer to the /companies endpoint.
 	CompanyID []string `query:"companyId,omitzero" json:"-"`
+	// String Array. Filter articles by company ISIN codes (International Securities
+	// Identification Numbers). For available company entities and their ISINs, consult
+	// the /companies endpoint.
+	CompanyIsin []string `query:"companyIsin,omitzero" json:"-"`
 	// String Array. Filter articles by company stock symbols. For available company
 	// entities and their symbols, consult the /companies endpoint.
 	CompanySymbol []string `query:"companySymbol,omitzero" json:"-"`
@@ -304,6 +308,10 @@ type SummarizeNewParams struct {
 	// String Array. Exclude articles mentioning companies with specific identifiers.
 	// Creates an AND-exclude filter to remove content about these corporate entities.
 	ExcludeCompanyID []string `query:"excludeCompanyId,omitzero" json:"-"`
+	// String Array. Exclude articles related to companies with specific ISIN codes.
+	// Creates an AND-exclude filter to remove content about these companies. For
+	// available company entities and their ISINs, consult the /companies endpoint.
+	ExcludeCompanyIsin []string `query:"excludeCompanyIsin,omitzero" json:"-"`
 	// String Array. A list of stock symbols (ticker symbols) that identify companies
 	// to be excluded. Articles related to companies using any of these symbols will be
 	// omitted, which is useful for targeting or avoiding specific public companies.
