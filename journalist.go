@@ -75,6 +75,8 @@ type Journalist struct {
 	BlogURL string `json:"blogUrl" api:"nullable"`
 	// Biographical description of the journalist.
 	Description string `json:"description" api:"nullable"`
+	// Journalist's email.
+	Email string `json:"email" api:"nullable"`
 	// Facebook profile URL for the journalist.
 	FacebookURL string `json:"facebookUrl" api:"nullable"`
 	// Full name of the journalist.
@@ -125,6 +127,7 @@ type Journalist struct {
 		AvgMonthlyPosts     respjson.Field
 		BlogURL             respjson.Field
 		Description         respjson.Field
+		Email               respjson.Field
 		FacebookURL         respjson.Field
 		FullName            respjson.Field
 		Headline            respjson.Field
