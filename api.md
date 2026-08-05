@@ -60,7 +60,6 @@ Methods:
 
 Response Types:
 
-- <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#SourceTopStatHolder">SourceTopStatHolder</a>
 - <a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2">perigon</a>.<a href="https://pkg.go.dev/github.com/goperigon/perigon-go-sdk/v2#SourceListResponse">SourceListResponse</a>
 
 Methods:

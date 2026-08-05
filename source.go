@@ -14,7 +14,6 @@ import (
 	"github.com/goperigon/perigon-go-sdk/v2/option"
 	"github.com/goperigon/perigon-go-sdk/v2/packages/param"
 	"github.com/goperigon/perigon-go-sdk/v2/packages/respjson"
-	"github.com/goperigon/perigon-go-sdk/v2/shared"
 )
 
 // Core endpoints for the Perigon News API v1, providing access to aggregated news
@@ -50,24 +49,6 @@ func (r *SourceService) List(ctx context.Context, query SourceListParams, opts .
 	return res, err
 }
 
-type SourceTopStatHolder struct {
-	Count int64  `json:"count" api:"nullable"`
-	Name  string `json:"name" api:"nullable"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Count       respjson.Field
-		Name        respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
-}
-
-// Returns the unmodified JSON received from the API
-func (r SourceTopStatHolder) RawJSON() string { return r.JSON.raw }
-func (r *SourceTopStatHolder) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
-}
-
 // Source search result
 type SourceListResponse struct {
 	NumResults int64                      `json:"numResults" api:"required"`
@@ -89,58 +70,21 @@ func (r *SourceListResponse) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Sources used to populate the field.
 type SourceListResponseResult struct {
-	ID                 string   `json:"id" api:"nullable"`
-	AdFontesBiasRating string   `json:"adFontesBiasRating" api:"nullable"`
-	AllSidesBiasRating string   `json:"allSidesBiasRating" api:"nullable"`
-	AltNames           []string `json:"altNames" api:"nullable"`
-	AvgBiasRating      string   `json:"avgBiasRating" api:"nullable"`
-	AvgMonthlyPosts    int64    `json:"avgMonthlyPosts" api:"nullable"`
-	Description        string   `json:"description" api:"nullable"`
-	Domain             string   `json:"domain" api:"nullable"`
-	GlobalRank         int64    `json:"globalRank" api:"nullable"`
-	// Geographic location of the publisher, when available.
-	Location        shared.SourceLocation `json:"location" api:"nullable"`
-	LogoFavIcon     ImageHolder           `json:"logoFavIcon" api:"nullable"`
-	LogoLarge       ImageHolder           `json:"logoLarge" api:"nullable"`
-	LogoSquare      ImageHolder           `json:"logoSquare" api:"nullable"`
-	MbfcBiasRating  string                `json:"mbfcBiasRating" api:"nullable"`
-	MonthlyVisits   int64                 `json:"monthlyVisits" api:"nullable"`
-	Name            string                `json:"name" api:"nullable"`
-	Paywall         bool                  `json:"paywall" api:"nullable"`
-	PrimaryRecordID string                `json:"primaryRecordId" api:"nullable"`
-	TopCategories   []SourceTopStatHolder `json:"topCategories" api:"nullable"`
-	TopCountries    []SourceTopStatHolder `json:"topCountries" api:"nullable"`
-	TopLabels       []SourceTopStatHolder `json:"topLabels" api:"nullable"`
-	TopTopics       []SourceTopStatHolder `json:"topTopics" api:"nullable"`
-	UpdatedAt       string                `json:"updatedAt" api:"nullable"`
+	// Perigon article ID of the supporting source, when available.
+	ArticleID string `json:"articleId" api:"nullable"`
+	// Title of the supporting source, when available.
+	Title string `json:"title" api:"nullable"`
+	// URL of the supporting source, when available.
+	URL string `json:"url" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
-		ID                 respjson.Field
-		AdFontesBiasRating respjson.Field
-		AllSidesBiasRating respjson.Field
-		AltNames           respjson.Field
-		AvgBiasRating      respjson.Field
-		AvgMonthlyPosts    respjson.Field
-		Description        respjson.Field
-		Domain             respjson.Field
-		GlobalRank         respjson.Field
-		Location           respjson.Field
-		LogoFavIcon        respjson.Field
-		LogoLarge          respjson.Field
-		LogoSquare         respjson.Field
-		MbfcBiasRating     respjson.Field
-		MonthlyVisits      respjson.Field
-		Name               respjson.Field
-		Paywall            respjson.Field
-		PrimaryRecordID    respjson.Field
-		TopCategories      respjson.Field
-		TopCountries       respjson.Field
-		TopLabels          respjson.Field
-		TopTopics          respjson.Field
-		UpdatedAt          respjson.Field
-		ExtraFields        map[string]respjson.Field
-		raw                string
+		ArticleID   respjson.Field
+		Title       respjson.Field
+		URL         respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
 	} `json:"-"`
 }
 
