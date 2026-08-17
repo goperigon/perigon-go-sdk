@@ -251,6 +251,26 @@ type JournalistListParams struct {
 	// they publish. This accepts labels like 'Opinion' or 'Pop Culture'. (Searches the
 	// topLabels data field.)
 	Label []string `query:"label,omitzero" json:"-"`
+	// String Array. Filter journalists by their profile location area — neighborhood,
+	// borough, or district (`locations.area`). Multiple values create an OR filter.
+	LocationArea []string `query:"locationArea,omitzero" json:"-"`
+	// String Array. Filter journalists by their profile location city
+	// (`locations.city`). Multiple values create an OR filter.
+	LocationCity []string `query:"locationCity,omitzero" json:"-"`
+	// String Array. Filter journalists by their profile location country
+	// (`locations.country`). Uses ISO 3166-1 alpha-2 two-letter country codes in
+	// lowercase (e.g., us, gb, jp). `uk` is accepted as an alias for `gb`. Distinct
+	// from `country`, which filters reporting focus (`topCountries`). Multiple values
+	// create an OR filter.
+	LocationCountry []string `query:"locationCountry,omitzero" json:"-"`
+	// String Array. Filter journalists by their profile location county
+	// (`locations.county`). County names should match stored metadata (e.g., 'Los
+	// Angeles County', 'Cook County'). Multiple values create an OR filter.
+	LocationCounty []string `query:"locationCounty,omitzero" json:"-"`
+	// String Array. Filter journalists by their profile location state or region
+	// (`locations.state`). For US locations this is the two-letter state code (e.g.,
+	// NY, CA). Multiple values create an OR filter.
+	LocationState []string `query:"locationState,omitzero" json:"-"`
 	// String Array. Filter journalists by the publisher domains they write for.
 	// Supports wildcards (_ and ?) for pattern matching (e.g., _.cnn.com). Multiple
 	// values create an OR filter.
