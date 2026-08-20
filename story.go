@@ -618,6 +618,12 @@ type StoryListParams struct {
 	// Returns stories where companies with these symbols appear prominently. For
 	// available company entities and their symbols, consult the /companies endpoint.
 	CompanySymbol []string `query:"companySymbol,omitzero" json:"-"`
+	// String Array. Filter stories by ISIN codes on ticker listings of top mentioned
+	// companies (symbols.isin). Distinct from companyIsin, which matches the
+	// company-level ISIN. Returns stories where those companies appear prominently.
+	// For available company entities and their listing ISINs, consult the /companies
+	// endpoint.
+	CompanySymbolIsin []string `query:"companySymbolIsin,omitzero" json:"-"`
 	// String Array. Country code to filter by country. If multiple parameters are
 	// passed, they will be applied as OR operations.
 	Country []string `query:"country,omitzero" json:"-"`

@@ -36,6 +36,7 @@ func TestStoryListWithOptionalParams(t *testing.T) {
 		CompanyIsin:           []string{"string"},
 		CompanyName:           perigon.String("companyName"),
 		CompanySymbol:         []string{"string"},
+		CompanySymbolIsin:     []string{"string"},
 		Country:               []string{"string"},
 		ExcludeClusterID:      []string{"string"},
 		ExpandArticles:        perigon.Bool(true),
