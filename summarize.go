@@ -285,6 +285,11 @@ type SummarizeNewParams struct {
 	// String Array. Filter articles by company stock symbols. For available company
 	// entities and their symbols, consult the /companies endpoint.
 	CompanySymbol []string `query:"companySymbol,omitzero" json:"-"`
+	// String Array. Filter articles by ISIN codes on company ticker listings
+	// (symbols.isin). Distinct from companyIsin, which matches the company-level ISIN.
+	// For available company entities and their listing ISINs, consult the /companies
+	// endpoint.
+	CompanySymbolIsin []string `query:"companySymbolIsin,omitzero" json:"-"`
 	// String Array. Country code to filter by country. If multiple parameters are
 	// passed, they will be applied as OR operations.
 	Country []string `query:"country,omitzero" json:"-"`
@@ -316,6 +321,11 @@ type SummarizeNewParams struct {
 	// to be excluded. Articles related to companies using any of these symbols will be
 	// omitted, which is useful for targeting or avoiding specific public companies.
 	ExcludeCompanySymbol []string `query:"excludeCompanySymbol,omitzero" json:"-"`
+	// String Array. Exclude articles related to companies whose ticker listings have
+	// these ISIN codes (symbols.isin). Distinct from excludeCompanyIsin, which matches
+	// the company-level ISIN. For available company entities and their listing ISINs,
+	// consult the /companies endpoint.
+	ExcludeCompanySymbolIsin []string `query:"excludeCompanySymbolIsin,omitzero" json:"-"`
 	// String Array. Excludes articles from specific counties or administrative
 	// divisions in the search results. Accepts either a single county name or a list
 	// of county names. County names should match the format used in article metadata
