@@ -65,6 +65,7 @@ func TestJournalistListWithOptionalParams(t *testing.T) {
 		Q:               perigon.String("q"),
 		ShowNumResults:  perigon.Bool(true),
 		Size:            perigon.Int(0),
+		SortBy:          perigon.JournalistListParamsSortByAvgMonthlyPosts,
 		Source:          []string{"string"},
 		Topic:           []string{"string"},
 		Twitter:         perigon.String("twitter"),

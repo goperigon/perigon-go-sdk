@@ -271,6 +271,12 @@ type JournalistListParams struct {
 	// (`locations.state`). For US locations this is the two-letter state code (e.g.,
 	// NY, CA). Multiple values create an OR filter.
 	LocationState []string `query:"locationState,omitzero" json:"-"`
+	// String. Sort journalists from highest to lowest by avgMonthlyPosts,
+	// linkedinConnections, or linkedinFollowers. When omitted, results are sorted by
+	// relevance.
+	//
+	// Any of "avgMonthlyPosts", "linkedinConnections", "linkedinFollowers".
+	SortBy JournalistListParamsSortBy `query:"sortBy,omitzero" json:"-"`
 	// String Array. Filter journalists by the publisher domains they write for.
 	// Supports wildcards (_ and ?) for pattern matching (e.g., _.cnn.com). Multiple
 	// values create an OR filter.
@@ -290,3 +296,14 @@ func (r JournalistListParams) URLQuery() (v url.Values, err error) {
 		NestedFormat: apiquery.NestedQueryFormatBrackets,
 	})
 }
+
+// String. Sort journalists from highest to lowest by avgMonthlyPosts,
+// linkedinConnections, or linkedinFollowers. When omitted, results are sorted by
+// relevance.
+type JournalistListParamsSortBy string
+
+const (
+	JournalistListParamsSortByAvgMonthlyPosts     JournalistListParamsSortBy = "avgMonthlyPosts"
+	JournalistListParamsSortByLinkedinConnections JournalistListParamsSortBy = "linkedinConnections"
+	JournalistListParamsSortByLinkedinFollowers   JournalistListParamsSortBy = "linkedinFollowers"
+)
