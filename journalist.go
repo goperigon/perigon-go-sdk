@@ -96,7 +96,8 @@ type Journalist struct {
 	// Locations associated with the journalist.
 	Locations []shared.LocationHolder `json:"locations" api:"nullable"`
 	// Common display name of the journalist.
-	Name string `json:"name" api:"nullable"`
+	Name            string `json:"name" api:"nullable"`
+	PrimaryRecordID string `json:"primaryRecordId" api:"nullable"`
 	// Professional title of the journalist.
 	Title string `json:"title" api:"nullable"`
 	// Categories most frequently covered by the journalist.
@@ -138,6 +139,7 @@ type Journalist struct {
 		LinkedinURL         respjson.Field
 		Locations           respjson.Field
 		Name                respjson.Field
+		PrimaryRecordID     respjson.Field
 		Title               respjson.Field
 		TopCategories       respjson.Field
 		TopCountries        respjson.Field
