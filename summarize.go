@@ -40,8 +40,11 @@ func NewSummarizeService(opts ...option.RequestOption) (r SummarizeService) {
 	return
 }
 
-// Produce a single, concise summary over the full corpus of articles matching your
-// filters, using your prompt to guide which insights to highlight.
+// Produce one concise summary from up to 100 articles matching the supplied
+// filters. Use the prompt and summarization fields to control which insights are
+// highlighted. When method is CLUSTERS, article-only parameters such as articleId,
+// page, sortBy, watchlist, reprintGroupId, exclusion filters, prefixTaxonomy, and
+// highlighting options are ignored.
 func (r *SummarizeService) New(ctx context.Context, params SummarizeNewParams, opts ...option.RequestOption) (res *SummarizeNewResponse, err error) {
 	opts = slices.Concat(r.Options, opts)
 	path := "v1/summarize"
@@ -50,10 +53,15 @@ func (r *SummarizeService) New(ctx context.Context, params SummarizeNewParams, o
 }
 
 type SummarizeNewResponse struct {
-	NumResults int64     `json:"numResults" api:"required"`
-	Results    []Article `json:"results" api:"required"`
-	Status     int64     `json:"status" api:"required"`
-	Summary    string    `json:"summary" api:"required"`
+	// Number of articles returned in results after applying returnedArticleCount.
+	NumResults int64 `json:"numResults" api:"required"`
+	// Articles returned after summary generation, limited by returnedArticleCount.
+	Results []Article `json:"results" api:"required"`
+	// HTTP status code for the response.
+	Status int64 `json:"status" api:"required"`
+	// Generated summary of the selected articles, or 'No articles found' when no
+	// content matches.
+	Summary string `json:"summary" api:"required"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		NumResults  respjson.Field
@@ -72,17 +80,19 @@ func (r *SummarizeNewResponse) UnmarshalJSON(data []byte) error {
 }
 
 type SummarizeNewParams struct {
-	// The maximum number of articles to factor into the summary.
+	// Maximum number of articles used to generate the summary. Must be between 1
+	// and 100.
 	MaxArticleCount param.Opt[int64] `json:"maxArticleCount,omitzero"`
-	// Maximum number of tokens to generate in the summary.
+	// Maximum number of tokens to generate. Must be 0 or greater.
 	MaxTokens param.Opt[int64] `json:"maxTokens,omitzero"`
-	// Instructions guiding how the summary should be written. Maximum length: 2 048
+	// Instructions guiding how the summary should be written. Maximum length: 2,048
 	// characters.
 	Prompt param.Opt[string] `json:"prompt,omitzero"`
-	// The maximum number of articles that should be returned in the response. This can
-	// be used to return fewer than maxArticleCount results.
+	// Maximum number of articles returned in the response. Must be between 1 and 100
+	// and cannot return more articles than maxArticleCount selected.
 	ReturnedArticleCount param.Opt[int64] `json:"returnedArticleCount,omitzero"`
-	// Sampling temperature for the LLM (0.0 = deterministic to 2.0 = very creative).
+	// Sampling temperature from 0.0 to 2.0. Ignored by gpt-5.4-mini, gpt-5.4-nano,
+	// gpt-5-mini, and gpt-5-nano.
 	Temperature param.Opt[float64] `json:"temperature,omitzero"`
 	// Nucleus sampling (top-p) for the LLM (0.0 to 1.0).
 	TopP param.Opt[float64] `json:"topP,omitzero"`
@@ -188,20 +198,14 @@ type SummarizeNewParams struct {
 	SearchTranslation param.Opt[bool] `query:"searchTranslation,omitzero" json:"-"`
 	// Boolean. When set to true, enables text highlighting in search results.
 	ShowHighlighting param.Opt[bool] `query:"showHighlighting,omitzero" json:"-"`
-	// Boolean. Whether to show the total number of all matched articles. Default value
-	// is false which makes queries a bit more efficient but also counts up to 10000
-	// articles.
-	ShowNumResults param.Opt[bool] `query:"showNumResults,omitzero" json:"-"`
 	// Boolean. Controls whether to include reprinted content in results. When true
 	// (default), shows syndicated articles from wire services like AP or Reuters that
 	// appear on multiple sites.
 	ShowReprints param.Opt[bool] `query:"showReprints,omitzero" json:"-"`
-	// Integer. The number of articles to return per page in the paginated response.
-	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
 	// Float. Latitude of the center point to search articles created by local
 	// publications.
 	SourceLat param.Opt[float64] `query:"sourceLat,omitzero" json:"-"`
-	// Float. Latitude of the center point to search articles created by local
+	// Float. Longitude of the center point to search articles created by local
 	// publications.
 	SourceLon param.Opt[float64] `query:"sourceLon,omitzero" json:"-"`
 	// Float. Maximum distance from starting point to search articles created by local
@@ -221,16 +225,16 @@ type SummarizeNewParams struct {
 	// could be used for querying certain website sections, e.g.
 	// source=cnn.com&url=travel.
 	URL param.Opt[string] `query:"url,omitzero" json:"-"`
-	// Method for selecting articles: ARTICLES (include all matches) or CLUSTERS (one
-	// per cluster).
+	// Article selection method. ARTICLES selects up to maxArticleCount matching
+	// articles; CLUSTERS selects the first article from each of up to maxArticleCount
+	// stories.
 	//
 	// Any of "ARTICLES", "CLUSTERS".
 	Method SummarizeNewParamsMethod `json:"method,omitzero"`
 	// The underlying LLM model to use for generation.
 	//
 	// Any of "gpt-5.4-mini", "gpt-5.4-nano", "gpt-5-mini", "gpt-5-nano", "gpt-4o",
-	// "gpt-4o-mini", "gpt-4.1", "gpt-4.1-mini", "llama-3.3-70b-versatile",
-	// "openai/gpt-oss-120b".
+	// "gpt-4o-mini", "gpt-4.1", "gpt-4.1-mini", "openai/gpt-oss-120b".
 	Model SummarizeNewParamsModel `json:"model,omitzero"`
 	// Which article fields to include when generating the summary. Up to three values
 	// from TITLE, CONTENT, SUMMARY.
@@ -274,9 +278,18 @@ type SummarizeNewParams struct {
 	// String Array. Filter articles by company identifiers. For a complete list of
 	// tracked companies, refer to the /companies endpoint.
 	CompanyID []string `query:"companyId,omitzero" json:"-"`
+	// String Array. Filter articles by company ISIN codes (International Securities
+	// Identification Numbers). For available company entities and their ISINs, consult
+	// the /companies endpoint.
+	CompanyIsin []string `query:"companyIsin,omitzero" json:"-"`
 	// String Array. Filter articles by company stock symbols. For available company
 	// entities and their symbols, consult the /companies endpoint.
 	CompanySymbol []string `query:"companySymbol,omitzero" json:"-"`
+	// String Array. Filter articles by ISIN codes on company ticker listings
+	// (symbols.isin). Distinct from companyIsin, which matches the company-level ISIN.
+	// For available company entities and their listing ISINs, consult the /companies
+	// endpoint.
+	CompanySymbolIsin []string `query:"companySymbolIsin,omitzero" json:"-"`
 	// String Array. Country code to filter by country. If multiple parameters are
 	// passed, they will be applied as OR operations.
 	Country []string `query:"country,omitzero" json:"-"`
@@ -300,10 +313,19 @@ type SummarizeNewParams struct {
 	// String Array. Exclude articles mentioning companies with specific identifiers.
 	// Creates an AND-exclude filter to remove content about these corporate entities.
 	ExcludeCompanyID []string `query:"excludeCompanyId,omitzero" json:"-"`
+	// String Array. Exclude articles related to companies with specific ISIN codes.
+	// Creates an AND-exclude filter to remove content about these companies. For
+	// available company entities and their ISINs, consult the /companies endpoint.
+	ExcludeCompanyIsin []string `query:"excludeCompanyIsin,omitzero" json:"-"`
 	// String Array. A list of stock symbols (ticker symbols) that identify companies
 	// to be excluded. Articles related to companies using any of these symbols will be
 	// omitted, which is useful for targeting or avoiding specific public companies.
 	ExcludeCompanySymbol []string `query:"excludeCompanySymbol,omitzero" json:"-"`
+	// String Array. Exclude articles related to companies whose ticker listings have
+	// these ISIN codes (symbols.isin). Distinct from excludeCompanyIsin, which matches
+	// the company-level ISIN. For available company entities and their listing ISINs,
+	// consult the /companies endpoint.
+	ExcludeCompanySymbolIsin []string `query:"excludeCompanySymbolIsin,omitzero" json:"-"`
 	// String Array. Excludes articles from specific counties or administrative
 	// divisions in the search results. Accepts either a single county name or a list
 	// of county names. County names should match the format used in article metadata
@@ -460,8 +482,9 @@ func (r SummarizeNewParams) URLQuery() (v url.Values, err error) {
 	})
 }
 
-// Method for selecting articles: ARTICLES (include all matches) or CLUSTERS (one
-// per cluster).
+// Article selection method. ARTICLES selects up to maxArticleCount matching
+// articles; CLUSTERS selects the first article from each of up to maxArticleCount
+// stories.
 type SummarizeNewParamsMethod string
 
 const (
@@ -473,14 +496,13 @@ const (
 type SummarizeNewParamsModel string
 
 const (
-	SummarizeNewParamsModelGpt5_4Mini            SummarizeNewParamsModel = "gpt-5.4-mini"
-	SummarizeNewParamsModelGpt5_4Nano            SummarizeNewParamsModel = "gpt-5.4-nano"
-	SummarizeNewParamsModelGpt5Mini              SummarizeNewParamsModel = "gpt-5-mini"
-	SummarizeNewParamsModelGpt5Nano              SummarizeNewParamsModel = "gpt-5-nano"
-	SummarizeNewParamsModelGpt4o                 SummarizeNewParamsModel = "gpt-4o"
-	SummarizeNewParamsModelGpt4oMini             SummarizeNewParamsModel = "gpt-4o-mini"
-	SummarizeNewParamsModelGpt4_1                SummarizeNewParamsModel = "gpt-4.1"
-	SummarizeNewParamsModelGpt4_1Mini            SummarizeNewParamsModel = "gpt-4.1-mini"
-	SummarizeNewParamsModelLlama3_3_70bVersatile SummarizeNewParamsModel = "llama-3.3-70b-versatile"
-	SummarizeNewParamsModelOpenAIGptOss120b      SummarizeNewParamsModel = "openai/gpt-oss-120b"
+	SummarizeNewParamsModelGpt5_4Mini       SummarizeNewParamsModel = "gpt-5.4-mini"
+	SummarizeNewParamsModelGpt5_4Nano       SummarizeNewParamsModel = "gpt-5.4-nano"
+	SummarizeNewParamsModelGpt5Mini         SummarizeNewParamsModel = "gpt-5-mini"
+	SummarizeNewParamsModelGpt5Nano         SummarizeNewParamsModel = "gpt-5-nano"
+	SummarizeNewParamsModelGpt4o            SummarizeNewParamsModel = "gpt-4o"
+	SummarizeNewParamsModelGpt4oMini        SummarizeNewParamsModel = "gpt-4o-mini"
+	SummarizeNewParamsModelGpt4_1           SummarizeNewParamsModel = "gpt-4.1"
+	SummarizeNewParamsModelGpt4_1Mini       SummarizeNewParamsModel = "gpt-4.1-mini"
+	SummarizeNewParamsModelOpenAIGptOss120b SummarizeNewParamsModel = "openai/gpt-oss-120b"
 )

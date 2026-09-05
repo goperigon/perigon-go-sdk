@@ -62,43 +62,80 @@ func (r *StoryService) List(ctx context.Context, query StoryListParams, opts ...
 	return res, err
 }
 
+// Expanded story cluster details, when requested and available.
 type NewsCluster struct {
-	ID                string                  `json:"id" api:"nullable"`
-	Categories        []RecordStatHolder      `json:"categories" api:"nullable"`
-	Companies         []NewsClusterCompany    `json:"companies" api:"nullable"`
-	Countries         []RecordStatHolder      `json:"countries" api:"nullable"`
-	CreatedAt         string                  `json:"createdAt" api:"nullable"`
-	DuplicateOf       string                  `json:"duplicateOf" api:"nullable"`
-	Highlights        map[string][]string     `json:"highlights" api:"nullable"`
-	ImageSource       NewsClusterImageSource  `json:"imageSource" api:"nullable"`
-	ImageURL          string                  `json:"imageUrl" api:"nullable"`
-	InitializedAt     string                  `json:"initializedAt" api:"nullable"`
-	KeyPoints         []NewsClusterKeyPoint   `json:"keyPoints" api:"nullable"`
-	Locations         []NewsClusterLocation   `json:"locations" api:"nullable"`
-	Name              string                  `json:"name" api:"nullable"`
-	People            []NewsClusterPerson     `json:"people" api:"nullable"`
-	Questions         []NewsClusterQuestion   `json:"questions" api:"nullable"`
-	ReprintCount      int64                   `json:"reprintCount" api:"nullable"`
-	SelectedArticles  []Article               `json:"selectedArticles" api:"nullable"`
-	Sentiment         NewsClusterSentiment    `json:"sentiment" api:"nullable"`
-	ShortSummary      string                  `json:"shortSummary" api:"nullable"`
-	Slug              string                  `json:"slug" api:"nullable"`
-	SourceDiversity   float64                 `json:"sourceDiversity" api:"nullable"`
-	Summary           string                  `json:"summary" api:"nullable"`
-	SummaryReferences []string                `json:"summaryReferences" api:"nullable"`
-	Taxonomies        []RecordStatHolder      `json:"taxonomies" api:"nullable"`
-	TopCategories     []shared.CategoryHolder `json:"topCategories" api:"nullable"`
-	TopCompanies      []NewsClusterTopCompany `json:"topCompanies" api:"nullable"`
-	TopCountries      []string                `json:"topCountries" api:"nullable"`
-	Topics            []RecordStatHolder      `json:"topics" api:"nullable"`
-	TopLocations      []shared.LocationHolder `json:"topLocations" api:"nullable"`
-	TopPeople         []NewsClusterTopPerson  `json:"topPeople" api:"nullable"`
-	TopTaxonomies     []shared.CategoryHolder `json:"topTaxonomies" api:"nullable"`
-	TopTopics         []NewsClusterTopTopic   `json:"topTopics" api:"nullable"`
-	TotalCount        int64                   `json:"totalCount" api:"nullable"`
-	UniqueCount       int64                   `json:"uniqueCount" api:"nullable"`
-	UniqueSources     []string                `json:"uniqueSources" api:"nullable"`
-	UpdatedAt         string                  `json:"updatedAt" api:"nullable"`
+	// Unique identifier for the story cluster.
+	ID string `json:"id" api:"nullable"`
+	// Categories associated with the story and their article counts.
+	Categories []RecordStatHolder `json:"categories" api:"nullable"`
+	// Companies associated with the story and their article counts.
+	Companies []NewsClusterCompany `json:"companies" api:"nullable"`
+	// Countries associated with the story and their article counts.
+	Countries []RecordStatHolder `json:"countries" api:"nullable"`
+	// Date and time the story was created, in ISO 8601 format.
+	CreatedAt string `json:"createdAt" api:"nullable"`
+	// Identifier of the original story when this story is a duplicate.
+	DuplicateOf string `json:"duplicateOf" api:"nullable"`
+	// Matched text fragments grouped by story field.
+	Highlights map[string][]string `json:"highlights" api:"nullable"`
+	// Publisher information for the selected story image.
+	ImageSource NewsClusterImageSource `json:"imageSource" api:"nullable"`
+	// Primary image URL selected for the story.
+	ImageURL string `json:"imageUrl" api:"nullable"`
+	// Date and time the story became initialized and visible, in ISO 8601 format.
+	InitializedAt string `json:"initializedAt" api:"nullable"`
+	// Key facts and developments identified in the story.
+	KeyPoints []NewsClusterKeyPoint `json:"keyPoints" api:"nullable"`
+	// Locations associated with the story and their article counts.
+	Locations []NewsClusterLocation `json:"locations" api:"nullable"`
+	// Generated story title.
+	Name string `json:"name" api:"nullable"`
+	// People associated with the story and their article counts.
+	People []NewsClusterPerson `json:"people" api:"nullable"`
+	// Questions and answers generated from the story content.
+	Questions []NewsClusterQuestion `json:"questions" api:"nullable"`
+	// Number of reprinted articles in the story.
+	ReprintCount int64 `json:"reprintCount" api:"nullable"`
+	// Representative articles selected for the story.
+	SelectedArticles []Article `json:"selectedArticles" api:"nullable"`
+	// Aggregate sentiment scores for the story.
+	Sentiment NewsClusterSentiment `json:"sentiment" api:"nullable"`
+	// Short generated story summary, when available.
+	ShortSummary string `json:"shortSummary" api:"nullable"`
+	// URL-safe identifier for the story.
+	Slug string `json:"slug" api:"nullable"`
+	// Ratio of unique publisher domains to total articles in the story.
+	SourceDiversity float64 `json:"sourceDiversity" api:"nullable"`
+	// Generated story summary.
+	Summary string `json:"summary" api:"nullable"`
+	// Article IDs supporting the story summary.
+	SummaryReferences []string `json:"summaryReferences" api:"nullable"`
+	// Google Content Categories associated with the story and their article counts.
+	Taxonomies []RecordStatHolder `json:"taxonomies" api:"nullable"`
+	// Categories most strongly associated with the story.
+	TopCategories []shared.CategoryHolder `json:"topCategories" api:"nullable"`
+	// Companies most strongly associated with the story.
+	TopCompanies []NewsClusterTopCompany `json:"topCompanies" api:"nullable"`
+	// Countries most strongly associated with the story.
+	TopCountries []string `json:"topCountries" api:"nullable"`
+	// Topics associated with the story and their article counts.
+	Topics []RecordStatHolder `json:"topics" api:"nullable"`
+	// Locations most strongly associated with the story.
+	TopLocations []shared.LocationHolder `json:"topLocations" api:"nullable"`
+	// People most strongly associated with the story.
+	TopPeople []NewsClusterTopPerson `json:"topPeople" api:"nullable"`
+	// Google Content Categories most strongly associated with the story.
+	TopTaxonomies []shared.CategoryHolder `json:"topTaxonomies" api:"nullable"`
+	// Topics most strongly associated with the story.
+	TopTopics []NewsClusterTopTopic `json:"topTopics" api:"nullable"`
+	// Total article count including reprints.
+	TotalCount int64 `json:"totalCount" api:"nullable"`
+	// Number of unique articles in the story.
+	UniqueCount int64 `json:"uniqueCount" api:"nullable"`
+	// Distinct publisher domains represented in the story.
+	UniqueSources []string `json:"uniqueSources" api:"nullable"`
+	// Date and time the story was last updated, in ISO 8601 format.
+	UpdatedAt string `json:"updatedAt" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                respjson.Field
@@ -148,11 +185,17 @@ func (r *NewsCluster) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Companies associated with the story and their article counts.
 type NewsClusterCompany struct {
-	ID      string   `json:"id" api:"nullable"`
-	Count   int64    `json:"count" api:"nullable"`
+	// Unique Perigon identifier for the company.
+	ID string `json:"id" api:"nullable"`
+	// Number of story articles mentioning the company.
+	Count int64 `json:"count" api:"nullable"`
+	// Domains associated with the company.
 	Domains []string `json:"domains" api:"nullable"`
-	Name    string   `json:"name" api:"nullable"`
+	// Company name.
+	Name string `json:"name" api:"nullable"`
+	// Stock symbols associated with the company.
 	Symbols []string `json:"symbols" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -172,10 +215,14 @@ func (r *NewsClusterCompany) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Publisher information for the selected story image.
 type NewsClusterImageSource struct {
-	Domain   string                `json:"domain" api:"nullable"`
+	// Publisher domain.
+	Domain string `json:"domain" api:"nullable"`
+	// Geographic location of the publisher, when available.
 	Location shared.SourceLocation `json:"location" api:"nullable"`
-	Paywall  bool                  `json:"paywall" api:"nullable"`
+	// Whether the publisher uses a paywall, when known.
+	Paywall bool `json:"paywall" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Domain      respjson.Field
@@ -192,8 +239,11 @@ func (r *NewsClusterImageSource) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Key facts and developments identified in the story.
 type NewsClusterKeyPoint struct {
-	Point      string   `json:"point" api:"nullable"`
+	// A key fact or development identified in the content.
+	Point string `json:"point" api:"nullable"`
+	// Article IDs supporting the key point.
 	References []string `json:"references" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -210,13 +260,20 @@ func (r *NewsClusterKeyPoint) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Locations associated with the story and their article counts.
 type NewsClusterLocation struct {
-	Area    string `json:"area" api:"nullable"`
-	City    string `json:"city" api:"nullable"`
-	Count   int64  `json:"count" api:"nullable"`
+	// Neighborhood, borough, or district associated with the story.
+	Area string `json:"area" api:"nullable"`
+	// City associated with the story.
+	City string `json:"city" api:"nullable"`
+	// Number of story articles associated with the location.
+	Count int64 `json:"count" api:"nullable"`
+	// Country associated with the story.
 	Country string `json:"country" api:"nullable"`
-	County  string `json:"county" api:"nullable"`
-	State   string `json:"state" api:"nullable"`
+	// County associated with the story.
+	County string `json:"county" api:"nullable"`
+	// State or region associated with the story.
+	State string `json:"state" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Area        respjson.Field
@@ -236,9 +293,13 @@ func (r *NewsClusterLocation) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// People associated with the story and their article counts.
 type NewsClusterPerson struct {
-	Count      int64  `json:"count" api:"nullable"`
-	Name       string `json:"name" api:"nullable"`
+	// Number of story articles mentioning the person.
+	Count int64 `json:"count" api:"nullable"`
+	// Person name.
+	Name string `json:"name" api:"nullable"`
+	// Wikidata identifier for the person.
 	WikidataID string `json:"wikidataId" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -256,9 +317,13 @@ func (r *NewsClusterPerson) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Questions and answers generated from the story content.
 type NewsClusterQuestion struct {
-	Answer     string   `json:"answer" api:"nullable"`
-	Question   string   `json:"question" api:"nullable"`
+	// Answer generated from the story content.
+	Answer string `json:"answer" api:"nullable"`
+	// Question generated from the story content.
+	Question string `json:"question" api:"nullable"`
+	// Article IDs supporting the answer.
 	References []string `json:"references" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -276,9 +341,13 @@ func (r *NewsClusterQuestion) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Aggregate sentiment scores for the story.
 type NewsClusterSentiment struct {
+	// Negative sentiment score from 0 to 1.
 	Negative float64 `json:"negative" api:"nullable"`
-	Neutral  float64 `json:"neutral" api:"nullable"`
+	// Neutral sentiment score from 0 to 1.
+	Neutral float64 `json:"neutral" api:"nullable"`
+	// Positive sentiment score from 0 to 1.
 	Positive float64 `json:"positive" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -296,10 +365,15 @@ func (r *NewsClusterSentiment) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Companies most strongly associated with the story.
 type NewsClusterTopCompany struct {
-	ID      string   `json:"id" api:"nullable"`
+	// Unique Perigon identifier for the company.
+	ID string `json:"id" api:"nullable"`
+	// Domains associated with the company.
 	Domains []string `json:"domains" api:"nullable"`
-	Name    string   `json:"name" api:"nullable"`
+	// Company name.
+	Name string `json:"name" api:"nullable"`
+	// Stock symbols associated with the company.
 	Symbols []string `json:"symbols" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -318,8 +392,11 @@ func (r *NewsClusterTopCompany) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// People most strongly associated with the story.
 type NewsClusterTopPerson struct {
-	Name       string `json:"name" api:"nullable"`
+	// Person name.
+	Name string `json:"name" api:"nullable"`
+	// Wikidata identifier for the person.
 	WikidataID string `json:"wikidataId" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -336,7 +413,9 @@ func (r *NewsClusterTopPerson) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Topics most strongly associated with the story.
 type NewsClusterTopTopic struct {
+	// Topic assigned to the article.
 	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -352,9 +431,12 @@ func (r *NewsClusterTopTopic) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Google Content Categories associated with the story and their article counts.
 type RecordStatHolder struct {
-	Count int64  `json:"count" api:"nullable"`
-	Name  string `json:"name" api:"nullable"`
+	// Number of matching articles for the value.
+	Count int64 `json:"count" api:"nullable"`
+	// Name of the aggregated value.
+	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Count       respjson.Field
@@ -397,9 +479,8 @@ type StoryListParams struct {
 	CompanyName param.Opt[string] `query:"companyName,omitzero" json:"-"`
 	// Boolean. Preview 5 articles from the cluster.
 	ExpandArticles param.Opt[bool] `query:"expandArticles,omitzero" json:"-"`
-	// Date. 'from' filter, will search stories created after the specified date, the
-	// date could be passed as ISO or 'yyyy-mm-dd'. Add time in ISO format, ie.
-	// 2023-03-01T00:00:00
+	// Filter for stories created on or after this date. Accepts ISO 8601 or yyyy-mm-dd
+	// format.
 	From param.Opt[time.Time] `query:"from,omitzero" format:"date-time" json:"-"`
 	// Integer. Specifies the size in characters of each highlighted text fragment.
 	// Defaults to 100 if not specified.
@@ -418,11 +499,11 @@ type StoryListParams struct {
 	// change' with 'highlightQ=renewable OR solar' will highlight terms 'renewable'
 	// and 'solar' in results about climate change.
 	HighlightQ param.Opt[string] `query:"highlightQ,omitzero" json:"-"`
-	// Date. Filter for stories created after this date. Alternative parameter for
-	// filtering by story creation date.
+	// Filter for stories initialized on or after this date. A story is initialized
+	// when it becomes visible with generated story data.
 	InitializedFrom param.Opt[time.Time] `query:"initializedFrom,omitzero" format:"date-time" json:"-"`
-	// Date. Filter for stories created before this date. Alternative parameter for
-	// filtering by story creation date.
+	// Filter for stories initialized on or before this date. A story is initialized
+	// when it becomes visible with generated story data.
 	InitializedTo param.Opt[time.Time] `query:"initializedTo,omitzero" format:"date-time" json:"-"`
 	// Integer. Filter by maximum cluster size. Maximum cluster size filter applies to
 	// number of unique articles in the cluster.
@@ -446,21 +527,21 @@ type StoryListParams struct {
 	// to true. Note that stories only receive names after they contain at least 5
 	// unique articles.
 	NameExists param.Opt[bool] `query:"nameExists,omitzero" json:"-"`
-	// Float. Filter stories with an aggregate negative sentiment score greater than or
-	// equal to the specified value. Scores range from 0 to 1, with higher values
-	// indicating stronger negative tone.
+	// Filter stories with an aggregate negative sentiment score greater than or equal
+	// to the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger negative tone.
 	NegativeSentimentFrom param.Opt[float64] `query:"negativeSentimentFrom,omitzero" json:"-"`
-	// Float. Filter articles with an aggregate negative sentiment score less than or
-	// equal to the specified value. Scores range from 0 to 1, with higher values
-	// indicating stronger negative tone.
+	// Filter stories with an aggregate negative sentiment score less than or equal to
+	// the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger negative tone.
 	NegativeSentimentTo param.Opt[float64] `query:"negativeSentimentTo,omitzero" json:"-"`
-	// Float. Filter articles with an aggregate neutral sentiment score greater than or
-	// equal to the specified value. Scores range from 0 to 1, with higher values
-	// indicating stronger neutral tone.
+	// Filter stories with an aggregate neutral sentiment score greater than or equal
+	// to the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger neutral tone.
 	NeutralSentimentFrom param.Opt[float64] `query:"neutralSentimentFrom,omitzero" json:"-"`
-	// Float. Filter articles with an aggregate neutral sentiment score less than or
-	// equal to the specified value. Scores range from 0 to 1, with higher values
-	// indicating stronger neutral tone.
+	// Filter stories with an aggregate neutral sentiment score less than or equal to
+	// the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger neutral tone.
 	NeutralSentimentTo param.Opt[float64] `query:"neutralSentimentTo,omitzero" json:"-"`
 	// Integer. The specific page of results to retrieve in the paginated response.
 	// Starts at 0.
@@ -469,13 +550,13 @@ type StoryListParams struct {
 	// support Boolean or complex logic. For available person entities, consult the
 	// /people endpoint.
 	PersonName param.Opt[string] `query:"personName,omitzero" json:"-"`
-	// Float. Filter articles with an aggregate positive sentiment score greater than
-	// or equal to the specified value. Scores range from 0 to 1, with higher values
-	// indicating stronger positive tone.
+	// Filter stories with an aggregate positive sentiment score greater than or equal
+	// to the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger positive tone.
 	PositiveSentimentFrom param.Opt[float64] `query:"positiveSentimentFrom,omitzero" json:"-"`
-	// Float. Filter articles with an aggregate positive sentiment score less than or
-	// equal to the specified value. Scores range from 0 to 1, with higher values
-	// indicating stronger positive tone.
+	// Filter stories with an aggregate positive sentiment score less than or equal to
+	// the specified value. Scores range from 0 to 1, with higher values indicating
+	// stronger positive tone.
 	PositiveSentimentTo param.Opt[float64] `query:"positiveSentimentTo,omitzero" json:"-"`
 	// String. Primary search query for filtering stories based on their name, summary,
 	// and key points. Supports Boolean operators (AND, OR, NOT), exact phrases with
@@ -494,9 +575,8 @@ type StoryListParams struct {
 	ShowStoryPageInfo param.Opt[bool] `query:"showStoryPageInfo,omitzero" json:"-"`
 	// Integer. The number of articles to return per page in the paginated response.
 	Size param.Opt[int64] `query:"size,omitzero" json:"-"`
-	// Date. 'to' filter, will search stories created before the specified date, the
-	// date could be passed as ISO or 'yyyy-mm-dd'. Add time in ISO format, ie.
-	// 2023-03-01T23:59:59
+	// Filter for stories created on or before this date. Accepts ISO 8601 or
+	// yyyy-mm-dd format.
 	To param.Opt[time.Time] `query:"to,omitzero" format:"date-time" json:"-"`
 	// Date. Filter for stories that received new articles after this date. Useful for
 	// tracking developing news events or evolving storylines.
@@ -529,10 +609,21 @@ type StoryListParams struct {
 	// stories where these companies appear prominently. For a complete list of tracked
 	// companies, refer to the /companies endpoint.
 	CompanyID []string `query:"companyId,omitzero" json:"-"`
+	// String Array. Filter stories by ISIN codes of top mentioned companies
+	// (International Securities Identification Numbers). Returns stories where
+	// companies with these ISINs appear prominently. For available company entities
+	// and their ISINs, consult the /companies endpoint.
+	CompanyIsin []string `query:"companyIsin,omitzero" json:"-"`
 	// String Array. Filter stories by stock symbols of top mentioned companies.
 	// Returns stories where companies with these symbols appear prominently. For
 	// available company entities and their symbols, consult the /companies endpoint.
 	CompanySymbol []string `query:"companySymbol,omitzero" json:"-"`
+	// String Array. Filter stories by ISIN codes on ticker listings of top mentioned
+	// companies (symbols.isin). Distinct from companyIsin, which matches the
+	// company-level ISIN. Returns stories where those companies appear prominently.
+	// For available company entities and their listing ISINs, consult the /companies
+	// endpoint.
+	CompanySymbolIsin []string `query:"companySymbolIsin,omitzero" json:"-"`
 	// String Array. Country code to filter by country. If multiple parameters are
 	// passed, they will be applied as OR operations.
 	Country []string `query:"country,omitzero" json:"-"`
@@ -551,7 +642,7 @@ type StoryListParams struct {
 	// reprints).
 	//
 	// Any of "createdAt", "updatedAt", "relevance", "count", "totalCount".
-	SortBy SortBy `query:"sortBy,omitzero" json:"-"`
+	SortBy StoryListParamsSortBy `query:"sortBy,omitzero" json:"-"`
 	// String Array. Filter stories that contain articles from specific publisher
 	// domains or subdomains. Supports wildcards (_ and ?) for pattern matching (e.g.,
 	// _.cnn.com). A story will match if it contains at least one article from any of
@@ -588,3 +679,18 @@ func (r StoryListParams) URLQuery() (v url.Values, err error) {
 		NestedFormat: apiquery.NestedQueryFormatBrackets,
 	})
 }
+
+// String. Determines the story sorting order. Options include createdAt (default,
+// when stories first emerged), updatedAt (when stories received new articles, best
+// for tracking developing events), relevance (best match to query), count (by
+// unique article count), and totalCount (by total article count including
+// reprints).
+type StoryListParamsSortBy string
+
+const (
+	StoryListParamsSortByCreatedAt  StoryListParamsSortBy = "createdAt"
+	StoryListParamsSortByUpdatedAt  StoryListParamsSortBy = "updatedAt"
+	StoryListParamsSortByRelevance  StoryListParamsSortBy = "relevance"
+	StoryListParamsSortByCount      StoryListParamsSortBy = "count"
+	StoryListParamsSortByTotalCount StoryListParamsSortBy = "totalCount"
+)

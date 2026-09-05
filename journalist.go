@@ -65,39 +65,70 @@ func (r *JournalistService) List(ctx context.Context, query JournalistListParams
 	return res, err
 }
 
+// Expanded journalist details, when requested and available.
 type Journalist struct {
-	ID                  string                  `json:"id" api:"nullable"`
-	AvgMonthlyPosts     int64                   `json:"avgMonthlyPosts" api:"nullable"`
-	BlogURL             string                  `json:"blogUrl" api:"nullable"`
-	Description         string                  `json:"description" api:"nullable"`
-	FacebookURL         string                  `json:"facebookUrl" api:"nullable"`
-	FullName            string                  `json:"fullName" api:"nullable"`
-	Headline            string                  `json:"headline" api:"nullable"`
-	ImageURL            string                  `json:"imageUrl" api:"nullable"`
-	InstagramURL        string                  `json:"instagramUrl" api:"nullable"`
-	LinkedinConnections int64                   `json:"linkedinConnections" api:"nullable"`
-	LinkedinFollowers   int64                   `json:"linkedinFollowers" api:"nullable"`
-	LinkedinURL         string                  `json:"linkedinUrl" api:"nullable"`
-	Locations           []shared.LocationHolder `json:"locations" api:"nullable"`
-	Name                string                  `json:"name" api:"nullable"`
-	Title               string                  `json:"title" api:"nullable"`
-	TopCategories       []NameCount             `json:"topCategories" api:"nullable"`
-	TopCountries        []NameCount             `json:"topCountries" api:"nullable"`
-	TopLabels           []NameCount             `json:"topLabels" api:"nullable"`
-	TopSources          []NameCount             `json:"topSources" api:"nullable"`
-	TopTopics           []NameCount             `json:"topTopics" api:"nullable"`
-	TumblrURL           string                  `json:"tumblrUrl" api:"nullable"`
-	TwitterBio          string                  `json:"twitterBio" api:"nullable"`
-	TwitterHandle       string                  `json:"twitterHandle" api:"nullable"`
-	UpdatedAt           string                  `json:"updatedAt" api:"nullable"`
-	WebsiteURL          string                  `json:"websiteUrl" api:"nullable"`
-	YoutubeURL          string                  `json:"youtubeUrl" api:"nullable"`
+	// Unique Perigon identifier for the journalist.
+	ID string `json:"id" api:"nullable"`
+	// Average number of articles published by the journalist per month.
+	AvgMonthlyPosts int64 `json:"avgMonthlyPosts" api:"nullable"`
+	// Blog URL for the journalist.
+	BlogURL string `json:"blogUrl" api:"nullable"`
+	// Biographical description of the journalist.
+	Description string `json:"description" api:"nullable"`
+	// Journalist's email.
+	Email string `json:"email" api:"nullable"`
+	// Facebook profile URL for the journalist.
+	FacebookURL string `json:"facebookUrl" api:"nullable"`
+	// Full name of the journalist.
+	FullName string `json:"fullName" api:"nullable"`
+	// Professional headline associated with the journalist.
+	Headline string `json:"headline" api:"nullable"`
+	// Profile image URL for the journalist.
+	ImageURL string `json:"imageUrl" api:"nullable"`
+	// Instagram profile URL for the journalist.
+	InstagramURL string `json:"instagramUrl" api:"nullable"`
+	// LinkedIn connection count for the journalist, when available.
+	LinkedinConnections int64 `json:"linkedinConnections" api:"nullable"`
+	// LinkedIn follower count for the journalist, when available.
+	LinkedinFollowers int64 `json:"linkedinFollowers" api:"nullable"`
+	// LinkedIn profile URL for the journalist.
+	LinkedinURL string `json:"linkedinUrl" api:"nullable"`
+	// Locations associated with the journalist.
+	Locations []shared.LocationHolder `json:"locations" api:"nullable"`
+	// Common display name of the journalist.
+	Name            string `json:"name" api:"nullable"`
+	PrimaryRecordID string `json:"primaryRecordId" api:"nullable"`
+	// Professional title of the journalist.
+	Title string `json:"title" api:"nullable"`
+	// Categories most frequently covered by the journalist.
+	TopCategories []NameCount `json:"topCategories" api:"nullable"`
+	// Countries most frequently associated with the journalist's articles.
+	TopCountries []NameCount `json:"topCountries" api:"nullable"`
+	// Editorial labels most frequently associated with the journalist's articles.
+	TopLabels []NameCount `json:"topLabels" api:"nullable"`
+	// Publishers most frequently associated with the journalist.
+	TopSources []NameCount `json:"topSources" api:"nullable"`
+	// Topics most frequently covered by the journalist.
+	TopTopics []NameCount `json:"topTopics" api:"nullable"`
+	// Tumblr profile URL for the journalist.
+	TumblrURL string `json:"tumblrUrl" api:"nullable"`
+	// Biography from the journalist's X or Twitter profile.
+	TwitterBio string `json:"twitterBio" api:"nullable"`
+	// Journalist's X or Twitter handle.
+	TwitterHandle string `json:"twitterHandle" api:"nullable"`
+	// Date and time the journalist record was last refreshed, in ISO 8601 format.
+	UpdatedAt string `json:"updatedAt" api:"nullable"`
+	// Personal or professional website URL for the journalist.
+	WebsiteURL string `json:"websiteUrl" api:"nullable"`
+	// YouTube channel URL for the journalist.
+	YoutubeURL string `json:"youtubeUrl" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		ID                  respjson.Field
 		AvgMonthlyPosts     respjson.Field
 		BlogURL             respjson.Field
 		Description         respjson.Field
+		Email               respjson.Field
 		FacebookURL         respjson.Field
 		FullName            respjson.Field
 		Headline            respjson.Field
@@ -108,6 +139,7 @@ type Journalist struct {
 		LinkedinURL         respjson.Field
 		Locations           respjson.Field
 		Name                respjson.Field
+		PrimaryRecordID     respjson.Field
 		Title               respjson.Field
 		TopCategories       respjson.Field
 		TopCountries        respjson.Field
@@ -131,9 +163,12 @@ func (r *Journalist) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Countries most frequently associated with the journalist's articles.
 type NameCount struct {
-	Count int64  `json:"count" api:"nullable"`
-	Name  string `json:"name" api:"nullable"`
+	// Number of matching records for the value.
+	Count int64 `json:"count" api:"nullable"`
+	// Name of the aggregated value.
+	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Count       respjson.Field
@@ -218,6 +253,32 @@ type JournalistListParams struct {
 	// they publish. This accepts labels like 'Opinion' or 'Pop Culture'. (Searches the
 	// topLabels data field.)
 	Label []string `query:"label,omitzero" json:"-"`
+	// String Array. Filter journalists by their profile location area — neighborhood,
+	// borough, or district (`locations.area`). Multiple values create an OR filter.
+	LocationArea []string `query:"locationArea,omitzero" json:"-"`
+	// String Array. Filter journalists by their profile location city
+	// (`locations.city`). Multiple values create an OR filter.
+	LocationCity []string `query:"locationCity,omitzero" json:"-"`
+	// String Array. Filter journalists by their profile location country
+	// (`locations.country`). Uses ISO 3166-1 alpha-2 two-letter country codes in
+	// lowercase (e.g., us, gb, jp). `uk` is accepted as an alias for `gb`. Distinct
+	// from `country`, which filters reporting focus (`topCountries`). Multiple values
+	// create an OR filter.
+	LocationCountry []string `query:"locationCountry,omitzero" json:"-"`
+	// String Array. Filter journalists by their profile location county
+	// (`locations.county`). County names should match stored metadata (e.g., 'Los
+	// Angeles County', 'Cook County'). Multiple values create an OR filter.
+	LocationCounty []string `query:"locationCounty,omitzero" json:"-"`
+	// String Array. Filter journalists by their profile location state or region
+	// (`locations.state`). For US locations this is the two-letter state code (e.g.,
+	// NY, CA). Multiple values create an OR filter.
+	LocationState []string `query:"locationState,omitzero" json:"-"`
+	// String. Sort journalists from highest to lowest by avgMonthlyPosts,
+	// linkedinConnections, or linkedinFollowers. When omitted, results are sorted by
+	// relevance.
+	//
+	// Any of "avgMonthlyPosts", "linkedinConnections", "linkedinFollowers".
+	SortBy JournalistListParamsSortBy `query:"sortBy,omitzero" json:"-"`
 	// String Array. Filter journalists by the publisher domains they write for.
 	// Supports wildcards (_ and ?) for pattern matching (e.g., _.cnn.com). Multiple
 	// values create an OR filter.
@@ -237,3 +298,14 @@ func (r JournalistListParams) URLQuery() (v url.Values, err error) {
 		NestedFormat: apiquery.NestedQueryFormatBrackets,
 	})
 }
+
+// String. Sort journalists from highest to lowest by avgMonthlyPosts,
+// linkedinConnections, or linkedinFollowers. When omitted, results are sorted by
+// relevance.
+type JournalistListParamsSortBy string
+
+const (
+	JournalistListParamsSortByAvgMonthlyPosts     JournalistListParamsSortBy = "avgMonthlyPosts"
+	JournalistListParamsSortByLinkedinConnections JournalistListParamsSortBy = "linkedinConnections"
+	JournalistListParamsSortByLinkedinFollowers   JournalistListParamsSortBy = "linkedinFollowers"
+)
