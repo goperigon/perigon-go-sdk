@@ -16,14 +16,22 @@ type paramObj = param.APIObject
 
 type Error = apierror.Error
 
+// Google Content Categories most strongly associated with the story.
+//
 // This is an alias to an internal type.
 type CategoryHolder = shared.CategoryHolder
 
+// Geographic coordinates of the place.
+//
 // This is an alias to an internal type.
 type Coordinate = shared.Coordinate
 
+// Locations most strongly associated with the story.
+//
 // This is an alias to an internal type.
 type LocationHolder = shared.LocationHolder
 
+// Geographic location of the publisher, when available.
+//
 // This is an alias to an internal type.
 type SourceLocation = shared.SourceLocation
