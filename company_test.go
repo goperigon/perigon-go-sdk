@@ -42,6 +42,7 @@ func TestCompanyListWithOptionalParams(t *testing.T) {
 		Sector:           perigon.String("sector"),
 		Size:             perigon.Int(1),
 		Symbol:           []string{"string"},
+		SymbolIsin:       []string{"string"},
 	})
 	if err != nil {
 		var apierr *perigon.Error

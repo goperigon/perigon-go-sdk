@@ -14,7 +14,9 @@ type paramUnion = param.APIUnion
 // aliased to make [param.APIObject] private when embedding
 type paramObj = param.APIObject
 
+// Google Content Categories most strongly associated with the story.
 type CategoryHolder struct {
+	// Content category assigned to the article.
 	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -30,8 +32,11 @@ func (r *CategoryHolder) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Geographic coordinates of the place.
 type Coordinate struct {
+	// Latitude in decimal degrees.
 	Lat float64 `json:"lat" api:"nullable"`
+	// Longitude in decimal degrees.
 	Lon float64 `json:"lon" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -48,12 +53,18 @@ func (r *Coordinate) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Locations most strongly associated with the story.
 type LocationHolder struct {
-	Area    string `json:"area" api:"nullable"`
-	City    string `json:"city" api:"nullable"`
+	// Neighborhood, borough, or district central to the article.
+	Area string `json:"area" api:"nullable"`
+	// City central to the article.
+	City string `json:"city" api:"nullable"`
+	// Country central to the article.
 	Country string `json:"country" api:"nullable"`
-	County  string `json:"county" api:"nullable"`
-	State   string `json:"state" api:"nullable"`
+	// County central to the article.
+	County string `json:"county" api:"nullable"`
+	// State or region central to the article.
+	State string `json:"state" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Area        respjson.Field
@@ -72,12 +83,18 @@ func (r *LocationHolder) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Geographic location of the publisher, when available.
 type SourceLocation struct {
-	City        string     `json:"city" api:"nullable"`
+	// City where the publisher is located.
+	City string `json:"city" api:"nullable"`
+	// Geographic coordinates of the place.
 	Coordinates Coordinate `json:"coordinates" api:"nullable"`
-	Country     string     `json:"country" api:"nullable"`
-	County      string     `json:"county" api:"nullable"`
-	State       string     `json:"state" api:"nullable"`
+	// Country where the publisher is located.
+	Country string `json:"country" api:"nullable"`
+	// County where the publisher is located.
+	County string `json:"county" api:"nullable"`
+	// State or region where the publisher is located.
+	State string `json:"state" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		City        respjson.Field

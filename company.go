@@ -152,15 +152,19 @@ func (r *CompanyListResponseResult) UnmarshalJSON(data []byte) error {
 }
 
 type CompanyListResponseResultSymbol struct {
+	Cusip             string `json:"cusip" api:"nullable"`
 	Exchange          string `json:"exchange" api:"nullable"`
 	ExchangeShortName string `json:"exchangeShortName" api:"nullable"`
 	IpoDate           string `json:"ipoDate" api:"nullable"`
+	Isin              string `json:"isin" api:"nullable"`
 	Symbol            string `json:"symbol" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
+		Cusip             respjson.Field
 		Exchange          respjson.Field
 		ExchangeShortName respjson.Field
 		IpoDate           respjson.Field
+		Isin              respjson.Field
 		Symbol            respjson.Field
 		ExtraFields       map[string]respjson.Field
 		raw               string
@@ -267,6 +271,10 @@ type CompanyListParams struct {
 	// String Array. Filter by company stock ticker symbols (e.g., AAPL, MSFT, GOOGL).
 	// Multiple values create an OR filter.
 	Symbol []string `query:"symbol,omitzero" json:"-"`
+	// String Array. Filter by ISIN codes on company ticker listings. Matches
+	// symbols.isin rather than the company-level ISIN. Multiple values create an OR
+	// filter.
+	SymbolIsin []string `query:"symbolIsin,omitzero" json:"-"`
 	paramObj
 }
 

@@ -64,51 +64,96 @@ const (
 )
 
 type Article struct {
-	AddDate               string                  `json:"addDate" api:"nullable"`
-	ArticleID             string                  `json:"articleId" api:"nullable"`
-	AuthorsByline         string                  `json:"authorsByline" api:"nullable"`
-	Categories            []shared.CategoryHolder `json:"categories" api:"nullable"`
-	Claim                 string                  `json:"claim" api:"nullable"`
-	Cluster               *NewsCluster            `json:"cluster" api:"nullable"`
-	ClusterID             string                  `json:"clusterId" api:"nullable"`
-	Companies             []ArticleCompany        `json:"companies" api:"nullable"`
-	Content               string                  `json:"content" api:"nullable"`
-	Country               string                  `json:"country" api:"nullable"`
-	Description           string                  `json:"description" api:"nullable"`
-	EnContentWordCount    int64                   `json:"enContentWordCount" api:"nullable"`
-	Entities              []ArticleEntity         `json:"entities" api:"nullable"`
-	EventTypes            []ArticleEventType      `json:"eventTypes" api:"nullable"`
-	Highlights            map[string][]string     `json:"highlights" api:"nullable"`
-	ImageURL              string                  `json:"imageUrl" api:"nullable"`
-	Journalists           []Journalist            `json:"journalists" api:"nullable"`
-	Keywords              []ArticleKeyword        `json:"keywords" api:"nullable"`
-	Labels                []ArticleLabel          `json:"labels" api:"nullable"`
-	Language              string                  `json:"language" api:"nullable"`
-	Links                 []string                `json:"links" api:"nullable"`
-	Locations             []shared.LocationHolder `json:"locations" api:"nullable"`
-	MatchedAuthors        []ArticleMatchedAuthor  `json:"matchedAuthors" api:"nullable"`
-	Medium                string                  `json:"medium" api:"nullable"`
-	People                []ArticlePerson         `json:"people" api:"nullable"`
-	Places                []ArticlePlace          `json:"places" api:"nullable"`
-	PubDate               string                  `json:"pubDate" api:"nullable"`
-	RefreshDate           string                  `json:"refreshDate" api:"nullable"`
-	Reprint               bool                    `json:"reprint" api:"nullable"`
-	ReprintGroupID        string                  `json:"reprintGroupId" api:"nullable"`
-	Score                 float64                 `json:"score" api:"nullable"`
-	Sentiment             ArticleSentiment        `json:"sentiment" api:"nullable"`
-	ShortSummary          string                  `json:"shortSummary" api:"nullable"`
-	Source                ArticleSource           `json:"source" api:"nullable"`
-	Summary               string                  `json:"summary" api:"nullable"`
-	Taxonomies            []ArticleTaxonomy       `json:"taxonomies" api:"nullable"`
-	Title                 string                  `json:"title" api:"nullable"`
-	Topics                []ArticleTopic          `json:"topics" api:"nullable"`
-	TranslatedDescription string                  `json:"translatedDescription" api:"nullable"`
-	TranslatedSummary     string                  `json:"translatedSummary" api:"nullable"`
-	TranslatedTitle       string                  `json:"translatedTitle" api:"nullable"`
-	Translation           string                  `json:"translation" api:"nullable"`
-	URL                   string                  `json:"url" api:"nullable"`
-	Vectors               []ArticleVector         `json:"vectors" api:"nullable"`
-	Verdict               string                  `json:"verdict" api:"nullable"`
+	// Date and time the article was added to Perigon, in ISO 8601 format.
+	AddDate string `json:"addDate" api:"nullable"`
+	// Unique Perigon identifier for the article.
+	ArticleID string `json:"articleId" api:"nullable"`
+	// Author byline as published by the source.
+	AuthorsByline string `json:"authorsByline" api:"nullable"`
+	// Broad content categories assigned to the article.
+	Categories []shared.CategoryHolder `json:"categories" api:"nullable"`
+	// Claim identified in fact-check content, when applicable.
+	Claim string `json:"claim" api:"nullable"`
+	// Expanded story cluster details, when requested and available.
+	Cluster *NewsCluster `json:"cluster" api:"nullable"`
+	// Identifier of the story cluster containing the article, when assigned.
+	ClusterID string `json:"clusterId" api:"nullable"`
+	// Companies identified in the article.
+	Companies []ArticleCompany `json:"companies" api:"nullable"`
+	// Full article body available to Perigon.
+	Content string `json:"content" api:"nullable"`
+	// Two-character country code associated with the article.
+	Country string `json:"country" api:"nullable"`
+	// Article description or publisher-provided excerpt.
+	Description string `json:"description" api:"nullable"`
+	// Word count of the English article content, when available.
+	EnContentWordCount int64 `json:"enContentWordCount" api:"nullable"`
+	// Named entities extracted from the article.
+	Entities []ArticleEntity `json:"entities" api:"nullable"`
+	// Event types detected in the article.
+	EventTypes []ArticleEventType `json:"eventTypes" api:"nullable"`
+	// Matched text fragments grouped by article field.
+	Highlights map[string][]string `json:"highlights" api:"nullable"`
+	// Primary image URL associated with the article.
+	ImageURL string `json:"imageUrl" api:"nullable"`
+	// Expanded journalist details, when requested and available.
+	Journalists []Journalist `json:"journalists" api:"nullable"`
+	// Keywords extracted from the article with their relevance weights.
+	Keywords []ArticleKeyword `json:"keywords" api:"nullable"`
+	// Editorial labels assigned to the article.
+	Labels []ArticleLabel `json:"labels" api:"nullable"`
+	// ISO 639 two-letter language code for the article.
+	Language string `json:"language" api:"nullable"`
+	// URLs linked from the article content.
+	Links []string `json:"links" api:"nullable"`
+	// Locations identified as central to the article.
+	Locations []shared.LocationHolder `json:"locations" api:"nullable"`
+	// Known journalist records matched to the article byline.
+	MatchedAuthors []ArticleMatchedAuthor `json:"matchedAuthors" api:"nullable"`
+	// Primary medium type, such as Article or Video.
+	Medium string `json:"medium" api:"nullable"`
+	// Known people identified in the article.
+	People []ArticlePerson `json:"people" api:"nullable"`
+	// Structured geographic places extracted from the article.
+	Places []ArticlePlace `json:"places" api:"nullable"`
+	// Date and time the article was published, in ISO 8601 format.
+	PubDate string `json:"pubDate" api:"nullable"`
+	// Date and time the article was last refreshed by Perigon, in ISO 8601 format.
+	RefreshDate string `json:"refreshDate" api:"nullable"`
+	// Whether the article is a reprint of previously published content.
+	Reprint bool `json:"reprint" api:"nullable"`
+	// Identifier grouping the original article with its known reprints.
+	ReprintGroupID string `json:"reprintGroupId" api:"nullable"`
+	// Search relevance score for the article, when applicable.
+	Score float64 `json:"score" api:"nullable"`
+	// Aggregate sentiment scores for the story.
+	Sentiment ArticleSentiment `json:"sentiment" api:"nullable"`
+	// Short generated summary of the article, when available.
+	ShortSummary string `json:"shortSummary" api:"nullable"`
+	// Publisher information for the selected story image.
+	Source ArticleSource `json:"source" api:"nullable"`
+	// Generated summary of the article, when available.
+	Summary string `json:"summary" api:"nullable"`
+	// Google Content Categories assigned to the article with confidence scores.
+	Taxonomies []ArticleTaxonomy `json:"taxonomies" api:"nullable"`
+	// Article headline.
+	Title string `json:"title" api:"nullable"`
+	// Topics assigned to the article.
+	Topics []ArticleTopic `json:"topics" api:"nullable"`
+	// English translation of the article description, when available.
+	TranslatedDescription string `json:"translatedDescription" api:"nullable"`
+	// English translation of the article summary, when available.
+	TranslatedSummary string `json:"translatedSummary" api:"nullable"`
+	// English translation of the article title, when available.
+	TranslatedTitle string `json:"translatedTitle" api:"nullable"`
+	// Translated article content, when available.
+	Translation string `json:"translation" api:"nullable"`
+	// Canonical URL of the article.
+	URL string `json:"url" api:"nullable"`
+	// Vector embeddings associated with the article, when requested.
+	Vectors []ArticleVector `json:"vectors" api:"nullable"`
+	// Verdict identified in fact-check content, when applicable.
+	Verdict string `json:"verdict" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		AddDate               respjson.Field
@@ -167,10 +212,15 @@ func (r *Article) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Companies most strongly associated with the story.
 type ArticleCompany struct {
-	ID      string   `json:"id" api:"nullable"`
+	// Unique Perigon identifier for the company.
+	ID string `json:"id" api:"nullable"`
+	// Domains associated with the company.
 	Domains []string `json:"domains" api:"nullable"`
-	Name    string   `json:"name" api:"nullable"`
+	// Company name.
+	Name string `json:"name" api:"nullable"`
+	// Stock symbols associated with the company.
 	Symbols []string `json:"symbols" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -189,10 +239,14 @@ func (r *ArticleCompany) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Named entities extracted from the article.
 type ArticleEntity struct {
-	Data     string `json:"data" api:"nullable"`
-	Mentions int64  `json:"mentions" api:"nullable"`
-	Type     string `json:"type" api:"nullable"`
+	// Text value of the extracted entity.
+	Data string `json:"data" api:"nullable"`
+	// Number of times the entity appears in the article.
+	Mentions int64 `json:"mentions" api:"nullable"`
+	// Entity type, such as PERSON, ORGANIZATION, or LOCATION.
+	Type string `json:"type" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -209,8 +263,11 @@ func (r *ArticleEntity) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Event types detected in the article.
 type ArticleEventType struct {
+	// Detected event name.
 	Name string `json:"name" api:"nullable"`
+	// Detected event classification.
 	Type string `json:"type" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -227,8 +284,11 @@ func (r *ArticleEventType) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Keywords extracted from the article with their relevance weights.
 type ArticleKeyword struct {
-	Name   string  `json:"name" api:"nullable"`
+	// Keyword extracted from the article.
+	Name string `json:"name" api:"nullable"`
+	// Relative relevance weight of the keyword.
 	Weight float64 `json:"weight" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -245,7 +305,9 @@ func (r *ArticleKeyword) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Editorial labels assigned to the article.
 type ArticleLabel struct {
+	// Editorial label assigned to the article.
 	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -261,8 +323,11 @@ func (r *ArticleLabel) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Known journalist records matched to the article byline.
 type ArticleMatchedAuthor struct {
-	ID   string `json:"id" api:"nullable"`
+	// Unique identifier for the matched record.
+	ID string `json:"id" api:"nullable"`
+	// Display name of the matched record.
 	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -279,8 +344,11 @@ func (r *ArticleMatchedAuthor) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// People most strongly associated with the story.
 type ArticlePerson struct {
-	Name       string `json:"name" api:"nullable"`
+	// Person name.
+	Name string `json:"name" api:"nullable"`
+	// Wikidata identifier for the person.
 	WikidataID string `json:"wikidataId" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -297,22 +365,38 @@ func (r *ArticlePerson) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Structured geographic places extracted from the article.
 type ArticlePlace struct {
-	Amenity       string            `json:"amenity" api:"nullable"`
-	City          string            `json:"city" api:"nullable"`
-	Coordinates   shared.Coordinate `json:"coordinates" api:"nullable"`
-	Country       string            `json:"country" api:"nullable"`
-	CountryCode   string            `json:"countryCode" api:"nullable"`
-	County        string            `json:"county" api:"nullable"`
-	Neighbourhood string            `json:"neighbourhood" api:"nullable"`
-	OsmID         string            `json:"osmId" api:"nullable"`
-	Postcode      string            `json:"postcode" api:"nullable"`
-	Quarter       string            `json:"quarter" api:"nullable"`
-	Road          string            `json:"road" api:"nullable"`
-	State         string            `json:"state" api:"nullable"`
-	StateDistrict string            `json:"stateDistrict" api:"nullable"`
-	Suburb        string            `json:"suburb" api:"nullable"`
-	Town          string            `json:"town" api:"nullable"`
+	// Named amenity associated with the place.
+	Amenity string `json:"amenity" api:"nullable"`
+	// City associated with the place.
+	City string `json:"city" api:"nullable"`
+	// Geographic coordinates of the place.
+	Coordinates shared.Coordinate `json:"coordinates" api:"nullable"`
+	// Country associated with the place.
+	Country string `json:"country" api:"nullable"`
+	// Two-character country code for the place.
+	CountryCode string `json:"countryCode" api:"nullable"`
+	// County associated with the place.
+	County string `json:"county" api:"nullable"`
+	// Neighborhood associated with the place.
+	Neighbourhood string `json:"neighbourhood" api:"nullable"`
+	// OpenStreetMap identifier for the place.
+	OsmID string `json:"osmId" api:"nullable"`
+	// Postal code associated with the place.
+	Postcode string `json:"postcode" api:"nullable"`
+	// Quarter associated with the place.
+	Quarter string `json:"quarter" api:"nullable"`
+	// Road associated with the place.
+	Road string `json:"road" api:"nullable"`
+	// State or region associated with the place.
+	State string `json:"state" api:"nullable"`
+	// State district associated with the place.
+	StateDistrict string `json:"stateDistrict" api:"nullable"`
+	// Suburb associated with the place.
+	Suburb string `json:"suburb" api:"nullable"`
+	// Town associated with the place.
+	Town string `json:"town" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Amenity       respjson.Field
@@ -341,9 +425,13 @@ func (r *ArticlePlace) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Aggregate sentiment scores for the story.
 type ArticleSentiment struct {
+	// Negative sentiment score from 0 to 1.
 	Negative float64 `json:"negative" api:"nullable"`
-	Neutral  float64 `json:"neutral" api:"nullable"`
+	// Neutral sentiment score from 0 to 1.
+	Neutral float64 `json:"neutral" api:"nullable"`
+	// Positive sentiment score from 0 to 1.
 	Positive float64 `json:"positive" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -361,10 +449,14 @@ func (r *ArticleSentiment) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Publisher information for the selected story image.
 type ArticleSource struct {
-	Domain   string                `json:"domain" api:"nullable"`
+	// Publisher domain.
+	Domain string `json:"domain" api:"nullable"`
+	// Geographic location of the publisher, when available.
 	Location shared.SourceLocation `json:"location" api:"nullable"`
-	Paywall  bool                  `json:"paywall" api:"nullable"`
+	// Whether the publisher uses a paywall, when known.
+	Paywall bool `json:"paywall" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Domain      respjson.Field
@@ -381,8 +473,11 @@ func (r *ArticleSource) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Google Content Categories assigned to the article with confidence scores.
 type ArticleTaxonomy struct {
-	Name  string  `json:"name" api:"nullable"`
+	// Full taxonomy category path.
+	Name string `json:"name" api:"nullable"`
+	// Confidence score for the category assignment.
 	Score float64 `json:"score" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -399,7 +494,9 @@ func (r *ArticleTaxonomy) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Topics most strongly associated with the story.
 type ArticleTopic struct {
+	// Topic assigned to the article.
 	Name string `json:"name" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
@@ -415,9 +512,12 @@ func (r *ArticleTopic) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
 }
 
+// Vector embeddings associated with the article, when requested.
 type ArticleVector struct {
-	Data    []float64 `json:"data" api:"nullable"`
-	Version int64     `json:"version" api:"nullable"`
+	// Numeric values in the vector embedding.
+	Data []float64 `json:"data" api:"nullable"`
+	// Version of the embedding representation.
+	Version int64 `json:"version" api:"nullable"`
 	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
 	JSON struct {
 		Data        respjson.Field
@@ -569,7 +669,7 @@ type AllListParams struct {
 	// Float. Latitude of the center point to search articles created by local
 	// publications.
 	SourceLat param.Opt[float64] `query:"sourceLat,omitzero" json:"-"`
-	// Float. Latitude of the center point to search articles created by local
+	// Float. Longitude of the center point to search articles created by local
 	// publications.
 	SourceLon param.Opt[float64] `query:"sourceLon,omitzero" json:"-"`
 	// Float. Maximum distance from starting point to search articles created by local
@@ -626,9 +726,18 @@ type AllListParams struct {
 	// String Array. Filter articles by company identifiers. For a complete list of
 	// tracked companies, refer to the /companies endpoint.
 	CompanyID []string `query:"companyId,omitzero" json:"-"`
+	// String Array. Filter articles by company ISIN codes (International Securities
+	// Identification Numbers). For available company entities and their ISINs, consult
+	// the /companies endpoint.
+	CompanyIsin []string `query:"companyIsin,omitzero" json:"-"`
 	// String Array. Filter articles by company stock symbols. For available company
 	// entities and their symbols, consult the /companies endpoint.
 	CompanySymbol []string `query:"companySymbol,omitzero" json:"-"`
+	// String Array. Filter articles by ISIN codes on company ticker listings
+	// (symbols.isin). Distinct from companyIsin, which matches the company-level ISIN.
+	// For available company entities and their listing ISINs, consult the /companies
+	// endpoint.
+	CompanySymbolIsin []string `query:"companySymbolIsin,omitzero" json:"-"`
 	// String Array. Country code to filter by country. If multiple parameters are
 	// passed, they will be applied as OR operations.
 	Country []string `query:"country,omitzero" json:"-"`
@@ -652,10 +761,19 @@ type AllListParams struct {
 	// String Array. Exclude articles mentioning companies with specific identifiers.
 	// Creates an AND-exclude filter to remove content about these corporate entities.
 	ExcludeCompanyID []string `query:"excludeCompanyId,omitzero" json:"-"`
+	// String Array. Exclude articles related to companies with specific ISIN codes.
+	// Creates an AND-exclude filter to remove content about these companies. For
+	// available company entities and their ISINs, consult the /companies endpoint.
+	ExcludeCompanyIsin []string `query:"excludeCompanyIsin,omitzero" json:"-"`
 	// String Array. A list of stock symbols (ticker symbols) that identify companies
 	// to be excluded. Articles related to companies using any of these symbols will be
 	// omitted, which is useful for targeting or avoiding specific public companies.
 	ExcludeCompanySymbol []string `query:"excludeCompanySymbol,omitzero" json:"-"`
+	// String Array. Exclude articles related to companies whose ticker listings have
+	// these ISIN codes (symbols.isin). Distinct from excludeCompanyIsin, which matches
+	// the company-level ISIN. For available company entities and their listing ISINs,
+	// consult the /companies endpoint.
+	ExcludeCompanySymbolIsin []string `query:"excludeCompanySymbolIsin,omitzero" json:"-"`
 	// String Array. Excludes articles from specific counties or administrative
 	// divisions in the search results. Accepts either a single county name or a list
 	// of county names. County names should match the format used in article metadata
