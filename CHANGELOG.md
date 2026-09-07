@@ -1,5 +1,27 @@
 # Changelog
 
+## 2.15.0 (2026-09-07)
+
+Full Changelog: [v2.14.0...v2.15.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.14.0...v2.15.0)
+
+### Features
+
+* **api:** api update ([d15588e](https://github.com/goperigon/perigon-go-sdk/commit/d15588eef0a26f07d2b8c64c382cb4cfe81bb381))
+* **api:** api update ([71e1818](https://github.com/goperigon/perigon-go-sdk/commit/71e18185158a9b626500e153f2fc6f8029647f97))
+* **api:** api update ([9ddc8fb](https://github.com/goperigon/perigon-go-sdk/commit/9ddc8fbcf09d8d58271f357f90077f878521902d))
+* **api:** api update ([240e227](https://github.com/goperigon/perigon-go-sdk/commit/240e227993f5de85706b286c4a8545aab95fac35))
+* **api:** api update ([d66d9dc](https://github.com/goperigon/perigon-go-sdk/commit/d66d9dc3784fb3de276cc50d3ceb6981ad5c80f8))
+* **api:** api update ([162e928](https://github.com/goperigon/perigon-go-sdk/commit/162e92871a6b56ad772b88da3c990221e0a0cca8))
+* **api:** api update ([fab2a04](https://github.com/goperigon/perigon-go-sdk/commit/fab2a04025c28db06695332d5fa778c94b74c677))
+* **api:** api update ([7d33daa](https://github.com/goperigon/perigon-go-sdk/commit/7d33daa49c0137945a6f073d9e6c0d6a984d00a9))
+* **api:** api update ([c3cbc4e](https://github.com/goperigon/perigon-go-sdk/commit/c3cbc4e3d87ab8aa5856e2367a73539b1104a952))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([aea8d03](https://github.com/goperigon/perigon-go-sdk/commit/aea8d03625193a409178e38b7e4d6b5398335e1b))
+
+
+### Chores
+
+* **internal:** allow the mock server port to be set with STAINLESS_MOCK_PORT ([0144a0a](https://github.com/goperigon/perigon-go-sdk/commit/0144a0abc8613217240a04f25a50e3aa69253502))
+
 ## 2.14.0 (2026-05-04)
 
 Full Changelog: [v2.13.0...v2.14.0](https://github.com/goperigon/perigon-go-sdk/compare/v2.13.0...v2.14.0)
