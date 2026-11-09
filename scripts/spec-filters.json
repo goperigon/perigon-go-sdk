@@ -1,0 +1,9 @@
+{
+  "$description": "Filters applied to the OpenAPI spec before SDK generation. `hiddenFields` is schema-name -> property names to omit from generated models and types. `excludedPaths` is a list of globs matched against OpenAPI path keys. A pattern with no wildcards is an exact match. `*` covers one path segment and `**` covers one or more nested segments; it does not match the path without those segments. Brace expansion is disabled so `{uuid}` stays literal. Remove an entry here to re-expose a field or endpoint.",
+  "hiddenFields": {
+    "Article": ["topCategory", "vectors"],
+    "ScoredDataArticle": ["vectors"],
+    "ScoredDataWikiData": ["vectors"]
+  },
+  "excludedPaths": ["/v1/articles/refresh", "/v1/articles/refresh/**"]
+}

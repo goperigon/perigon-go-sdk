@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+echo "==> Checking gofmt"
+unformatted="$(gofmt -l .)"
+if [ -n "$unformatted" ]; then
+  echo "These files need gofmt:"
+  echo "$unformatted"
+  exit 1
+fi
+
+echo "==> Running go vet"
+go vet ./...
+
 echo "==> Running Go build"
 go build ./...
-
-echo "==> Checking tests compile"
-go test -run=^$ ./...
