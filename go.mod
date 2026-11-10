@@ -1,13 +1,10 @@
-module github.com/goperigon/perigon-go-sdk/v2
+module github.com/goperigon/perigon-go-sdk/v3
 
-go 1.22
+go 1.22.5
 
-require (
-	github.com/tidwall/gjson v1.18.0
-	github.com/tidwall/sjson v1.2.5
-)
+require github.com/oapi-codegen/runtime v1.2.0
 
 require (
-	github.com/tidwall/match v1.1.1 // indirect
-	github.com/tidwall/pretty v1.2.1 // indirect
+	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
+	github.com/google/uuid v1.5.0 // indirect
 )

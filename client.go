@@ -1,171 +1,72 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
-
 package perigon
 
 import (
 	"context"
+	"fmt"
 	"net/http"
-	"os"
-	"slices"
+	"net/url"
 	"strings"
-
-	"github.com/goperigon/perigon-go-sdk/v2/internal/requestconfig"
-	"github.com/goperigon/perigon-go-sdk/v2/option"
+	"time"
 )
 
-// Client creates a struct with services and top level methods that help with
-// interacting with the perigon API. You should not instantiate this client
-// directly, and instead use the [NewClient] method instead.
-type Client struct {
-	Options []option.RequestOption
-	// Core endpoints for the Perigon News API v1, providing access to aggregated news
-	// stories, articles, and related content. These endpoints enable searching,
-	// filtering, and retrieving media content across multiple sources.
-	All AllService
-	// Core endpoints for the Perigon News API v1, providing access to aggregated news
-	// stories, articles, and related content. These endpoints enable searching,
-	// filtering, and retrieving media content across multiple sources.
-	Companies CompanyService
-	// Core endpoints for the Perigon News API v1, providing access to aggregated news
-	// stories, articles, and related content. These endpoints enable searching,
-	// filtering, and retrieving media content across multiple sources.
-	Journalists JournalistService
-	// Core endpoints for the Perigon News API v1, providing access to aggregated news
-	// stories, articles, and related content. These endpoints enable searching,
-	// filtering, and retrieving media content across multiple sources.
-	People PersonService
-	// Core endpoints for the Perigon News API v1, providing access to aggregated news
-	// stories, articles, and related content. These endpoints enable searching,
-	// filtering, and retrieving media content across multiple sources.
-	Sources SourceService
-	// Core endpoints for the Perigon News API v1, providing access to aggregated news
-	// stories, articles, and related content. These endpoints enable searching,
-	// filtering, and retrieving media content across multiple sources.
-	Stories StoryService
-	// Core endpoints for the Perigon News API v1, providing access to aggregated news
-	// stories, articles, and related content. These endpoints enable searching,
-	// filtering, and retrieving media content across multiple sources.
-	Summarize SummarizeService
-	// Core endpoints for the Perigon News API v1, providing access to aggregated news
-	// stories, articles, and related content. These endpoints enable searching,
-	// filtering, and retrieving media content across multiple sources.
-	Topics TopicService
-	Vector VectorService
-	// Core endpoints for the Perigon News API v1, providing access to aggregated news
-	// stories, articles, and related content. These endpoints enable searching,
-	// filtering, and retrieving media content across multiple sources.
-	Wikipedia WikipediaService
-}
+// DefaultBaseURL is the Perigon API host used when WithBaseURL is not set.
+const DefaultBaseURL = "https://api.perigon.io"
 
-// DefaultClientOptions read from the environment (PERIGON_API_KEY,
-// PERIGON_BASE_URL). This should be used to initialize new clients.
-func DefaultClientOptions() []option.RequestOption {
-	defaults := []option.RequestOption{option.WithHTTPClient(defaultHTTPClient()), option.WithEnvironmentProduction()}
-	if o, ok := os.LookupEnv("PERIGON_BASE_URL"); ok {
-		defaults = append(defaults, option.WithBaseURL(o))
+// defaultResponseHeaderTimeout bounds the time between a fully written request
+// and the server's response headers. It does not apply to the response body.
+const defaultResponseHeaderTimeout = 10 * time.Minute
+
+// Option configures the client returned by New.
+// WithBaseURL, WithHTTPClient, and WithRequestEditorFn are accepted options.
+type Option = ClientOption
+
+// New returns a client for the Perigon API.
+// apiKey is sent as Authorization: Bearer. An empty key is an error.
+// Pass WithBaseURL or WithHTTPClient to override the host or the HTTP client.
+// New does not read PERIGON_API_KEY, PERIGON_BASE_URL, or PERIGON_CUSTOM_HEADERS.
+func New(apiKey string, opts ...Option) (*ClientWithResponses, error) {
+	apiKey = strings.TrimSpace(apiKey)
+	if apiKey == "" {
+		return nil, fmt.Errorf("perigon: api key is required")
 	}
-	if o, ok := os.LookupEnv("PERIGON_API_KEY"); ok {
-		defaults = append(defaults, option.WithAPIKey(o))
-	}
-	if o, ok := os.LookupEnv("PERIGON_CUSTOM_HEADERS"); ok {
-		for _, line := range strings.Split(o, "\n") {
-			colon := strings.Index(line, ":")
-			if colon >= 0 {
-				defaults = append(defaults, option.WithHeader(strings.TrimSpace(line[:colon]), strings.TrimSpace(line[colon+1:])))
-			}
+
+	// A sentinel server shows whether WithBaseURL ran. Applying options here
+	// does not register request editors on the client that is returned.
+	const untouched = "\x00"
+	probe := &Client{Server: untouched}
+	for _, opt := range opts {
+		if err := opt(probe); err != nil {
+			return nil, err
 		}
 	}
-	return defaults
+	if probe.Server != untouched {
+		if err := validateBaseURL(probe.Server); err != nil {
+			return nil, err
+		}
+	}
+
+	clientOpts := make([]ClientOption, 0, len(opts)+2)
+	clientOpts = append(clientOpts, WithRequestEditorFn(func(_ context.Context, req *http.Request) error {
+		req.Header.Set("Authorization", "Bearer "+apiKey)
+		return nil
+	}))
+	if probe.Client == nil {
+		clientOpts = append(clientOpts, WithHTTPClient(defaultHTTPClient()))
+	}
+	clientOpts = append(clientOpts, opts...)
+	return NewClientWithResponses(DefaultBaseURL, clientOpts...)
 }
 
-// NewClient generates a new client with the default option read from the
-// environment (PERIGON_API_KEY, PERIGON_BASE_URL). The option passed in as
-// arguments are applied after these default arguments, and all option will be
-// passed down to the services and requests that this client makes.
-func NewClient(opts ...option.RequestOption) (r Client) {
-	opts = append(DefaultClientOptions(), opts...)
-
-	r = Client{Options: opts}
-
-	r.All = NewAllService(opts...)
-	r.Companies = NewCompanyService(opts...)
-	r.Journalists = NewJournalistService(opts...)
-	r.People = NewPersonService(opts...)
-	r.Sources = NewSourceService(opts...)
-	r.Stories = NewStoryService(opts...)
-	r.Summarize = NewSummarizeService(opts...)
-	r.Topics = NewTopicService(opts...)
-	r.Vector = NewVectorService(opts...)
-	r.Wikipedia = NewWikipediaService(opts...)
-
-	return
+func validateBaseURL(raw string) error {
+	parsed, err := url.Parse(raw)
+	if err != nil || parsed.Scheme == "" || parsed.Host == "" || parsed.RawQuery != "" || parsed.Fragment != "" {
+		return fmt.Errorf("perigon: base URL must be absolute and include a host")
+	}
+	return nil
 }
 
-// Execute makes a request with the given context, method, URL, request params,
-// response, and request options. This is useful for hitting undocumented endpoints
-// while retaining the base URL, auth, retries, and other options from the client.
-//
-// If a byte slice or an [io.Reader] is supplied to params, it will be used as-is
-// for the request body.
-//
-// The params is by default serialized into the body using [encoding/json]. If your
-// type implements a MarshalJSON function, it will be used instead to serialize the
-// request. If a URLQuery method is implemented, the returned [url.Values] will be
-// used as query strings to the url.
-//
-// If your params struct uses [param.Field], you must provide either [MarshalJSON],
-// [URLQuery], and/or [MarshalForm] functions. It is undefined behavior to use a
-// struct uses [param.Field] without specifying how it is serialized.
-//
-// Any "…Params" object defined in this library can be used as the request
-// argument. Note that 'path' arguments will not be forwarded into the url.
-//
-// The response body will be deserialized into the res variable, depending on its
-// type:
-//
-//   - A pointer to a [*http.Response] is populated by the raw response.
-//   - A pointer to a byte array will be populated with the contents of the request
-//     body.
-//   - A pointer to any other type uses this library's default JSON decoding, which
-//     respects UnmarshalJSON if it is defined on the type.
-//   - A nil value will not read the response body.
-//
-// For even greater flexibility, see [option.WithResponseInto] and
-// [option.WithResponseBodyInto].
-func (r *Client) Execute(ctx context.Context, method string, path string, params any, res any, opts ...option.RequestOption) error {
-	opts = slices.Concat(r.Options, opts)
-	return requestconfig.ExecuteNewRequest(ctx, method, path, params, res, opts...)
-}
-
-// Get makes a GET request with the given URL, params, and optionally deserializes
-// to a response. See [Execute] documentation on the params and response.
-func (r *Client) Get(ctx context.Context, path string, params any, res any, opts ...option.RequestOption) error {
-	return r.Execute(ctx, http.MethodGet, path, params, res, opts...)
-}
-
-// Post makes a POST request with the given URL, params, and optionally
-// deserializes to a response. See [Execute] documentation on the params and
-// response.
-func (r *Client) Post(ctx context.Context, path string, params any, res any, opts ...option.RequestOption) error {
-	return r.Execute(ctx, http.MethodPost, path, params, res, opts...)
-}
-
-// Put makes a PUT request with the given URL, params, and optionally deserializes
-// to a response. See [Execute] documentation on the params and response.
-func (r *Client) Put(ctx context.Context, path string, params any, res any, opts ...option.RequestOption) error {
-	return r.Execute(ctx, http.MethodPut, path, params, res, opts...)
-}
-
-// Patch makes a PATCH request with the given URL, params, and optionally
-// deserializes to a response. See [Execute] documentation on the params and
-// response.
-func (r *Client) Patch(ctx context.Context, path string, params any, res any, opts ...option.RequestOption) error {
-	return r.Execute(ctx, http.MethodPatch, path, params, res, opts...)
-}
-
-// Delete makes a DELETE request with the given URL, params, and optionally
-// deserializes to a response. See [Execute] documentation on the params and
-// response.
-func (r *Client) Delete(ctx context.Context, path string, params any, res any, opts ...option.RequestOption) error {
-	return r.Execute(ctx, http.MethodDelete, path, params, res, opts...)
+func defaultHTTPClient() *http.Client {
+	transport := http.DefaultTransport.(*http.Transport).Clone()
+	transport.ResponseHeaderTimeout = defaultResponseHeaderTimeout
+	return &http.Client{Transport: transport}
 }

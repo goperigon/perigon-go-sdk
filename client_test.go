@@ -1,243 +1,176 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
-
-package perigon_test
+package perigon
 
 import (
 	"context"
-	"fmt"
+	"io"
 	"net/http"
 	"reflect"
+	"strings"
 	"testing"
 	"time"
-
-	"github.com/goperigon/perigon-go-sdk/v2"
-	"github.com/goperigon/perigon-go-sdk/v2/internal"
-	"github.com/goperigon/perigon-go-sdk/v2/option"
 )
 
-type closureTransport struct {
-	fn func(req *http.Request) (*http.Response, error)
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(req *http.Request) (*http.Response, error) {
+	return f(req)
 }
 
-func (t *closureTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	return t.fn(req)
-}
+func TestNewSetsBearerAndBaseURL(t *testing.T) {
+	var got *http.Request
+	doer := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		got = req
+		return &http.Response{
+			StatusCode: http.StatusOK,
+			Header:     http.Header{"Content-Type": []string{"application/json"}},
+			Body:       io.NopCloser(strings.NewReader(`{"articles":[],"numResults":0,"status":200}`)),
+			Request:    req,
+		}, nil
+	})}
 
-func TestUserAgentHeader(t *testing.T) {
-	var userAgent string
-	client := perigon.NewClient(
-		option.WithAPIKey("My API Key"),
-		option.WithHTTPClient(&http.Client{
-			Transport: &closureTransport{
-				fn: func(req *http.Request) (*http.Response, error) {
-					userAgent = req.Header.Get("User-Agent")
-					return &http.Response{
-						StatusCode: http.StatusOK,
-					}, nil
-				},
-			},
-		}),
-	)
-	_, _ = client.All.List(context.Background(), perigon.AllListParams{})
-	if userAgent != fmt.Sprintf("Perigon/Go %s", internal.PackageVersion) {
-		t.Errorf("Expected User-Agent to be correct, but got: %#v", userAgent)
+	client, err := New("secret", WithHTTPClient(doer))
+	if err != nil {
+		t.Fatal(err)
 	}
-}
-
-func TestRetryAfter(t *testing.T) {
-	retryCountHeaders := make([]string, 0)
-	client := perigon.NewClient(
-		option.WithAPIKey("My API Key"),
-		option.WithHTTPClient(&http.Client{
-			Transport: &closureTransport{
-				fn: func(req *http.Request) (*http.Response, error) {
-					retryCountHeaders = append(retryCountHeaders, req.Header.Get("X-Stainless-Retry-Count"))
-					return &http.Response{
-						StatusCode: http.StatusTooManyRequests,
-						Header: http.Header{
-							http.CanonicalHeaderKey("Retry-After"): []string{"0.1"},
-						},
-					}, nil
-				},
-			},
-		}),
-	)
-	_, err := client.All.List(context.Background(), perigon.AllListParams{})
-	if err == nil {
-		t.Error("Expected there to be a cancel error")
+	from := time.Date(2022, 2, 1, 0, 0, 0, 0, time.UTC)
+	resp, err := client.SearchArticlesWithResponse(context.Background(), &SearchArticlesParams{
+		Q:      Ptr("ai"),
+		Source: Ptr([]string{"reuters.com", "apnews.com"}),
+		From:   Ptr(from),
+	})
+	if err != nil {
+		t.Fatal(err)
 	}
-
-	attempts := len(retryCountHeaders)
-	if attempts != 3 {
-		t.Errorf("Expected %d attempts, got %d", 3, attempts)
+	if err := Failed(resp.StatusCode(), resp.Body); err != nil {
+		t.Fatal(err)
 	}
-
-	expectedRetryCountHeaders := []string{"0", "1", "2"}
-	if !reflect.DeepEqual(retryCountHeaders, expectedRetryCountHeaders) {
-		t.Errorf("Expected %v retry count headers, got %v", expectedRetryCountHeaders, retryCountHeaders)
+	if got == nil {
+		t.Fatal("request was not sent")
 	}
-}
-
-func TestDeleteRetryCountHeader(t *testing.T) {
-	retryCountHeaders := make([]string, 0)
-	client := perigon.NewClient(
-		option.WithAPIKey("My API Key"),
-		option.WithHTTPClient(&http.Client{
-			Transport: &closureTransport{
-				fn: func(req *http.Request) (*http.Response, error) {
-					retryCountHeaders = append(retryCountHeaders, req.Header.Get("X-Stainless-Retry-Count"))
-					return &http.Response{
-						StatusCode: http.StatusTooManyRequests,
-						Header: http.Header{
-							http.CanonicalHeaderKey("Retry-After"): []string{"0.1"},
-						},
-					}, nil
-				},
-			},
-		}),
-		option.WithHeaderDel("X-Stainless-Retry-Count"),
-	)
-	_, err := client.All.List(context.Background(), perigon.AllListParams{})
-	if err == nil {
-		t.Error("Expected there to be a cancel error")
+	if got.Header.Get("Authorization") != "Bearer secret" {
+		t.Fatalf("authorization = %q", got.Header.Get("Authorization"))
 	}
-
-	expectedRetryCountHeaders := []string{"", "", ""}
-	if !reflect.DeepEqual(retryCountHeaders, expectedRetryCountHeaders) {
-		t.Errorf("Expected %v retry count headers, got %v", expectedRetryCountHeaders, retryCountHeaders)
+	if got.URL.Scheme != "https" || got.URL.Host != "api.perigon.io" {
+		t.Fatalf("url = %s", got.URL.String())
+	}
+	if !strings.HasSuffix(got.URL.Path, "/v1/articles/all") {
+		t.Fatalf("path = %s", got.URL.Path)
+	}
+	query := got.URL.Query()
+	if query.Get("q") != "ai" {
+		t.Fatalf("query = %s", got.URL.RawQuery)
+	}
+	if !reflect.DeepEqual(query["source"], []string{"reuters.com", "apnews.com"}) {
+		t.Fatalf("source = %#v", query["source"])
+	}
+	if query.Get("from") != from.Format(time.RFC3339Nano) {
+		t.Fatalf("from = %s", query.Get("from"))
+	}
+	if resp.JSON200 == nil {
+		t.Fatal("JSON200 is nil")
 	}
 }
 
-func TestOverwriteRetryCountHeader(t *testing.T) {
-	retryCountHeaders := make([]string, 0)
-	client := perigon.NewClient(
-		option.WithAPIKey("My API Key"),
-		option.WithHTTPClient(&http.Client{
-			Transport: &closureTransport{
-				fn: func(req *http.Request) (*http.Response, error) {
-					retryCountHeaders = append(retryCountHeaders, req.Header.Get("X-Stainless-Retry-Count"))
-					return &http.Response{
-						StatusCode: http.StatusTooManyRequests,
-						Header: http.Header{
-							http.CanonicalHeaderKey("Retry-After"): []string{"0.1"},
-						},
-					}, nil
-				},
-			},
-		}),
-		option.WithHeader("X-Stainless-Retry-Count", "42"),
-	)
-	_, err := client.All.List(context.Background(), perigon.AllListParams{})
-	if err == nil {
-		t.Error("Expected there to be a cancel error")
-	}
+func TestNewWithBaseURL(t *testing.T) {
+	var gotHost string
+	doer := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		gotHost = req.URL.Host
+		return &http.Response{
+			StatusCode: http.StatusOK,
+			Header:     http.Header{"Content-Type": []string{"application/json"}},
+			Body:       io.NopCloser(strings.NewReader(`{}`)),
+			Request:    req,
+		}, nil
+	})}
 
-	expectedRetryCountHeaders := []string{"42", "42", "42"}
-	if !reflect.DeepEqual(retryCountHeaders, expectedRetryCountHeaders) {
-		t.Errorf("Expected %v retry count headers, got %v", expectedRetryCountHeaders, retryCountHeaders)
+	client, err := New("secret", WithBaseURL("http://127.0.0.1:4010"), WithHTTPClient(doer))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err := client.SearchArticlesWithResponse(context.Background(), &SearchArticlesParams{}); err != nil {
+		t.Fatal(err)
+	}
+	if gotHost != "127.0.0.1:4010" {
+		t.Fatalf("host = %s", gotHost)
 	}
 }
 
-func TestRetryAfterMs(t *testing.T) {
-	attempts := 0
-	client := perigon.NewClient(
-		option.WithAPIKey("My API Key"),
-		option.WithHTTPClient(&http.Client{
-			Transport: &closureTransport{
-				fn: func(req *http.Request) (*http.Response, error) {
-					attempts++
-					return &http.Response{
-						StatusCode: http.StatusTooManyRequests,
-						Header: http.Header{
-							http.CanonicalHeaderKey("Retry-After-Ms"): []string{"100"},
-						},
-					}, nil
-				},
-			},
-		}),
-	)
-	_, err := client.All.List(context.Background(), perigon.AllListParams{})
-	if err == nil {
-		t.Error("Expected there to be a cancel error")
-	}
-	if want := 3; attempts != want {
-		t.Errorf("Expected %d attempts, got %d", want, attempts)
-	}
-}
-
-func TestContextCancel(t *testing.T) {
-	client := perigon.NewClient(
-		option.WithAPIKey("My API Key"),
-		option.WithHTTPClient(&http.Client{
-			Transport: &closureTransport{
-				fn: func(req *http.Request) (*http.Response, error) {
-					<-req.Context().Done()
-					return nil, req.Context().Err()
-				},
-			},
-		}),
-	)
-	cancelCtx, cancel := context.WithCancel(context.Background())
-	cancel()
-	_, err := client.All.List(cancelCtx, perigon.AllListParams{})
-	if err == nil {
-		t.Error("Expected there to be a cancel error")
-	}
-}
-
-func TestContextCancelDelay(t *testing.T) {
-	client := perigon.NewClient(
-		option.WithAPIKey("My API Key"),
-		option.WithHTTPClient(&http.Client{
-			Transport: &closureTransport{
-				fn: func(req *http.Request) (*http.Response, error) {
-					<-req.Context().Done()
-					return nil, req.Context().Err()
-				},
-			},
-		}),
-	)
-	cancelCtx, cancel := context.WithTimeout(context.Background(), 2*time.Millisecond)
-	defer cancel()
-	_, err := client.All.List(cancelCtx, perigon.AllListParams{})
-	if err == nil {
-		t.Error("expected there to be a cancel error")
-	}
-}
-
-func TestContextDeadline(t *testing.T) {
-	testTimeout := time.After(3 * time.Second)
-	testDone := make(chan struct{})
-
-	deadline := time.Now().Add(100 * time.Millisecond)
-	deadlineCtx, cancel := context.WithDeadline(context.Background(), deadline)
-	defer cancel()
-
-	go func() {
-		client := perigon.NewClient(
-			option.WithAPIKey("My API Key"),
-			option.WithHTTPClient(&http.Client{
-				Transport: &closureTransport{
-					fn: func(req *http.Request) (*http.Response, error) {
-						<-req.Context().Done()
-						return nil, req.Context().Err()
-					},
-				},
-			}),
-		)
-		_, err := client.All.List(deadlineCtx, perigon.AllListParams{})
-		if err == nil {
-			t.Error("expected there to be a deadline error")
+func TestNewRequiresAPIKey(t *testing.T) {
+	for _, key := range []string{"", " ", "\t"} {
+		if _, err := New(key); err == nil {
+			t.Fatalf("New(%q) succeeded", key)
 		}
-		close(testDone)
-	}()
+	}
+}
 
-	select {
-	case <-testTimeout:
-		t.Fatal("client didn't finish in time")
-	case <-testDone:
-		if diff := time.Since(deadline); diff < -30*time.Millisecond || 30*time.Millisecond < diff {
-			t.Fatalf("client did not return within 30ms of context deadline, got %s", diff)
+func TestNewRejectsRelativeBaseURL(t *testing.T) {
+	doer := &http.Client{Transport: roundTripFunc(func(req *http.Request) (*http.Response, error) {
+		t.Fatal("request was sent")
+		return nil, nil
+	})}
+	for _, baseURL := range []string{"api.perigon.io", "https://api.perigon.io?x=1", "https://api.perigon.io#frag"} {
+		if _, err := New("secret", WithBaseURL(baseURL), WithHTTPClient(doer)); err == nil {
+			t.Fatalf("New base URL %q succeeded", baseURL)
 		}
+	}
+}
+
+func TestNewDefaultTransportTimeout(t *testing.T) {
+	client, err := New("secret")
+	if err != nil {
+		t.Fatal(err)
+	}
+	raw, ok := client.ClientInterface.(*Client)
+	if !ok {
+		t.Fatalf("client type = %T", client.ClientInterface)
+	}
+	httpClient, ok := raw.Client.(*http.Client)
+	if !ok {
+		t.Fatalf("doer type = %T", raw.Client)
+	}
+	transport, ok := httpClient.Transport.(*http.Transport)
+	if !ok {
+		t.Fatalf("transport type = %T", httpClient.Transport)
+	}
+	if transport.ResponseHeaderTimeout != defaultResponseHeaderTimeout {
+		t.Fatalf("timeout = %s", transport.ResponseHeaderTimeout)
+	}
+}
+
+func TestFailed(t *testing.T) {
+	if err := Failed(200, []byte(`{"ok":true}`)); err != nil {
+		t.Fatalf("2xx returned %v", err)
+	}
+	if err := Failed(204, nil); err != nil {
+		t.Fatalf("204 returned %v", err)
+	}
+	err := Failed(401, []byte(`{"message":"no"}`))
+	apiErr, ok := err.(*APIError)
+	if !ok {
+		t.Fatalf("error type = %T", err)
+	}
+	if apiErr.StatusCode != 401 {
+		t.Fatalf("status = %d", apiErr.StatusCode)
+	}
+	if string(apiErr.Body) != `{"message":"no"}` {
+		t.Fatalf("body = %s", apiErr.Body)
+	}
+}
+
+func TestDecoded(t *testing.T) {
+	value := &QuerySearchResult{}
+	got, err := Decoded(200, []byte(`{}`), value)
+	if err != nil || got != value {
+		t.Fatalf("got %v err %v", got, err)
+	}
+	if _, err := Decoded[QuerySearchResult](200, nil, nil); err == nil {
+		t.Fatal("nil body succeeded")
+	}
+	err = nil
+	if _, err = Decoded(401, []byte(`{"message":"no"}`), value); err == nil {
+		t.Fatal("401 succeeded")
+	}
+	if _, ok := err.(*APIError); !ok {
+		t.Fatalf("error type = %T", err)
 	}
 }

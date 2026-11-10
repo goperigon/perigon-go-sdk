@@ -3,26 +3,40 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 
-	"github.com/goperigon/perigon-go-sdk/v2"
+	"github.com/goperigon/perigon-go-sdk/v3"
 )
 
 func main() {
-	client := perigon.NewClient()
-	ctx := context.Background()
-
-	resp, err := client.Vector.News.Search(ctx, perigon.VectorNewsSearchParams{
-		Prompt: "Elon Musk impact on Tesla stock price",
-	})
-
+	client, err := perigon.New(os.Getenv("PERIGON_API_KEY"))
 	if err != nil {
 		panic(err)
 	}
 
-	for _, res := range resp.Results {
-		article := res.Data
-		fmt.Printf("Title: %s\n", article.Title)
-		fmt.Printf("PubDate: %s\n", article.PubDate)
-
+	resp, err := client.VectorSearchArticlesWithResponse(context.Background(), perigon.VectorSearchArticlesJSONRequestBody{
+		Prompt: "Elon Musk impact on Tesla stock price",
+	})
+	if err != nil {
+		panic(err)
 	}
+	body, err := perigon.Decoded(resp.StatusCode(), resp.Body, resp.JSON200)
+	if err != nil {
+		panic(err)
+	}
+
+	for _, result := range body.Results {
+		if result.Data == nil {
+			continue
+		}
+		fmt.Printf("Title: %s\n", text(result.Data.Title))
+		fmt.Printf("PubDate: %s\n", text(result.Data.PubDate))
+	}
+}
+
+func text(v *string) string {
+	if v == nil {
+		return ""
+	}
+	return *v
 }
